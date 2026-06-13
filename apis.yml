@@ -1,0 +1,172 @@
+name: Bloomreach
+description: Digital commerce experience platform with REST APIs for search, merchandising, recommendations, CDP, and email/SMS marketing automation.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/bloomreach/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+type: Index
+tags:
+  - Digital Commerce
+  - Search
+  - Merchandising
+  - Recommendations
+  - Customer Data Platform
+  - CDP
+  - Email Marketing
+  - SMS Marketing
+  - Marketing Automation
+  - Headless CMS
+  - Personalization
+  - E-commerce
+
+apis:
+
+  - name: Bloomreach Discovery API
+    description: REST APIs for site search, category browsing, autosuggest, recommendations, bestseller listings, and content search powered by Bloomreach's autonomous search engine.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+    baseURL: https://core.dxpapi.com/api/v1
+    tags:
+      - Search
+      - Category Search
+      - Autosuggest
+      - Recommendations
+      - Bestseller
+      - Content Search
+    properties:
+      - type: Documentation
+        url: https://documentation.bloomreach.com/discovery/reference/welcome
+      - type: OpenAPI
+        url: https://github.com/bloomreach/api-specs/blob/main/discovery/search-category.yaml
+      - type: RateLimits
+        url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+
+  - name: Bloomreach Discovery Catalog Management API
+    description: REST API for sending and managing product catalog data to Bloomreach, supporting full feed uploads, incremental patch updates, and indexing job triggers for search and merchandising.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+    baseURL: https://api.bloomreach.com
+    tags:
+      - Catalog
+      - Product Data
+      - Feed Management
+      - Indexing
+    properties:
+      - type: Documentation
+        url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+      - type: OpenAPI
+        url: https://github.com/bloomreach/api-specs/blob/main/discovery/catalog-management.yaml
+      - type: RateLimits
+        url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+
+  - name: Bloomreach Engagement API
+    description: REST API for the Bloomreach Engagement marketing automation and CDP platform, enabling customer tracking, segmentation, campaign management, email/SMS sends, recommendations, and analytics.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://documentation.bloomreach.com/engagement/reference/about
+    baseURL: https://api.exponea.com
+    tags:
+      - Marketing Automation
+      - CDP
+      - Customer Data Platform
+      - Email
+      - SMS
+      - Tracking
+      - Segmentation
+      - Campaigns
+    properties:
+      - type: Documentation
+        url: https://documentation.bloomreach.com/engagement/reference/about
+      - type: Authentication
+        url: https://documentation.bloomreach.com/engagement/reference/authentication
+
+  - name: Bloomreach Content Management API
+    description: REST APIs for managing headless CMS content, including site channels, content types, documents, folders, batch import/export, projects, integrations, webhooks, and delivery API settings.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://documentation.bloomreach.com/content/reference/management-apis
+    baseURL: https://api.bloomreach.com
+    tags:
+      - Headless CMS
+      - Content Management
+      - Channels
+      - Webhooks
+      - Projects
+    properties:
+      - type: Documentation
+        url: https://documentation.bloomreach.com/content/reference/management-apis
+      - type: Authentication
+        url: https://documentation.bloomreach.com/content/reference/api-authorization
+
+  - name: Bloomreach Content Delivery API
+    description: REST endpoints for SPAs and front-end applications to retrieve JSON representations of available channels, pages, and documents from the Bloomreach headless CMS.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://documentation.bloomreach.com/content/reference/delivery-api
+    baseURL: https://api.bloomreach.com
+    tags:
+      - Headless CMS
+      - Content Delivery
+      - SPA
+      - Channels
+      - Pages
+    properties:
+      - type: Documentation
+        url: https://documentation.bloomreach.com/content/reference/delivery-api
+
+  - name: Bloomreach Data Hub Workspace Import API
+    description: REST API for importing workspace data into Bloomreach Data Hub, enabling unified data platform operations across customer and product data.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://documentation.bloomreach.com/
+    baseURL: https://api.bloomreach.com
+    tags:
+      - Data Hub
+      - Data Import
+      - Workspace
+      - Unified Data
+    properties:
+      - type: Documentation
+        url: https://documentation.bloomreach.com/
+      - type: OpenAPI
+        url: https://github.com/bloomreach/api-specs/blob/main/data-hub/workspace-import-api.yaml
+
+common:
+
+  - type: Website
+    url: https://www.bloomreach.com
+
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+
+  - type: GitHubOrg
+    url: https://github.com/bloomreach
+
+  - type: GitHubRepository
+    url: https://github.com/bloomreach/api-specs
+
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/bloomreach
+
+  - type: Blog
+    url: https://www.bloomreach.com/en/blog
+
+  - type: Pricing
+    url: https://www.bloomreach.com/en/pricing
+
+  - type: StatusPage
+    url: https://status.bloomreach.com
+
+  - type: X
+    url: https://x.com/bloomreach_tm
+
+  - type: Plans
+    url: plans/bloomreach-plans-pricing.yml
+
+  - type: RateLimits
+    url: rate-limits/bloomreach-rate-limits.yml
+
+  - type: FinOps
+    url: finops/bloomreach-finops.yml
+
+maintainers:
+
+  - FN: Kin Lane
+    email: kin@apievangelist.com

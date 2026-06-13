@@ -1,0 +1,110 @@
+name: Bloomreach FinOps
+description: FinOps Framework 1.0 FOCUS-aligned cost visibility and optimization guidance for Bloomreach API consumption across Discovery, Engagement, and Content product modules. Bloomreach pricing is entirely custom-quoted and modular, with costs driven by customer volume, catalog size, event counts, and communication send volume.
+specificationVersion: "1.0"
+url: https://www.bloomreach.com/en/pricing
+
+framework: FinOps Framework 1.0
+alignment: FOCUS
+
+costDimensions:
+
+  - name: Module Fee
+    description: Fixed annual or monthly subscription fee per product module selected (Engagement, Discovery, Content). Serves as the base cost regardless of usage volume.
+    type: fixed
+    billingCadence: annual
+    currency: USD
+    notes: Module fees are negotiated and custom-quoted per customer. Bloomreach does not publish public list prices for most modules beyond the Shopify App Store Engagement tier.
+
+  - name: Usage Fee - Events
+    description: Variable usage fee for Bloomreach Engagement based on total Events consumed. Events include web tracking calls, email sends, SMS sends, push notifications, weblayer impressions, API sends, and recommendation impressions. Default contract cap is 100 million Events.
+    type: variable
+    unit: event
+    currency: USD
+    notes: Overages beyond contractual event cap may incur additional charges. Monitor event volume through the Bloomreach Engagement dashboard to avoid unexpected overage costs.
+
+  - name: Usage Fee - Customer Count
+    description: Pricing scales with the number of active customer profiles stored and managed in the CDP. Higher customer counts increase module fees at negotiation time.
+    type: variable
+    unit: customer-profile
+    currency: USD
+
+  - name: Usage Fee - Catalog Size
+    description: Bloomreach Discovery pricing scales with the number of products in the catalog. Larger catalogs incur higher Discovery module fees.
+    type: variable
+    unit: product
+    currency: USD
+
+  - name: Usage Fee - Communication Volume
+    description: Email, SMS, push notification, and other channel send volumes are primary pricing levers for Bloomreach Engagement. Higher send volumes increase costs.
+    type: variable
+    unit: send
+    currency: USD
+
+  - name: Professional Services
+    description: Optional one-time or recurring fees for implementation, onboarding, custom integrations, and ongoing professional services. Common for enterprise customers.
+    type: one-time
+    currency: USD
+
+costOptimization:
+
+  - name: Right-size Event Volumes
+    description: Audit tracking implementations to avoid sending duplicate or unnecessary events. Rate limits at 150 requests/second per IP and a 100M event default cap mean excessive tracking can burn through allowances and trigger overages.
+    category: waste-reduction
+    impact: high
+    actions:
+      - Audit client-side tracking calls for deduplication
+      - Disable tracking for internal/bot traffic
+      - Review weblayer and recommendation impression events for necessity
+      - Set up event volume dashboards and alerts
+
+  - name: Optimize Catalog Feed Updates
+    description: Catalog Management API PATCH updates are capped at 1440 per day. Use targeted delta/incremental updates rather than full re-sends to stay within limits and reduce indexing overhead.
+    category: efficiency
+    impact: medium
+    actions:
+      - Use PATCH for incremental updates rather than PUT full feed where possible
+      - Batch catalog changes to minimize API calls within daily caps
+      - Schedule indexing jobs during off-peak periods
+
+  - name: Modular Procurement
+    description: Bloomreach charges per module (Engagement, Discovery, Content). Only procure modules actively in use. Avoid bundling modules not yet implemented to reduce upfront cost.
+    category: cost-avoidance
+    impact: high
+    actions:
+      - Assess current vs. planned feature utilization before contract renewal
+      - Negotiate module additions incrementally as adoption grows
+      - Use Shopify App Store Engagement tier for smaller deployments to gain price transparency
+
+  - name: Monitor API Rate Limits to Prevent Overages
+    description: HTTP 429 responses indicate approaching rate limit thresholds. Implement retry logic with exponential backoff to avoid failed calls and ensure reliable API consumption within contracted limits.
+    category: reliability
+    impact: medium
+    actions:
+      - Implement exponential backoff on 429 responses across all API integrations
+      - Monitor Retry-After header values to pace requests
+      - Alert account team before planned traffic spikes or load tests to pre-negotiate temporary limit increases
+
+  - name: Annual Contract vs. Monthly Billing
+    description: Bloomreach Engagement is available at monthly rates via the Shopify App Store (approximately $1,585/month) or at discounted annual contract rates. Larger enterprise commitments should negotiate annual agreements for better per-unit pricing.
+    category: cost-optimization
+    impact: medium
+    actions:
+      - Compare Shopify App Store monthly pricing against annual direct contract for break-even analysis
+      - Negotiate multi-year agreements for largest discounts at enterprise scale
+      - Align contract renewal timing with catalog and customer growth projections
+
+visibility:
+
+  - name: Bloomreach Engagement Dashboard
+    description: Built-in analytics dashboard within Bloomreach Engagement for monitoring event consumption, campaign performance, and channel send volumes against contracted limits.
+    url: https://app.exponea.com
+    type: native
+
+  - name: Bloomreach Discovery Analytics
+    description: Reporting within Bloomreach Discovery for search query volumes, recommendation impressions, and catalog index status — all factors in usage-based cost attribution.
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+    type: native
+
+  - name: API Rate Limit Monitoring
+    description: Track HTTP 429 response rates across all Bloomreach API integrations as a proxy for usage approaching contracted thresholds. Integrate with application monitoring tooling (Datadog, New Relic, etc.) for alerting.
+    type: external

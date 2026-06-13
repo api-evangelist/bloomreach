@@ -1,0 +1,93 @@
+name: Bloomreach Plans and Pricing
+description: Bloomreach pricing is modular and custom-quoted, scaling across three primary dimensions — customer count, product catalog size, and communication volume. Plans are available for Engagement (marketing automation/CDP), Discovery (search/merchandising), and Content (headless CMS) products, sold separately or bundled.
+specificationVersion: "0.1"
+url: https://www.bloomreach.com/en/pricing
+
+plans:
+
+  - name: Engagement Essentials
+    description: Entry-level marketing automation and CDP plan for smaller retailers, available via the Shopify App Store with transparent pricing starting around $1,585/month. Includes core email, SMS, segmentation, and web personalization features.
+    url: https://www.bloomreach.com/en/pricing
+    price: "19,020"
+    unit: year
+    pricingModel: subscription
+    currency: USD
+    features:
+      - Email marketing automation
+      - SMS marketing
+      - Customer data platform (CDP)
+      - Web personalization / Weblayers
+      - Basic segmentation
+      - Campaign analytics
+      - API access (public and private endpoints)
+    additionalFees:
+      - name: Usage fee
+        description: Separate usage fee applies on top of module fee, based on number of events (tracking, email sends, SMS, push notifications, recommendation impressions).
+      - name: Overage events
+        description: Default cap of 100 million Events if Sales Order does not specify otherwise.
+
+  - name: Engagement Growth
+    description: Mid-market plan with expanded automation capabilities, A/B testing, advanced analytics, and multi-channel orchestration for growing e-commerce retailers.
+    url: https://www.bloomreach.com/en/pricing
+    price: custom
+    unit: year
+    pricingModel: custom
+    currency: USD
+    features:
+      - All Essentials features
+      - A/B testing and experimentation
+      - Advanced segmentation and predictions
+      - Multi-channel campaign orchestration
+      - Push notifications
+      - In-app messaging
+      - Priority support
+
+  - name: Engagement Enterprise
+    description: Full-featured enterprise CDP and marketing automation plan for large retailers, supporting high event volumes, advanced AI/ML recommendations, dedicated infrastructure, and custom SLAs.
+    url: https://www.bloomreach.com/en/pricing
+    price: custom
+    unit: year
+    pricingModel: custom
+    currency: USD
+    features:
+      - All Growth features
+      - Custom event volume tiers
+      - Dedicated customer success manager
+      - Custom SLAs and uptime guarantees
+      - Advanced AI/ML predictions
+      - Custom integrations and professional services
+      - Enterprise security and compliance
+
+  - name: Discovery (Search and Merchandising)
+    description: Custom-priced module for AI-powered site search, category browsing, autosuggest, recommendations, and catalog management. Priced based on catalog size and query volume.
+    url: https://www.bloomreach.com/en/pricing
+    price: custom
+    unit: year
+    pricingModel: custom
+    currency: USD
+    features:
+      - Site search and ranking
+      - Category browse and merchandising
+      - Autosuggest / typeahead
+      - Product recommendations and pathways
+      - Bestseller algorithms
+      - Catalog management API
+      - SEO thematic pages
+      - A/B testing for search
+
+  - name: Content (Headless CMS)
+    description: Custom-priced headless CMS module (SaaS or PaaS/self-hosted) for managing digital experience content, channels, and delivery via REST APIs.
+    url: https://www.bloomreach.com/en/pricing
+    price: custom
+    unit: year
+    pricingModel: custom
+    currency: USD
+    features:
+      - Headless content management
+      - Multi-channel delivery API
+      - Visual page builder
+      - Content type management
+      - Project and workflow management
+      - Webhook management
+      - SPA SDK support (React, Angular, Vue)
+      - PaaS or SaaS deployment options

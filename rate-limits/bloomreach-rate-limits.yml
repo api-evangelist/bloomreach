@@ -1,0 +1,92 @@
+name: Bloomreach Rate Limits
+description: Rate limits for Bloomreach Discovery, Engagement, and Content APIs. Discovery Catalog Management has the most explicit documented limits. Search/merchandising limits are set per-customer and monitored continuously. Engagement Tracking API enforces a minimum of 150 requests/second per IP. Standard HTTP 429 responses with Retry-After headers are used across all APIs.
+specificationVersion: "0.1"
+url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+
+limits:
+
+  - name: Discovery Catalog Management API - Default
+    description: Default rate limit applying to all Catalog Management API endpoints (v1 through v3). Exceeding this limit returns HTTP 429 with a Retry-After header.
+    api: Bloomreach Discovery Catalog Management API
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+    limit: 1
+    unit: second
+    scope: account
+    errorCode: 429
+    errorHeader: Retry-After
+    retryStrategy: exponential-backoff
+
+  - name: Discovery Catalog Management - Run Indexing Job
+    description: Rate limit for triggering catalog indexing jobs via the Catalog Management API. Applies per account.
+    api: Bloomreach Discovery Catalog Management API
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+    limit: 1
+    unit: 10 minutes
+    scope: account
+    errorCode: 429
+    errorHeader: Retry-After
+    retryStrategy: exponential-backoff
+
+  - name: Discovery Catalog Management - Upload Full Feed (PUT)
+    description: Rate limit for uploading a complete product catalog feed via PUT to the Catalog Management API.
+    api: Bloomreach Discovery Catalog Management API
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+    limit: 1
+    unit: 10 minutes
+    scope: account
+    errorCode: 429
+    errorHeader: Retry-After
+    retryStrategy: exponential-backoff
+
+  - name: Discovery Catalog Management - Modify Feed Records (PATCH)
+    description: Incremental PATCH updates to catalog records. Soft limit of 1 request per minute per catalog averaged over 24 hours; hard limit of 1 request per second for large payloads; daily cap of 1440 requests per day (UTC-based).
+    api: Bloomreach Discovery Catalog Management API
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+    limit: 1
+    unit: minute
+    scope: catalog
+    dailyCap: 1440
+    hardLimit: 1
+    hardLimitUnit: second
+    errorCode: 429
+    errorHeader: Retry-After
+    retryStrategy: exponential-backoff
+
+  - name: Discovery Search and Category APIs
+    description: Per-customer rate limits set and continuously monitored by Bloomreach based on maximum usage patterns. Thresholds include buffers for organic traffic growth. Contact account team in advance of anticipated traffic spikes or load testing.
+    api: Bloomreach Discovery API
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+    limit: custom
+    unit: second
+    scope: customer
+    errorCode: 429
+    notes: Limits are set on a per-customer basis and continuously monitored and adjusted based on changes to maximum usage.
+
+  - name: Discovery Product Suggest (Autosuggest) APIs
+    description: Rate limits set to allow all normal usage while protecting against automated scrapers and bot attacks. Exact limits vary by account.
+    api: Bloomreach Discovery API
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+    limit: custom
+    unit: second
+    scope: customer
+    errorCode: 429
+
+  - name: Engagement Tracking API
+    description: Minimum rate limit of 150 tracking requests per second per IP address for the Bloomreach Engagement Tracking API. Requests exceeding this threshold receive HTTP 429. Rate limits protect against integration errors generating excessive duplicate events.
+    api: Bloomreach Engagement API
+    url: https://documentation.bloomreach.com/engagement/reference/tracking-api-overview-2
+    limit: 150
+    unit: second
+    scope: ip
+    errorCode: 429
+    errorHeader: Retry-After
+    retryStrategy: exponential-backoff
+
+  - name: Engagement Default Event Cap
+    description: Default cap of 100 million Events per contract period if the Sales Order does not specify a higher limit. Events include web tracking, API sends, emails, SMS, push notifications, weblayers, and recommendation impressions.
+    api: Bloomreach Engagement API
+    url: https://www.bloomreach.com/en/legal
+    limit: 100000000
+    unit: contract-period
+    scope: account
+    notes: Events cap is contractual and defined in the Sales Order. Overage may incur additional fees.
