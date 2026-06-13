@@ -39,6 +39,30 @@ apis:
         url: https://documentation.bloomreach.com/discovery/reference/welcome
       - type: OpenAPI
         url: https://github.com/bloomreach/api-specs/blob/main/discovery/search-category.yaml
+      - type: OpenAPI
+        url: openapi/bloomreach-discovery-search-category-openapi.yml
+      - type: OpenAPI
+        url: openapi/bloomreach-discovery-autosuggest-openapi.yml
+      - type: OpenAPI
+        url: openapi/bloomreach-discovery-bestseller-openapi.yml
+      - type: OpenAPI
+        url: openapi/bloomreach-discovery-content-search-openapi.yml
+      - type: OpenAPI
+        url: openapi/bloomreach-discovery-recommendations-pathways-openapi.yml
+      - type: OpenAPI
+        url: openapi/bloomreach-discovery-email-widget-openapi.yml
+      - type: JSONSchema
+        url: json-schema/bloomreach-product-schema.json
+      - type: JSONSchema
+        url: json-schema/bloomreach-search-response-schema.json
+      - type: JSONSchema
+        url: json-schema/bloomreach-suggest-response-schema.json
+      - type: Example
+        url: examples/bloomreach-product-search-request-example.json
+      - type: Example
+        url: examples/bloomreach-product-search-response-example.json
+      - type: Example
+        url: examples/bloomreach-autosuggest-response-example.json
       - type: RateLimits
         url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
 
@@ -57,6 +81,12 @@ apis:
         url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
       - type: OpenAPI
         url: https://github.com/bloomreach/api-specs/blob/main/discovery/catalog-management.yaml
+      - type: OpenAPI
+        url: openapi/bloomreach-discovery-catalog-management-openapi.yml
+      - type: JSONSchema
+        url: json-schema/bloomreach-product-schema.json
+      - type: Example
+        url: examples/bloomreach-catalog-product-put-example.json
       - type: RateLimits
         url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
 
@@ -127,6 +157,8 @@ apis:
         url: https://documentation.bloomreach.com/
       - type: OpenAPI
         url: https://github.com/bloomreach/api-specs/blob/main/data-hub/workspace-import-api.yaml
+      - type: OpenAPI
+        url: openapi/bloomreach-data-hub-workspace-import-openapi.yml
 
 common:
 
@@ -156,6 +188,12 @@ common:
 
   - type: X
     url: https://x.com/bloomreach_tm
+
+  - type: Vocabulary
+    url: vocabulary/bloomreach-vocabulary.yml
+
+  - type: JSONLDContext
+    url: json-ld/bloomreach-context.jsonld
 
   - type: Plans
     url: plans/bloomreach-plans-pricing.yml

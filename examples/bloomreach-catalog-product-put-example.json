@@ -1,0 +1,41 @@
+{
+  "_comment": "Example request body for PUT /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/catalogs/{catalog_name}/items/{item_id} — Bloomreach Catalog Management API",
+  "item_id": "SKU-98765",
+  "attributes": {
+    "title": "Men's Ultra Boost Running Shoe",
+    "description": "Lightweight responsive running shoe with Boost midsole technology for high-performance daily training.",
+    "brand": "AdiSport",
+    "price": 120.00,
+    "sale_price": 89.99,
+    "url": "https://example.com/products/mens-ultra-boost",
+    "thumb_image": "https://cdn.example.com/images/sku-98765-thumb.jpg",
+    "category_id": ["shoes", "mens-running"],
+    "category_paths": [
+      [
+        { "id": "shoes", "name": "Shoes" },
+        { "id": "mens-running", "name": "Men's Running" }
+      ]
+    ],
+    "tags": ["running", "boost", "lightweight", "performance"]
+  },
+  "variants": [
+    {
+      "variant_id": "SKU-98765-BLU-10",
+      "sku_color": "Blue",
+      "sku_size": "10",
+      "sku_price": 120.00,
+      "sku_sale_price": 89.99,
+      "sku_thumb_images": ["https://cdn.example.com/images/sku-98765-blue-thumb.jpg"],
+      "sku_swatch_images": ["https://cdn.example.com/swatches/blue.jpg"]
+    },
+    {
+      "variant_id": "SKU-98765-BLU-11",
+      "sku_color": "Blue",
+      "sku_size": "11",
+      "sku_price": 120.00,
+      "sku_sale_price": 89.99,
+      "sku_thumb_images": ["https://cdn.example.com/images/sku-98765-blue-thumb.jpg"],
+      "sku_swatch_images": ["https://cdn.example.com/swatches/blue.jpg"]
+    }
+  ]
+}

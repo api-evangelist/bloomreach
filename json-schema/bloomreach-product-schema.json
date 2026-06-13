@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/bloomreach/json-schema/bloomreach-product-schema.json",
+  "title": "BloomreachProduct",
+  "description": "JSON Schema for a Bloomreach Discovery catalog product, including variants, views, and catalog metadata.",
+  "type": "object",
+  "required": ["item_id", "attributes"],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "description": "Unique identifier for the product in the Bloomreach catalog."
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Key-value map of product attributes (title, description, price, brand, etc.).",
+      "additionalProperties": true,
+      "properties": {
+        "title": { "type": "string", "description": "Display name of the product." },
+        "description": { "type": "string", "description": "Long-form product description." },
+        "brand": { "type": "string", "description": "Brand or manufacturer name." },
+        "price": { "type": "number", "description": "Current product price." },
+        "sale_price": { "type": "number", "description": "Discounted/sale price if applicable." },
+        "url": { "type": "string", "format": "uri", "description": "Canonical URL for the product detail page." },
+        "thumb_image": { "type": "string", "format": "uri", "description": "URL for the product thumbnail image." },
+        "sku_color_group": { "type": "string", "description": "Color grouping for variant SKUs." },
+        "sku_swatch_images": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "description": "Swatch images for variant selection."
+        },
+        "sku_thumb_images": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "description": "Thumbnail images for SKU variants."
+        },
+        "category_id": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of category IDs the product belongs to."
+        },
+        "category_paths": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "name": { "type": "string" }
+              }
+            }
+          },
+          "description": "Hierarchical category path arrays."
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Searchable tags associated with the product."
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "description": "Product variants (SKUs) with their own attributes.",
+      "items": {
+        "type": "object",
+        "required": ["variant_id"],
+        "properties": {
+          "variant_id": { "type": "string", "description": "Unique variant/SKU identifier." },
+          "sku_sale_price": { "type": "number" },
+          "sku_price": { "type": "number" },
+          "sku_color": { "type": "string" },
+          "sku_size": { "type": "string" },
+          "sku_thumb_images": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" }
+          },
+          "sku_swatch_images": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "views": {
+      "type": "object",
+      "description": "Named catalog views that provide alternate attribute sets for the same product.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "attributes": { "type": "object", "additionalProperties": true },
+          "variants": { "type": "array", "items": { "type": "object" } }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

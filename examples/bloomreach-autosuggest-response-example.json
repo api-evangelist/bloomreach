@@ -1,0 +1,39 @@
+{
+  "_comment": "Example response from Bloomreach Discovery Autosuggest API",
+  "suggestionGroups": [
+    {
+      "catalogName": "example_com",
+      "view": "default",
+      "querySuggestions": [
+        { "query": "blue running shoes", "displayText": "blue running shoes", "numResults": 142 },
+        { "query": "blue running shoes men", "displayText": "blue running shoes men", "numResults": 78 },
+        { "query": "blue running shoes women", "displayText": "blue running shoes women", "numResults": 64 }
+      ],
+      "searchSuggestions": [
+        {
+          "pid": "SKU-98765",
+          "title": "Men's Ultra Boost Running Shoe",
+          "url": "https://example.com/products/mens-ultra-boost",
+          "thumb_image": "https://cdn.example.com/images/sku-98765-thumb.jpg",
+          "price": 120.00,
+          "sale_price": 89.99
+        },
+        {
+          "pid": "SKU-11122",
+          "title": "Nike Air Zoom Pegasus 39 Blue",
+          "url": "https://example.com/products/nike-air-zoom-peg-39-blue",
+          "thumb_image": "https://cdn.example.com/images/sku-11122-thumb.jpg",
+          "price": 130.00,
+          "sale_price": null
+        }
+      ],
+      "attributeSuggestions": [
+        { "name": "color", "value": "Blue", "attributeType": "text" },
+        { "name": "brand", "value": "Nike", "attributeType": "text" }
+      ]
+    }
+  ],
+  "queryContext": {
+    "originalQuery": "blue running"
+  }
+}

@@ -1,0 +1,233 @@
+name: Bloomreach API Vocabulary
+description: >
+  Controlled vocabulary of key terms, concepts, parameters, and data entities
+  used across the Bloomreach Discovery, Engagement, Content, and Data Hub APIs.
+url: https://raw.githubusercontent.com/api-evangelist/bloomreach/refs/heads/main/vocabulary/bloomreach-vocabulary.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+
+terms:
+
+  # Core Product / Catalog Entities
+
+  - term: pid
+    label: Product ID
+    definition: >
+      Unique string identifier for a product within a Bloomreach catalog.
+      Used as the primary key in catalog feeds, search responses, and widget API calls.
+    domain: Catalog, Search, Recommendations
+
+  - term: item_id
+    label: Item ID
+    definition: >
+      Synonym for pid used in the Catalog Management API v3 when referring to
+      a specific catalog item (product or content item) being created or updated.
+    domain: Catalog Management
+
+  - term: variant_id
+    label: Variant ID
+    definition: >
+      Unique identifier for a product variant (SKU), such as a specific color/size
+      combination. Maps to skuid in search responses.
+    domain: Catalog, Search
+
+  - term: skuid
+    label: SKU Identifier
+    definition: >
+      Unique identifier for a product stock-keeping unit (SKU) / variant as returned
+      in Discovery search and recommendations responses.
+    domain: Search, Recommendations
+
+  - term: catalog_name
+    label: Catalog Name
+    definition: >
+      Logical name of a Bloomreach product or content catalog. Used in Catalog
+      Management API paths to scope operations to a specific catalog.
+    domain: Catalog Management
+
+  - term: account_name
+    label: Account Name
+    definition: >
+      Bloomreach account identifier used to namespace Catalog Management API resources.
+    domain: Catalog Management
+
+  - term: environment_name
+    label: Environment Name
+    definition: >
+      Deployment environment (e.g., "production", "staging") scoping Catalog Management
+      API operations to a specific pipeline.
+    domain: Catalog Management
+
+  # Search & Discovery Parameters
+
+  - term: account_id
+    label: Account ID
+    definition: >
+      Numeric Bloomreach account identifier passed as a query parameter to the Discovery
+      search, autosuggest, recommendations, and bestseller APIs.
+    domain: Discovery
+
+  - term: domain_key
+    label: Domain Key
+    definition: >
+      String identifier for the website/domain registered with Bloomreach Discovery.
+      Used alongside account_id to route search requests to the correct index.
+    domain: Discovery
+
+  - term: request_type
+    label: Request Type
+    definition: >
+      Specifies the Discovery API operation mode. Common values: "search", "suggest",
+      "category", "bestseller", "widget".
+    domain: Discovery
+
+  - term: fl
+    label: Field List
+    definition: >
+      Comma-separated list of product/content fields to return in the Discovery API
+      response, controlling payload size.
+    domain: Discovery
+
+  - term: fq
+    label: Filter Query
+    definition: >
+      One or more filter expressions applied to narrow search results without
+      influencing relevance scoring (e.g., fq=color:"Blue").
+    domain: Discovery
+
+  - term: facet.field
+    label: Facet Field
+    definition: >
+      Attribute to compute facet/filter counts for in the search response
+      (e.g., "color", "brand", "size").
+    domain: Discovery
+
+  - term: sort
+    label: Sort Order
+    definition: >
+      Field and direction used to order search results (e.g., "price asc", "title desc").
+      Default is relevance ranking.
+    domain: Discovery
+
+  - term: _br_uid_2
+    label: Bloomreach User ID Cookie
+    definition: >
+      Cookie-based visitor identifier passed to Discovery APIs for personalization,
+      A/B testing attribution, and analytics. Format: uid={id}:v={version}:ts={timestamp}:hc={hit_count}
+    domain: Discovery
+
+  # Facets & Filters
+
+  - term: facet_counts
+    label: Facet Counts
+    definition: >
+      Section of the Discovery search response containing aggregated facet data
+      (terms and range buckets) for building filter UIs.
+    domain: Search
+
+  - term: facet.range
+    label: Facet Range
+    definition: >
+      Numeric field for which range buckets are computed in the facet response
+      (e.g., "price"). Configured with facet.range.start/end/gap parameters.
+    domain: Discovery
+
+  # Catalog Jobs
+
+  - term: job_id
+    label: Job ID
+    definition: >
+      Unique identifier for a Catalog Management API indexing or feed job.
+      Used to poll job status via GET /jobs/{job_id}.
+    domain: Catalog Management
+
+  - term: job_type
+    label: Job Type
+    definition: >
+      Specifies the catalog operation: "FEED" (full product feed upload),
+      "INDEX" (trigger indexing), or "SUGGEST" (suggest index rebuild).
+    domain: Catalog Management
+
+  - term: job_status
+    label: Job Status
+    definition: >
+      Current state of a catalog job: PENDING, RUNNING, COMPLETED, FAILED, CANCELLED.
+    domain: Catalog Management
+
+  # Recommendations & Personalization
+
+  - term: widget_id
+    label: Widget ID
+    definition: >
+      Unique identifier for a Bloomreach Recommendations widget configuration,
+      used in pathways, personalized, item-based, category, and keyword widget calls.
+    domain: Recommendations
+
+  - term: widget_type
+    label: Widget Type
+    definition: >
+      Category of recommendation widget: "keyword", "item", "category",
+      "personalized", or "global".
+    domain: Recommendations
+
+  - term: rid
+    label: Request ID
+    definition: >
+      Unique identifier for a Discovery API request, returned in the metadata.widget
+      object. Must be passed back in add-to-cart and conversion pixel events for analytics.
+    domain: Discovery
+
+  # Engagement / CDP
+
+  - term: project_token
+    label: Project Token
+    definition: >
+      Bloomreach Engagement API credential identifying the specific Engagement project
+      (tenant) against which API calls are authenticated.
+    domain: Engagement
+
+  - term: customer_id
+    label: Customer ID
+    definition: >
+      Unique identifier for a customer record in Bloomreach Engagement CDP.
+      Used for tracking events, fetching segmentation, and triggering campaigns.
+    domain: Engagement
+
+  - term: event_type
+    label: Event Type
+    definition: >
+      Named customer behavior event tracked to Bloomreach Engagement (e.g.,
+      "purchase", "view_item", "add_to_cart", "session_start").
+    domain: Engagement
+
+  # Content / Headless CMS
+
+  - term: channel_id
+    label: Channel ID
+    definition: >
+      Unique identifier for a Bloomreach Content site channel (e.g., a website,
+      app, or headless channel). Scopes Content Management and Delivery API operations.
+    domain: Content
+
+  - term: document_type
+    label: Document Type
+    definition: >
+      Named schema/content type defining the structure of CMS documents within
+      a Bloomreach Content channel (e.g., "news-article", "product-landing-page").
+    domain: Content
+
+  # Data Hub
+
+  - term: workspace_id
+    label: Workspace ID
+    definition: >
+      Unique identifier for a Bloomreach Data Hub workspace. Used to scope
+      workspace import API operations.
+    domain: Data Hub
+
+  - term: import_id
+    label: Import ID
+    definition: >
+      Identifier for a specific Data Hub workspace import job configuration.
+      Referenced when triggering an import via the Workspace Imports API.
+    domain: Data Hub

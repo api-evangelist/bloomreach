@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/bloomreach/json-schema/bloomreach-suggest-response-schema.json",
+  "title": "BloomreachSuggestResponse",
+  "description": "JSON Schema for a Bloomreach Discovery Autosuggest API response.",
+  "type": "object",
+  "properties": {
+    "suggestionGroups": {
+      "type": "array",
+      "description": "Grouped suggestions returned by the autosuggest engine.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "catalogName": { "type": "string", "description": "Name of the catalog providing suggestions." },
+          "view": { "type": "string", "description": "Catalog view used." },
+          "querySuggestions": {
+            "type": "array",
+            "description": "Suggested search queries.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "query": { "type": "string" },
+                "displayText": { "type": "string" },
+                "numResults": { "type": "integer" }
+              }
+            }
+          },
+          "searchSuggestions": {
+            "type": "array",
+            "description": "Matched product/content suggestions.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pid": { "type": "string" },
+                "title": { "type": "string" },
+                "url": { "type": "string", "format": "uri" },
+                "thumb_image": { "type": "string", "format": "uri" },
+                "price": { "type": "number" },
+                "sale_price": { "type": "number" }
+              },
+              "additionalProperties": true
+            }
+          },
+          "attributeSuggestions": {
+            "type": "array",
+            "description": "Attribute-based facet suggestions.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "value": { "type": "string" },
+                "attributeType": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "queryContext": {
+      "type": "object",
+      "description": "Context about the original query.",
+      "properties": {
+        "originalQuery": { "type": "string" }
+      }
+    }
+  }
+}

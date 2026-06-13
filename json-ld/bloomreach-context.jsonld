@@ -1,0 +1,90 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "br": "https://documentation.bloomreach.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "BloomreachProduct": "br:Product",
+    "BloomreachVariant": "br:Variant",
+    "BloomreachSearchResponse": "br:SearchResponse",
+    "BloomreachCatalog": "br:Catalog",
+    "BloomreachWidget": "br:Widget",
+    "BloomreachJob": "br:Job",
+
+    "pid": { "@id": "br:productId", "@type": "xsd:string" },
+    "item_id": { "@id": "br:itemId", "@type": "xsd:string" },
+    "variant_id": { "@id": "br:variantId", "@type": "xsd:string" },
+    "skuid": { "@id": "br:skuId", "@type": "xsd:string" },
+
+    "title": { "@id": "schema:name", "@type": "xsd:string" },
+    "description": { "@id": "schema:description", "@type": "xsd:string" },
+    "brand": { "@id": "schema:brand", "@type": "xsd:string" },
+    "price": { "@id": "schema:price", "@type": "xsd:decimal" },
+    "sale_price": { "@id": "br:salePrice", "@type": "xsd:decimal" },
+    "url": { "@id": "schema:url", "@type": "@id" },
+    "thumb_image": { "@id": "schema:image", "@type": "@id" },
+
+    "sku_color": { "@id": "schema:color", "@type": "xsd:string" },
+    "sku_size": { "@id": "schema:size", "@type": "xsd:string" },
+    "sku_price": { "@id": "br:skuPrice", "@type": "xsd:decimal" },
+    "sku_sale_price": { "@id": "br:skuSalePrice", "@type": "xsd:decimal" },
+    "sku_thumb_images": { "@id": "br:skuThumbnailImages", "@type": "@id", "@container": "@list" },
+    "sku_swatch_images": { "@id": "br:skuSwatchImages", "@type": "@id", "@container": "@list" },
+
+    "variants": { "@id": "br:hasVariant", "@type": "@id", "@container": "@set" },
+    "views": { "@id": "br:hasView", "@container": "@index" },
+    "attributes": { "@id": "br:attributes" },
+
+    "category_id": { "@id": "schema:category", "@container": "@list" },
+    "category_paths": { "@id": "br:categoryPaths", "@container": "@list" },
+    "tags": { "@id": "schema:keywords", "@container": "@list" },
+
+    "numFound": { "@id": "br:totalResults", "@type": "xsd:integer" },
+    "start": { "@id": "br:resultOffset", "@type": "xsd:integer" },
+    "docs": { "@id": "br:results", "@container": "@list" },
+
+    "facet_counts": { "@id": "br:facetCounts" },
+    "facets": { "@id": "br:facets", "@container": "@list" },
+    "facet_fields": { "@id": "br:facetFields" },
+    "facet_ranges": { "@id": "br:facetRanges" },
+
+    "stats": { "@id": "br:statistics" },
+    "stats_fields": { "@id": "br:statisticsFields" },
+
+    "metadata": { "@id": "br:metadata" },
+    "widget_id": { "@id": "br:widgetId", "@type": "xsd:string" },
+    "widget_type": { "@id": "br:widgetType", "@type": "xsd:string" },
+    "rid": { "@id": "br:requestId", "@type": "xsd:string" },
+
+    "account_id": { "@id": "br:accountId", "@type": "xsd:string" },
+    "domain_key": { "@id": "br:domainKey", "@type": "xsd:string" },
+    "catalog_name": { "@id": "br:catalogName", "@type": "xsd:string" },
+    "account_name": { "@id": "br:accountName", "@type": "xsd:string" },
+    "environment_name": { "@id": "br:environmentName", "@type": "xsd:string" },
+
+    "job_id": { "@id": "br:jobId", "@type": "xsd:string" },
+    "job_type": { "@id": "br:jobType", "@type": "xsd:string" },
+    "job_status": { "@id": "br:jobStatus", "@type": "xsd:string" },
+
+    "workspace_id": { "@id": "br:workspaceId", "@type": "xsd:string" },
+    "import_id": { "@id": "br:importId", "@type": "xsd:string" },
+
+    "project_token": { "@id": "br:projectToken", "@type": "xsd:string" },
+    "customer_id": { "@id": "br:customerId", "@type": "xsd:string" },
+    "event_type": { "@id": "br:eventType", "@type": "xsd:string" },
+
+    "channel_id": { "@id": "br:channelId", "@type": "xsd:string" },
+    "document_type": { "@id": "br:documentType", "@type": "xsd:string" },
+
+    "suggestionGroups": { "@id": "br:suggestionGroups", "@container": "@list" },
+    "querySuggestions": { "@id": "br:querySuggestions", "@container": "@list" },
+    "searchSuggestions": { "@id": "br:searchSuggestions", "@container": "@list" },
+    "attributeSuggestions": { "@id": "br:attributeSuggestions", "@container": "@list" },
+    "queryContext": { "@id": "br:queryContext" },
+    "originalQuery": { "@id": "br:originalQuery", "@type": "xsd:string" },
+
+    "displayText": { "@id": "br:displayText", "@type": "xsd:string" },
+    "numResults": { "@id": "br:numResults", "@type": "xsd:integer" }
+  }
+}

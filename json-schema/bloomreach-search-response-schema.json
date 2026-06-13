@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/bloomreach/json-schema/bloomreach-search-response-schema.json",
+  "title": "BloomreachSearchResponse",
+  "description": "JSON Schema for a Bloomreach Discovery product/category search API response.",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "object",
+      "description": "Core search result container.",
+      "properties": {
+        "numFound": { "type": "integer", "description": "Total number of matching documents." },
+        "start": { "type": "integer", "description": "Offset of the first result returned." },
+        "docs": {
+          "type": "array",
+          "description": "List of matched product documents.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pid": { "type": "string", "description": "Product ID." },
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "brand": { "type": "string" },
+              "price": { "type": "number" },
+              "sale_price": { "type": "number" },
+              "url": { "type": "string", "format": "uri" },
+              "thumb_image": { "type": "string", "format": "uri" },
+              "variants": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "skuid": { "type": "string" },
+                    "sku_color": { "type": "string" },
+                    "sku_price": { "type": "number" },
+                    "sku_sale_price": { "type": "number" },
+                    "sku_thumb_images": {
+                      "type": "array",
+                      "items": { "type": "string", "format": "uri" }
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "facet_counts": {
+      "type": "object",
+      "description": "Facet aggregation results for filtering.",
+      "properties": {
+        "facets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string", "enum": ["terms", "range"] },
+              "value": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "count": { "type": "integer" },
+                    "cat_id": { "type": "string" },
+                    "cat_name": { "type": "string" },
+                    "start": { "type": "number" },
+                    "end": { "type": "number" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Query metadata including experiment and widget info.",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "modification": { "type": "object", "additionalProperties": true },
+            "reformulation": { "type": "object", "additionalProperties": true }
+          }
+        },
+        "widget": {
+          "type": "object",
+          "properties": {
+            "rid": { "type": "string", "description": "Request ID for analytics." },
+            "id": { "type": "string" },
+            "type": { "type": "string" },
+            "name": { "type": "string" }
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "description": "Statistical aggregations (e.g., price range).",
+      "properties": {
+        "stats_fields": {
+          "type": "object",
+          "properties": {
+            "price": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "keywordRedirect": {
+      "type": "object",
+      "description": "Keyword redirect rule if applicable.",
+      "properties": {
+        "redirected_query": { "type": "string" },
+        "redirected_url": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

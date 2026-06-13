@@ -1,0 +1,18 @@
+{
+  "_comment": "Example request parameters for Bloomreach Discovery Product Search API (GET /)",
+  "account_id": "1234",
+  "domain_key": "example_com",
+  "request_type": "search",
+  "q": "blue running shoes",
+  "fl": "pid,title,brand,price,sale_price,url,thumb_image,sku_color,sku_price,sku_sale_price,sku_thumb_images",
+  "rows": "20",
+  "start": "0",
+  "facet.field": "color,size,brand",
+  "facet.range": "price",
+  "stats.field": "price",
+  "sort": "price asc",
+  "_br_uid_2": "uid=1234567890:v=12.0:ts=1609459200000:hc=5",
+  "url": "https://example.com/search?q=blue+running+shoes",
+  "ref_url": "https://example.com/",
+  "request_id": "1234567890"
+}

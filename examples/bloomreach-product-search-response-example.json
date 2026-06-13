@@ -1,0 +1,86 @@
+{
+  "response": {
+    "numFound": 142,
+    "start": 0,
+    "docs": [
+      {
+        "pid": "SKU-98765",
+        "title": "Men's Ultra Boost Running Shoe",
+        "description": "Lightweight responsive running shoe with Boost midsole technology.",
+        "brand": "AdiSport",
+        "price": 120.00,
+        "sale_price": 89.99,
+        "url": "https://example.com/products/mens-ultra-boost",
+        "thumb_image": "https://cdn.example.com/images/sku-98765-thumb.jpg",
+        "variants": [
+          {
+            "skuid": "SKU-98765-BLU-10",
+            "sku_color": "Blue",
+            "sku_size": "10",
+            "sku_price": 120.00,
+            "sku_sale_price": 89.99,
+            "sku_thumb_images": ["https://cdn.example.com/images/sku-98765-blue-thumb.jpg"]
+          },
+          {
+            "skuid": "SKU-98765-BLU-11",
+            "sku_color": "Blue",
+            "sku_size": "11",
+            "sku_price": 120.00,
+            "sku_sale_price": 89.99,
+            "sku_thumb_images": ["https://cdn.example.com/images/sku-98765-blue-thumb.jpg"]
+          }
+        ]
+      },
+      {
+        "pid": "SKU-54321",
+        "title": "Women's Cloud Runner",
+        "description": "Ultra-cushioned daily trainer for long-distance runs.",
+        "brand": "CloudStep",
+        "price": 145.00,
+        "sale_price": null,
+        "url": "https://example.com/products/womens-cloud-runner",
+        "thumb_image": "https://cdn.example.com/images/sku-54321-thumb.jpg",
+        "variants": []
+      }
+    ]
+  },
+  "facet_counts": {
+    "facets": [
+      {
+        "name": "color",
+        "type": "terms",
+        "value": [
+          { "count": 58, "cat_name": "Blue" },
+          { "count": 34, "cat_name": "Black" },
+          { "count": 18, "cat_name": "White" }
+        ]
+      },
+      {
+        "name": "price",
+        "type": "range",
+        "value": [
+          { "count": 22, "start": 0, "end": 50 },
+          { "count": 75, "start": 50, "end": 150 },
+          { "count": 45, "start": 150, "end": 300 }
+        ]
+      }
+    ]
+  },
+  "stats": {
+    "stats_fields": {
+      "price": { "min": 19.99, "max": 299.99 }
+    }
+  },
+  "metadata": {
+    "query": {
+      "modification": {},
+      "reformulation": {}
+    },
+    "widget": {
+      "rid": "req-abc123def456",
+      "id": "search-widget-1",
+      "type": "search",
+      "name": "Main Search"
+    }
+  }
+}
