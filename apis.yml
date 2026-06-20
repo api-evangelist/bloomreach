@@ -1,6 +1,6 @@
 name: Bloomreach
 description: Digital commerce experience platform with REST APIs for search, merchandising, recommendations, CDP, and email/SMS marketing automation.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/bloomreach/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -24,7 +24,7 @@ apis:
 
   - name: Bloomreach Discovery API
     description: REST APIs for site search, category browsing, autosuggest, recommendations, bestseller listings, and content search powered by Bloomreach's autonomous search engine.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
     baseURL: https://core.dxpapi.com/api/v1
     tags:
@@ -68,7 +68,7 @@ apis:
 
   - name: Bloomreach Discovery Catalog Management API
     description: REST API for sending and managing product catalog data to Bloomreach, supporting full feed uploads, incremental patch updates, and indexing job triggers for search and merchandising.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
     baseURL: https://api.bloomreach.com
     tags:
@@ -92,7 +92,7 @@ apis:
 
   - name: Bloomreach Engagement API
     description: REST API for the Bloomreach Engagement marketing automation and CDP platform, enabling customer tracking, segmentation, campaign management, email/SMS sends, recommendations, and analytics.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://documentation.bloomreach.com/engagement/reference/about
     baseURL: https://api.exponea.com
     tags:
@@ -112,7 +112,7 @@ apis:
 
   - name: Bloomreach Content Management API
     description: REST APIs for managing headless CMS content, including site channels, content types, documents, folders, batch import/export, projects, integrations, webhooks, and delivery API settings.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://documentation.bloomreach.com/content/reference/management-apis
     baseURL: https://api.bloomreach.com
     tags:
@@ -129,7 +129,7 @@ apis:
 
   - name: Bloomreach Content Delivery API
     description: REST endpoints for SPAs and front-end applications to retrieve JSON representations of available channels, pages, and documents from the Bloomreach headless CMS.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://documentation.bloomreach.com/content/reference/delivery-api
     baseURL: https://api.bloomreach.com
     tags:
@@ -144,7 +144,7 @@ apis:
 
   - name: Bloomreach Data Hub Workspace Import API
     description: REST API for importing workspace data into Bloomreach Data Hub, enabling unified data platform operations across customer and product data.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://documentation.bloomreach.com/
     baseURL: https://api.bloomreach.com
     tags:
