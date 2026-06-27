@@ -57,11 +57,11 @@ apis:
         url: json-schema/bloomreach-search-response-schema.json
       - type: JSONSchema
         url: json-schema/bloomreach-suggest-response-schema.json
-      - type: Example
+      - type: Examples
         url: examples/bloomreach-product-search-request-example.json
-      - type: Example
+      - type: Examples
         url: examples/bloomreach-product-search-response-example.json
-      - type: Example
+      - type: Examples
         url: examples/bloomreach-autosuggest-response-example.json
       - type: RateLimits
         url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
@@ -85,7 +85,7 @@ apis:
         url: openapi/bloomreach-discovery-catalog-management-openapi.yml
       - type: JSONSchema
         url: json-schema/bloomreach-product-schema.json
-      - type: Example
+      - type: Examples
         url: examples/bloomreach-catalog-product-put-example.json
       - type: RateLimits
         url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
