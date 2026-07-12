@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/bloomreach-data-hub-workspace-import-openapi.yml, openapi/bloomreach-discovery-catalog-management-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: |-
+    HTTP Basic authentication using an API Key ID and API Secret.
+    For this workspace-scoped endpoint, use a workspace API key.
+
+    `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+    The API key must have the **Imports → Allow trigger imports**
+    permission enabled in Workspace settings → Access management →
+    API.
+  sources:
+  - openapi/bloomreach-data-hub-workspace-import-openapi.yml
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API Key
+  sources:
+  - openapi/bloomreach-discovery-catalog-management-openapi.yml
