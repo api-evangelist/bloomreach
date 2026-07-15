@@ -162,6 +162,8 @@ apis:
 
 common:
 
+  - type: AgenticAccess
+    url: agentic-access/bloomreach-agentic-access.yml
   - type: DomainSecurity
     url: security/bloomreach-domain-security.yml
   - type: Authentication
