@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Personalization-based Widget Products API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Personalization-based Widget Products
+paths:
+  /api/v2/widgets/image/personalized/{widget_id}:
+    description: Email image api for personalization widgets such as Past Purchases
+    parameters:
+    - $ref: '#/components/parameters/auth_key'
+    - name: widget_id
+      in: path
+      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+      required: true
+      schema:
+        type: string
+        default: nj3rvrjr
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/domain_key'
+    - $ref: '#/components/parameters/_br_uid_2'
+    - $ref: '#/components/parameters/url'
+    - $ref: '#/components/parameters/query'
+    - $ref: '#/components/parameters/user_id'
+    - $ref: '#/components/parameters/ref_url'
+    - $ref: '#/components/parameters/request_id'
+    - $ref: '#/components/parameters/view_id'
+    - $ref: '#/components/parameters/fields'
+    - $ref: '#/components/parameters/rows'
+    - $ref: '#/components/parameters/start'
+    - $ref: '#/components/parameters/sort'
+    - $ref: '#/components/parameters/filter'
+    - $ref: '#/components/parameters/segment'
+    - $ref: '#/components/parameters/facet'
+    get:
+      tags:
+      - Personalization-based Widget Products
+      summary: Image API
+      description: This API allows you to fetch the EnrichedImage for products in user_id based personalization widgets such as Past Purchases
+      responses:
+        '302':
+          description: Redirect to the enriched image for that product
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: If the query parameters are incorrect/invalid
+        '404':
+          description: Must send 404 if the widget id is not valid
+  /api/v2/widgets/proxy/personalized/{widget_id}:
+    description: Email proxy api for personalization widgets such as Past Purchases
+    parameters:
+    - $ref: '#/components/parameters/auth_key'
+    - name: widget_id
+      in: path
+      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+      required: true
+      schema:
+        type: string
+        default: nj3rvrjr
+    - $ref: '#/components/parameters/account_id'
+    - $ref: '#/components/parameters/domain_key'
+    - $ref: '#/components/parameters/_br_uid_2'
+    - $ref: '#/components/parameters/url'
+    - $ref: '#/components/parameters/query'
+    - $ref: '#/components/parameters/user_id'
+    - $ref: '#/components/parameters/ref_url'
+    - $ref: '#/components/parameters/request_id'
+    - $ref: '#/components/parameters/view_id'
+    - $ref: '#/components/parameters/fields'
+    - $ref: '#/components/parameters/rows'
+    - $ref: '#/components/parameters/start'
+    - $ref: '#/components/parameters/sort'
+    - $ref: '#/components/parameters/filter'
+    - $ref: '#/components/parameters/segment'
+    - $ref: '#/components/parameters/facet'
+    get:
+      tags:
+      - Personalization-based Widget Products
+      summary: Proxy API
+      description: This API allows you to fetch the Product Description Pages for products in user_id based personalization widgets such as Past Purchases
+      responses:
+        '302':
+          description: Redirect to the PDP link
+          content:
+            text/html:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: If the query parameters are incorrect/invalid
+        '404':
+          description: Must send 404 if the widget id is not valid
+components:
+  parameters:
+    filter:
+      name: filter
+      in: query
+      description: 'The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values. Any facet that you want to filter must be in your feed.
+
+        Attributes must be enabled and mapped by Bloomreach. Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
+
+        You can filter results based on numeric ranges.
+
+        For example, &filter=(price:["100" TO "*"]).
+
+
+        Please note that a negative filter on ranges is not supported.
+
+
+        To provide multiple filters, send multiple filter parameters. For example, &filter=(price:["*" TO "100"])&filter=(color_groups: ("blue"))'
+      required: false
+      schema:
+        type: string
+    query:
+      name: query
+      in: query
+      description: Your site visitor's search query. Search queries are composed of one or more terms. You can percent encode spaces between terms as %20, or you can leave the spaces unencoded.
+      required: true
+      schema:
+        type: string
+        default: box
+    request_id:
+      name: request_id
+      in: query
+      description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
+      required: false
+      example: 1234567891234
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response.
+      required: false
+      schema:
+        type: string
+        default: pid
+    start:
+      name: start
+      in: query
+      description: The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. The maximum value is 10000.
+      required: false
+      example: 3
+      schema:
+        type: integer
+        default: 3
+        minimum: 0
+    facet:
+      name: facet
+      in: query
+      description: Facets are disabled by default. To enable facets, set facet=true.
+      required: false
+      schema:
+        type: boolean
+    segment:
+      name: segment
+      in: query
+      description: Segment allows you to rank search results based on segment data to serve different experiences to different segments of users. Ranking happens only among items with that segment.</br> Example - view_id:ie
+      required: false
+      schema:
+        type: string
+    account_id:
+      name: account_id
+      in: query
+      description: Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.
+      required: true
+      schema:
+        type: string
+        default: 6370
+    url:
+      name: url
+      in: query
+      description: The absolute URL of the page where the request is initiated. Do not use a relative URL.
+      required: true
+      schema:
+        type: string
+        format: uri
+        default: https%3A%2F%2Fwww.pacific.com%2Fso3005719.html
+    user_id:
+      name: user_id
+      in: query
+      description: The universal customer ID of the user. You only need to pass this field if your particular integration tracks customers this way. The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking. In this way, Bloomreach recognizes users in a way that's aligned with your system. Use an anonymous string. Don't use email or other personally identifiable information.
+      required: true
+      schema:
+        type: string
+        default: 6453546d-5b17-41f4-8fad-43f379d3657f
+    auth_key:
+      name: auth_key
+      in: query
+      description: Unique key shared by your Bloomreach representative during integration. This is used to authenticate a merchant API call.
+      required: false
+      schema:
+        type: string
+    sort:
+      name: sort
+      in: query
+      description: Sort order based on numeric fields. Value is a field name, followed by asc/desc for ascending/descending order respectively. For example, sort=sale_price desc sorts in descending order of the sale price.
+      required: false
+      schema:
+        type: string
+    _br_uid_2:
+      name: _br_uid_2
+      in: query
+      description: A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. </br></br> Mostly the default value provided is used, which is already encoded.
+      required: true
+      schema:
+        type: string
+        default: uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13
+    domain_key:
+      name: domain_key
+      in: query
+      description: Your site domain's ID, which is provided by Bloomreach during initial scoping and integration. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
+      required: true
+      schema:
+        type: string
+        default: pacific_supply
+    rows:
+      name: rows
+      in: query
+      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+      required: false
+      schema:
+        type: integer
+        default: 5
+        minimum: 0
+        maximum: 200
+    ref_url:
+      name: ref_url
+      in: query
+      description: The URL of the page or HTTP referrer where the request is started.
+      required: false
+      schema:
+        type: string
+        format: uri
+        default: https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items
+    view_id:
+      name: view_id
+      in: query
+      description: A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

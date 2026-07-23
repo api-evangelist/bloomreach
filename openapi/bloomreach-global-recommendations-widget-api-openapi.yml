@@ -1,0 +1,230 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Global recommendations widget API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Global recommendations widget
+paths:
+  /global/{widget_id}:
+    get:
+      tags:
+      - Global recommendations widget
+      summary: Global widget
+      operationId: global-recommendation-widget-api
+      parameters:
+      - $ref: '#/components/parameters/WidgetId'
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/BrUid'
+      - $ref: '#/components/parameters/DomainKey'
+      - $ref: '#/components/parameters/RequestId'
+      - $ref: '#/components/parameters/Url'
+      - $ref: '#/components/parameters/RefUrl'
+      - $ref: '#/components/parameters/Fields'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/ContentInjection'
+      - $ref: '#/components/parameters/Rows'
+      - $ref: '#/components/parameters/ViewId'
+      deprecated: false
+components:
+  parameters:
+    Url:
+      name: url
+      in: query
+      description: 'The absolute URL of the page where the request is initiated. Don''t use a relative URL.
+
+
+        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: https://www.documentation-site.com
+      schema:
+        type: string
+        default: https://www.documentation-site.com
+    AccountId:
+      name: account_id
+      in: query
+      description: 'Your site''s numerical Bloomreach account ID.
+
+
+        Your Bloomreach representative gives your site''s account ID to you before or during your integration kickoff meeting.
+
+        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: 6276
+      schema:
+        type: integer
+        format: int32
+        default: 6276
+    BrUid:
+      name: _br_uid_2
+      in: query
+      description: 'A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
+
+        This cookie creates a unique, anonymous identifier for every browser or device.
+
+        Use the default value provided, which is already encoded.
+
+        '
+      required: true
+      example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      schema:
+        type: string
+        default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+    ContentInjection:
+      name: content_injection
+      in: query
+      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+      required: false
+      example: true
+      schema:
+        type: boolean
+    DomainKey:
+      name: domain_key
+      in: query
+      description: 'Your site domain''s ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
+
+
+        This parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.
+
+        The example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: bloomreach_devdocs
+      schema:
+        type: string
+        default: bloomreach_devdocs
+    RefUrl:
+      name: ref_url
+      in: query
+      description: 'The URL of the page or HTTP referrer where the request is started.
+
+
+        Required if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).
+
+        '
+      schema:
+        type: string
+    ViewId:
+      name: view_id
+      in: query
+      description: 'A unique identifier for a specific view of your product catalog.
+
+        If you have multiple versions of your site, each with its own product catalog characteristics like product titles and prices, then add `view_id` to your call.
+
+        Bloomreach uses your `view_id` parameter value to display the right product information for your customers based on their individual site views.
+
+
+        You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+
+        '
+      schema:
+        type: string
+    Fields:
+      name: fields
+      in: query
+      description: 'A comma-separated list of fields to be sent in the request.
+
+
+        Alternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.
+
+        This parameter is required if not sent via the Dashboard.
+
+        '
+      schema:
+        type: string
+    RequestId:
+      name: request_id
+      in: query
+      description: 'An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking.
+
+        The `request_id` is also important for debugging.
+
+        '
+      required: true
+      example: abh3kjh1kjnd8
+      schema:
+        type: string
+        default: abh3kjh1kjnd8
+    WidgetId:
+      name: widget_id
+      in: path
+      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
+
+
+        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      schema:
+        type: string
+        default: 1jwy7eg9
+      required: true
+      example: 1jwy7eg9
+    Filter:
+      name: filter
+      in: query
+      description: 'The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.
+
+
+        Any facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.
+
+        Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
+
+
+        You can filter results based on numeric ranges. For example, `&filter=(price:["100" TO "*"])`.
+
+        Note that a negative filter on ranges isn''t supported.
+
+        To provide multiple filters, send multiple filter parameters.
+
+        For example, `&filter=(price:["*" TO "100"])&filter=(color_groups: ("blue"))`.
+
+        '
+      schema:
+        type: string
+    Rows:
+      name: rows
+      in: query
+      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
+
+        The result size is used from the Dashboard if it isn''t sent in the API.
+
+
+        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+
+        '
+      schema:
+        type: integer
+        format: int32
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

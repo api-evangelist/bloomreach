@@ -1,0 +1,532 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Personalization-based widgets API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Personalization-based widgets
+paths:
+  /personalized/{widget_id}:
+    get:
+      tags:
+      - Personalization-based widgets
+      summary: Personalized widget
+      operationId: personalization-based-widget-api
+      parameters:
+      - $ref: '#/components/parameters/WidgetId'
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/BrUid'
+      - $ref: '#/components/parameters/DomainKey'
+      - name: query
+        in: query
+        description: 'Your site visitor''s search query. Search queries are composed of one or more terms.
+
+          You can percent encode spaces between terms as `%20`, or you can leave the spaces unencoded.
+
+
+          The example value shown here, <i>cable</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+          '
+        required: true
+        example: cable
+        schema:
+          type: string
+          default: cable
+      - name: user_id
+        in: query
+        description: 'The universal customer ID of the user. Required for Personalization-based widgets.
+
+
+          The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
+
+          This way, Bloomreach recognizes users in a way that''s aligned with your system.
+
+
+          Use an anonymous string. Don''t use email or other personally identifiable information.
+
+          The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+          '
+        required: true
+        example: abc123
+        schema:
+          type: string
+          default: abc123
+      - $ref: '#/components/parameters/RequestId'
+      - $ref: '#/components/parameters/Url'
+      - $ref: '#/components/parameters/RefUrl'
+      - $ref: '#/components/parameters/Fields'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/ContentInjection'
+      - $ref: '#/components/parameters/Rows'
+      - $ref: '#/components/parameters/ViewId'
+      deprecated: false
+  /personalized/{recently_viewed_widget_id}:
+    get:
+      tags:
+      - Personalization-based widgets
+      summary: Recently viewed widget
+      operationId: recently-viewed-widget-api
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/BrUid'
+      - $ref: '#/components/parameters/DomainKey'
+      - name: recently_viewed_widget_id
+        in: path
+        description: 'The ID of the Recently Viewed widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
+
+
+          The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+          '
+        schema:
+          type: string
+          default: 1jwy7eg9
+        required: true
+        example: 1jwy7eg9
+      - $ref: '#/components/parameters/RequestId'
+      - $ref: '#/components/parameters/Url'
+      - $ref: '#/components/parameters/RefUrl'
+      - $ref: '#/components/parameters/Fields'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/ContentInjection'
+      - $ref: '#/components/parameters/Rows'
+      - $ref: '#/components/parameters/ViewId'
+      - name: auth_key
+        in: query
+        description: 'The Bloomreach-provided authentication key for the Bloomreach account that''s sending the request.
+
+
+          Widget API calls are client-side, so you can leave `auth_key` empty.
+
+          '
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: 'The universal customer ID of the user. Required for Personalization-based Recommendation widgets.
+
+
+          The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
+
+          This way, Bloomreach recognizes users in a way that''s aligned with your system.
+
+
+          Use an anonymous string. Don''t use email or other personally identifiable information.
+
+          The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+          '
+        schema:
+          type: string
+          default: abc123
+      - name: start
+        in: query
+        description: 'The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0.
+
+          The maximum value is 10000.
+
+          '
+        example: 0
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"response\": {\n    \"start\": 0,\n    \"rows\": 2,\n    \"docs\": [\n      {\n        \"pid\": \"prod1243\",\n        \"url\": \"some url\",\n        \"sale_price\": 34.2,\n        \"title\": \"some title\"\n      },\n      {\n        \"pid\": \"prod453\",\n        \"url\": \"some url\",\n        \"sale_price\": 124.2,\n        \"title\": \"some title\"\n      }\n    ]\n  },\n  \"facet\": {\n    \"category\": [\n      {\n        \"count\": 44,\n        \"cat_id\": \"cat id\",\n        \"cat_name\": \"home\",\n        \"children\": [\n          {\n            \"count\": 21,\n            \"cat_id\": \"cat id\",\n            \"cat_name\": \"mens\",\n            \"children\": [\n              {\n                \"count\": 12,\n                \"cat_id\": \"cat_id\",\n                \"cat_name\": \"men's shirts\",\n                \"children\": null\n              },\n              {\n                \"count\": 9,\n                \"cat_id\": \"cat_id\",\n                \"cat_name\": \"men's t-shirts\",\n                \"children\": null\n              }\n            ]\n          },\n        ] \n    },\n    ],\n    \"fields\":[\n      {\n        \"key\": \"Size\",\n        \"type\": \"text\",\n        \"value\": [],\n      },\n      {\n        \"key\": \"Color\",\n        \"type\": \"number\",\n        \"value\":[]\n      },\n      {\n        \"key\": \"sale_price_test\",\n        \"type\": \"number_range\",\n        \"value\": []\n      }\n    ],\n  }\n  \"metadata\": {\n    \"widget\": {\n      \"rid\": \"some id\",\n      \"id\": \"some id\",\n      \"type\": \"mlt\",\n      \"description\": \"some text\",\n      \"name\": \"some text\"\n    },\n    \"query\": {\n      \"did_you_mean\": [\n        \"black\",\n        \"block\"\n      ],\n      \"modification\": {\n        \"mode\": \"autoCorrectQuery\",\n        \"value\": \"black\"\n      }\n    },\n    \"response\": {\n      \"personalized_results\": false,\n      \"fallback\": \"mlt\"\n    }\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: object
+                    properties:
+                      start:
+                        type: integer
+                        example: 0
+                        default: 0
+                      rows:
+                        type: integer
+                        example: 2
+                        default: 0
+                      docs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            pid:
+                              type: string
+                              example: prod1243
+                            url:
+                              type: string
+                              example: some url
+                            sale_price:
+                              type: number
+                              example: 34.2
+                              default: 0
+                            title:
+                              type: string
+                              example: some title
+                  facet:
+                    type: object
+                    properties:
+                      ranges:
+                        type: array
+                        required: false
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                              example: slider_price
+                            value:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  count:
+                                    type: integer
+                                    example: 10
+                                    default: 0
+                                  start:
+                                    type: integer
+                                    example: 0
+                                    default: 0
+                                  end:
+                                    type: integer
+                                    example: 500
+                                    default: 0
+                      fields:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                              example: colour
+                            type:
+                              type: string
+                              enum:
+                              - number
+                              - number_range
+                              - text
+                              example: number_range
+                            value:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  start:
+                                    type: integer
+                                    example: 1
+                                  end:
+                                    type: integer
+                                    example: 25
+                                  count:
+                                    type: integer
+                                    example: 231
+                                    default: 0
+                                  name:
+                                    type: string
+                                    example: black
+                      category:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              example: 12
+                              default: 0
+                            cat_id:
+                              type: string
+                              example: some id
+                            cat_name:
+                              type: string
+                              example: sale
+                            children:
+                              type: array
+                              items:
+                                type: string
+                                example: empty_arry
+                      query: {}
+                  metadata:
+                    type: object
+                    properties:
+                      widget:
+                        type: object
+                        properties:
+                          rid:
+                            type: string
+                            example: some id
+                          id:
+                            type: string
+                            example: some id
+                          type:
+                            type: string
+                            example: mlt
+                          description:
+                            type: string
+                            example: some text
+                          name:
+                            type: string
+                            example: some text
+                      query:
+                        type: object
+                        properties:
+                          did_you_mean:
+                            type: array
+                            items:
+                              type: string
+                              example: black
+                          modification:
+                            type: object
+                            properties:
+                              mode:
+                                type: string
+                                example: autoCorrectQuery
+                              value:
+                                type: string
+                                example: black
+                      response:
+                        type: object
+                        properties:
+                          personalized_results:
+                            type: boolean
+                            example: false
+                            default: true
+                          fallback:
+                            type: string
+                            example: mlt
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: Incorrect/Invalid query params.
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: An invalid auth-key is passed with the request.
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: 'The widget ID is not valid.
+
+
+                    '
+      deprecated: false
+components:
+  parameters:
+    Url:
+      name: url
+      in: query
+      description: 'The absolute URL of the page where the request is initiated. Don''t use a relative URL.
+
+
+        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: https://www.documentation-site.com
+      schema:
+        type: string
+        default: https://www.documentation-site.com
+    AccountId:
+      name: account_id
+      in: query
+      description: 'Your site''s numerical Bloomreach account ID.
+
+
+        Your Bloomreach representative gives your site''s account ID to you before or during your integration kickoff meeting.
+
+        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: 6276
+      schema:
+        type: integer
+        format: int32
+        default: 6276
+    BrUid:
+      name: _br_uid_2
+      in: query
+      description: 'A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
+
+        This cookie creates a unique, anonymous identifier for every browser or device.
+
+        Use the default value provided, which is already encoded.
+
+        '
+      required: true
+      example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      schema:
+        type: string
+        default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+    ContentInjection:
+      name: content_injection
+      in: query
+      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+      required: false
+      example: true
+      schema:
+        type: boolean
+    DomainKey:
+      name: domain_key
+      in: query
+      description: 'Your site domain''s ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
+
+
+        This parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.
+
+        The example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: bloomreach_devdocs
+      schema:
+        type: string
+        default: bloomreach_devdocs
+    RefUrl:
+      name: ref_url
+      in: query
+      description: 'The URL of the page or HTTP referrer where the request is started.
+
+
+        Required if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).
+
+        '
+      schema:
+        type: string
+    ViewId:
+      name: view_id
+      in: query
+      description: 'A unique identifier for a specific view of your product catalog.
+
+        If you have multiple versions of your site, each with its own product catalog characteristics like product titles and prices, then add `view_id` to your call.
+
+        Bloomreach uses your `view_id` parameter value to display the right product information for your customers based on their individual site views.
+
+
+        You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+
+        '
+      schema:
+        type: string
+    Fields:
+      name: fields
+      in: query
+      description: 'A comma-separated list of fields to be sent in the request.
+
+
+        Alternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.
+
+        This parameter is required if not sent via the Dashboard.
+
+        '
+      schema:
+        type: string
+    RequestId:
+      name: request_id
+      in: query
+      description: 'An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking.
+
+        The `request_id` is also important for debugging.
+
+        '
+      required: true
+      example: abh3kjh1kjnd8
+      schema:
+        type: string
+        default: abh3kjh1kjnd8
+    WidgetId:
+      name: widget_id
+      in: path
+      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
+
+
+        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      schema:
+        type: string
+        default: 1jwy7eg9
+      required: true
+      example: 1jwy7eg9
+    Filter:
+      name: filter
+      in: query
+      description: 'The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.
+
+
+        Any facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.
+
+        Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
+
+
+        You can filter results based on numeric ranges. For example, `&filter=(price:["100" TO "*"])`.
+
+        Note that a negative filter on ranges isn''t supported.
+
+        To provide multiple filters, send multiple filter parameters.
+
+        For example, `&filter=(price:["*" TO "100"])&filter=(color_groups: ("blue"))`.
+
+        '
+      schema:
+        type: string
+    Rows:
+      name: rows
+      in: query
+      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
+
+        The result size is used from the Dashboard if it isn''t sent in the API.
+
+
+        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+
+        '
+      schema:
+        type: integer
+        format: int32
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

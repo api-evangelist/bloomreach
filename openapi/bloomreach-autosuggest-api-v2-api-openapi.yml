@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Autosuggest API v2
+paths:
+  /:
+    get:
+      tags:
+      - Autosuggest API v2
+      summary: Get autosuggestions
+      description: This API returns product/category suggestions based on an inputted search query.
+      operationId: autosuggest-api
+      parameters:
+      - name: _br_uid_2
+        in: query
+        description: A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. <br><br> Use the default value provided, which is already encoded.
+        required: true
+        example: '{{ br_uid_2 }}'
+        schema:
+          type: string
+          default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      - name: account_id
+        in: query
+        description: Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting. <br><br> The example value shown here, <i>6413</i>, is included for your convenience to send a request with <b>Try It</b>.
+        required: true
+        example: '{{ account_id }}'
+        schema:
+          type: integer
+          format: int32
+          default: 6413
+      - name: auth_key
+        in: query
+        description: The authentication key provided by Bloomreach for the account that's sending the request. <br><br> Autosuggest API calls are client-side, so you can leave **auth_key** empty.
+        example: '{{ auth_key }}'
+        schema:
+          type: string
+      - name: callback
+        in: query
+        description: Indicates whether to return data wrapped in the function for cross-origin requests. <br><br> For server-side requests, use the value **br_server**. For native-app requests, use the value **br_app**.
+        schema:
+          type: string
+          enum:
+          - br_server
+          - br_app
+      - name: catalog_views
+        in: query
+        description: A list of catalog views that you want to see in your suggestions. You must specify the catalog name within the catalog view. For Product catalogs, the catalog name is the same value as your domain_key. <br><br> A **catalog_views** value contains the view_ids within a catalog separated by a colon. If you pass multiple catalogs in **catalog_views**, they must be pipe-separated. Attributes suggestions are enabled for the first two catalogs mentioned as part of catalog_views and only for the first view passed in each of the first two catalogs. <br><br> For example, **&catalog_views=product:store1,store2|recipe:premium|articles** would return text and attribute suggestions for the product catalog in the store1 view, and for the recipe catalog in the premium view; only text suggestions will be displayed for the articles catalog. <br><br> The example value shown here, <i>pacifichome</i>, is included for your convenience to send a request with <b>Try It</b>.
+        required: true
+        example: pacifichome
+        schema:
+          type: string
+          default: pacifichome
+      - name: q
+        in: query
+        description: Your site visitor's partial search query that Autosuggest should operate on. <br><br> You can percent encode spaces between terms as %20, or you can leave the spaces unencoded. <br><br> The example value shown here, <i>cha</i>, is included for your convenience to send a request with <b>Try It</b>.
+        required: true
+        example: cha
+        schema:
+          type: string
+          default: cha
+      - name: ref_url
+        in: query
+        description: The URL of the page or HTTP referrer where the request is started.
+        required: true
+        example: '{{ ref_url }}'
+        schema:
+          type: string
+          default: https://example.com
+      - name: request_id
+        in: query
+        description: An ID to track site visitor clicks. We recommend generating unique, random values of 13 digits to enable click-tracking. <br><br> Bloomreach doesn't automatically enforce the requirements for this parameter. For example, you can enter test as your value for each instance of the request_id parameter without triggering an error message. However, using a unique value allows us to help you if you encounter a problem.
+        required: true
+        example: 1703497216731
+        schema:
+          type: string
+          default: 1703497216731
+      - name: request_type
+        in: query
+        description: The type of API request. Value should be **suggest** for Autosuggest requests.
+        required: true
+        example: suggest
+        schema:
+          type: string
+          enum:
+          - suggest
+          default: suggest
+      - name: url
+        in: query
+        description: The absolute URL of the page where the request is initiated. Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+        required: true
+        example: '{{ url }}'
+        schema:
+          type: string
+          default: https://www.documentation-site.com
+      - name: user_agent
+        in: query
+        description: The user agent of the browser that's making the search request. <br><br> Make sure that this value in your API request is the same as the value in the original request from your user. We optimize pages in part by crawling and gathering data, and the original user_agent lets us distinguish between our internal Bloomreach users who QA pages and everyone else who visits your site.
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The universal customer ID of the user. You only need to pass this field if your particular integration tracks customers this way.  The parameter captures user IDs from the customer side, and reuses the information when powering apps or enhancing cross-device linking. In this way, Bloomreach recognizes users in a way that's aligned with your system. <br><br> Use an anonymous string. Don't use email or other personally identifiable information. <br><br> If you do not track users this way, then omit this field.
+        schema:
+          type: string
+      deprecated: false
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuggestResponse'
+components:
+  schemas:
+    SuggestResponse:
+      additionalProperties: false
+      properties:
+        queryContext:
+          additionalProperties: false
+          properties:
+            originalQuery:
+              type: string
+          type: object
+        suggestionGroups:
+          items:
+            additionalProperties: false
+            properties:
+              attributeSuggestions:
+                items:
+                  additionalProperties: false
+                  properties:
+                    attributeType:
+                      type: string
+                    name:
+                      type: string
+                    value:
+                      type: string
+                  required:
+                  - name
+                  - value
+                  - attributeType
+                  type: object
+                type: array
+              catalogName:
+                type: string
+              product_suggest_query:
+                type: string
+              querySuggestions:
+                items:
+                  additionalProperties: false
+                  properties:
+                    displayText:
+                      type: string
+                    query:
+                      type: string
+                  required:
+                  - query
+                  - displayText
+                  type: object
+                type: array
+              searchSuggestions:
+                items:
+                  additionalProperties: false
+                  properties:
+                    pid:
+                      type: string
+                    sale_price:
+                      type: string
+                    thumb_image:
+                      type: string
+                    title:
+                      type: string
+                    url:
+                      type: string
+                  required:
+                  - sale_price
+                  - url
+                  - pid
+                  - thumb_image
+                  - title
+                  type: object
+                type: array
+              view:
+                type: string
+            type: object
+          type: array
+      type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

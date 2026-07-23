@@ -1,0 +1,314 @@
+openapi: 3.1.0
+info:
+  title: Workspace Autosuggest API v2 Imports API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Imports
+  description: Operations for working with existing imports.
+paths:
+  /data/v2/workspaces/{workspaceId}/imports/{import_id}/start:
+    post:
+      summary: Start import
+      operationId: startWorkspaceImport
+      tags:
+      - Imports
+      description: 'Trigger the run of an existing workspace-scoped import programmatically.
+
+
+        The following types of imports can be triggered: [URL](https://documentation.bloomreach.com/data-hub/docs/url-imports), [File storage
+
+        (GCS, S3, SFTP)](https://documentation.bloomreach.com/data-hub/docs/file-storage-imports), [Data warehouse](https://documentation.bloomreach.com/data-hub/docs/data-warehouse-imports).
+
+
+        If you''re using a URL or File storage (GCS, SFTP) import, you can
+
+        override its original path or URL. When overridden, the path
+
+        applies only to this specific run and does not modify the import
+
+        definition.
+
+
+        Use this endpoint with a [**workspace** API key](https://documentation.bloomreach.com/data-hub/reference/data-hub-api-prerequisites) (issued in
+
+        Workspace settings → Access management → API). The
+
+        `{workspaceId}` in the path must match the workspace the API key
+
+        was issued for.
+
+
+        ### Authorization
+
+        - **Access type:** Private access (workspace API key)
+
+        - **Permission required:** Imports → Allow trigger imports
+
+
+        ### Limitations
+
+        - Cannot trigger **Copy & paste** or **File upload** imports.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ImportId'
+      requestBody:
+        $ref: '#/components/requestBodies/StartImportBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/Started'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Forbidden:
+      description: 'The API key lacks the **Imports → Allow trigger imports**
+
+        permission, or the `workspaceId` in the path does not match the
+
+        workspace the API key was issued for.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            noPermission:
+              value:
+                success: false
+                errors:
+                  _global:
+                  - No permission to allow trigger imports. Check Workspace settings -> Access management -> API -> Imports -> Allow trigger imports.
+    Unauthorized:
+      description: 'Authentication is missing or invalid. Provide HTTP Basic
+
+        credentials with a valid API Key ID and Secret.
+
+        '
+      headers:
+        WWW-Authenticate:
+          description: Basic realm="Login Required"
+          schema:
+            type: string
+    Started:
+      description: Import triggered successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessResponse'
+          examples:
+            success:
+              value:
+                success: true
+    BadRequest:
+      description: 'Bad request — the request was malformed, contained invalid
+
+        parameters, or the underlying import service rejected the run
+
+        (for example, an invalid override path).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            globalError:
+              summary: Validation or restriction error
+              value:
+                success: false
+                errors:
+                  _global:
+                  - 'BadRequest: The browser (or proxy) sent a request that this server could not understand.'
+            passthroughError:
+              summary: Error returned by the import service
+              value:
+                error: bad path
+    NotFound:
+      description: 'No import with the given `import_id` exists in the addressed
+
+        workspace.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundErrorResponse'
+          examples:
+            notFound:
+              value:
+                success: false
+                errors:
+                  code: NotFoundError
+                  message: The requested resource was not found.
+  schemas:
+    NotFoundErrorResponse:
+      type: object
+      required:
+      - success
+      - errors
+      properties:
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              example: NotFoundError
+            message:
+              type: string
+              example: The requested resource was not found.
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    ErrorResponse:
+      type: object
+      description: 'Error response. Most errors use the `success` + `errors._global`
+
+        shape; some failures returned by the underlying import service
+
+        are surfaced verbatim and use the alternative `error` shape.
+
+        '
+      properties:
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: object
+          description: Map of error categories to error messages.
+          properties:
+            _global:
+              type: array
+              description: Errors not tied to a specific field.
+              items:
+                type: string
+        error:
+          type: string
+          description: 'Single error message returned by the underlying import
+
+            service for some failure modes.
+
+            '
+    StartImportRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        path:
+          type: string
+          description: 'URL, GCS, or SFTP path that overrides the import''s configured
+
+            source. The override applies only to this run — it does not
+
+            modify the import definition. Only applicable for URL and
+
+            Filestorage (GCS, SFTP) imports.
+
+            '
+          example: https://example.com/data.csv
+        test_connection:
+          type: boolean
+          description: 'When `true` (default), the API tests the import-source
+
+            connection before starting the run. Set to `false` to skip
+
+            the check — useful for sources that may otherwise time out.
+
+            With the check skipped, the import can still fail later if
+
+            the source is unreachable.
+
+            '
+          default: true
+  parameters:
+    WorkspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      description: 'The ID of your Bloomreach Engagement workspace. Must match the
+
+        workspace the API key was issued for; otherwise the request is
+
+        rejected with HTTP 403.
+
+        '
+      schema:
+        type: string
+        example: 12345678-1234-1234-1234-123456789abc
+    ImportId:
+      name: import_id
+      in: path
+      required: true
+      description: The ID of an existing import in the workspace.
+      schema:
+        type: string
+        example: 5f8a3b2e1c9d4e6f7a8b9c0d
+  requestBodies:
+    StartImportBody:
+      required: false
+      description: 'Optional body to override the source path or skip the
+
+        connection-test step. The body may be omitted entirely.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StartImportRequest'
+          examples:
+            overridePath:
+              summary: Override the source path for this run
+              value:
+                path: https://example.com/data.csv
+                test_connection: true
+            skipConnectionTest:
+              summary: Run without testing the source connection
+              value:
+                test_connection: false
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

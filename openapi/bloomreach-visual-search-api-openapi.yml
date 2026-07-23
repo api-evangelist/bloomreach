@@ -1,0 +1,269 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Visual search API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Visual search
+paths:
+  /visual/upload/{widget_id}:
+    post:
+      tags:
+      - Visual search
+      summary: Upload image
+      operationId: upload-api
+      deprecated: false
+      parameters:
+      - $ref: '#/components/parameters/WidgetId'
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/DomainKey'
+      - name: auth_key
+        in: query
+        description: 'The unique key shared during the integration phase. This is used to authenticate your API call.
+
+          '
+        schema:
+          type: string
+        required: false
+      - name: Content-Disposition
+        description: "This specifies the form field as \"image\" and the suggested filename of the image being uploaded.         \nExample syntax: `Content-Disposition: form-data; name=\"image\"; filename=\"filename.jpg\"`\n"
+        in: header
+        schema:
+          type: string
+          default: form-data; name="image"; filename="filename.jpg"
+        required: true
+        example: form-data; name="image"; filename="filename.jpg"
+      - name: Content-Type
+        description: 'This header specifies the media type (image) and format. We accept all image formats - jpg, png, jpeg, webp.
+
+          Example syntax: `Content-Type: image/jpeg`
+
+          '
+        in: header
+        schema:
+          type: string
+          default: image/jpeg
+        required: true
+        example: image/jpeg
+  /visual/search/{widget_id}:
+    get:
+      tags:
+      - Visual search
+      summary: Run visual search
+      operationId: visual-search-response-api
+      deprecated: false
+      parameters:
+      - $ref: '#/components/parameters/WidgetId'
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/BrUid'
+      - $ref: '#/components/parameters/DomainKey'
+      - $ref: '#/components/parameters/Url'
+      - $ref: '#/components/parameters/Fields'
+      - $ref: '#/components/parameters/Filter'
+      - $ref: '#/components/parameters/ContentInjection'
+      - $ref: '#/components/parameters/Rows'
+      - name: image_id
+        in: query
+        description: 'You’ll get this value in the Upload API response once an image is uploaded.
+
+          You can use `image_id` to make any number of subsequent queries for widget responses (with different parameters/filters and objects) without the need to re-upload.
+
+          '
+        schema:
+          type: string
+          default: str123
+        required: false
+        example: str123
+      - name: item_ids
+        in: query
+        description: "Item ID/PID of the item for which you want visual recommendations. \nPassing this parameter makes it a [Visual Recommendations](https://documentation.bloomreach.com/discovery/reference/visual-search-response-api#visual-recommendations-api) request.\n"
+        schema:
+          type: string
+          default: pid123
+        required: false
+        example: pid123
+      - name: sku_id
+        in: query
+        description: 'If you have SKUs in the catalog, `sku_id` should be passed, else this can be skipped.
+
+          '
+        schema:
+          type: string
+        required: false
+      - name: object_id
+        in: query
+        description: "By default, you will get the recommendations for the whole image you uploaded if you make an API call without the object_id [denoted by -1]. \nTo get more targeted results, you can also make API calls specific to an `object_id`.\n"
+        schema:
+          type: int32
+        required: false
+      - name: auth_key
+        in: query
+        description: 'The unique key shared during the integration phase. This is used to authenticate your API call.
+
+          '
+        schema:
+          type: string
+        required: false
+components:
+  parameters:
+    Url:
+      name: url
+      in: query
+      description: 'The absolute URL of the page where the request is initiated. Don''t use a relative URL.
+
+
+        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: https://www.documentation-site.com
+      schema:
+        type: string
+        default: https://www.documentation-site.com
+    AccountId:
+      name: account_id
+      in: query
+      description: 'Your site''s numerical Bloomreach account ID.
+
+
+        Your Bloomreach representative gives your site''s account ID to you before or during your integration kickoff meeting.
+
+        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: 6276
+      schema:
+        type: integer
+        format: int32
+        default: 6276
+    BrUid:
+      name: _br_uid_2
+      in: query
+      description: 'A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
+
+        This cookie creates a unique, anonymous identifier for every browser or device.
+
+        Use the default value provided, which is already encoded.
+
+        '
+      required: true
+      example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      schema:
+        type: string
+        default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+    ContentInjection:
+      name: content_injection
+      in: query
+      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+      required: false
+      example: true
+      schema:
+        type: boolean
+    DomainKey:
+      name: domain_key
+      in: query
+      description: 'Your site domain''s ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
+
+
+        This parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.
+
+        The example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: bloomreach_devdocs
+      schema:
+        type: string
+        default: bloomreach_devdocs
+    Fields:
+      name: fields
+      in: query
+      description: 'A comma-separated list of fields to be sent in the request.
+
+
+        Alternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.
+
+        This parameter is required if not sent via the Dashboard.
+
+        '
+      schema:
+        type: string
+    WidgetId:
+      name: widget_id
+      in: path
+      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
+
+
+        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      schema:
+        type: string
+        default: 1jwy7eg9
+      required: true
+      example: 1jwy7eg9
+    Filter:
+      name: filter
+      in: query
+      description: 'The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.
+
+
+        Any facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.
+
+        Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
+
+
+        You can filter results based on numeric ranges. For example, `&filter=(price:["100" TO "*"])`.
+
+        Note that a negative filter on ranges isn''t supported.
+
+        To provide multiple filters, send multiple filter parameters.
+
+        For example, `&filter=(price:["*" TO "100"])&filter=(color_groups: ("blue"))`.
+
+        '
+      schema:
+        type: string
+    Rows:
+      name: rows
+      in: query
+      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
+
+        The result size is used from the Dashboard if it isn''t sent in the API.
+
+
+        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+
+        '
+      schema:
+        type: integer
+        format: int32
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

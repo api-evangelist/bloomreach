@@ -1,0 +1,581 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Job processing API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Job processing
+paths:
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/jobs/{job_id}:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/JobId'
+    get:
+      tags:
+      - Job processing
+      summary: Get job details
+      description: 'Get all the details about a particular job including its status.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      job:
+                        $ref: '#/components/schemas/Job'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/jobs:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/PageNumber'
+    - $ref: '#/components/parameters/PageLimit'
+    - $ref: '#/components/parameters/JobClass'
+    get:
+      tags:
+      - Job processing
+      summary: Get all jobs
+      description: 'Get all the jobs associated with a catalog.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      previous_page:
+                        type: integer
+                      next_page:
+                        type: integer
+                  data:
+                    type: object
+                    properties:
+                      jobs:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Job'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+components:
+  parameters:
+    PageNumber:
+      description: To navigate through paginated results, use the page number to switch between pages.
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      required: false
+      example: 1
+    AccountName:
+      description: Your unique account name.
+      name: account_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis
+    JobClass:
+      description: 'Filter the jobs based on comma-separated class values:
+
+
+        * feed_records_full — Include full feed jobs in response, that is, if type=feed and feed_mode=full
+
+        * feed_records_delta - Include delta feed jobs in response, that is, if type=feed and feed_mode=delta
+
+        * index_update - Include update index jobs from search quality in response, that is, if type=index, index_mode=update
+
+        * index_refresh - Include refresh index jobs in response, that is, if type=index, index_mode=refresh
+
+        * suggest_refresh - Include suggestions for refresh jobs in response
+
+
+        If no filter value is provided, all jobs are returned by default, regardless of job class. This is equivalent to passing all job class values in the parameter.
+
+        '
+      name: class
+      in: query
+      explode: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - feed_records_full
+          - feed_records_delta
+          - index_update
+          - index_refresh
+          - suggest_refresh
+        minItems: 1
+      example:
+      - feed_products_full,feed_products_delta
+      - index_update
+    JobId:
+      description: The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records)).
+      name: job_id
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: '1324'
+    EnvironmentName:
+      description: The type of environment you want to use for the request (Production/Staging).
+      name: environment_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+        enum:
+        - production
+        - staging
+      required: true
+    PageLimit:
+      description: Specify the maximum number of pages to return in the response.
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+      required: false
+      example: 10
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
+  schemas:
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ContentFeedJobStats:
+      type: object
+      properties:
+        patch_operation_count:
+          type: integer
+        patch_operation_add_item_count:
+          type: integer
+        patch_operation_add_item_view_count:
+          type: integer
+        patch_operation_add_item_views_count:
+          type: integer
+        patch_operation_add_item_attributes_count:
+          type: integer
+        patch_operation_add_item_view_attributes_count:
+          type: integer
+        patch_operation_add_item_attribute_count:
+          type: integer
+        patch_operation_add_item_view_attribute_count:
+          type: integer
+        patch_operation_remove_item_count:
+          type: integer
+        patch_operation_remove_item_views_count:
+          type: integer
+        patch_operation_remove_item_views_attribute_count:
+          type: integer
+        patch_operation_remove_item_views_attributes_count:
+          type: integer
+        patch_operation_remove_item_view_count:
+          type: integer
+        patch_operation_remove_item_view_attribute_count:
+          type: integer
+        patch_operation_remove_item_view_attributes_count:
+          type: integer
+    SuggestJobProperties:
+      type: object
+    FeedJobProperties:
+      type: object
+      properties:
+        feed_data_type:
+          enum:
+          - product
+          - content
+          type: string
+        feed_mode:
+          enum:
+          - full
+          - delta
+          type: string
+        input_source:
+          enum:
+          - sftp_file_upload
+          - api_request_body
+          type: string
+        input_filenames:
+          type: array
+          items:
+            type: string
+    IndexJobProperties:
+      type: object
+      properties:
+        index_data_type:
+          enum:
+          - product
+          - content
+        index_mode:
+          enum:
+          - update
+          type: string
+        ignore_count_drop:
+          type: boolean
+        config_etag:
+          description: The catalog configuration version used at time of job processing.
+          type: string
+          example: 3613f704b80020ef908f0375100fbd1d
+        index_config_etag:
+          description: The index configuration version used at time of job processing.
+          type: string
+          example: 3613f704b80020ef908f0375100fbd1d
+    ProductFeedJobStats:
+      type: object
+      properties:
+        patch_operation_count:
+          type: integer
+        patch_operation_add_product_count:
+          type: integer
+        patch_operation_add_product_attribute_count:
+          type: integer
+        patch_operation_add_product_attributes_count:
+          type: integer
+        patch_operation_add_product_variant_count:
+          type: integer
+        patch_operation_add_product_variant_attribute_count:
+          type: integer
+        patch_operation_add_product_variant_attributes_count:
+          type: integer
+        patch_operation_add_product_variants_count:
+          type: integer
+        patch_operation_add_product_view_count:
+          type: integer
+        patch_operation_add_product_view_attribute_count:
+          type: integer
+        patch_operation_add_product_view_attributes_count:
+          type: integer
+        patch_operation_add_product_views_count:
+          type: integer
+        patch_operation_add_product_views_group_count:
+          type: integer
+        patch_operation_add_product_views_variant_count:
+          type: integer
+        patch_operation_add_product_view_variant_count:
+          type: integer
+        patch_operation_add_product_view_variant_attribute_count:
+          type: integer
+        patch_operation_add_product_view_variant_attributes_count:
+          type: integer
+        patch_operation_add_product_view_variant_exclusion_count:
+          type: integer
+        patch_operation_add_product_view_variants_count:
+          type: integer
+        patch_operation_remove_product_count:
+          type: integer
+        patch_operation_remove_product_attribute_count:
+          type: integer
+        patch_operation_remove_product_attributes_count:
+          type: integer
+        patch_operation_remove_product_variant_count:
+          type: integer
+        patch_operation_remove_product_variant_attribute_count:
+          type: integer
+        patch_operation_remove_product_variant_attributes_count:
+          type: integer
+        patch_operation_remove_product_variants_count:
+          type: integer
+        patch_operation_remove_product_view_count:
+          type: integer
+        patch_operation_remove_product_view_attribute_count:
+          type: integer
+        patch_operation_remove_product_view_attributes_count:
+          type: integer
+        patch_operation_remove_product_views_count:
+          type: integer
+        patch_operation_remove_product_views_group_count:
+          type: integer
+        patch_operation_remove_product_views_groups_count:
+          type: integer
+        patch_operation_remove_product_view_variant_count:
+          type: integer
+        patch_operation_remove_product_view_variant_attribute_count:
+          type: integer
+        patch_operation_remove_product_view_variant_attributes_count:
+          type: integer
+        patch_operation_remove_product_view_variants_count:
+          type: integer
+        patch_operation_update_product_count:
+          type: integer
+        patch_operation_update_product_attributes_count:
+          type: integer
+        patch_operation_update_product_view_count:
+          type: integer
+        patch_operation_update_product_view_attributes_count:
+          type: integer
+    JobErrorDetail:
+      type: object
+      properties:
+        class:
+          type: string
+          enum:
+          - warning
+          - error
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        resolution:
+          type: string
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    Job:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobErrorDetail'
+        id:
+          type: string
+        stats:
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/ProductFeedJobStats'
+          - $ref: '#/components/schemas/ProductIndexJobStats'
+          - $ref: '#/components/schemas/ContentFeedJobStats'
+          - $ref: '#/components/schemas/ContentIndexJobStats'
+        properties:
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/FeedJobProperties'
+          - $ref: '#/components/schemas/IndexJobProperties'
+          - $ref: '#/components/schemas/SuggestJobProperties'
+        type:
+          enum:
+          - feed
+          - index
+          - suggest
+          type: string
+        status:
+          enum:
+          - running
+          - skipped
+          - queued
+          - failed
+          - success
+          - killed
+          type: string
+        status_code:
+          enum:
+          - 100
+          - 101
+          - 102
+          - 105
+          - 200
+          - 210
+          - 305
+          - 310
+          - 350
+          - 360
+          - 430
+          - 440
+          - 450
+          - 500
+          - 550
+          type: number
+        created_at:
+          format: date-time
+          type: string
+        started_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        stopped_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - type
+      - status
+      - status_code
+      - created_at
+      - updated_at
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
+    ContentIndexJobStats:
+      type: object
+      properties:
+        item_doc_count:
+          type: integer
+        search_item_count:
+          type: integer
+        deleted_parent_count:
+          type: integer
+    ProductIndexJobStats:
+      type: object
+      properties:
+        search_product_count:
+          type: integer
+        search_document_count:
+          type: integer
+        search_documents_byte_count:
+          type: integer
+        deleted_parent_count:
+          type: integer
+        product_doc_count:
+          type: integer
+        variant_doc_count:
+          type: integer
+        search_variant_count:
+          type: integer
+        products_no_title_count:
+          type: integer
+        products_no_url_count:
+          type: integer
+        invalid_products_count:
+          type: integer
+        invalid_variants_count:
+          type: integer
+        invalid_products_no_price_data_count:
+          type: integer
+        invalid_products_invalid_price_data_count:
+          type: integer
+        invalid_products_empty_product_id_count:
+          type: integer
+        invalid_variants_no_price_data_count:
+          type: integer
+        unavailable_products_count:
+          type: integer
+        unavailable_variants_count:
+          type: integer
+        unavailable_products_all_variants_unavailable_count:
+          type: integer
+        modified_product_record_count:
+          type: integer
+        modified_variant_record_count:
+          type: integer
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

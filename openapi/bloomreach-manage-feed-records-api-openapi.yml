@@ -1,0 +1,1087 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Manage feed records API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Manage feed records
+paths:
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/PageNumber'
+    - $ref: '#/components/parameters/PageLimit'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get current records
+      description: 'View the current state of product and item feed records in a catalog.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      records:
+                        type: array
+                        items:
+                          oneOf:
+                          - $ref: '#/components/schemas/Product'
+                          - $ref: '#/components/schemas/ProductSummary'
+                          - $ref: '#/components/schemas/Item'
+                          - $ref: '#/components/schemas/ItemSummary'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+    put:
+      tags:
+      - Manage feed records
+      summary: Upload full feed
+      description: 'Upload the entire feed data at once.
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: List of file names to be processed
+              type: array
+              items:
+                type: string
+          application/json-patch+json:
+            schema:
+              description: List of JSON Lines patch operations
+              type: array
+              items:
+                type: object
+          application/json-patch+jsonlines:
+            schema:
+              description: JSON Lines patch operations
+              type: object
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      job_id:
+                        type: string
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        406:
+          description: Invalid Content-Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406Response'
+        413:
+          description: Content Too Large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/413Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+    patch:
+      tags:
+      - Manage feed records
+      summary: Modify feed records
+      description: "Edit/change or add particular product or item records in the feed. \n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: List of file names to be processed
+              type: array
+              items:
+                type: string
+          application/json-patch+json:
+            schema:
+              description: List of JSON Lines patch operations
+              type: array
+              items:
+                type: object
+          application/json-patch+jsonlines:
+            schema:
+              description: JSON Lines patch operations
+              type: object
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      job_id:
+                        type: string
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        406:
+          description: Invalid Content-Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/406Response'
+        413:
+          description: Content Too Large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/413Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/RecordId'
+    - $ref: '#/components/parameters/Mode'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get record details
+      description: 'View the details of a product or item feed record.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      record:
+                        oneOf:
+                        - $ref: '#/components/schemas/Product'
+                        - $ref: '#/components/schemas/ProductSummary'
+                        - $ref: '#/components/schemas/Item'
+                        - $ref: '#/components/schemas/ItemSummary'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/variants:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/RecordId'
+    - $ref: '#/components/parameters/PageNumber'
+    - $ref: '#/components/parameters/PageLimit'
+    - $ref: '#/components/parameters/Mode'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get record variants
+      description: 'View the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a product or item feed record.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        variants:
+                          type: object
+                          additionalProperties:
+                            $ref: '#/components/schemas/ProductVariant'
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                        previous_page:
+                          type: string
+                        next_page:
+                          type: string
+                    data:
+                      type: object
+                      properties:
+                        variants:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/ProductVariantSummary'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/variants/{variant_id}:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/RecordId'
+    - $ref: '#/components/parameters/VariantId'
+    - $ref: '#/components/parameters/Mode'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get variant details
+      description: 'View the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) of any product or item in the feed data.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      variant:
+                        oneOf:
+                        - $ref: '#/components/schemas/ProductVariant'
+                        - $ref: '#/components/schemas/ProductVariantSummary'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/RecordId'
+    - $ref: '#/components/parameters/PageNumber'
+    - $ref: '#/components/parameters/PageLimit'
+    - $ref: '#/components/parameters/Mode'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get views
+      description: 'Get all the [views](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) associated with a product or item feed record.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                    data:
+                      type: object
+                      properties:
+                        views:
+                          type: object
+                          additionalProperties:
+                            oneOf:
+                            - $ref: '#/components/schemas/ProductView'
+                            - $ref: '#/components/schemas/ItemView'
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                    data:
+                      type: object
+                      properties:
+                        views:
+                          type: array
+                          items:
+                            oneOf:
+                            - $ref: '#/components/schemas/ProductViewsetPreview'
+                            - $ref: '#/components/schemas/ItemViewsetPreview'
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                        previous_page:
+                          type: string
+                        next_page:
+                          type: string
+                      required:
+                      - count
+                    data:
+                      type: object
+                      properties:
+                        views:
+                          type: array
+                          items:
+                            oneOf:
+                            - $ref: '#/components/schemas/ProductViewSummary'
+                            - $ref: '#/components/schemas/ItemViewSummary'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/RecordId'
+    - $ref: '#/components/parameters/ViewId'
+    - $ref: '#/components/parameters/Mode'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get view details
+      description: 'Get the details of a [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product or item feed record.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        view:
+                          oneOf:
+                          - $ref: '#/components/schemas/ProductView'
+                          - $ref: '#/components/schemas/ItemView'
+                - type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        view:
+                          oneOf:
+                          - $ref: '#/components/schemas/ProductViewPreview'
+                          - $ref: '#/components/schemas/ItemViewPreview'
+                - type: object
+                  properties:
+                    data:
+                      type: object
+                      properties:
+                        view:
+                          oneOf:
+                          - $ref: '#/components/schemas/ProductViewSummary'
+                          - $ref: '#/components/schemas/ItemViewSummary'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+  ? /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}/variants
+  : parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/RecordId'
+    - $ref: '#/components/parameters/ViewId'
+    - $ref: '#/components/parameters/PageNumber'
+    - $ref: '#/components/parameters/PageLimit'
+    - $ref: '#/components/parameters/Mode'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get view variants
+      description: 'Get all the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product feed record.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                    data:
+                      type: object
+                      properties:
+                        variant_views:
+                          type: object
+                          additionalProperties:
+                            $ref: '#/components/schemas/ProductVariantView'
+                - type: object
+                  properties:
+                    meta:
+                      type: object
+                      properties:
+                        count:
+                          type: integer
+                        previous_page:
+                          type: string
+                        next_page:
+                          type: string
+                      required:
+                      - count
+                    data:
+                      type: object
+                      properties:
+                        views:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/ProductVariantViewSummary'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+  ? /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}/variants/{variant_id}
+  : parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/RecordId'
+    - $ref: '#/components/parameters/ViewId'
+    - $ref: '#/components/parameters/VariantId'
+    - $ref: '#/components/parameters/Mode'
+    get:
+      tags:
+      - Manage feed records
+      summary: Get view variant details
+      description: 'Get the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) for a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of a product feed record.
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      variant_view:
+                        oneOf:
+                        - $ref: '#/components/schemas/ProductVariantView'
+                        - $ref: '#/components/schemas/ProductVariantViewSummary'
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+components:
+  schemas:
+    ItemViewsetPreview:
+      description: ''
+      type: object
+      properties:
+        view_ids:
+          type: array
+          items:
+            type: string
+        attributes:
+          type: object
+      required:
+      - view_ids
+      - attributes
+    ProductVariantSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+      required:
+      - id
+      - attributes
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProductViewsetPreview:
+      description: ''
+      type: object
+      properties:
+        view_ids:
+          type: array
+          items:
+            type: string
+        variants:
+          type: object
+        attributes:
+          type: object
+      required:
+      - view_ids
+      - variants
+      - attributes
+    ProductViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        variant_override_record_count:
+          type: integer
+      required:
+      - id
+      - attributes
+      - variant_override_record_count
+    ProductVariant:
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    406Response:
+      description: Not Acceptable
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ItemSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        view_count:
+          type: integer
+      required:
+      - id
+      - attributes
+    413Response:
+      description: Content Too Large
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    Item:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+        views:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ItemView'
+      required:
+      - attributes
+    ItemView:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ProductViewPreview:
+      description: ''
+      type: object
+      properties:
+        variants:
+          type: object
+        attributes:
+          type: object
+      required:
+      - variants
+      - attributes
+    Product:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+        variants:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ProductVariant'
+        views:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ProductView'
+      required:
+      - attributes
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProductView:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+        variants:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ProductVariantView'
+      required:
+      - attributes
+      - variants
+    ItemViewPreview:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ProductSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        variant_record_count:
+          type: integer
+        view_count:
+          type: integer
+        product_view_override_record_count:
+          type: integer
+        variant_view_override_record_count:
+          type: integer
+      required:
+      - id
+      - attributes
+    ProductVariantViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        exclude_from_view:
+          type: boolean
+      required:
+      - id
+      - attributes
+      - exclude_from_view
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
+    ItemViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+      required:
+      - id
+      - attributes
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProductVariantView:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        exclude_from_view:
+          type: boolean
+      required:
+      - id
+      - attributes
+      - exclude_from_view
+  parameters:
+    PageNumber:
+      description: To navigate through paginated results, use the page number to switch between pages.
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      required: false
+      example: 1
+    AccountName:
+      description: Your unique account name.
+      name: account_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis
+    RecordId:
+      description: The unique ID associated with a product or item feed record.
+      name: record_id
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: 1111abcd
+    EnvironmentName:
+      description: The type of environment you want to use for the request (Production/Staging).
+      name: environment_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+        enum:
+        - production
+        - staging
+      required: true
+    ViewId:
+      description: "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.\n\nBloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. \nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
+      name: view_id
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: 1324abc
+    Mode:
+      description: '* raw - returns only the raw view/variant data of a feed record
+
+        * preview - returns a preview of the complete feed record containing all attributes, views, and variants
+
+        '
+      name: mode
+      in: query
+      schema:
+        type: string
+        enum:
+        - raw
+        - preview
+      required: false
+    VariantId:
+      description: A unique identifier for a specific variant of a product or item feed record.
+      name: variant_id
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: 123xyz
+    PageLimit:
+      description: Specify the maximum number of pages to return in the response.
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+      required: false
+      example: 10
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

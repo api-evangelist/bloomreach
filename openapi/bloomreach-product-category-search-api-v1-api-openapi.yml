@@ -1,0 +1,574 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Product & Category Search API v1 API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Product & Category Search API v1
+paths:
+  /:
+    get:
+      tags:
+      - Product & Category Search API v1
+      summary: Get products/categories
+      description: The <b>Product Search API</b> sends a keyword query to retrieve results about products and other content on your site. You can apply additional filters and facets to return products and content that either include or exclude specified attributes like colors and brands. The <b>Category Search API</b> sends a category query to retrieve results about products within the categories that you specify.
+      operationId: product-category-search-api
+      parameters:
+      - name: _br_uid_2
+        in: query
+        description: A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. <br><br> Use the default value provided, which is already encoded.
+        required: true
+        example: '{{ br_uid_2 }}'
+        schema:
+          type: string
+          default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      - name: account_id
+        in: query
+        description: Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>, is included for your convenience to send a request with <b>Try It</b>. </br> <div background-color="red>Callout</div>
+        required: true
+        example: '{{ account_id }}'
+        schema:
+          type: integer
+          format: int32
+          default: 6370
+      - name: auth_key
+        in: query
+        description: The Bloomreach-provided authentication key for the Bloomreach account that's sending the request. <br><br> Pass the auth_key with an empty value in client-side calls.  The auth_key value is a private authorization key. If you include your valid auth_key value in client-side calls, then you inadvertently expose that private information to everybody.
+        example: '{{ auth_key }}'
+        schema:
+          type: string
+      - name: domain_key
+        in: query
+        description: Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.  This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions. Bloomreach uses your domain_key parameter value to ensure that only the data that pertains to that site version is used for query and analytics features, such as autosuggestions. <br><br> The example value shown here, <i>documentation_site</i>, is included for your convenience to send a request with <b>Try It</b>.
+        required: true
+        example: '{{ domain_key }}'
+        schema:
+          type: string
+          default: documentation_site
+      - name: ref_url
+        in: query
+        description: The URL of the page or HTTP referrer where the request is started.
+        required: true
+        example: '{{ ref_url }}'
+        schema:
+          type: string
+      - name: request_type
+        in: query
+        description: The type of API request. Value should be **search** for Product Search or Category requests.
+        required: true
+        example: search
+        schema:
+          type: string
+          enum:
+          - search
+          default: search
+      - name: search_type
+        in: query
+        description: The type of search. Value should be **keyword** for Product Search requests, **category** for Category requests.
+        required: true
+        example: keyword
+        schema:
+          type: string
+          enum:
+          - keyword
+          - category
+          default: keyword
+      - name: callback
+        in: query
+        description: Indicates whether to return data wrapped in the function for cross-origin requests.  <br><br> For server-side requests, use the value **br_server**. For native-app requests, use the value **br_app**.
+        schema:
+          type: string
+          enum:
+          - br_server
+          - br_app
+      - name: efq
+        in: query
+        description: Applies a complex boolean filter to search results to include or exclude items that fit your parameter values. Any product attribute in your product feed is valid, such as brand names and sizes. <br><br> Typically, the efq parameter is used for custom attributes that you include in your product feed to support additional business logic that you might need to filter.  Read more about using the efq parameter in the "Complex boolean filtering" section in the [Faceting and filtering page](ref:faceting-and-filtering).
+        schema:
+          type: string
+      - name: br_diagnostics
+        in: query
+        description: 'This parameter sends Product grid insights data in the API response to help debug your search results.<br>Allowed values are: `all`/`recall`/`ranking`/`merchandising`.<br><br>Refer to the guide [Product grid insights on the API](https://documentation.bloomreach.com/discovery/reference/ranking-diagnostics-on-the-api) for more details, like the response format.'
+        example: all
+        schema:
+          type: string
+          enum:
+          - all
+          - recall
+          - ranking
+          - merchandising
+      - name: facet.range
+        in: query
+        description: Return a count of ranged facets, such as price and sale price. Use numeric attributes only. <br><br> You need to parse the values that are in the facets_counts section of the response. The facet_queries section has custom range facets for numeric fields that you define in your request. The facet_fields section gives you facets that you can display to your site's users, such as brands and colors.
+        schema:
+          type: string
+      - name: facet.version
+        in: query
+        description: Set the value of this parameter to "3.0" to use the new [Facet Response v3](https://documentation.bloomreach.com/discovery/reference/facet-response-v3-unified-ranking). This will return the facet information in the new unified format.
+        example: '3.0'
+        schema:
+          type: number
+          format: float
+      - name: fl
+        in: query
+        description: The attributes that you want returned in your API response, such as product IDs and prices. <br><br> All fl parameters for Product Search or Category requests must include **pid** as one of their values. Any attribute from your product feed may be used as a value for fl. <br><br> Multiple values should be comma separated, such as **fl=pid,price**.
+        required: true
+        example: pid,url,description
+        schema:
+          type: string
+          default: pid,url,description
+      - name: fq
+        in: query
+        description: The fq parameter applies a faceted filter to the returned products, searching for products that fit your parameter values. <br><br> Any facet that you want to filter must be in your feed.  Read more about using the fq parameter in the "Simple Filtering" section in the [Faceting and filtering page](ref:faceting-and-filtering). <br><br> You can [configure Attributes](doc:understanding-feed-configuring-attributes) from the Catalog Management Tab. Configure which attributes in your content feed you want to apply as filters to search results.
+        schema:
+          type: string
+      - name: ll
+        in: query
+        description: The latitude-longitude of the end-customer used for the [Buy Online Pick-up In Store (BOPIS) feature](doc:buy-online-pick-up-in-store-bopis). <br><br> Value should be provided as latitude,longitude. For example, **ll=11.09,10.018**. <br><br> Use **fl=store_lat_lon** to return the distance from ll. In the response body, this value is returned as an additional field with the suffix ‘.distance’. <br><br> Use **fq=store_lat_lon** to enable filtering by distance.
+        example: 11.09,10.018
+        schema:
+          type: string
+      - name: merchandising.ts
+        in: query
+        description: 'This parameter allows you to preview the search results that would be produced at a future date.<br>It takes all the merchandising rules that will be active at the entered timestamp into account.<br>Example (Unix Epoch timestamp): 1703497216<br><br>If you have scheduled rules through the [duration selector in the dashboard](https://documentation.bloomreach.com/discovery/docs/product-grid-editor#duration), this parameter can help you preview their combined impact up to 21 days in advance.'
+        example: '1703497216'
+        schema:
+          type: string
+          format: date-time
+      - name: q
+        in: query
+        description: Your site visitor's search query. Search queries are composed of one or more terms. <br><br> For Category queries, the value is the category ID. <br><br> You can percent encode spaces between terms as %20, or you can leave the spaces unencoded.  <br><br> If you use q=\*, the latency of the response will vary depending on your catalog size and it may not adhere to Bloomreach's standard SLA. Additionally, most merchandising operations do not work on \* query parameters, except for include/exclude operations. <br><br> The example value shown here, <i>cable</i>, is included for your convenience to send a request with <b>Try It</b>.
+        required: true
+        examples:
+          product:
+            value: cable
+            summary: Search terms
+          category:
+            value: PNB160303000000
+            summary: Category ID
+        schema:
+          type: string
+          default: cable
+      - name: content_injection
+        in: query
+        description: This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature. <br>If `true`, the API response includes media objects along with product results. The content and positions <br>of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard.
+        required: false
+        example: true
+        schema:
+          type: boolean
+      - name: request_id
+        in: query
+        description: An ID to track the API request for identification in logs. <br><br> Bloomreach doesn't automatically enforce the requirements for this parameter. For example, you can enter `test` as your value for each instance of the request_id parameter without triggering an error message. However, using a unique value (random number/Unix Timestamp) allows us to help you if you encounter a problem.
+        required: false
+        example: 1234567891234
+        schema:
+          type: string
+      - name: rows
+        in: query
+        description: The number of matching items to return per results page in the API response. The maximum value is 200.<br><br>To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+        required: false
+        example: 20
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      - name: sort
+        in: query
+        description: Sorts results based on the field value in ascending, descending, or another combination of orders. You can sort any fl field. <br><br> Value is a field name, followed by **asc**/**desc** for ascending/descending order, respectively. For example, **sort=sale_price desc** sorts in descending order of the sale price
+        example: sale_price desc
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. <br><br> The maximum value is 10000.
+        required: false
+        example: 0
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: stats.field
+        in: query
+        description: This parameter allows you to display the maximum and minimum values of any numeric field in your data set for a user query. With this parameter, you can get all the documents matching a query and display the minimum and maximum values of single-valued, numeric attributes such as price, sale_price, length, width, reviews, etc. <br><br> Values are returned in the response as **stats_field**.
+        schema:
+          type: string
+      - name: url
+        in: query
+        description: The absolute URL of the page where the request is initiated. Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+        required: true
+        example: '{{ url }}'
+        schema:
+          type: string
+          default: https://www.documentation-site.com
+      - name: user_id
+        in: query
+        description: The universal customer ID of the user. You only need to pass this field if your particular integration tracks customers this way.  The parameter captures user IDs from the customer side, and reuses the information when powering apps or enhancing cross-device linking. In this way, Bloomreach recognizes users in a way that's aligned with your system. <br><br> Use an anonymous string. Don't use email or other personally identifiable information. If you do not track users this way, then omit this field.
+        schema:
+          type: string
+      - name: view_id
+        in: query
+        description: A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. <br><br> Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views.  You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+        schema:
+          type: string
+      - name: widget_id
+        in: query
+        description: The widget_id provided in the Dashboard for the Dynamic Widgets feature, which is used to provided curated results. <br><br> This is an optional feature that can be enabled by discussing with your CSM.
+        schema:
+          type: string
+      deprecated: false
+      responses:
+        '200':
+          description: Successful response. Click to see response body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+components:
+  schemas:
+    SearchResponseDoc:
+      additionalProperties: false
+      properties:
+        brand:
+          type: string
+        description:
+          type: string
+        pid:
+          type: string
+        price:
+          type: number
+        price_range:
+          type: array
+          items:
+            type: number
+        promotions:
+          type: array
+          items:
+            type: string
+        sale_price:
+          type: number
+        sale_price_range:
+          type: array
+          items:
+            type: number
+        score:
+          type: number
+        thumb_image:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Variant'
+      required:
+      - sale_price
+      - price
+      - description
+      - title
+      - url
+      - brand
+      - pid
+      - thumb_image
+      - sale_price_range
+      - price_range
+      - variants
+      type: object
+    SearchResponseResponse:
+      additionalProperties: false
+      properties:
+        maxScore:
+          type: number
+        numFound:
+          type: number
+        start:
+          type: number
+        docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResponseDoc'
+      type: object
+    SearchResponseMetadata:
+      type: object
+      properties:
+        query:
+          type: object
+          properties:
+            query_tags:
+              type: object
+              properties:
+                untagged_tokens:
+                  type: array
+                  items:
+                    type: string
+            precision:
+              type: object
+              properties:
+                configured:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                applied:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+        experiments:
+          type: array
+          items:
+            type: object
+            properties:
+              ab_test_experiment_name:
+                type: string
+              ab_test_variant_name:
+                type: string
+    SearchResponseStats:
+      additionalProperties: false
+      required:
+      - stats_fields
+      properties:
+        stats_fields:
+          $ref: '#/components/schemas/SearchResponseStatsStatsFields'
+      type: object
+    SearchResponseStatsStatsFields:
+      additionalProperties: false
+      properties:
+        price:
+          $ref: '#/components/schemas/SearchResponseStatsStatsFieldsPrice'
+        sale_price:
+          $ref: '#/components/schemas/SearchResponseStatsStatsFieldsPrice'
+      type: object
+    SearchResponseFacetCountsFacetFieldsCategory:
+      additionalProperties: false
+      properties:
+        cat_id:
+          type: string
+        cat_name:
+          type: string
+        count:
+          type: number
+        crumb:
+          type: string
+        parent:
+          type: string
+        tree_path:
+          type: string
+      type: object
+    SearchResponse:
+      additionalProperties: false
+      properties:
+        response:
+          $ref: '#/components/schemas/SearchResponseResponse'
+        facet_counts:
+          $ref: '#/components/schemas/SearchResponseFacetCounts'
+        category_map:
+          type: object
+        autoCorrectQuery:
+          type: string
+        did_you_mean:
+          type: array
+          items:
+            type: string
+        keywordRedirect:
+          $ref: '#/components/schemas/SearchResponseKeywords'
+        group_response:
+          $ref: '#/components/schemas/SearchResponseGroupResponse'
+        stats:
+          $ref: '#/components/schemas/SearchResponseStats'
+        metadata:
+          $ref: '#/components/schemas/SearchResponseMetadata'
+      type: object
+    SearchResponseGroupResponseGroupList:
+      additionalProperties: false
+      required:
+      - matches
+      - groups
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResponseGroupResponseGroupListGroup'
+        matches:
+          type: number
+      type: object
+    SearchResponseGroupResponse:
+      additionalProperties:
+        $ref: '#/components/schemas/SearchResponseGroupResponseGroupList'
+      type: object
+    Variant:
+      additionalProperties: false
+      properties:
+        sku_color_group:
+          type: string
+        sku_price:
+          type: number
+        sku_sale_price:
+          type: number
+        sku_swatch_images:
+          type: array
+          items:
+            type: string
+        sku_thumb_images:
+          type: array
+          items:
+            type: string
+        skuid:
+          type: string
+      required:
+      - sku_color_group
+      - sku_swatch_images
+      - sku_thumb_images
+      type: object
+    SearchResponseFacetCounts:
+      additionalProperties: false
+      properties:
+        facets:
+          $ref: '#/components/schemas/SearchResponseFacetCountsFacets'
+        facet_fields:
+          $ref: '#/components/schemas/SearchResponseFacetCountsFacetFields'
+        facet_queries:
+          type: object
+        facet_ranges:
+          $ref: '#/components/schemas/SearchResponseFacetCountsFacetRanges'
+      type: object
+    SearchResponseFacetCountsFacetRanges:
+      additionalProperties: false
+      properties:
+        price:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResponseFacetCountsFacetRangesPrice'
+      type: object
+    SearchResponseFacetCountsFacetRangesPrice:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        end:
+          type: number
+        start:
+          type: number
+      required:
+      - count
+      - start
+      - end
+      type: object
+    SearchResponseFacetCountsFacets:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: AverageRating
+          type:
+            type: string
+            enum:
+            - number
+            - number_range
+            - number_stats
+            - text
+            example: text
+          value:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Decent
+                count:
+                  type: integer
+                  example: 15
+                start:
+                  type: number
+                end:
+                  type: number
+    SearchResponseKeywords:
+      additionalProperties: false
+      required:
+      - original_query
+      - redirected_query
+      - redirected_url
+      properties:
+        original_query:
+          type: string
+        redirected_query:
+          type: string
+        redirected_url:
+          type: string
+      type: object
+    SearchResponseStatsStatsFieldsPrice:
+      additionalProperties: false
+      required:
+      - max
+      - min
+      properties:
+        max:
+          type: number
+        min:
+          type: number
+      type: object
+    SearchResponseGroupResponseGroupListGroup:
+      additionalProperties: false
+      required:
+      - groupValue
+      properties:
+        doclist:
+          additionalProperties: false
+          properties:
+            docs:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchResponseDoc'
+            maxScore:
+              type: number
+            numFound:
+              type: number
+            start:
+              type: number
+          type: object
+        groupValue:
+          type: string
+      type: object
+    SearchResponseFacetCountsFacetFields:
+      additionalProperties:
+        type: array
+        items:
+          type: object
+      properties:
+        category:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResponseFacetCountsFacetFieldsCategory'
+      type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

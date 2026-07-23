@@ -1,0 +1,207 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Content Search API v1 API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Content Search API v1
+paths:
+  /:
+    get:
+      tags:
+      - Content Search API v1
+      summary: Get Content
+      description: The Content Search API sends a keyword query to retrieve non-product content on your site. You can apply additional facets to return content that either includes or excludes specified attributes about content type like videos and blog posts.
+      operationId: content-search-api
+      parameters:
+      - name: _br_uid_2
+        in: query
+        description: A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. <br><br> Use the default value provided, which is already encoded.
+        required: true
+        example: '{{ br_uid_2 }}'
+        schema:
+          type: string
+          default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      - name: account_id
+        in: query
+        description: Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting. <br><br> The value shown here, <i>6413</i>, is provided as an example.
+        required: true
+        example: '{{ account_id }}'
+        schema:
+          type: integer
+          format: int32
+          default: 6413
+      - name: auth_key
+        in: query
+        description: The Bloomreach-provided authentication key for the Bloomreach account that's sending the request. <br><br> Pass the auth_key with an empty value in client-side calls. The auth_key value is a private authorization key. If you include your valid auth_key value in client-side calls, then you inadvertently expose that private information to everybody.
+        example: '{{ auth_key }}'
+        schema:
+          type: string
+          default: jazzhands
+      - name: callback
+        in: query
+        description: Indicates whether to return data wrapped in the function for cross-origin requests. <br><br> For server-side requests, use the value **br_server**. For native-app requests, use the value **br_app**.
+        example: br_app
+        schema:
+          type: string
+          enum:
+          - br_server
+          - br_app
+      - name: catalog_name
+        in: query
+        description: Named identifier of the catalog. A catalog is a grouping of items into a broader category such as blogs, videos, etc. A catalog is a representation of a group of items and must have a unique name, that is also unique to a domain (if you have multiple sites). <br><br> Catalogs are created in the DataConnect UI by default, you can rename the catalogs when you set up your catalogs initially.
+        required: true
+        example: content_en
+        schema:
+          type: string
+          default: content_en
+      - name: domain_key
+        in: query
+        description: Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.  This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions. Bloomreach uses your domain_key parameter value to ensure that only the data that pertains to that site version is used for query and analytics features, such as autosuggestions.
+        required: true
+        example: '{{ domain_key }}'
+        schema:
+          type: string
+          default: example_com
+      - name: efq
+        in: query
+        description: Applies a complex boolean filter to search results to include or exclude items that fit your parameter values. Any attribute in your content feed is valid, such as title and description. <br><br> Typically, the efq parameter is used for custom attributes that you include in your content feed to support additional business logic that you might need to filter.  Read more about using the efq parameter in the "Complex boolean filtering" section in the [Faceting and filtering page](ref:faceting-and-filtering).
+        schema:
+          type: string
+      - name: facet.field
+        in: query
+        description: Returns a list of fields to facet on. You must explicitly request all the facets you would like returned.
+        schema:
+          type: string
+      - name: facet.range
+        in: query
+        description: Return a count of ranged facets, such as price and sale price. Use numeric attributes only. <br><br> You need to parse the values that are in the facets_counts section of the response. The facet_queries section has custom range facets for numeric fields that you define in your request. The facet_fields section gives you facets that you can display to your site's users, such as brands and colors.
+        schema:
+          type: string
+      - name: facet.version
+        in: query
+        description: Set the value of this parameter to "3.0" to use the new [Facet Response v3](https://documentation.bloomreach.com/discovery/reference/facet-response-v3-unified-ranking). This will return the facet information in the new unified format.
+        example: '3.0'
+        schema:
+          type: number
+          format: float
+      - name: fl
+        in: query
+        description: The attributes that you want returned in your API response, such as item IDs and prices. <br><br> All fl parameters for Content Search must include **item_id** as one of their values. Any attribute from your content feed may be used as a value for fl. <br><br> Multiple values should be comma separated, such as **fl=item_id,price**.
+        required: true
+        example: item_id,item_title,thumb_image,url,description
+        schema:
+          type: string
+          default: item_id,item_title,thumb_image,url,description
+      - name: fq
+        in: query
+        description: The fq parameter applies a faceted filter to the returned content, searching for content that fits your parameter values. <br><br> Any facet that you want to filter must be in your feed.  Read more about using the fq parameter in the "Simple Filtering" section in the [Faceting and filtering page](ref:faceting-and-filtering). <br><br> You can [configure Attributes](doc:understanding-feed-configuring-attributes) from the Catalog Management Tab. Configure which attributes in your content feed you want to apply as filters to search results.
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Your site visitor's search query. Search queries are composed of one or more terms. <br><br> You can percent encode spaces between terms as %20, or you can leave the spaces unencoded. <br><br> If you use q=\*, the latency of the response will vary depending on your catalog size and it may not adhere to Bloomreach's standard SLA. Additionally, most merchandising operations do not work on \* query parameters, except for include/exclude operations.
+        required: true
+        example: sofa
+        schema:
+          type: string
+          default: sofa
+      - name: ref_url
+        in: query
+        description: The URL of the page or HTTP referrer where the request is started.
+        required: true
+        example: '{{ ref_url }}'
+        schema:
+          type: string
+          default: https://documentation.bloomreach.com/discovery
+      - name: request_type
+        in: query
+        description: The type of API request. Value should be **search** for Content Search requests.
+        required: true
+        example: search
+        schema:
+          type: string
+          enum:
+          - search
+          default: search
+      - name: rows
+        in: query
+        description: The number of matching items to return per results page in the API response. The maximum value is 100. <br><br> To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+        required: true
+        example: 10
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: search_type
+        in: query
+        description: The type of search. Value should be **keyword** for Content Search requests.
+        required: true
+        example: keyword
+        schema:
+          type: string
+          enum:
+          - keyword
+          default: keyword
+      - name: sort
+        in: query
+        description: Sorts results based on the field value in ascending, descending, or another combination of orders. You can sort any fl field. <br><br> Value is a field name, followed by **asc**/**desc** for ascending/descending order respectively. For example, **sort=sale_price desc** sorts in descending order of the sale price
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. <br><br> The maximum value is 1000.
+        required: true
+        example: 0
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: url
+        in: query
+        description: The absolute URL of the page where the request is initiated. Do not use a relative URL.
+        required: true
+        example: '{{ url }}'
+        schema:
+          type: string
+          default: http://www.example.com/index.html?q=popcorn
+      - name: user_id
+        in: query
+        description: The universal customer ID of the user. You only need to pass this field if your particular integration tracks customers this way.  The parameter captures user IDs from the customer side, and reuses the information when powering apps or enhancing cross-device linking. In this way, Bloomreach recognizes users in a way that's aligned with your system. <br><br> Use an anonymous string. Don't use email or other personally identifiable information. <br><br> If you do not track users this way, then omit this field.
+        schema:
+          type: string
+      - name: view_id
+        in: query
+        description: A unique identifier for a specific view of your content catalog. If you have multiple versions of your site, each with their own content catalog characteristics like content titles and descriptions, then add **view_id** to your call. <br><br> Bloomreach uses your view_id parameter value to display the right content information for your customers based on their individual site views.  You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and content catalog. <br><br> Bloomreach Content Search can support a single view_id, multiple view_ids (separated by commas) or * view_id in a single API parameter for a single content catalog. If no view_ids are passed for a content item in a catalog, Bloomreach will assign a br_default_view value. If an API call is made with no view_id in the request, the br_default_view content items will return. <br><br> If a content item contains more than one view_id in the catalog and those view_ids are passed in the API param, we will return those documents without de-duping or grouping.
+        schema:
+          type: string
+      deprecated: false
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '

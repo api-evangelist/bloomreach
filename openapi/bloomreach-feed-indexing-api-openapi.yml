@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Workspace Imports Autosuggest API v2 Feed indexing API
+  description: 'API to programmatically trigger an existing workspace-scoped
+
+    import in Bloomreach Engagement.
+
+    '
+  version: '2.1'
+servers:
+- url: https://api.bloomreach.com
+  description: Bloomreach API
+security:
+- basicAuth: []
+tags:
+- name: Feed indexing
+paths:
+  /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/indexes:
+    parameters:
+    - $ref: '#/components/parameters/AccountName'
+    - $ref: '#/components/parameters/CatalogName'
+    - $ref: '#/components/parameters/EnvironmentName'
+    - $ref: '#/components/parameters/IndexRefreshHeader'
+    - $ref: '#/components/parameters/IgnoreCountDropHeader'
+    post:
+      tags:
+      - Feed indexing
+      summary: Run an indexing job
+      description: 'Trigger an indexing job to [update the catalog''s index](https://documentation.bloomreach.com/discovery/docs/promoting-changes-viewing-jobs#3-update-catalogs-index).
+
+        '
+      responses:
+        200:
+          description: OK. Click to see the response structure.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      job_id:
+                        type: string
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  details:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ErrorResponse'
+        401:
+          description: Unauthorized
+        404:
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404Response'
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/429Response'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500Response'
+components:
+  schemas:
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
+  parameters:
+    EnvironmentName:
+      description: The type of environment you want to use for the request (Production/Staging).
+      name: environment_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+        enum:
+        - production
+        - staging
+      required: true
+    IndexRefreshHeader:
+      description: 'Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.
+
+
+        This only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.'
+      name: Index-Refresh
+      in: header
+      schema:
+        type: boolean
+      required: false
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
+    IgnoreCountDropHeader:
+      description: Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.
+      name: BR-Ignore-Document-Count-Drop
+      in: header
+      schema:
+        type: boolean
+      required: false
+    AccountName:
+      description: Your unique account name.
+      name: account_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic authentication using an API Key ID and API Secret.
+
+        For this workspace-scoped endpoint, use a workspace API key.
+
+
+        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+
+
+        The API key must have the **Imports → Allow trigger imports**
+
+        permission enabled in Workspace settings → Access management →
+
+        API.
+
+        '
