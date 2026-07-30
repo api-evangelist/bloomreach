@@ -1,6 +1,19 @@
 name: Bloomreach
 description: Digital commerce experience platform with REST APIs for search, merchandising, recommendations, CDP, and email/SMS marketing automation.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bloomreach.png
 url: https://raw.githubusercontent.com/api-evangelist/bloomreach/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -21,145 +34,815 @@ tags:
   - E-commerce
 
 apis:
-
-  - name: Bloomreach Discovery API
-    description: REST APIs for site search, category browsing, autosuggest, recommendations, bestseller listings, and content search powered by Bloomreach's autonomous search engine.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-    baseURL: https://core.dxpapi.com/api/v1
-    tags:
-      - Search
-      - Category Search
-      - Autosuggest
-      - Recommendations
-      - Bestseller
-      - Content Search
-    properties:
-      - type: Documentation
-        url: https://documentation.bloomreach.com/discovery/reference/welcome
-      - type: OpenAPI
-        url: https://github.com/bloomreach/api-specs/blob/main/discovery/search-category.yaml
-      - type: OpenAPI
-        url: openapi/bloomreach-discovery-search-category-openapi.yml
-      - type: OpenAPI
-        url: openapi/bloomreach-discovery-autosuggest-openapi.yml
-      - type: OpenAPI
-        url: openapi/bloomreach-discovery-bestseller-openapi.yml
-      - type: OpenAPI
-        url: openapi/bloomreach-discovery-content-search-openapi.yml
-      - type: OpenAPI
-        url: openapi/bloomreach-discovery-recommendations-pathways-openapi.yml
-      - type: OpenAPI
-        url: openapi/bloomreach-discovery-email-widget-openapi.yml
-      - type: JSONSchema
-        url: json-schema/bloomreach-product-schema.json
-      - type: JSONSchema
-        url: json-schema/bloomreach-search-response-schema.json
-      - type: JSONSchema
-        url: json-schema/bloomreach-suggest-response-schema.json
-      - type: Examples
-        url: examples/bloomreach-product-search-request-example.json
-      - type: Examples
-        url: examples/bloomreach-product-search-response-example.json
-      - type: Examples
-        url: examples/bloomreach-autosuggest-response-example.json
-      - type: RateLimits
-        url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
-
-  - name: Bloomreach Discovery Catalog Management API
-    description: REST API for sending and managing product catalog data to Bloomreach, supporting full feed uploads, incremental patch updates, and indexing job triggers for search and merchandising.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
-    baseURL: https://api.bloomreach.com
-    tags:
-      - Catalog
-      - Product Data
-      - Feed Management
-      - Indexing
-    properties:
-      - type: Documentation
-        url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
-      - type: OpenAPI
-        url: https://github.com/bloomreach/api-specs/blob/main/discovery/catalog-management.yaml
-      - type: OpenAPI
-        url: openapi/bloomreach-discovery-catalog-management-openapi.yml
-      - type: JSONSchema
-        url: json-schema/bloomreach-product-schema.json
-      - type: Examples
-        url: examples/bloomreach-catalog-product-put-example.json
-      - type: RateLimits
-        url: https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
-
-  - name: Bloomreach Engagement API
-    description: REST API for the Bloomreach Engagement marketing automation and CDP platform, enabling customer tracking, segmentation, campaign management, email/SMS sends, recommendations, and analytics.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://documentation.bloomreach.com/engagement/reference/about
-    baseURL: https://api.exponea.com
-    tags:
-      - Marketing Automation
-      - CDP
-      - Customer Data Platform
-      - Email
-      - SMS
-      - Tracking
-      - Segmentation
-      - Campaigns
-    properties:
-      - type: Documentation
-        url: https://documentation.bloomreach.com/engagement/reference/about
-      - type: Authentication
-        url: https://documentation.bloomreach.com/engagement/reference/authentication
-
-  - name: Bloomreach Content Management API
-    description: REST APIs for managing headless CMS content, including site channels, content types, documents, folders, batch import/export, projects, integrations, webhooks, and delivery API settings.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://documentation.bloomreach.com/content/reference/management-apis
-    baseURL: https://api.bloomreach.com
-    tags:
-      - Headless CMS
-      - Content Management
-      - Channels
-      - Webhooks
-      - Projects
-    properties:
-      - type: Documentation
-        url: https://documentation.bloomreach.com/content/reference/management-apis
-      - type: Authentication
-        url: https://documentation.bloomreach.com/content/reference/api-authorization
-
-  - name: Bloomreach Content Delivery API
-    description: REST endpoints for SPAs and front-end applications to retrieve JSON representations of available channels, pages, and documents from the Bloomreach headless CMS.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://documentation.bloomreach.com/content/reference/delivery-api
-    baseURL: https://api.bloomreach.com
-    tags:
-      - Headless CMS
-      - Content Delivery
-      - SPA
-      - Channels
-      - Pages
-    properties:
-      - type: Documentation
-        url: https://documentation.bloomreach.com/content/reference/delivery-api
-
-  - name: Bloomreach Data Hub Workspace Import API
-    description: REST API for importing workspace data into Bloomreach Data Hub, enabling unified data platform operations across customer and product data.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://documentation.bloomreach.com/
-    baseURL: https://api.bloomreach.com
-    tags:
-      - Data Hub
-      - Data Import
-      - Workspace
-      - Unified Data
-    properties:
-      - type: Documentation
-        url: https://documentation.bloomreach.com/
-      - type: OpenAPI
-        url: https://github.com/bloomreach/api-specs/blob/main/data-hub/workspace-import-api.yaml
-      - type: OpenAPI
-        url: openapi/bloomreach-data-hub-workspace-import-openapi.yml
-
+- name: Bloomreach Engagement API
+  description: >-
+    REST API for the Bloomreach Engagement marketing automation and CDP platform, enabling customer tracking,
+    segmentation, campaign management, email/SMS sends, recommendations, and analytics.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.bloomreach.com/engagement/reference/about
+  baseURL: https://api.exponea.com
+  tags:
+  - Marketing Automation
+  - CDP
+  - Customer Data Platform
+  - Email
+  - SMS
+  - Tracking
+  - Segmentation
+  - Campaigns
+  properties:
+  - type: Documentation
+    url: https://documentation.bloomreach.com/engagement/reference/about
+  - type: Authentication
+    url: https://documentation.bloomreach.com/engagement/reference/authentication
+- name: Bloomreach Content Management API
+  description: >-
+    REST APIs for managing headless CMS content, including site channels, content types, documents, folders,
+    batch import/export, projects, integrations, webhooks, and delivery API settings.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.bloomreach.com/content/reference/management-apis
+  baseURL: https://api.bloomreach.com
+  tags:
+  - Headless CMS
+  - Content Management
+  - Channels
+  - Webhooks
+  - Projects
+  properties:
+  - type: Documentation
+    url: https://documentation.bloomreach.com/content/reference/management-apis
+  - type: Authentication
+    url: https://documentation.bloomreach.com/content/reference/api-authorization
+- name: Bloomreach Content Delivery API
+  description: >-
+    REST endpoints for SPAs and front-end applications to retrieve JSON representations of available channels,
+    pages, and documents from the Bloomreach headless CMS.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.bloomreach.com/content/reference/delivery-api
+  baseURL: https://api.bloomreach.com
+  tags:
+  - Headless CMS
+  - Content Delivery
+  - SPA
+  - Channels
+  - Pages
+  properties:
+  - type: Documentation
+    url: https://documentation.bloomreach.com/content/reference/delivery-api
+- aid: bloomreach:bloomreach-autosuggest-api-v2-api
+  name: Bloomreach Autosuggest API v2 API
+  description: The Autosuggest API v2 API from Bloomreach — 1 operation(s) for autosuggest api v2.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Autosuggest API v2
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-autosuggest-api-v2-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-bestseller-api-v1-api
+  name: Bloomreach Bestseller API v1 API
+  description: The Bestseller API v1 API from Bloomreach — 1 operation(s) for bestseller api v1.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Bestseller API v1
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-bestseller-api-v1-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-catalog-configuration-api
+  name: Bloomreach Catalog configuration API
+  description: >-
+    The Catalog configuration API from Bloomreach — 3 operation(s) for catalog configuration.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Catalog configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-catalog-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-category-based-widget-api
+  name: Bloomreach Category-based widget API
+  description: >-
+    The Category-based widget API from Bloomreach — 1 operation(s) for category-based widget.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Category-based widget
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-category-based-widget-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-category-based-widget-products-api
+  name: Bloomreach Category-based Widget Products API
+  description: >-
+    The Category-based Widget Products API from Bloomreach — 2 operation(s) for category-based widget
+    products.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Category-based Widget Products
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-category-based-widget-products-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-content-search-api-v1-api
+  name: Bloomreach Content Search API v1 API
+  description: >-
+    The Content Search API v1 API from Bloomreach — 1 operation(s) for content search api v1.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Content Search API v1
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-content-search-api-v1-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-feed-indexing-api
+  name: Bloomreach Feed indexing API
+  description: The Feed indexing API from Bloomreach — 1 operation(s) for feed indexing.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Feed indexing
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-feed-indexing-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-global-recommendation-widget-products-api
+  name: Bloomreach Global Recommendation Widget Products API
+  description: >-
+    The Global Recommendation Widget Products API from Bloomreach — 2 operation(s) for global recommendation
+    widget products.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Global Recommendation Widget Products
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-global-recommendation-widget-products-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-global-recommendations-widget-api
+  name: Bloomreach Global recommendations widget API
+  description: >-
+    The Global recommendations widget API from Bloomreach — 1 operation(s) for global recommendations
+    widget.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Global recommendations widget
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-global-recommendations-widget-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-imports-api
+  name: Bloomreach Imports API
+  description: Operations for working with existing imports.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Imports
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-imports-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-item-based-recommendation-widget-api
+  name: Bloomreach Item-based recommendation widget API
+  description: >-
+    The Item-based recommendation widget API from Bloomreach — 1 operation(s) for item-based recommendation
+    widget.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Item-based recommendation widget
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-item-based-recommendation-widget-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-item-based-recommendation-widget-products-api
+  name: Bloomreach Item-based Recommendation Widget Products API
+  description: >-
+    The Item-based Recommendation Widget Products API from Bloomreach — 2 operation(s) for item-based
+    recommendation widget products.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Item-based Recommendation Widget Products
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-item-based-recommendation-widget-products-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-job-processing-api
+  name: Bloomreach Job processing API
+  description: The Job processing API from Bloomreach — 2 operation(s) for job processing.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Job processing
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-job-processing-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-keyword-based-widget-api
+  name: Bloomreach Keyword-based widget API
+  description: The Keyword-based widget API from Bloomreach — 1 operation(s) for keyword-based widget.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Keyword-based widget
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-keyword-based-widget-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-keyword-based-widget-products-api
+  name: Bloomreach Keyword-based Widget Products API
+  description: >-
+    The Keyword-based Widget Products API from Bloomreach — 2 operation(s) for keyword-based widget products.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Keyword-based Widget Products
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-keyword-based-widget-products-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-manage-feed-records-api
+  name: Bloomreach Manage feed records API
+  description: The Manage feed records API from Bloomreach — 8 operation(s) for manage feed records.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Manage feed records
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-manage-feed-records-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-personalization-based-widget-products-api
+  name: Bloomreach Personalization-based Widget Products API
+  description: >-
+    The Personalization-based Widget Products API from Bloomreach — 2 operation(s) for personalization-based
+    widget products.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Personalization-based Widget Products
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-personalization-based-widget-products-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-personalization-based-widgets-api
+  name: Bloomreach Personalization-based widgets API
+  description: >-
+    The Personalization-based widgets API from Bloomreach — 2 operation(s) for personalization-based widgets.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Personalization-based widgets
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-personalization-based-widgets-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-product-category-search-api-v1-api
+  name: Bloomreach Product & Category Search API v1 API
+  description: >-
+    The Product & Category Search API v1 API from Bloomreach — 1 operation(s) for product & category search
+    api v1.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Product & Category Search API v1
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-view-catalogs-data-api
+  name: Bloomreach View Catalogs data API
+  description: The View Catalogs data API from Bloomreach — 2 operation(s) for view catalogs data.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - View Catalogs data
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
+- aid: bloomreach:bloomreach-visual-search-api
+  name: Bloomreach Visual search API
+  description: The Visual search API from Bloomreach — 2 operation(s) for visual search.
+  humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
+  baseURL: https://core.dxpapi.com/api/v1
+  tags:
+  - Visual search
+  properties:
+  - type: OpenAPI
+    url: openapi/bloomreach-visual-search-api-openapi.yml
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: JSONSchema
+    url: json-schema/bloomreach-product-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-search-response-schema.json
+  - type: JSONSchema
+    url: json-schema/bloomreach-suggest-response-schema.json
+  - type: Examples
+    url: examples/bloomreach-product-search-request-example.json
+  - type: Examples
+    url: examples/bloomreach-product-search-response-example.json
+  - type: Examples
+    url: examples/bloomreach-autosuggest-response-example.json
+  - type: RateLimits
+    url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/discovery/reference/catalog-management-api-v3
+  - type: Examples
+    url: examples/bloomreach-catalog-product-put-example.json
+  - type: RateLimits
+    url: >-
+      https://documentation.bloomreach.com/discovery/reference/catalog-data-management-api-rate-limits
+  - type: Documentation
+    url: https://documentation.bloomreach.com/
 common:
 
   - type: AgenticAccess
