@@ -1,5 +1,13 @@
 name: Bloomreach
-description: Digital commerce experience platform with REST APIs for search, merchandising, recommendations, CDP, and email/SMS marketing automation.
+description: >-
+  Bloomreach is a commerce experience cloud combining an e-commerce search and merchandising engine
+  (Discovery), a marketing automation platform and customer data platform (Engagement, formerly
+  Exponea), and a headless content management system (Content, formerly Hippo/brXM). It publishes
+  REST APIs for product and category search, autosuggest, recommendation widgets, catalog
+  management and indexing, customer tracking and segmentation, email and SMS campaigns, and
+  headless content delivery and management. Its Loomi AI layer adds agentic capabilities, and
+  Loomi Connect exposes the estate to AI agents as an OAuth-protected remote MCP server carrying
+  more than 160 tools across marketing, analytics, search and data hub.
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -16,7 +24,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/bloomreach.png
 url: https://raw.githubusercontent.com/api-evangelist/bloomreach/refs/heads/main/apis.yml
 created: "2026-06-13"
-modified: "2026-06-13"
+modified: 2026-08-13
 specificationVersion: "0.19"
 type: Index
 tags:
@@ -61,7 +69,7 @@ apis:
     batch import/export, projects, integrations, webhooks, and delivery API settings.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://documentation.bloomreach.com/content/reference/management-apis
-  baseURL: https://api.bloomreach.com
+  baseURL: https://{environment_name}.bloomreach.io/management
   tags:
   - Headless CMS
   - Content Management
@@ -79,7 +87,7 @@ apis:
     pages, and documents from the Bloomreach headless CMS.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://documentation.bloomreach.com/content/reference/delivery-api
-  baseURL: https://api.bloomreach.com
+  baseURL: https://{environment_name}.bloomreach.io/delivery/site/v1
   tags:
   - Headless CMS
   - Content Delivery
@@ -93,12 +101,14 @@ apis:
   name: Bloomreach Autosuggest API v2 API
   description: The Autosuggest API v2 API from Bloomreach — 1 operation(s) for autosuggest api v2.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://suggest.dxpapi.com/api/v2/suggest
   tags:
   - Autosuggest API v2
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-autosuggest-api-v2-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-autosuggest-api-v2-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -128,12 +138,14 @@ apis:
   name: Bloomreach Bestseller API v1 API
   description: The Bestseller API v1 API from Bloomreach — 1 operation(s) for bestseller api v1.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://core.dxpapi.com/api/v1/core
   tags:
   - Bestseller API v1
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-bestseller-api-v1-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-bestseller-api-v1-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -164,12 +176,14 @@ apis:
   description: >-
     The Catalog configuration API from Bloomreach — 3 operation(s) for catalog configuration.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://discovery.bloomreach.com/dataconnect/api/v3
   tags:
   - Catalog configuration
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-catalog-configuration-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-catalog-configuration-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -200,12 +214,14 @@ apis:
   description: >-
     The Category-based widget API from Bloomreach — 1 operation(s) for category-based widget.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways.dxpapi.com/api/v2/widgets
   tags:
   - Category-based widget
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-category-based-widget-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-category-based-widget-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -237,12 +253,14 @@ apis:
     The Category-based Widget Products API from Bloomreach — 2 operation(s) for category-based widget
     products.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways-email.dxpapi.com
   tags:
   - Category-based Widget Products
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-category-based-widget-products-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-category-based-widget-products-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -273,12 +291,14 @@ apis:
   description: >-
     The Content Search API v1 API from Bloomreach — 1 operation(s) for content search api v1.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://core.dxpapi.com/api/v1/core
   tags:
   - Content Search API v1
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-content-search-api-v1-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-content-search-api-v1-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -308,12 +328,14 @@ apis:
   name: Bloomreach Feed indexing API
   description: The Feed indexing API from Bloomreach — 1 operation(s) for feed indexing.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://discovery.bloomreach.com/dataconnect/api/v3
   tags:
   - Feed indexing
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-feed-indexing-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-feed-indexing-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -345,12 +367,14 @@ apis:
     The Global Recommendation Widget Products API from Bloomreach — 2 operation(s) for global recommendation
     widget products.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways-email.dxpapi.com
   tags:
   - Global Recommendation Widget Products
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-global-recommendation-widget-products-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-global-recommendation-widget-products-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -382,12 +406,14 @@ apis:
     The Global recommendations widget API from Bloomreach — 1 operation(s) for global recommendations
     widget.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways.dxpapi.com/api/v2/widgets
   tags:
   - Global recommendations widget
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-global-recommendations-widget-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-global-recommendations-widget-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -417,12 +443,14 @@ apis:
   name: Bloomreach Imports API
   description: Operations for working with existing imports.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://api.bloomreach.com
   tags:
   - Imports
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-imports-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-imports-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -454,12 +482,14 @@ apis:
     The Item-based recommendation widget API from Bloomreach — 1 operation(s) for item-based recommendation
     widget.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways.dxpapi.com/api/v2/widgets
   tags:
   - Item-based recommendation widget
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-item-based-recommendation-widget-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-item-based-recommendation-widget-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -491,12 +521,14 @@ apis:
     The Item-based Recommendation Widget Products API from Bloomreach — 2 operation(s) for item-based
     recommendation widget products.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways-email.dxpapi.com
   tags:
   - Item-based Recommendation Widget Products
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-item-based-recommendation-widget-products-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-item-based-recommendation-widget-products-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -526,12 +558,14 @@ apis:
   name: Bloomreach Job processing API
   description: The Job processing API from Bloomreach — 2 operation(s) for job processing.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://discovery.bloomreach.com/dataconnect/api/v3
   tags:
   - Job processing
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-job-processing-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-job-processing-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -561,12 +595,14 @@ apis:
   name: Bloomreach Keyword-based widget API
   description: The Keyword-based widget API from Bloomreach — 1 operation(s) for keyword-based widget.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways.dxpapi.com/api/v2/widgets
   tags:
   - Keyword-based widget
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-keyword-based-widget-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-keyword-based-widget-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -597,12 +633,14 @@ apis:
   description: >-
     The Keyword-based Widget Products API from Bloomreach — 2 operation(s) for keyword-based widget products.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways-email.dxpapi.com
   tags:
   - Keyword-based Widget Products
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-keyword-based-widget-products-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-keyword-based-widget-products-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -632,12 +670,14 @@ apis:
   name: Bloomreach Manage feed records API
   description: The Manage feed records API from Bloomreach — 8 operation(s) for manage feed records.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://discovery.bloomreach.com/dataconnect/api/v3
   tags:
   - Manage feed records
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-manage-feed-records-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-manage-feed-records-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -669,12 +709,14 @@ apis:
     The Personalization-based Widget Products API from Bloomreach — 2 operation(s) for personalization-based
     widget products.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways-email.dxpapi.com
   tags:
   - Personalization-based Widget Products
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-personalization-based-widget-products-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-personalization-based-widget-products-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -705,12 +747,14 @@ apis:
   description: >-
     The Personalization-based widgets API from Bloomreach — 2 operation(s) for personalization-based widgets.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways.dxpapi.com/api/v2/widgets
   tags:
   - Personalization-based widgets
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-personalization-based-widgets-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-personalization-based-widgets-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -742,12 +786,14 @@ apis:
     The Product & Category Search API v1 API from Bloomreach — 1 operation(s) for product & category search
     api v1.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://core.dxpapi.com/api/v1/core
   tags:
   - Product & Category Search API v1
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-product-category-search-api-v1-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -777,12 +823,14 @@ apis:
   name: Bloomreach View Catalogs data API
   description: The View Catalogs data API from Bloomreach — 2 operation(s) for view catalogs data.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://discovery.bloomreach.com/dataconnect/api/v3
   tags:
   - View Catalogs data
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-view-catalogs-data-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -812,12 +860,14 @@ apis:
   name: Bloomreach Visual search API
   description: The Visual search API from Bloomreach — 2 operation(s) for visual search.
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
-  baseURL: https://core.dxpapi.com/api/v1
+  baseURL: https://pathways.dxpapi.com/api/v2/widgets
   tags:
   - Visual search
   properties:
   - type: OpenAPI
     url: openapi/bloomreach-visual-search-api-openapi.yml
+  - type: Overlay
+    url: overlays/bloomreach-visual-search-overlay.yaml
   - type: Documentation
     url: https://documentation.bloomreach.com/discovery/reference/welcome
   - type: JSONSchema
@@ -897,6 +947,75 @@ common:
 
   - type: FinOps
     url: finops/bloomreach-finops.yml
+
+  - type: MCPServer
+    name: Loomi Connect MCP
+    url: mcp/bloomreach-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/bloomreach-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/bloomreach-llms.txt
+  - type: WellKnown
+    url: well-known/bloomreach-well-known.yml
+  - type: APICatalog
+    url: well-known/bloomreach-api-catalog.json
+  - type: Packages
+    url: packages/bloomreach-packages.yml
+  - type: SDKs
+    url: packages/bloomreach-packages.yml
+  - type: Conventions
+    url: conventions/bloomreach-conventions.yml
+  - type: ErrorCatalog
+    url: errors/bloomreach-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/bloomreach-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/bloomreach-changelog.yml
+  - type: Conformance
+    url: conformance/bloomreach-conformance.yml
+  - type: Compliance
+    url: https://www.bloomreach.com/en/legal/security
+  - type: TrustCenter
+    url: security/bloomreach-trust-center.yml
+  - type: OAuthScopes
+    url: scopes/bloomreach-scopes.yml
+  - type: Sandbox
+    url: sandbox/bloomreach-sandbox.yml
+  - type: Components
+    url: components/bloomreach-components.yml
+  - type: DataModel
+    url: data-model/bloomreach-data-model.yml
+  - type: Webhooks
+    url: asyncapi/bloomreach-webhooks.yml
+  - type: Roadmap
+    url: https://www.bloomreach.com/en/roadmap
+  - type: Postman
+    name: Bloomreach Content Postman collections
+    url: https://documentation.bloomreach.com/content/reference/postman
+  - type: DeveloperPortal
+    url: https://documentation.bloomreach.com/
+  - type: APIReference
+    url: https://documentation.bloomreach.com/discovery/reference/welcome
+  - type: GettingStarted
+    url: https://documentation.bloomreach.com/engagement/reference/get-started-101
+  - type: Support
+    url: https://support.bloomreach.com
+  - type: SignUp
+    url: https://us.login.bloomreach.com
+  - type: TermsOfService
+    url: https://www.bloomreach.com/en/legal/terms-of-use
+  - type: PrivacyPolicy
+    url: https://www.bloomreach.com/en/legal/privacy-policy
+  - type: Academy
+    url: https://academy.bloomreach.com
+
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 54
+  pass: local-v1
 
 maintainers:
 
