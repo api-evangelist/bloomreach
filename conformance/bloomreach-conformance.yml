@@ -1,0 +1,112 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.bloomreach.com/en/legal/security, well-known/bloomreach-loomi-oauth-authorization-server.json,
+  well-known/bloomreach-api-catalog.json, openapi/*.yml
+description: 'Standards Bloomreach actually conforms to, split between the certification/compliance programme
+  it publishes and the wire-level standards its APIs implement. The interesting result is the split: the
+  agent surface (Loomi Connect MCP) is standards-forward — MCP 2025-06-18, RFC 8414, RFC 9728, OAuth 2.1
+  PKCE — while the product REST APIs implement almost no cross-cutting API standard.'
+standards:
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  version: '2025-06-18'
+  evidence: initialize handshake against the Conversations and Documentation servers returned protocolVersion
+    2025-06-18
+- id: oauth2
+  name: OAuth 2.0
+  conforms: true
+  evidence: Loomi Connect MCP authorization_code + refresh_token grants with S256 PKCE (well-known/bloomreach-loomi-oauth-authorization-server.json)
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://us.connect.loomi.ai/.well-known/oauth-authorization-server returns 200
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: https://us.connect.loomi.ai/.well-known/oauth-protected-resource/mcp returns 200 and the 401
+    challenge carries resource_metadata
+- id: oidc
+  name: OpenID Connect
+  conforms: true
+  evidence: Loomi Connect authenticates through Bloomreach single sign-on (OIDC) per the authenticate-MCP-connection
+    docs
+  note: No /.well-known/openid-configuration is served on any Bloomreach host (404 everywhere), so the
+    OIDC discovery leg is missing.
+- id: rfc9727
+  name: API Catalog (linkset)
+  conforms: true
+  evidence: https://documentation.bloomreach.com/.well-known/api-catalog returns an application/linkset+json
+    document
+- id: agent-skills
+  name: Agent Skills discovery 0.2.0
+  conforms: true
+  evidence: /.well-known/agent-skills/index.json served per documentation section with SKILL.md bodies
+- id: llms-txt
+  name: llms.txt
+  conforms: true
+  evidence: https://documentation.bloomreach.com/llms.txt, 1,714 lines, plus a per-section llms.txt for
+    content, discovery, engagement and loomi-connect
+- id: openapi
+  name: OpenAPI
+  conforms: true
+  evidence: 8 provider-published specs in openapi/_original/; 43 definitions enumerable via the documentation
+    MCP server
+- id: http-basic
+  name: HTTP Basic authentication (RFC 7617)
+  conforms: true
+  evidence: 'Engagement private access and Discovery Catalog Management both use Authorization: Basic'
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: No application/problem+json in any harvested spec; each product uses its own error envelope
+- id: rfc8594
+  name: Sunset HTTP header
+  conforms: false
+  evidence: No Sunset or Deprecation header documented
+- id: idempotency-key
+  name: Idempotency-Key header
+  conforms: false
+  evidence: No idempotency contract in any spec or doc page
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: Webhooks are documented and managed through a REST API, but no AsyncAPI document is published
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json miss on every host (404, or an HTML
+    SPA shell on the docs host)
+- id: json-api
+  name: JSON:API
+  conforms: false
+  evidence: Ad-hoc JSON response shapes
+- id: scim
+  name: SCIM 2.0
+  conforms: false
+  evidence: No /scim paths; user administration is UI-only
+- id: security-txt
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence: 404 on every host probed
+compliance_program:
+  url: https://www.bloomreach.com/en/legal/security
+  trust_center: https://trust.bloomreach.com/
+  certifications:
+  - SOC 2 Type II (annual report)
+  - ISO/IEC 27001
+  - ISO/IEC 27017
+  - ISO/IEC 27018
+  - ISO 9001
+  - ISO 22301
+  - GDPR compliance certification
+  assurance: Annual third-party penetration test for each product pillar
+  privacy:
+  - GDPR
+  - CCPA/CPRA
+  governance: Dedicated Data Protection Officer (DPO)
+  evidence: Read verbatim from https://www.bloomreach.com/en/legal/security (HTTP 200, 2026-08-13)
+summary:
+  conforms: 10
+  does_not_conform: 8
+  certifications_published: 7

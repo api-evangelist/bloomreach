@@ -1,6 +1,15 @@
 name: Bloomreach Plans and Pricing
 description: Bloomreach pricing is modular and custom-quoted, scaling across three primary dimensions — customer count, product catalog size, and communication volume. Plans are available for Engagement (marketing automation/CDP), Discovery (search/merchandising), and Content (headless CMS) products, sold separately or bundled.
 specificationVersion: "0.1"
+generated: '2026-08-13'
+method: searched
+source: https://www.bloomreach.com/en/pricing
+plan_count: 5
+plan_note: >-
+  Bloomreach publishes no public price list for its enterprise modules. The Engagement Essentials
+  tier is the only one with a transparent published price, via the Shopify App Store; every other
+  tier is custom-quoted from customer count, catalog size and communication volume. Re-verified
+  2026-08-13 against https://www.bloomreach.com/en/pricing.
 url: https://www.bloomreach.com/en/pricing
 
 plans:

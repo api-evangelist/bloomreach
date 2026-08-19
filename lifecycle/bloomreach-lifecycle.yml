@@ -1,0 +1,58 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/discovery/changelog, https://documentation.bloomreach.com/engagement/changelog,
+  https://documentation.bloomreach.com/content/changelog, https://status.bloomreach.com, https://www.bloomreach.com/en/roadmap
+description: Bloomreach runs three independent release trains with three different version schemes and
+  no shared deprecation policy. A status page and a public roadmap exist; a written API deprecation policy,
+  a published SLA and RFC 8594 Sunset/Deprecation header support do not.
+versioning:
+- product: Discovery
+  scheme: uri-path + dated release train
+  current: v1 (search/core), v2 (autosuggest, widgets), v3 (Catalog Management / dataconnect)
+  release_naming: ISO-week style, e.g. Release 2026-53
+  docs: https://documentation.bloomreach.com/discovery/changelog
+- product: Engagement (Marketing)
+  scheme: platform minor version
+  current: '1.315'
+  note: The API itself is unversioned in the path; the platform carries the version.
+  docs: https://documentation.bloomreach.com/engagement/changelog
+- product: Content
+  scheme: uri-path + dated release
+  current: Delivery API 1.0 and 2.0, Management APIs v1
+  release_naming: YYYYMMDD, e.g. 20260805
+  docs: https://documentation.bloomreach.com/content/changelog
+- product: Loomi Connect
+  scheme: semver pre-release
+  current: 0.1.0-beta.5
+  note: Early access. Bloomreach reserves the right to change, discontinue or suspend any part of it,
+    and states no SLA applies.
+  docs: https://documentation.bloomreach.com/loomi-connect/changelog/version-010-beta5
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: 'No API deprecation or sunset policy could be found on any of the four documentation sections,
+    and no operation in the harvested specs is marked deprecated: true. Version retirement is communicated
+    only through the per-product changelogs.'
+sla:
+  url: null
+  uptime_target: null
+  note: 'No public SLA or uptime commitment is published. For Loomi Connect the docs state the opposite
+    explicitly: "no SLA applies, and availability isn''t guaranteed" during early access.'
+status_page: https://status.bloomreach.com
+roadmap: https://www.bloomreach.com/en/roadmap
+deprecated_operations: []
+observed_decay:
+- signal: servers[] host does not resolve
+  detail: The Data Hub Workspace Imports OpenAPI published by Bloomreach names https://api.bloomreach.com
+    in servers[]; that hostname returns NXDOMAIN as of 2026-08-13.
+  evidence: host api.bloomreach.com -> NXDOMAIN
+- signal: OpenAPI download endpoints retired
+  detail: The ten "Open API Specification (JSON)" links published on the Content reference pages, of the
+    form /content/openapi/<24-hex-id>, all 302 to /404. The definitions are still rendered in the docs
+    and still enumerable through the documentation MCP server, but they are no longer downloadable.
+  evidence: HTTP 302 -> /404 on https://documentation.bloomreach.com/content/openapi/62a0999feb805c03d57457ce
+- signal: stale first-party SDKs
+  detail: '@bloomreach/limitless-ui-react still at 1.0.0 (2024-12-09); @bloomreach/discovery-web-sdk 2.0.2
+    (2025-12-10).'
+  evidence: packages/bloomreach-packages.yml

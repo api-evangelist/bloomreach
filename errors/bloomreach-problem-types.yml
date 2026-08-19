@@ -1,0 +1,128 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/*.yml (4xx/5xx responses) enriched from the Bloomreach docs
+format: proprietary
+rfc9457: false
+description: Error catalogue derived from every 4xx/5xx response declared across the harvested Bloomreach
+  OpenAPIs. No family uses application/problem+json; each returns a product-specific JSON envelope. Response
+  descriptions in the specs are frequently empty or echo the status code, which is itself the finding.
+envelopes:
+- family: Engagement (Marketing) API
+  host: api.exponea.com
+  shape: '{"errors": {"code": <int>, "description": "<string>"}}'
+  evidence: Live 404 from https://api.exponea.com/openapi.json on 2026-08-13
+- family: Discovery
+  host: core.dxpapi.com
+  shape: JSON error body on matched routes; nginx HTML 404 on unmatched paths
+  evidence: Live 404 from https://core.dxpapi.com/openapi.json on 2026-08-13
+- family: Loomi Connect MCP
+  host: us.connect.loomi.ai
+  shape: '{"error": "invalid_token", "error_description": "..."} plus a WWW-Authenticate Bearer challenge'
+  evidence: Live 401 from POST https://us.connect.loomi.ai/mcp on 2026-08-13
+notable:
+- status: 412
+  title: if_match_etag field did not match expected value
+  meaning: Optimistic-concurrency failure on a Catalog Management record PATCH. Re-read the record, take
+    the new ETag, and retry.
+- status: 413
+  title: Content Too Large
+  meaning: Catalog/import payload exceeds the accepted body size.
+- status: 429
+  title: Too Many Requests
+  meaning: Rate limit exceeded. Honour Retry-After and back off exponentially.
+- status: 406
+  title: Invalid Content-Type
+  meaning: Send application/json.
+problems:
+- status: 400
+  title: Bad request
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+- status: 401
+  title: Unauthorized
+  media_type: null
+  source_operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+- status: 404
+  title: Not found
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+- status: 429
+  title: Too Many Requests
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+- status: 500
+  title: Internal Server Error
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+- status: 412
+  title: if_match_etag field did not match expected value
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#POST /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+- status: 400
+  title: If the query parameters are incorrect/invalid
+  media_type: null
+  source_operation: openapi/bloomreach-category-based-widget-products-api-openapi.yml#GET /api/v2/widgets/image/category/{widget_id}
+- status: 404
+  title: Must send 404 if the widget id is not valid
+  media_type: null
+  source_operation: openapi/bloomreach-category-based-widget-products-api-openapi.yml#GET /api/v2/widgets/image/category/{widget_id}
+- status: 400
+  title: null
+  media_type: null
+  source_operation: openapi/bloomreach-imports-api-openapi.yml#startWorkspaceImport
+- status: 401
+  title: null
+  media_type: null
+  source_operation: openapi/bloomreach-imports-api-openapi.yml#startWorkspaceImport
+- status: 403
+  title: null
+  media_type: null
+  source_operation: openapi/bloomreach-imports-api-openapi.yml#startWorkspaceImport
+- status: 404
+  title: null
+  media_type: null
+  source_operation: openapi/bloomreach-imports-api-openapi.yml#startWorkspaceImport
+- status: 406
+  title: Invalid Content-Type
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#PUT /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records
+- status: 413
+  title: Content Too Large
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#PUT /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records
+- status: 400
+  title: '400'
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-personalization-based-widgets-api-openapi.yml#recently-viewed-widget-api
+- status: 401
+  title: '401'
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-personalization-based-widgets-api-openapi.yml#recently-viewed-widget-api
+- status: 404
+  title: '404'
+  media_type:
+  - application/json
+  source_operation: openapi/bloomreach-personalization-based-widgets-api-openapi.yml#recently-viewed-widget-api
+summary:
+  distinct_problems: 17
+  statuses:
+  - 400
+  - 401
+  - 403
+  - 404
+  - 406
+  - 412
+  - 413
+  - 429
+  - 500
+  with_a_title: 13
+  without_a_title: 4

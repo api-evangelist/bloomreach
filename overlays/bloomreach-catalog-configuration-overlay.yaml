@@ -1,0 +1,34 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Workspace Imports Autosuggest API v2 Catalog configuration API
+  version: 1.0.0
+extends: openapi/bloomreach-catalog-configuration-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bloomreach
+    x-apievangelist-artifacts:
+      authentication: authentication/bloomreach-authentication.yml
+      conventions: conventions/bloomreach-conventions.yml
+      errors: errors/bloomreach-problem-types.yml
+      lifecycle: lifecycle/bloomreach-lifecycle.yml
+      rate_limits: rate-limits/bloomreach-rate-limits.yml
+      data_model: data-model/bloomreach-data-model.yml
+      mcp: mcp/bloomreach-mcp.yml
+    x-apievangelist-source: openapi/_original/ (Bloomreach-published), refined one-document-per-tag
+- target: $.servers
+  update:
+    x-apievangelist-note: Restored from the provider-published servers[] in openapi/_original/. The refined
+      document previously carried https://api.bloomreach.com for every Discovery API, a host that returns
+      NXDOMAIN.
+- target: $
+  update:
+    x-apievangelist-error-envelope: Proprietary JSON error body — not RFC 9457 application/problem+json.
+      See errors/bloomreach-problem-types.yml.
+- target: $
+  update:
+    x-apievangelist-idempotency: Not supported. Bloomreach documents no Idempotency-Key contract; retried
+      writes are re-applied. Conditional update via ETag/if_match_etag is available on Catalog Management
+      records only.

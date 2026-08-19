@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/content/docs/log-in-to-the-developer-environment, https://documentation.bloomreach.com/loomi-connect/docs/connect-the-conversations-server
+description: 'Bloomreach has no test-mode/live-mode key split and publishes no magic test values. What
+  it does publish are two shared hosted environments a developer can call without owning a Bloomreach
+  contract: a public Content developer environment, and a public MCP prototype server bootstrapped with
+  a fixed sample catalogue.'
+test_live_separation:
+  supported: false
+  note: No test/live key prefixes, no sandbox mode flag. Non-production work is done in a separate environment
+    or a developer project, not a test mode.
+environments:
+- name: Public Developer Environment (Content)
+  type: hosted shared environment
+  host: https://developers.bloomreach.io
+  docs: https://documentation.bloomreach.com/content/docs/log-in-to-the-developer-environment
+  access: Open sign-in; retrieve an x-auth-token from Setup > Content API keys inside the environment
+  use: Exercise every Content Management API and the bundled Postman collections without a customer environment
+  note: https://developers.bloomreach.io 302s at the root; the docs page is the entry point.
+- name: Loomi Connect Conversations server
+  type: public MCP prototype
+  endpoint: https://uqa.api.exponea.dev/cocoaas/public/api/clarity-search/v1/mcp/019d4917-3c76-7479-9f00-06c620b231bb
+  docs: https://documentation.bloomreach.com/loomi-connect/docs/connect-the-conversations-server
+  access: No API key and no per-customer setup — all prototype users share one endpoint
+  verified: POST tools/list returned HTTP 200 anonymously on 2026-08-13
+  dataset:
+    catalog: Pacific Apparel
+    skus: ~13,000
+    brands: ~370
+    segments:
+    - women's and men's apparel
+    - footwear
+    - accessories
+    - jewellery
+    price_band: most items $20–$60, premium to $300+
+    seasonal_filters:
+    - blackfriday
+    - back2school
+    - mothersday
+    - christmas
+    - valentine
+    - easter
+    mutable: false
+  reference_implementation: https://hackathon.bloomreach.works/
+- name: Discovery staging widget host
+  type: non-production API host
+  host: https://pathways-email-staging.dxpapi.com
+  source: openapi/_original/bloomreach-discovery-email-widget-openapi.yml servers[]
+  note: A staging server declared alongside production in the Email Widget OpenAPI. Not documented as
+    a customer sandbox.
+- name: Developer projects (Content)
+  type: branching environment
+  docs: https://documentation.bloomreach.com/content/docs/development-environment
+  note: Every Content Management API write happens on the unpublished variant inside a developer project,
+    so a whole batch can be discarded by deleting the project before merge. This is the closest thing
+    Bloomreach has to a rollback primitive.
+test_values:
+  published: false
+  note: No test card numbers, magic identifiers or fixture triggers exist — Bloomreach is not a payments
+    provider.
+time_simulation:
+  supported: false

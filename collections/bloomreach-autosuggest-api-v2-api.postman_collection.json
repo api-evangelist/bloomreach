@@ -1,0 +1,245 @@
+{
+  "item": [
+    {
+      "id": "bae42ee5-6d4b-4f95-bfc9-2d4a283f9b55",
+      "name": "Autosuggest API v2",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41dc0638-3549-45b9-aa97-d47bddff8b1a",
+          "name": "Get autosuggestions",
+          "request": {
+            "name": "Get autosuggestions",
+            "description": {
+              "content": "This API returns product/category suggestions based on an inputted search query.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_br_uid_2",
+                  "value": "uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55",
+                  "description": "(Required) A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. <br><br> Use the default value provided, which is already encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "6413",
+                  "description": "(Required) Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting. <br><br> The example value shown here, <i>6413</i>, is included for your convenience to send a request with <b>Try It</b>."
+                },
+                {
+                  "disabled": false,
+                  "key": "auth_key",
+                  "value": "<string>",
+                  "description": "The authentication key provided by Bloomreach for the account that's sending the request. <br><br> Autosuggest API calls are client-side, so you can leave **auth_key** empty."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "<string>",
+                  "description": "Indicates whether to return data wrapped in the function for cross-origin requests. <br><br> For server-side requests, use the value **br_server**. For native-app requests, use the value **br_app**."
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_views",
+                  "value": "pacifichome",
+                  "description": "(Required) A list of catalog views that you want to see in your suggestions. You must specify the catalog name within the catalog view. For Product catalogs, the catalog name is the same value as your domain_key. <br><br> A **catalog_views** value contains the view_ids within a catalog separated by a colon. If you pass multiple catalogs in **catalog_views**, they must be pipe-separated. Attributes suggestions are enabled for the first two catalogs mentioned as part of catalog_views and only for the first view passed in each of the first two catalogs. <br><br> For example, **&catalog_views=product:store1,store2|recipe:premium|articles** would return text and attribute suggestions for the product catalog in the store1 view, and for the recipe catalog in the premium view; only text suggestions will be displayed for the articles catalog. <br><br> The example value shown here, <i>pacifichome</i>, is included for your convenience to send a request with <b>Try It</b>."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "cha",
+                  "description": "(Required) Your site visitor's partial search query that Autosuggest should operate on. <br><br> You can percent encode spaces between terms as %20, or you can leave the spaces unencoded. <br><br> The example value shown here, <i>cha</i>, is included for your convenience to send a request with <b>Try It</b>."
+                },
+                {
+                  "disabled": false,
+                  "key": "ref_url",
+                  "value": "https://example.com",
+                  "description": "(Required) The URL of the page or HTTP referrer where the request is started."
+                },
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "1703497216731",
+                  "description": "(Required) An ID to track site visitor clicks. We recommend generating unique, random values of 13 digits to enable click-tracking. <br><br> Bloomreach doesn't automatically enforce the requirements for this parameter. For example, you can enter test as your value for each instance of the request_id parameter without triggering an error message. However, using a unique value allows us to help you if you encounter a problem."
+                },
+                {
+                  "disabled": false,
+                  "key": "request_type",
+                  "value": "suggest",
+                  "description": "(Required) The type of API request. Value should be **suggest** for Autosuggest requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "https://www.documentation-site.com",
+                  "description": "(Required) The absolute URL of the page where the request is initiated. Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_agent",
+                  "value": "<string>",
+                  "description": "The user agent of the browser that's making the search request. <br><br> Make sure that this value in your API request is the same as the value in the original request from your user. We optimize pages in part by crawling and gathering data, and the original user_agent lets us distinguish between our internal Bloomreach users who QA pages and everyone else who visits your site."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The universal customer ID of the user. You only need to pass this field if your particular integration tracks customers this way.  The parameter captures user IDs from the customer side, and reuses the information when powering apps or enhancing cross-device linking. In this way, Bloomreach recognizes users in a way that's aligned with your system. <br><br> Use an anonymous string. Don't use email or other personally identifiable information. <br><br> If you do not track users this way, then omit this field."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8d556347-0c02-4d68-92b6-5f674a19b30c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_br_uid_2",
+                      "value": "{{ br_uid_2 }}"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "{{ account_id }}"
+                    },
+                    {
+                      "key": "auth_key",
+                      "value": "{{ auth_key }}"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "catalog_views",
+                      "value": "pacifichome"
+                    },
+                    {
+                      "key": "q",
+                      "value": "cha"
+                    },
+                    {
+                      "key": "ref_url",
+                      "value": "{{ ref_url }}"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "1703497216731"
+                    },
+                    {
+                      "key": "request_type",
+                      "value": "suggest"
+                    },
+                    {
+                      "key": "url",
+                      "value": "{{ url }}"
+                    },
+                    {
+                      "key": "user_agent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryContext\": {\n    \"originalQuery\": \"string\"\n  },\n  \"suggestionGroups\": [\n    {\n      \"attributeSuggestions\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"attributeType\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"attributeType\": \"string\"\n        }\n      ],\n      \"catalogName\": \"string\",\n      \"product_suggest_query\": \"string\",\n      \"querySuggestions\": [\n        {\n          \"query\": \"string\",\n          \"displayText\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"displayText\": \"string\"\n        }\n      ],\n      \"searchSuggestions\": [\n        {\n          \"sale_price\": \"string\",\n          \"url\": \"string\",\n          \"pid\": \"string\",\n          \"thumb_image\": \"string\",\n          \"title\": \"string\"\n        },\n        {\n          \"sale_price\": \"string\",\n          \"url\": \"string\",\n          \"pid\": \"string\",\n          \"thumb_image\": \"string\",\n          \"title\": \"string\"\n        }\n      ],\n      \"view\": \"string\"\n    },\n    {\n      \"attributeSuggestions\": [\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"attributeType\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"attributeType\": \"string\"\n        }\n      ],\n      \"catalogName\": \"string\",\n      \"product_suggest_query\": \"string\",\n      \"querySuggestions\": [\n        {\n          \"query\": \"string\",\n          \"displayText\": \"string\"\n        },\n        {\n          \"query\": \"string\",\n          \"displayText\": \"string\"\n        }\n      ],\n      \"searchSuggestions\": [\n        {\n          \"sale_price\": \"string\",\n          \"url\": \"string\",\n          \"pid\": \"string\",\n          \"thumb_image\": \"string\",\n          \"title\": \"string\"\n        },\n        {\n          \"sale_price\": \"string\",\n          \"url\": \"string\",\n          \"pid\": \"string\",\n          \"thumb_image\": \"string\",\n          \"title\": \"string\"\n        }\n      ],\n      \"view\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://suggest.dxpapi.com/api/v2/suggest",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7f92927a-629b-4c36-a357-82054f070640",
+    "name": "Workspace Imports Autosuggest API v2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to programmatically trigger an existing workspace-scoped\nimport in Bloomreach Engagement.\n",
+      "type": "text/plain"
+    }
+  }
+}

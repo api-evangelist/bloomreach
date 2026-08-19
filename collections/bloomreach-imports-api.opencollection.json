@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Autosuggest API v2 Imports API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Imports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bloomreach.com/data/v2/workspaces/:workspaceId/imports/:import_id/start",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of your Bloomreach Engagement workspace. Must match the\nworkspace the API key was issued for; otherwise the request is\nrejected with HTTP 403.\n"
+              },
+              {
+                "name": "import_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of an existing import in the workspace."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger the run of an existing workspace-scoped import programmatically.\n\nThe following types of imports can be triggered: [URL](https://documentation.bloomreach.com/data-hub/docs/url-imports), [File storage\n(GCS, S3, SFTP)](https://documentation.bloomreach.com/data-hub/docs/file-storage-imports), [Data warehouse](https://documentation.bloomreach.com/data-hub/docs/data-warehouse-imports).\n\nIf you're using a URL or File storage (GCS, SFTP) import, you can\noverride its original path or URL. When o"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

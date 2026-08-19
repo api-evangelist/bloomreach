@@ -1,0 +1,54 @@
+generated: '2026-08-13'
+method: probed
+source: https://us.connect.loomi.ai/.well-known/oauth-authorization-server and /.well-known/oauth-protected-resource/mcp
+docs: https://documentation.bloomreach.com/loomi-connect/docs/authenticate-mcp-connection
+description: The only OAuth surface Bloomreach publishes is the Loomi Connect MCP authorization server.
+  None of the product REST APIs uses OAuth — Engagement is Token/Basic, Content is an opaque x-auth-token,
+  Discovery is account_id + auth_key — so there is no REST scope surface to derive. Effective authorization
+  on the MCP server is carried by Bloomreach IAM roles, not by OAuth scopes.
+schemes:
+- name: Loomi Connect MCP OAuth
+  source: well-known/bloomreach-loomi-oauth-authorization-server.json
+  issuer: https://us.connect.loomi.ai/
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://us.connect.loomi.ai/authorize
+    tokenUrl: https://us.connect.loomi.ai/token
+    registrationUrl: https://us.connect.loomi.ai/register
+    pkce: S256
+    refresh: true
+    client_auth:
+    - client_secret_post
+    - client_secret_basic
+scopes:
+- scope: openid
+  description: Standard OIDC scope — issue an ID token for the signed-in Bloomreach user.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/bloomreach-loomi-oauth-authorization-server.json
+- scope: profile
+  description: Standard OIDC scope — basic profile claims for the signed-in Bloomreach user.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/bloomreach-loomi-oauth-authorization-server.json
+- scope: email
+  description: Standard OIDC scope — email claim for the signed-in Bloomreach user.
+  flows:
+  - authorizationCode
+  sources:
+  - well-known/bloomreach-loomi-oauth-authorization-server.json
+authorization_model:
+  note: The three scopes above are identity scopes only — they grant no product permission. What the agent
+    may actually read or write is decided by the caller's existing Bloomreach IAM role on each project,
+    enforced server-side. Callers without administration.pii.flag receive PII masked to ****** and cannot
+    override it from the tool.
+  iam_docs: https://documentation.bloomreach.com/data-hub/docs/unified-administration#role-management-by-product
+other_oauth_surfaces:
+- issuer: https://www.bloomreach.com/en
+  scopes_supported:
+  - mcp
+  source: well-known/bloomreach-oauth-authorization-server.json
+  note: An RFC 8414 document served by the WordPress marketing website advertising a single "mcp" scope.
+    It is not an API product surface.

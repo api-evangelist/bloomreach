@@ -1,6 +1,45 @@
 name: Bloomreach Rate Limits
 description: Rate limits for Bloomreach Discovery, Engagement, and Content APIs. Discovery Catalog Management has the most explicit documented limits. Search/merchandising limits are set per-customer and monitored continuously. Engagement Tracking API enforces a minimum of 150 requests/second per IP. Standard HTTP 429 responses with Retry-After headers are used across all APIs.
 specificationVersion: "0.1"
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
+limit_count: 11
+response_headers:
+  - Retry-After
+exhaustion_status: 429
+header_note: >-
+  Bloomreach returns 429 with Retry-After but does NOT emit X-RateLimit-* or RFC 9239 RateLimit-*
+  headers, so a client cannot see its remaining budget before it is exhausted — only after.
+added_2026_08_13:
+  - name: Loomi Connect MCP - global
+    description: Applies to every Loomi Connect MCP tool call, read or write.
+    api: Loomi Connect MCP
+    url: https://documentation.bloomreach.com/loomi-connect/docs/mcp-performance-and-rate-limits
+    limit: 1
+    unit: second
+    burst: 60 calls per minute
+    scope: key
+    errorMessage: "Too many requests: rate limit reached for key '<key>' (<limit>). Retry after ~<N> second(s)."
+    retryStrategy: exponential-backoff
+  - name: Loomi Connect MCP - write tools
+    description: Stricter limit stacked on top of the global limit for any tool that creates or updates configuration.
+    api: Loomi Connect MCP
+    url: https://documentation.bloomreach.com/loomi-connect/docs/mcp-performance-and-rate-limits
+    limit: 1
+    unit: 5 seconds
+    burst: 10 calls per minute
+    scope: key
+    retryStrategy: exponential-backoff
+  - name: Loomi Connect MCP - delete tools
+    description: Tightest limit; applies to deletions such as deleting an item collection.
+    api: Loomi Connect MCP
+    url: https://documentation.bloomreach.com/loomi-connect/docs/mcp-performance-and-rate-limits
+    limit: 1
+    unit: 10 seconds
+    burst: 10 calls per minute
+    scope: key
+    retryStrategy: exponential-backoff
 url: https://documentation.bloomreach.com/discovery/reference/api-rate-limits
 
 limits:

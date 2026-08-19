@@ -1,0 +1,131 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every apis.yml baseURL host, OpenAPI servers[] host, and the docs/console hosts
+description: >-
+  Well-known discovery surface probed across every Bloomreach host. Bloomreach serves no
+  RFC 9116 security.txt on any host, but the documentation host (ReadMe-hosted) serves a real
+  RFC 9727 api-catalog linkset, MCP server cards and an Agent Skills discovery index, and the
+  Loomi Connect MCP hosts serve RFC 8414 / RFC 9728 OAuth metadata.
+
+hosts:
+  - host: https://documentation.bloomreach.com
+    role: documentation / API reference (ReadMe)
+    documents:
+      - path: /.well-known/api-catalog          # RFC 9727 linkset
+        status: 200
+        content_type: application/linkset+json
+        file: bloomreach-api-catalog.json
+        note: >-
+          Linkset naming five service anchors — loomi-connect, data-hub, content, discovery,
+          engagement — each with a service-doc reference page.
+      - path: /.well-known/mcp/server-card.json
+        status: 200
+        content_type: application/json
+        file: bloomreach-mcp-server-card.json
+      - path: /.well-known/agent-skills/index.json
+        status: 200
+        content_type: application/json
+        file: bloomreach-agent-skills-index.json
+      - path: /content/.well-known/mcp/server-card.json
+        status: 200
+        file: bloomreach-content-mcp-server-card.json
+      - path: /discovery/.well-known/mcp/server-card.json
+        status: 200
+        file: bloomreach-discovery-mcp-server-card.json
+      - path: /engagement/.well-known/mcp/server-card.json
+        status: 200
+        file: bloomreach-engagement-mcp-server-card.json
+      - path: /.well-known/security.txt
+        status: 200
+        note: >-
+          NOT a document. The docs host is a single-page app whose catch-all answers 200 with
+          the 1.8 MB HTML shell for every unmatched /.well-known/* path. Treated as a MISS.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA shell (HTML), not an AgentCard. Treated as a MISS — no A2A card published.
+      - path: /.well-known/agent.json
+        status: 200
+        note: SPA shell (HTML), not an AgentCard. Treated as a MISS.
+
+  - host: https://us.connect.loomi.ai
+    role: Loomi Connect remote MCP server (regional; eu/uk/ca/ap are siblings)
+    documents:
+      - path: /.well-known/oauth-authorization-server   # RFC 8414
+        status: 200
+        content_type: application/json
+        file: bloomreach-loomi-oauth-authorization-server.json
+      - path: /.well-known/oauth-protected-resource/mcp # RFC 9728
+        status: 200
+        content_type: application/json
+        file: bloomreach-loomi-oauth-protected-resource.json
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+
+  - host: https://www.bloomreach.com
+    role: marketing website (WordPress)
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        file: bloomreach-oauth-authorization-server.json
+        note: >-
+          Real RFC 8414 document served by the WordPress marketing site, issuer
+          https://www.bloomreach.com/en, scopes_supported ["mcp"]. It advertises an
+          MCP authorization surface on the website, NOT on the product APIs.
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+
+  - host: https://core.dxpapi.com
+    role: Discovery search / bestseller / content-search API host
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+
+  - host: https://api.exponea.com
+    role: Engagement (Marketing) API host
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /.well-known/agent-card.json, status: 404}
+      - {path: /.well-known/agent.json, status: 404}
+
+  - host: https://api.bloomreach.com
+    role: server[] host declared by the Data Hub Workspace Imports OpenAPI
+    documents: []
+    note: >-
+      DOES NOT RESOLVE. `host api.bloomreach.com` returns NXDOMAIN, so no /.well-known/ path
+      could be probed. This is the host Bloomreach's own published Workspace Imports OpenAPI
+      names in servers[]; recorded as-is rather than repaired, because it is what the provider
+      publishes.
+
+summary:
+  hosts_probed: 6
+  documents_found: 9
+  security_txt: false
+  api_catalog: true
+  oauth_metadata: true
+  agent_card: false

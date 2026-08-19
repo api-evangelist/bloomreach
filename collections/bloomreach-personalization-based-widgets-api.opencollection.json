@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Imports Autosuggest API v2 Personalization-based widgets API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Personalization-based widgets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Personalized widget",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pathways.dxpapi.com/api/v2/widgets/personalized/:widget_id",
+            "params": [
+              {
+                "name": "widget_id",
+                "value": "1jwy7eg9",
+                "type": "path",
+                "description": "The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.\n\nThe example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "account_id",
+                "value": "6276",
+                "type": "query",
+                "description": "Your site's numerical Bloomreach account ID.\n\nYour Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.\nThe example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "_br_uid_2",
+                "value": "uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55",
+                "type": "query",
+                "description": "A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).\nThis cookie creates a unique, anonymous identifier for every browser or device.\nUse the default value provided, which is already encoded.\n"
+              },
+              {
+                "name": "domain_key",
+                "value": "bloomreach_devdocs",
+                "type": "query",
+                "description": "Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.\n\nThis parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.\nThe example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "query",
+                "value": "cable",
+                "type": "query",
+                "description": "Your site visitor's search query. Search queries are composed of one or more terms.\nYou can percent encode spaces between terms as `%20`, or you can leave the spaces unencoded.\n\nThe example value shown here, <i>cable</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "user_id",
+                "value": "abc123",
+                "type": "query",
+                "description": "The universal customer ID of the user. Required for Personalization-based widgets.\n\nThe parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.\nThis way, Bloomreach recognizes users in a way that's aligned with your system.\n\nUse an anonymous string. Don't use email or other personally identifiable information.\nThe example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "request_id",
+                "value": "abh3kjh1kjnd8",
+                "type": "query",
+                "description": "An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking.\nThe `request_id` is also important for debugging.\n"
+              },
+              {
+                "name": "url",
+                "value": "https://www.documentation-site.com",
+                "type": "query",
+                "description": "The absolute URL of the page where the request is initiated. Don't use a relative URL.\n\nThe example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "ref_url",
+                "value": "",
+                "type": "query",
+                "description": "The URL of the page or HTTP referrer where the request is started.\n\nRequired if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).\n"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of fields to be sent in the request.\n\nAlternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.\nThis parameter is required if not sent via the Dashboard.\n"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.\n\nAny facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.\nLet your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.\n\nYou can filter results based on numeric ranges. For example, `&filter=(price:[\"100\" TO \"*\"])`.\nNote that a negative filter on ranges isn't supported.\nTo provide multiple filters, send multiple filter parameters.\nFor example, `&filter=(price:[\"*\" TO \"100\"])&filter=(color_groups: (\"blue\"))`.\n"
+              },
+              {
+                "name": "content_injection",
+                "value": "true",
+                "type": "query",
+                "description": "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+              },
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query",
+                "description": "The number of matching items to return per results page in the API response. The maximum value is 200.\nThe result size is used from the Dashboard if it isn't sent in the API.\n\nTo enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.\n"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its own product catalog characteristics like product titles and prices, then add `view_id` to your call.\nBloomreach uses your `view_id` parameter value to display the right product information for your customers based on their individual site views.\n\nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
+              }
+            ]
+          },
+          "docs": "Personalized widget"
+        },
+        {
+          "info": {
+            "name": "Recently viewed widget",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pathways.dxpapi.com/api/v2/widgets/personalized/:recently_viewed_widget_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "6276",
+                "type": "query",
+                "description": "Your site's numerical Bloomreach account ID.\n\nYour Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.\nThe example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "_br_uid_2",
+                "value": "uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55",
+                "type": "query",
+                "description": "A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).\nThis cookie creates a unique, anonymous identifier for every browser or device.\nUse the default value provided, which is already encoded.\n"
+              },
+              {
+                "name": "domain_key",
+                "value": "bloomreach_devdocs",
+                "type": "query",
+                "description": "Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.\n\nThis parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.\nThe example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "recently_viewed_widget_id",
+                "value": "1jwy7eg9",
+                "type": "path",
+                "description": "The ID of the Recently Viewed widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.\n\nThe example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "request_id",
+                "value": "abh3kjh1kjnd8",
+                "type": "query",
+                "description": "An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking.\nThe `request_id` is also important for debugging.\n"
+              },
+              {
+                "name": "url",
+                "value": "https://www.documentation-site.com",
+                "type": "query",
+                "description": "The absolute URL of the page where the request is initiated. Don't use a relative URL.\n\nThe example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "ref_url",
+                "value": "",
+                "type": "query",
+                "description": "The URL of the page or HTTP referrer where the request is started.\n\nRequired if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).\n"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of fields to be sent in the request.\n\nAlternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.\nThis parameter is required if not sent via the Dashboard.\n"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.\n\nAny facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.\nLet your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.\n\nYou can filter results based on numeric ranges. For example, `&filter=(price:[\"100\" TO \"*\"])`.\nNote that a negative filter on ranges isn't supported.\nTo provide multiple filters, send multiple filter parameters.\nFor example, `&filter=(price:[\"*\" TO \"100\"])&filter=(color_groups: (\"blue\"))`.\n"
+              },
+              {
+                "name": "content_injection",
+                "value": "true",
+                "type": "query",
+                "description": "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+              },
+              {
+                "name": "rows",
+                "value": "",
+                "type": "query",
+                "description": "The number of matching items to return per results page in the API response. The maximum value is 200.\nThe result size is used from the Dashboard if it isn't sent in the API.\n\nTo enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.\n"
+              },
+              {
+                "name": "view_id",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its own product catalog characteristics like product titles and prices, then add `view_id` to your call.\nBloomreach uses your `view_id` parameter value to display the right product information for your customers based on their individual site views.\n\nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
+              },
+              {
+                "name": "auth_key",
+                "value": "",
+                "type": "query",
+                "description": "The Bloomreach-provided authentication key for the Bloomreach account that's sending the request.\n\nWidget API calls are client-side, so you can leave `auth_key` empty.\n"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The universal customer ID of the user. Required for Personalization-based Recommendation widgets.\n\nThe parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.\nThis way, Bloomreach recognizes users in a way that's aligned with your system.\n\nUse an anonymous string. Don't use email or other personally identifiable information.\nThe example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+              },
+              {
+                "name": "start",
+                "value": "0",
+                "type": "query",
+                "description": "The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0.\nThe maximum value is 10000.\n"
+              }
+            ]
+          },
+          "docs": "Recently viewed widget"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

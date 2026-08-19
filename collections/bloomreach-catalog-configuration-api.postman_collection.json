@@ -1,0 +1,2276 @@
+{
+  "item": [
+    {
+      "id": "df6ffa4a-c777-45ab-9d76-a3048b5d091a",
+      "name": "Catalog configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58d87b7d-d661-4ff0-8fd3-7b839e4f1788",
+          "name": "Get current configuration",
+          "request": {
+            "name": "Get current configuration",
+            "description": {
+              "content": "Understand the current state of catalog configuration, including custom attributes configuration and all [catalog settings](https://documentation.bloomreach.com/discovery/docs/catalog-settings) present in the dashboard.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_name",
+                "catalogs",
+                ":catalog_name",
+                "environments",
+                ":environment_name",
+                "configs",
+                "LATEST"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_name",
+                  "description": "(Required) Your unique account name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environment_name",
+                  "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55b4ea0a-b384-44d0-8411-ddd145d786a7",
+              "name": "OK. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"etag\": \"string\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": true,\n        \"search_unavailable_docs\": false,\n        \"search_docs_drop_threshold\": 3768.422906774872\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"auto\",\n        \"searchable\": true\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"product\",\n          \"displayable\": false,\n          \"facetable\": \"manual\",\n          \"searchable\": false,\n          \"multi_valued\": false,\n          \"data_type\": \"number\"\n        },\n        \"key_1\": {\n          \"level\": \"variant\",\n          \"displayable\": false,\n          \"facetable\": \"manual\",\n          \"searchable\": true,\n          \"multi_valued\": false,\n          \"data_type\": \"text\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": true,\n        \"attibute_autosuggest\": false,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": false,\n        \"category_ids\": true,\n        \"product_ids\": true,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": true,\n        \"description\": true,\n        \"gender\": true,\n        \"item_no\": true,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": true,\n        \"catalog_code\": false,\n        \"keywords\": true,\n        \"size\": false,\n        \"height\": false,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": false,\n        \"price\": false,\n        \"sale_price\": false,\n        \"color\": true,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36c46666-3259-4a93-851e-a95dd00b4393",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe12e98-1525-4dc4-a077-c588fa1d2ec8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "baa21cb7-ebf9-4d01-b22b-cde2f4082c1a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea6b1e88-2557-44be-a566-65e9d45d405d",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b344714-7848-4a9f-87bd-babb80edd4d9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3da7e6ae-e088-45d6-92bd-6d0279b50f81",
+          "name": "Modify current configuration",
+          "request": {
+            "name": "Modify current configuration",
+            "description": {
+              "content": "Programmatically modify the current catalog configuration to automate common tasks.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_name",
+                "catalogs",
+                ":catalog_name",
+                "environments",
+                ":environment_name",
+                "configs",
+                "LATEST"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_name",
+                  "description": "(Required) Your unique account name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environment_name",
+                  "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": \"<boolean>\"\n      },\n      \"index\": {\n        \"enable_index_jobs\": \"<boolean>\",\n        \"enable_auto_indexing\": \"<boolean>\",\n        \"search_unavailable_docs\": \"<boolean>\",\n        \"search_docs_drop_threshold\": \"<number>\"\n      },\n      \"variants\": {\n        \"sku_select\": \"<string>\",\n        \"enable_hero_sku_ranking\": \"<boolean>\",\n        \"enable_filtering\": \"<boolean>\",\n        \"ranking_attributes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"use_unavailable_variant_as_hero\": \"<boolean>\",\n        \"grouping_attribute\": \"<string>\",\n        \"search_document_variants_limit\": \"<number>\"\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"<string>\",\n        \"searchable\": \"<boolean>\"\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"<string>\",\n          \"displayable\": \"<boolean>\",\n          \"facetable\": \"<string>\",\n          \"searchable\": \"<boolean>\",\n          \"multi_valued\": \"<boolean>\",\n          \"data_type\": \"<string>\"\n        },\n        \"key_1\": {\n          \"level\": \"<string>\",\n          \"displayable\": \"<boolean>\",\n          \"facetable\": \"<string>\",\n          \"searchable\": \"<boolean>\",\n          \"multi_valued\": \"<boolean>\",\n          \"data_type\": \"<string>\"\n        },\n        \"key_2\": {\n          \"level\": \"<string>\",\n          \"displayable\": \"<boolean>\",\n          \"facetable\": \"<string>\",\n          \"searchable\": \"<boolean>\",\n          \"multi_valued\": \"<boolean>\",\n          \"data_type\": \"<string>\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"<string>\",\n          \"other_attributes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"minimum_character_count\": \"<number>\",\n        \"word_count_limit\": \"<number>\",\n        \"product_autosuggest\": \"<boolean>\",\n        \"attibute_autosuggest\": \"<boolean>\",\n        \"attribute_type\": \"<string>\",\n        \"attribute_autosuggest_limit\": \"<number>\"\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": \"<boolean>\",\n        \"category_ids\": \"<boolean>\",\n        \"product_ids\": \"<boolean>\",\n        \"variant_ids\": \"<boolean>\"\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": \"<boolean>\",\n        \"brand\": \"<boolean>\",\n        \"description\": \"<boolean>\",\n        \"gender\": \"<boolean>\",\n        \"item_no\": \"<boolean>\",\n        \"model_no\": \"<boolean>\",\n        \"suite_info\": \"<boolean>\",\n        \"store_id\": \"<boolean>\",\n        \"catalog_code\": \"<boolean>\",\n        \"keywords\": \"<boolean>\",\n        \"size\": \"<boolean>\",\n        \"height\": \"<boolean>\",\n        \"width\": \"<boolean>\",\n        \"weight\": \"<boolean>\",\n        \"capacity\": \"<boolean>\",\n        \"reviews\": \"<boolean>\",\n        \"price\": \"<boolean>\",\n        \"sale_price\": \"<boolean>\",\n        \"color\": \"<boolean>\",\n        \"color_group\": \"<boolean>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d7aef20-9aa0-4aca-b226-3cecb6bcc11e",
+              "name": "OK - The new config matches the current one, and no change is made. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"previous_etag\": \"string\",\n    \"new_etag\": \"string\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": true\n      },\n      \"index\": {\n        \"enable_index_jobs\": true,\n        \"enable_auto_indexing\": true,\n        \"search_unavailable_docs\": false,\n        \"search_docs_drop_threshold\": 706.8711081511136\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"false\",\n        \"searchable\": true\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"product\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": true,\n          \"multi_valued\": true,\n          \"data_type\": \"text\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": false,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": false,\n        \"product_ids\": true,\n        \"variant_ids\": true\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": false,\n        \"brand\": true,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": true,\n        \"model_no\": false,\n        \"suite_info\": true,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": false,\n        \"height\": false,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": true,\n        \"reviews\": true,\n        \"price\": false,\n        \"sale_price\": false,\n        \"color\": false,\n        \"color_group\": true\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d04b507d-dff7-4b2d-82ef-d66d72daed84",
+              "name": "Created - The new config differs from the current one, and the changes are applied. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"previous_etag\": \"string\",\n    \"new_etag\": \"string\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": true\n      },\n      \"index\": {\n        \"enable_index_jobs\": true,\n        \"enable_auto_indexing\": true,\n        \"search_unavailable_docs\": false,\n        \"search_docs_drop_threshold\": 706.8711081511136\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"false\",\n        \"searchable\": true\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"product\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": true,\n          \"multi_valued\": true,\n          \"data_type\": \"text\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": false,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": false,\n        \"product_ids\": true,\n        \"variant_ids\": true\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": false,\n        \"brand\": true,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": true,\n        \"model_no\": false,\n        \"suite_info\": true,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": false,\n        \"height\": false,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": true,\n        \"reviews\": true,\n        \"price\": false,\n        \"sale_price\": false,\n        \"color\": false,\n        \"color_group\": true\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cb7b6ff-7c1d-4e2a-bb3d-c35c708d6418",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"etag\": \"string\"\n  },\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "345f8f6f-68f7-42ab-85ae-b40a89f5165a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8a560aad-88e8-45a0-aff3-3218e34b04c6",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba2c86b7-2639-4ace-b8eb-f650d2d3b36d",
+              "name": "if_match_etag field did not match expected value",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39af9fff-c329-4af0-8e1c-9bcaa28ea2c3",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80eb2927-d9af-4cb0-9005-fcdd3a848a12",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    "LATEST"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"meta\": {\n    \"if_match_etag\": \"<string>\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": false,\n        \"search_unavailable_docs\": true,\n        \"search_docs_drop_threshold\": 430.52696116126054\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"manual\",\n        \"searchable\": false\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"variant\",\n          \"displayable\": true,\n          \"facetable\": \"auto\",\n          \"searchable\": false,\n          \"multi_valued\": true,\n          \"data_type\": \"number\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": false,\n        \"attibute_autosuggest\": true,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": true,\n        \"category_ids\": true,\n        \"product_ids\": false,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": false,\n        \"description\": false,\n        \"gender\": false,\n        \"item_no\": false,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": false,\n        \"catalog_code\": true,\n        \"keywords\": false,\n        \"size\": true,\n        \"height\": true,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": true,\n        \"price\": true,\n        \"sale_price\": true,\n        \"color\": false,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6a9c79e-28a0-49b5-9fbd-9c150339afbc",
+          "name": "Get an older configuration",
+          "request": {
+            "name": "Get an older configuration",
+            "description": {
+              "content": "Understand what the catalog configuration looked like at the point in time an index was generated. \n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_name",
+                "catalogs",
+                ":catalog_name",
+                "environments",
+                ":environment_name",
+                "configs",
+                ":config_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_name",
+                  "description": "(Required) Your unique account name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environment_name",
+                  "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "config_id",
+                  "description": "(Required) The unique ID associated with a particular state of the catalog configuration."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "037c00d9-6437-409b-8b60-2fe3c6d3c0f0",
+              "name": "OK. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    ":config_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "config_id",
+                      "description": "(Required) The unique ID associated with a particular state of the catalog configuration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"etag\": \"string\"\n  },\n  \"data\": {\n    \"config\": {\n      \"feed\": {\n        \"enable_feed_jobs\": false\n      },\n      \"index\": {\n        \"enable_index_jobs\": false,\n        \"enable_auto_indexing\": true,\n        \"search_unavailable_docs\": false,\n        \"search_docs_drop_threshold\": 3768.422906774872\n      },\n      \"variants\": {\n        \"sku_select\": \"on | off | transition-on | transition-off\",\n        \"enable_hero_sku_ranking\": true,\n        \"enable_filtering\": false,\n        \"ranking_attributes\": [\n          \"color\",\n          \"color_group\",\n          \"custom_attribute\"\n        ],\n        \"use_unavailable_variant_as_hero\": false,\n        \"grouping_attribute\": \"some_attribute\",\n        \"search_document_variants_limit\": 5\n      },\n      \"custom_attributes_defaults\": {\n        \"facetable\": \"auto\",\n        \"searchable\": true\n      },\n      \"custom_attributes\": {\n        \"key_0\": {\n          \"level\": \"product\",\n          \"displayable\": false,\n          \"facetable\": \"manual\",\n          \"searchable\": false,\n          \"multi_valued\": false,\n          \"data_type\": \"number\"\n        },\n        \"key_1\": {\n          \"level\": \"variant\",\n          \"displayable\": false,\n          \"facetable\": \"manual\",\n          \"searchable\": true,\n          \"multi_valued\": false,\n          \"data_type\": \"text\"\n        }\n      },\n      \"autosuggest\": {\n        \"product_attributes\": {\n          \"categories\": \"leaf_only | off\",\n          \"other_attributes\": [\n            \"color\",\n            \"title\",\n            \"custom_attribute\"\n          ]\n        },\n        \"minimum_character_count\": 4,\n        \"word_count_limit\": 5,\n        \"product_autosuggest\": true,\n        \"attibute_autosuggest\": false,\n        \"attribute_type\": \"category\",\n        \"attribute_autosuggest_limit\": 3\n      },\n      \"core_attribute_searchability\": {\n        \"category_names\": false,\n        \"category_ids\": true,\n        \"product_ids\": true,\n        \"variant_ids\": false\n      },\n      \"reserved_attribute_searchability\": {\n        \"title\": true,\n        \"brand\": true,\n        \"description\": true,\n        \"gender\": true,\n        \"item_no\": true,\n        \"model_no\": false,\n        \"suite_info\": false,\n        \"store_id\": true,\n        \"catalog_code\": false,\n        \"keywords\": true,\n        \"size\": false,\n        \"height\": false,\n        \"width\": true,\n        \"weight\": false,\n        \"capacity\": false,\n        \"reviews\": false,\n        \"price\": false,\n        \"sale_price\": false,\n        \"color\": true,\n        \"color_group\": false\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6d868e4-3477-4f20-bcd7-6a80ba33083d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    ":config_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "config_id",
+                      "description": "(Required) The unique ID associated with a particular state of the catalog configuration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "357f7fca-ab8b-48e2-ae98-e8676d5916e9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    ":config_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "config_id",
+                      "description": "(Required) The unique ID associated with a particular state of the catalog configuration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86bb2b17-a609-470a-8763-8b429b5ae93d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    ":config_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "config_id",
+                      "description": "(Required) The unique ID associated with a particular state of the catalog configuration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "476ee35e-4015-417b-bb1a-9cfeaed45405",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    ":config_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "config_id",
+                      "description": "(Required) The unique ID associated with a particular state of the catalog configuration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2f5040d-8d82-4388-b174-874539111752",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "configs",
+                    ":config_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "config_id",
+                      "description": "(Required) The unique ID associated with a particular state of the catalog configuration."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ae3ee0a-042a-4c18-a657-11b109d6a114",
+          "name": "Get reserved attributes",
+          "request": {
+            "name": "Get reserved attributes",
+            "description": {
+              "content": "Get a list of all [reserved attributes](https://documentation.bloomreach.com/discovery/reference/reserved-fields-api) for the catalog.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_name",
+                "catalogs",
+                ":catalog_name",
+                "environments",
+                ":environment_name",
+                "reserved-attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_name",
+                  "description": "(Required) Your unique account name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environment_name",
+                  "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c370840-83d6-45e0-903d-7c385c061a48",
+              "name": "OK. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "reserved-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"reserved_attributes\": {\n      \"product\": {\n        \"availability\": {},\n        \"brand\": {},\n        \"br_high_confidence_field\": {},\n        \"capacity\": {},\n        \"catalog_code\": {},\n        \"category_paths\": {},\n        \"city_location\": {},\n        \"color\": {},\n        \"color_group\": {},\n        \"condition\": {},\n        \"depth\": {},\n        \"description\": {},\n        \"flags\": {},\n        \"gender\": {},\n        \"height\": {},\n        \"i_level\": {},\n        \"is_buyable\": {},\n        \"is_monogramed\": {},\n        \"is_perishable\": {},\n        \"is_sellable\": {},\n        \"item_condition\": {},\n        \"item_no\": {},\n        \"keywords\": {},\n        \"large_image\": {},\n        \"launch_date\": {},\n        \"low_price\": {},\n        \"low_sale_price\": {},\n        \"model_name\": {},\n        \"model_no\": {},\n        \"price\": {},\n        \"price_range\": {},\n        \"reviews\": {},\n        \"sale_keywords\": {},\n        \"sale_price\": {},\n        \"sale_price_range\": {},\n        \"size\": {},\n        \"sku_id\": {},\n        \"store_id\": {},\n        \"store_location\": {},\n        \"suite_info\": {},\n        \"swatch_image\": {},\n        \"thumb_image\": {},\n        \"title\": {},\n        \"url\": {},\n        \"width\": {}\n      },\n      \"variant\": {\n        \"color\": {},\n        \"color_group\": {},\n        \"large_image\": {},\n        \"price\": {},\n        \"sale_price\": {},\n        \"size\": {},\n        \"sku_id\": {},\n        \"swatch_image\": {},\n        \"thumb_image\": {}\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1f4aeb6-9ae9-4dcf-9101-af4b88baba45",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "reserved-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d65078c1-c7f4-4de4-ab1d-977c6807ff2a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "reserved-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d40dcc2e-381c-476e-9b58-b09a981a17d7",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "reserved-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45957b5d-67b7-4033-b8f3-17022d170c2d",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "reserved-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "debb26e0-942f-4718-9835-1600814e5bd1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "reserved-attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://discovery.bloomreach.com/dataconnect/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a9709935-1be2-4fcc-9782-0af2f044aeef",
+    "name": "Workspace Imports Autosuggest API v2 Catalog configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to programmatically trigger an existing workspace-scoped\nimport in Bloomreach Engagement.\n",
+      "type": "text/plain"
+    }
+  }
+}

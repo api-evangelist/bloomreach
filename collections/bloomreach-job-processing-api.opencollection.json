@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Imports Autosuggest API v2 Job processing API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Job processing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get job details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/jobs/:job_id",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "job_id",
+                "value": "1324",
+                "type": "path",
+                "description": "The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
+              }
+            ]
+          },
+          "docs": "Get all the details about a particular job including its status.\n"
+        },
+        {
+          "info": {
+            "name": "Get all jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/jobs",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "To navigate through paginated results, use the page number to switch between pages."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Specify the maximum number of pages to return in the response."
+              },
+              {
+                "name": "class",
+                "value": "feed_products_full,feed_products_delta,index_update",
+                "type": "query",
+                "description": "Filter the jobs based on comma-separated class values:\n\n* feed_records_full — Include full feed jobs in response, that is, if type=feed and feed_mode=full\n* feed_records_delta - Include delta feed jobs in response, that is, if type=feed and feed_mode=delta\n* index_update - Include update index jobs from search quality in response, that is, if type=index, index_mode=update\n* index_refresh - Include refresh index jobs in response, that is, if type=index, index_mode=refresh\n* suggest_refresh - Include suggestions for refresh jobs in response\n\nIf no filter value is provided, all jobs are returned by default, regardless of job class. This is equivalent to passing all job class values in the parameter.\n"
+              }
+            ]
+          },
+          "docs": "Get all the jobs associated with a catalog.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

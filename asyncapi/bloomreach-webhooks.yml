@@ -1,0 +1,89 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/content/reference/webhook-management-api, https://documentation.bloomreach.com/engagement/docs/webhooks
+spec_type: Webhooks
+asyncapi: false
+description: 'Bloomreach has a real event surface but publishes no AsyncAPI document for it. The surface
+  splits in two: Content emits a small, fixed set of publish/unpublish events through webhooks that are
+  themselves managed by a REST API; Engagement inverts the model — a webhook is an ACTION node inside
+  a scenario that calls out to a third party, so the event vocabulary is whatever the customer''s scenario
+  triggers on rather than a fixed provider-published catalogue.'
+surfaces:
+- name: Content webhooks
+  model: provider-emitted, provider-defined events
+  management_api:
+    base_url: https://<your_brx_host>.bloomreach.io/management/webhooks/v1
+    auth: x-auth-token
+    operations:
+    - createWebhookConfiguration
+    - getWebhookConfiguration
+    - updateWebhookConfiguration
+    - deleteWebhookConfiguration
+    docs: https://documentation.bloomreach.com/content/reference/webhook-management-api
+  events:
+  - name: Document publish
+    description: A document was published in the environment.
+  - name: Document unpublish
+    description: A document was unpublished.
+  - name: Page publish
+    description: A page was published.
+  - name: Page unpublish
+    description: A page was unpublished.
+  delivery:
+    transport: HTTPS callout to a customer endpoint
+    authentication: The receiving endpoint must authenticate with an HTTP authorization header; only custom
+      HTTP headers are supported
+    retries: null
+    signature: null
+    note: No delivery-retry policy or payload-signing scheme is documented.
+  tutorial: https://documentation.bloomreach.com/content/docs/create-a-webhook
+- name: Engagement webhooks
+  model: customer-authored outbound call from a scenario
+  docs: https://documentation.bloomreach.com/engagement/docs/webhooks
+  setup: Campaigns > Scenario > New scenario > Actions > Webhook
+  variants:
+  - name: Custom webhook
+    docs: https://documentation.bloomreach.com/engagement/docs/api-webhook-in-a-scenario
+  - name: Batch webhook
+    docs: https://documentation.bloomreach.com/engagement/docs/batch-webhook-settings
+  - name: Widget webhook
+    docs: https://documentation.bloomreach.com/engagement/docs/widget-webhooks
+  - name: Firebase webhook
+    docs: https://documentation.bloomreach.com/engagement/docs/firebase-webhooks
+  - name: Webhook preset
+    docs: https://documentation.bloomreach.com/engagement/docs/webhook-preset-1
+  authentication: https://documentation.bloomreach.com/engagement/docs/webhook-authentication
+  responses:
+    usable: true
+    docs: https://documentation.bloomreach.com/engagement/docs/using-webhook-responses
+    note: The scenario can read the webhook response and branch on it, which makes this a request/response
+      integration point rather than a one-way event.
+  predefined_templates:
+  - Facebook
+  - WhatsApp
+  - Zapier
+  - Slack
+- name: Engagement inbound event ingestion
+  model: customer-emitted events into Bloomreach
+  api: Tracking API
+  docs: https://documentation.bloomreach.com/engagement/reference/about
+  note: Write requests are queued for later processing rather than applied synchronously, which is the
+    closest thing in the estate to an event bus.
+- name: Engagement Managed Endpoints
+  model: server-side personalization callout
+  url_form: POST https://<api-domain>/webxp/s/<project-id>/managed-endpoints/<managed-endpoint-id>
+  docs: https://documentation.bloomreach.com/engagement/reference/managed-endpoints-api
+  note: Requires the Web & App Personalization package to be enabled by an account manager.
+- name: Email event webhooks
+  docs: https://documentation.bloomreach.com/engagement/reference/email-list-webhooks
+  note: Email delivery/engagement event webhooks listed under the Email API reference.
+asyncapi_gap:
+  why_not_fabricated: An AsyncAPI could be hand-written for the four Content publish/unpublish events,
+    but Bloomreach publishes no channel bindings, no message schemas and no payload examples for them,
+    so any document produced here would be invention rather than harvest. Recorded as a Webhooks surface
+    only.
+  what_would_close_it: A published payload schema per Content webhook event, and a signature/retry contract.
+summary:
+  provider_defined_events: 4
+  webhook_variants: 5
+  asyncapi_documents: 0

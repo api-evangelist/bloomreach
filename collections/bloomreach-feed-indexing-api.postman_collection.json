@@ -1,0 +1,614 @@
+{
+  "item": [
+    {
+      "id": "0084e0ad-5c0c-4e0c-ba19-937c2f0cbbc5",
+      "name": "Feed indexing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9edc9de1-7ec0-4804-919d-dc13e7803480",
+          "name": "Run an indexing job",
+          "request": {
+            "name": "Run an indexing job",
+            "description": {
+              "content": "Trigger an indexing job to [update the catalog's index](https://documentation.bloomreach.com/discovery/docs/promoting-changes-viewing-jobs#3-update-catalogs-index).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_name",
+                "catalogs",
+                ":catalog_name",
+                "environments",
+                ":environment_name",
+                "indexes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_name",
+                  "description": "(Required) Your unique account name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environment_name",
+                  "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.",
+                "key": "Index-Refresh",
+                "value": "<boolean>"
+              },
+              {
+                "disabled": false,
+                "description": "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.",
+                "key": "BR-Ignore-Document-Count-Drop",
+                "value": "<boolean>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0d7b103-bb84-494a-a45b-14f79a81d823",
+              "name": "OK. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.",
+                    "key": "Index-Refresh",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.",
+                    "key": "BR-Ignore-Document-Count-Drop",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"job_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "865694de-d0f9-4f7c-a520-f9f914a8e96a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.",
+                    "key": "Index-Refresh",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.",
+                    "key": "BR-Ignore-Document-Count-Drop",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e134878c-00a8-4643-975a-bca7df269604",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.",
+                    "key": "Index-Refresh",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.",
+                    "key": "BR-Ignore-Document-Count-Drop",
+                    "value": "<boolean>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1f1edf4d-1ff2-4ed3-9aa4-07836832785e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.",
+                    "key": "Index-Refresh",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.",
+                    "key": "BR-Ignore-Document-Count-Drop",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a78fad0-6886-462f-a124-e94537a94357",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.",
+                    "key": "Index-Refresh",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.",
+                    "key": "BR-Ignore-Document-Count-Drop",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "580e711b-fc58-4d2f-8fb2-d3e44011c1b2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "indexes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.",
+                    "key": "Index-Refresh",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.",
+                    "key": "BR-Ignore-Document-Count-Drop",
+                    "value": "<boolean>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://discovery.bloomreach.com/dataconnect/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e74e231-574b-4212-82e0-5d0be76e748a",
+    "name": "Workspace Imports Autosuggest API v2 Feed indexing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to programmatically trigger an existing workspace-scoped\nimport in Bloomreach Engagement.\n",
+      "type": "text/plain"
+    }
+  }
+}

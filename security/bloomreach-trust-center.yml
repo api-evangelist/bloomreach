@@ -1,0 +1,41 @@
+generated: '2026-08-13'
+method: searched
+probe: true
+url: https://trust.bloomreach.com/
+source: https://www.bloomreach.com/en/legal/security
+certifications:
+- SOC 2 Type II
+- ISO/IEC 27001
+- ISO/IEC 27017
+- ISO/IEC 27018
+- ISO 9001
+- ISO 22301
+- GDPR
+privacy_regimes:
+- GDPR
+- CCPA/CPRA
+controls_published:
+- Encryption at rest and in transit
+- Role-based access to customer data
+- Endpoint security policy (disk encryption, malware protection, firewall)
+- Vulnerability management policy with regular web and threat scans
+- Annual third-party penetration test per product pillar
+- Dedicated Data Protection Officer
+evidence:
+- source: https://www.bloomreach.com/en/legal/security
+  http_status: 200
+  keywords:
+  - SOC 2 Type II
+  - ISO/IEC 27001
+  - '27017'
+  - '27018'
+  - '9001'
+  - '22301'
+  - GDPR
+  - pentest
+  - Data Protection Officer
+- source: https://trust.bloomreach.com/
+  http_status: 403
+  note: A dedicated trust centre exists and is linked from the site footer, but it sits behind a Cloudflare
+    bot challenge that returns 403 to an automated probe. The certification list above therefore comes
+    from the public /en/legal/security page, which returned 200.

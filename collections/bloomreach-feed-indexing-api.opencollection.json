@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Imports Autosuggest API v2 Feed indexing API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feed indexing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run an indexing job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/indexes",
+            "headers": [
+              {
+                "name": "Index-Refresh",
+                "value": ""
+              },
+              {
+                "name": "BR-Ignore-Document-Count-Drop",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              }
+            ]
+          },
+          "docs": "Trigger an indexing job to [update the catalog's index](https://documentation.bloomreach.com/discovery/docs/promoting-changes-viewing-jobs#3-update-catalogs-index).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

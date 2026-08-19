@@ -1,0 +1,901 @@
+{
+  "item": [
+    {
+      "id": "00172d0d-e03d-4ca5-8404-a1e18071f48d",
+      "name": "Global Recommendation Widget Products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "559eb809-86bc-45c0-8f84-cf1f76760029",
+          "name": "Image API",
+          "request": {
+            "name": "Image API",
+            "description": {
+              "content": "This API allows you to get the EnrichedImage for the products in global widgets like Trending products. Typically used on Context less pages like your Homepage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "widgets",
+                "image",
+                "global",
+                ":widget_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "auth_key",
+                  "value": "<string>",
+                  "description": "Unique key shared by your Bloomreach representative during integration. This is used to authenticate a merchant API call."
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "6228",
+                  "description": "(Required) Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting."
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_key",
+                  "value": "pacific_supply",
+                  "description": "(Required) Your site domain's ID, which is provided by Bloomreach during initial scoping and integration. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions."
+                },
+                {
+                  "disabled": false,
+                  "key": "_br_uid_2",
+                  "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13",
+                  "description": "(Required) A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. </br></br> Mostly the default value provided is used, which is already encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html",
+                  "description": "(Required) The absolute URL of the page where the request is initiated. Do not use a relative URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "ref_url",
+                  "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items",
+                  "description": "The URL of the page or HTTP referrer where the request is started."
+                },
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging."
+                },
+                {
+                  "disabled": false,
+                  "key": "view_id",
+                  "value": "<string>",
+                  "description": "A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "pid",
+                  "description": "A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response."
+                },
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "5",
+                  "description": "The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "3",
+                  "description": "The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. The maximum value is 10000."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values. Any facet that you want to filter must be in your feed.\nAttributes must be enabled and mapped by Bloomreach. Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.\nYou can filter results based on numeric ranges.\nFor example, &filter=(price:[\"100\" TO \"*\"]).\n\nPlease note that a negative filter on ranges is not supported.\n\nTo provide multiple filters, send multiple filter parameters. For example, &filter=(price:[\"*\" TO \"100\"])&filter=(color_groups: (\"blue\"))"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "09zwor59",
+                  "key": "widget_id",
+                  "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/jpeg"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09033f5d-738c-48b2-b5d5-10e6f0438233",
+              "name": "Redirect to the enriched image for that product",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "widgets",
+                    "image",
+                    "global",
+                    ":widget_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "6228"
+                    },
+                    {
+                      "key": "domain_key",
+                      "value": "pacific_supply"
+                    },
+                    {
+                      "key": "_br_uid_2",
+                      "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html"
+                    },
+                    {
+                      "key": "ref_url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "view_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "pid"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "5"
+                    },
+                    {
+                      "key": "start",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "09zwor59",
+                      "key": "widget_id",
+                      "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "image/jpeg"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/jpeg"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "071d3f28-738f-46d2-b498-5ca63b8d46d8",
+              "name": "If the query parameters are incorrect/invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "widgets",
+                    "image",
+                    "global",
+                    ":widget_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "6228"
+                    },
+                    {
+                      "key": "domain_key",
+                      "value": "pacific_supply"
+                    },
+                    {
+                      "key": "_br_uid_2",
+                      "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html"
+                    },
+                    {
+                      "key": "ref_url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "view_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "pid"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "5"
+                    },
+                    {
+                      "key": "start",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "09zwor59",
+                      "key": "widget_id",
+                      "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4287253-6862-4ab4-8b45-ebdecf6b8fd1",
+              "name": "Must send 404 if the widget id is not valid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "widgets",
+                    "image",
+                    "global",
+                    ":widget_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "6228"
+                    },
+                    {
+                      "key": "domain_key",
+                      "value": "pacific_supply"
+                    },
+                    {
+                      "key": "_br_uid_2",
+                      "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html"
+                    },
+                    {
+                      "key": "ref_url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "view_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "pid"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "5"
+                    },
+                    {
+                      "key": "start",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "09zwor59",
+                      "key": "widget_id",
+                      "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6020e8d-40df-4cfa-a5ac-7b7dd760d335",
+          "name": "Proxy API",
+          "request": {
+            "name": "Proxy API",
+            "description": {
+              "content": "This API allows you to get the Product Description Page for the products in global widgets like Trending products. Typically used on Context less pages like your Hompage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "widgets",
+                "proxy",
+                "global",
+                ":widget_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "auth_key",
+                  "value": "<string>",
+                  "description": "Unique key shared by your Bloomreach representative during integration. This is used to authenticate a merchant API call."
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "6228",
+                  "description": "(Required) Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting."
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_key",
+                  "value": "pacific_supply",
+                  "description": "(Required) Your site domain's ID, which is provided by Bloomreach during initial scoping and integration. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions."
+                },
+                {
+                  "disabled": false,
+                  "key": "_br_uid_2",
+                  "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13",
+                  "description": "(Required) A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. </br></br> Mostly the default value provided is used, which is already encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html",
+                  "description": "(Required) The absolute URL of the page where the request is initiated. Do not use a relative URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "ref_url",
+                  "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items",
+                  "description": "The URL of the page or HTTP referrer where the request is started."
+                },
+                {
+                  "disabled": false,
+                  "key": "request_id",
+                  "value": "<string>",
+                  "description": "An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging."
+                },
+                {
+                  "disabled": false,
+                  "key": "view_id",
+                  "value": "<string>",
+                  "description": "A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "pid",
+                  "description": "A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response."
+                },
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "5",
+                  "description": "The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "3",
+                  "description": "The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. The maximum value is 10000."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values. Any facet that you want to filter must be in your feed.\nAttributes must be enabled and mapped by Bloomreach. Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.\nYou can filter results based on numeric ranges.\nFor example, &filter=(price:[\"100\" TO \"*\"]).\n\nPlease note that a negative filter on ranges is not supported.\n\nTo provide multiple filters, send multiple filter parameters. For example, &filter=(price:[\"*\" TO \"100\"])&filter=(color_groups: (\"blue\"))"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "09zwor59",
+                  "key": "widget_id",
+                  "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/html"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3de6f8de-2080-415a-b3d7-d75e8522ba36",
+              "name": "Redirect to the PDP link",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "widgets",
+                    "proxy",
+                    "global",
+                    ":widget_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "6228"
+                    },
+                    {
+                      "key": "domain_key",
+                      "value": "pacific_supply"
+                    },
+                    {
+                      "key": "_br_uid_2",
+                      "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html"
+                    },
+                    {
+                      "key": "ref_url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "view_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "pid"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "5"
+                    },
+                    {
+                      "key": "start",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "09zwor59",
+                      "key": "widget_id",
+                      "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/html"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/html"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60cd91e5-a257-4836-9a19-6e50a5cf2adb",
+              "name": "If the query parameters are incorrect/invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "widgets",
+                    "proxy",
+                    "global",
+                    ":widget_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "6228"
+                    },
+                    {
+                      "key": "domain_key",
+                      "value": "pacific_supply"
+                    },
+                    {
+                      "key": "_br_uid_2",
+                      "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html"
+                    },
+                    {
+                      "key": "ref_url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "view_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "pid"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "5"
+                    },
+                    {
+                      "key": "start",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "09zwor59",
+                      "key": "widget_id",
+                      "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d8517a4-18d5-4f86-9c59-4775e98980b1",
+              "name": "Must send 404 if the widget id is not valid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "widgets",
+                    "proxy",
+                    "global",
+                    ":widget_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "auth_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "6228"
+                    },
+                    {
+                      "key": "domain_key",
+                      "value": "pacific_supply"
+                    },
+                    {
+                      "key": "_br_uid_2",
+                      "value": "uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13"
+                    },
+                    {
+                      "key": "url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fso3005719.html"
+                    },
+                    {
+                      "key": "ref_url",
+                      "value": "https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items"
+                    },
+                    {
+                      "key": "request_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "view_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "pid"
+                    },
+                    {
+                      "key": "rows",
+                      "value": "5"
+                    },
+                    {
+                      "key": "start",
+                      "value": "3"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "09zwor59",
+                      "key": "widget_id",
+                      "description": "(Required) The ID of the widget, which can be found in the Widget Configurator in the Dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pathways-email.dxpapi.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0e294bec-bace-4b58-95c6-8d9e792ab01d",
+    "name": "Workspace Imports Autosuggest API v2 Global Recommendation Widget Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to programmatically trigger an existing workspace-scoped\nimport in Bloomreach Engagement.\n",
+      "type": "text/plain"
+    }
+  }
+}

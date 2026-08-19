@@ -1,4 +1,4 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -13,20 +13,22 @@ hosts:
   cert_expires: Oct  3 22:52:17 2026 GMT
   hsts: true
   hsts_max_age: 31536000
-- host: core.dxpapi.com
+- host: api.exponea.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep  2 20:25:23 2026 GMT
-  hsts: null
+  cert_expires: Oct 19 20:18:42 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
 domains:
 - domain: bloomreach.com
   dnssec: false
   caa: []
   spf: true
   dmarc: true
-  dmarc_policy: none
-- domain: dxpapi.com
-  dnssec: false
+  dmarc_policy: quarantine
+- domain: exponea.com
+  dnssec: true
   caa: []
-  spf: false
-  dmarc: false
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

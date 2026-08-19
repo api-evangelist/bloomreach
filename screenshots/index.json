@@ -6,5 +6,14 @@
     "source_type": "Website",
     "file": "bloomreach-2026-06-20T173521.png",
     "bytes": 5002
+  },
+  {
+    "repo": "bloomreach",
+    "captured_at": "2026-08-17T083224",
+    "source_url": "https://documentation.bloomreach.com/",
+    "source_type": "DeveloperPortal",
+    "file": "bloomreach-2026-08-17T083224.png",
+    "bytes": 131227,
+    "capture": "playwright-local"
   }
 ]

@@ -1,0 +1,1 @@
+{"resource":"https://us.connect.loomi.ai/mcp","authorization_servers":["https://us.connect.loomi.ai/"],"scopes_supported":["openid","profile","email"],"bearer_methods_supported":["header"]}

@@ -9,7 +9,6 @@ info:
   version: '2.1'
 servers:
 - url: https://api.bloomreach.com
-  description: Bloomreach API
 security:
 - basicAuth: []
 tags:

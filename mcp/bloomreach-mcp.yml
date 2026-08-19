@@ -1,0 +1,624 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/loomi-connect/docs/get-started-with-mcp
+status: published
+description: 'Bloomreach ships MCP as a first-class agent surface under the Loomi Connect brand. Three
+  distinct remote MCP servers were found and probed: (1) the regional Loomi Connect production servers,
+  OAuth-gated, exposing 159 documented tools across Marketing, Analytics, Search and Data Hub; (2) a public,
+  unauthenticated Conversations prototype server whose tools/list was probed live and returned real inputSchemas;
+  and (3) a ReadMe-provided documentation MCP server on the Bloomreach docs host that exposes 43 OpenAPI
+  specs to agents. All three are remote HTTP endpoints an MCP client POSTs to — Bloomreach publishes no
+  local stdio package.'
+deployment:
+  mode: remote
+  endpoint: https://us.connect.loomi.ai/mcp
+  auth: oauth
+  verified: probed
+  note: Region-specific endpoints; the docs instruct you to replace the default US URL with the one matching
+    your project. POST to the endpoint without a token returns HTTP 401 with a WWW-Authenticate Bearer
+    challenge and a resource_metadata pointer, confirming a live OAuth-protected remote server. No stdio/npx
+    package is published.
+servers:
+- name: Loomi Connect MCP
+  transport: http
+  protocol: streamable-http
+  status: beta (early access)
+  url: https://us.connect.loomi.ai/mcp
+  regional_endpoints:
+  - https://us.connect.loomi.ai/mcp
+  - https://eu.connect.loomi.ai/mcp
+  - https://uk.connect.loomi.ai/mcp
+  - https://ca.connect.loomi.ai/mcp
+  - https://ap.connect.loomi.ai/mcp
+  docs: https://documentation.bloomreach.com/loomi-connect/docs/get-started-with-mcp
+  install: claude mcp add loomi-mcp --transport http https://us.connect.loomi.ai/mcp
+  auth:
+    type: oauth
+    flow: authorization_code
+    pkce: S256
+    identity: Bloomreach single sign-on (OIDC)
+    session_lifetime: up to 30 days
+    authorization_server: https://us.connect.loomi.ai/
+    metadata_file: well-known/bloomreach-loomi-oauth-authorization-server.json
+    protected_resource_file: well-known/bloomreach-loomi-oauth-protected-resource.json
+    scopes:
+    - openid
+    - profile
+    - email
+    authorization: Server enforces the caller's existing Bloomreach IAM permissions, including PII masking
+      to ****** for callers lacking administration.pii.flag
+    access: Contact loomi-connect@bloomreach.com to have the server enabled for your accounts or projects
+  probe:
+    url: https://us.connect.loomi.ai/mcp
+    method: POST tools/list
+    http_status: 401
+    result: invalid_token — the live schema is auth-gated. The tool catalog below is the provider-published
+      list from the docs (names + descriptions only); per-tool inputSchemas require authenticated introspection.
+    fetched: '2026-08-13'
+  rate_limits:
+    global: 1 call/second and 60 calls/minute
+    write_tools: 1 call/5 seconds and 10 calls/minute, on top of the global limit
+    delete_tools: 1 call/10 seconds and 10 calls/minute
+    error_message: 'Too many requests: rate limit reached for key ''<key>'' (<limit>). Retry after ~<N>
+      second(s).'
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/mcp-performance-and-rate-limits
+  resources: Serves built-in workflow guides as MCP resources that load automatically into the client
+    context
+  caching: Responses are cached; volatile resources for seconds, stable metadata for longer
+  tool_count: 159
+  tool_groups:
+  - group: automation scenarios
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/automation-scenarios-tools
+    tools:
+    - name: search_scenarios
+      description: List the automation scenarios in a project, or fetch one by ID.
+    - name: list_scenario_nodes
+      description: Get a lightweight node skeleton for a scenario.
+    - name: get_scenario_node
+      description: Get the full configuration of a single node in a scenario.
+    - name: create_scenario
+      description: Create a new scenario as a draft.
+    - name: update_scenario
+      description: Replace the full definition of a draft or inactive scenario.
+    - name: delete_scenario
+      description: Permanently delete a draft or inactive scenario.
+  - group: customer profiles and event history
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/customer-profiles-and-event-history-tools
+    tools:
+    - name: list_customers
+      description: Search for customers in a project.
+    - name: get_customer_properties
+      description: Get all properties on a single customer.
+    - name: get_customer_attribute_values
+      description: Compute aggregate or expression values for a single customer in real time.
+    - name: list_customer_events
+      description: List events for a single customer.
+    - name: list_customers_in_segment
+      description: List the customers in a named segment.
+  - group: email and sms campaigns
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/email-and-sms-campaigns-tools
+    tools:
+    - name: search_email_campaigns
+      description: List the email campaigns in a project, or fetch one by ID.
+    - name: search_sms_campaigns
+      description: List the SMS and MMS campaigns in a project, or fetch one by ID.
+    - name: generate_email_campaign_preview_link
+      description: Get a shareable browser URL that shows how an email campaign renders.
+    - name: create_email_campaign
+      description: Create a new email campaign as a draft.
+    - name: update_email_campaign
+      description: Replace the full definition of a draft or inactive email campaign.
+    - name: delete_email_campaign
+      description: Permanently delete a draft or inactive email campaign.
+    - name: create_sms_campaign
+      description: Create a new SMS or MMS campaign as a draft.
+    - name: update_sms_campaign
+      description: Replace the full definition of a draft or inactive SMS or MMS campaign.
+    - name: delete_sms_campaign
+      description: Permanently delete a draft or inactive SMS or MMS campaign.
+  - group: initiatives and campaign calendar
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/initiatives-and-campaign-calendar-tools
+    tools:
+    - name: search_initiatives
+      description: List the initiatives in a project, or fetch one by ID.
+    - name: get_initiative_items
+      description: List the campaigns and analyses inside an initiative.
+    - name: get_campaign_calendar
+      description: Get scheduled email and SMS campaigns within a date window.
+  - group: product catalogs and recommendations
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/product-catalogs-and-recommendations-tools
+    tools:
+    - name: search_catalogs
+      description: List the catalogs in a project, or fetch one by ID.
+    - name: search_catalog_items
+      description: Search items inside a catalog.
+    - name: get_catalog_item
+      description: Get a single item from a catalog by its item ID.
+    - name: get_catalog_configuration
+      description: Get the attribute schema for a catalog.
+    - name: list_catalog_jobs
+      description: List the import and update jobs for a catalog.
+    - name: get_catalog_usages
+      description: See which campaigns and engines reference a catalog.
+    - name: search_recommendations
+      description: List the recommendation engines in a project, or fetch one by ID.
+    - name: get_customer_recommendations
+      description: Run a recommendation engine for a specific customer and return the ranked products.
+  - group: project schema and data mapping
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/project-schema-and-data-mapping-tools
+    tools:
+    - name: get_customer_schema
+      description: Get the customer identifier schema for a project.
+    - name: get_customer_property_schema
+      description: Get all customer property definitions for a project.
+    - name: get_event_schema
+      description: Get every event type tracked in a project and the properties each one carries.
+    - name: get_mapping
+      description: Get the project's custom mapping to Bloomreach's standard schema.
+  - group: project settings and access
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/project-settings-and-access-tools
+    tools:
+    - name: list_project_variables
+      description: List the project-level template variables.
+    - name: get_consent_settings
+      description: Get the project's consent configuration.
+    - name: get_frequency_policies
+      description: Get the project's frequency cap policy settings.
+    - name: get_data_retention_rules
+      description: Get the project's event retention windows from Data manager.
+    - name: list_project_users
+      description: List users with access to a project.
+    - name: search_api_triggers
+      description: List the API trigger definitions in a project, or fetch one by ID.
+    - name: search_integrations
+      description: List the integrations configured on a project, or fetch one by ID.
+  - group: voucher pools and codes
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/voucher-pools-and-codes-tools
+    tools:
+    - name: search_voucher_pools
+      description: List the voucher pools in a project, or fetch one by ID.
+    - name: list_voucher_codes
+      description: List the individual codes inside a pool.
+  - group: web and mobile campaigns
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/web-and-mobile-campaigns-tools
+    tools:
+    - name: search_banners
+      description: List the weblayer banner campaigns in a project, or fetch one by ID.
+    - name: search_in_app_messages
+      description: List the in-app message campaigns in a project, or fetch one by ID.
+    - name: search_experiments
+      description: List the web personalization A/B experiments in a project, or fetch one by ID.
+    - name: search_surveys
+      description: List the survey campaigns in a project, or fetch one by ID.
+  - group: workspace and project basics
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/workspace-and-project-basics-tools
+    tools:
+    - name: list_cloud_organizations
+      description: List the cloud organizations you belong to.
+    - name: get_cloud_organization_details
+      description: Get details for a single cloud organization.
+    - name: list_workspaces
+      description: List workspaces inside a cloud organization.
+    - name: list_projects
+      description: List projects across an organization, with optional workspace filter.
+    - name: list_projects_with_overview
+      description: List projects and pull each project's KPI snapshot in one call.
+    - name: get_project_overview
+      description: Get a KPI snapshot for a single project.
+  - group: ad hoc analytics queries
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/ad-hoc-analytics-queries-tools
+    tools:
+    - name: execute_analytics_eql
+      description: Run a one-off analytics query written in EQL.
+    - name: estimate_eql_cost
+      description: Estimate an EQL query's cost before running it.
+    - name: calculate_report
+      description: Run a saved report by ID and return its computed results.
+  - group: analytics building blocks
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/analytics-building-blocks-tools
+    tools:
+    - name: search_expressions
+      description: List the expressions defined in a project, or fetch one by ID.
+    - name: search_aggregates
+      description: List the aggregates defined in a project, or fetch one by ID.
+    - name: search_running_aggregates
+      description: List the running (real-time) aggregates in a project, or fetch one by ID.
+    - name: search_event_segmentations
+      description: List the event segmentations in a project, or fetch one by ID.
+  - group: customer filters and segments
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/customer-filters-and-segments-tools
+    tools:
+    - name: search_customer_filters
+      description: List the reusable customer filters in a project, or fetch one by ID.
+    - name: search_segmentations
+      description: List the segmentations in a project, or fetch one by ID.
+    - name: search_autosegments
+      description: List the ML-driven autosegments in a project, or fetch one by ID.
+    - name: search_event_segmentations
+      description: List the event segmentations in a project, or fetch one by ID.
+    - name: create_customer_filter
+      description: Create a new saved customer filter in a project.
+  - group: dashboards
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/dashboards-tools
+    tools:
+    - name: search_dashboards
+      description: List the dashboards visible in a project, or fetch one by ID.
+  - group: predictive customer scores
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/predictive-customer-scores-tools
+    tools:
+    - name: search_predictions
+      description: List the ML prediction jobs in a project, or fetch one by ID.
+    - name: get_customer_prediction_score
+      description: Get a customer's current score for a prediction.
+  - group: saved analyses
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/saved-analyses-tools
+    tools:
+    - name: search_funnels
+      description: List the saved funnel analyses in a project, or fetch one by ID.
+    - name: search_trends
+      description: List the saved trend analyses in a project, or fetch one by ID.
+    - name: search_reports
+      description: List the saved report analyses in a project, or fetch one by ID.
+  - group: ab tests
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/ab-tests-tools
+    tools:
+    - name: search_discovery_experiments
+      description: List the A/B test experiments in an account, or fetch one by ID.
+    - name: get_discovery_experiment_report
+      description: Get the analytics report for an experiment.
+    - name: create_discovery_experiment
+      description: Create a new A/B test experiment in draft state.
+    - name: start_discovery_experiment
+      description: Start a draft experiment and begin the live traffic split.
+    - name: end_discovery_experiment
+      description: End a running experiment and optionally promote a winner.
+    - name: archive_discovery_experiment
+      description: Archive a completed experiment.
+  - group: accounts and sites
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/accounts-and-sites-tools
+    tools:
+    - name: list_discovery_accounts
+      description: List the account names you can access.
+    - name: list_discovery_sites
+      description: List the sites and site groups configured for an account.
+  - group: autosuggest
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/autosuggest-tools
+    tools:
+    - name: search_autosuggest_exclusion_rules
+      description: List the autosuggest exclusion rules in an account, or fetch one by ID.
+    - name: get_autosuggest_results
+      description: Get the autosuggest suggestions for a search term.
+    - name: create_autosuggest_exclusion_rule
+      description: Create a new autosuggest exclusion rule.
+    - name: update_autosuggest_exclusion_rule
+      description: Update an existing autosuggest exclusion rule.
+    - name: delete_autosuggest_exclusion_rule
+      description: Permanently delete an autosuggest exclusion rule.
+    - name: bulk_update_autosuggest_exclusion_rules
+      description: Bulk enable or disable multiple autosuggest exclusion rules.
+  - group: catalogs
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/catalogs-tools
+    tools:
+    - name: search_discovery_catalogs
+      description: List the catalogs in your account, or fetch one by name.
+    - name: get_discovery_catalog_config
+      description: Get a catalog's attribute configuration.
+    - name: search_discovery_catalog_products
+      description: List the products in a catalog, or fetch one by ID.
+    - name: search_discovery_catalog_product_variants
+      description: List the variants for a product, or fetch one by ID.
+    - name: search_discovery_catalog_jobs
+      description: List the feed and index jobs for a catalog, or fetch one by ID.
+    - name: get_discovery_catalog_reserved_attributes
+      description: Get the reserved attribute names for a catalog.
+  - group: categories
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/categories-tools
+    tools:
+    - name: list_categories
+      description: List the categories in the product taxonomy.
+    - name: search_dynamic_categories
+      description: List the rule-based dynamic categories in an account, or fetch one by ID.
+  - group: event diagnostics
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/event-diagnostics-tools
+    tools:
+    - name: get_pixel_health_status
+      description: Get the health of each pixel type and the top issues for failing ones.
+    - name: get_pixel_event_stream
+      description: Sample raw pixel events and see how devices and issues break down.
+    - name: get_pixel_event_details
+      description: Get the full parameters and derived properties for a single pixel event.
+  - group: facet rules
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/facet-rules-tools
+    tools:
+    - name: list_site_search_facets
+      description: List the site-search facet rules for an account.
+    - name: list_facets_global
+      description: List the global facet rules that apply across site search and category pages.
+    - name: list_category_facets
+      description: List the category facet rules for an account.
+    - name: list_facet_attributes
+      description: List the product attributes available for facet configuration.
+    - name: get_facet_rule
+      description: Get the full configuration of a single facet rule.
+    - name: create_facet_rule
+      description: Create a new facet rule that controls which filters appear.
+    - name: update_facet_rule
+      description: Update an existing facet rule.
+    - name: delete_facet_rule
+      description: Permanently delete a facet rule.
+  - group: media rules and assets
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/media-rules-and-assets-tools
+    tools:
+    - name: list_site_search_media_rules
+      description: List the media rules that inject sponsored content into site search results.
+    - name: list_category_media_rules
+      description: List the media rules that inject sponsored content on category pages.
+    - name: list_global_media_rules
+      description: List the site-wide media rules that apply across all search and category pages.
+    - name: get_discovery_media_rule
+      description: Get the full configuration of a single media rule by ID.
+    - name: search_discovery_assets
+      description: List the reusable media assets, such as banners, weblayers, and Conversational agent
+        elements, or fetch one by ID.
+    - name: get_discovery_weblayer_customizations
+      description: List the media rules that reference a weblayer asset.
+    - name: get_discovery_multi_slot_customizations
+      description: List the media rules that use multi-slot content grid assets.
+  - group: performance analytics
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/performance-analytics-tools
+    tools:
+    - name: get_discovery_overall_performance
+      description: Get the Overall tab metric cards for all site traffic.
+    - name: get_discovery_search_performance
+      description: Get the Site search tab metric cards for search-driven traffic.
+    - name: get_discovery_category_performance
+      description: Get the Category tab metric cards for category-page traffic.
+    - name: get_discovery_products_overview
+      description: Get the Products tab metric cards for product-driven traffic.
+    - name: get_discovery_trend
+      description: Get a daily time series for one metric, with the comparison period alongside it.
+  - group: performance table
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/performance-table-tools
+    tools:
+    - name: get_discovery_query_performance
+      description: Get the search queries table, with per-query metrics and previous-period values.
+    - name: get_discovery_category_performance_table
+      description: Get the categories table, with per-category metrics.
+    - name: get_discovery_product_performance_table
+      description: Get the products table, with product titles, images, and metrics.
+    - name: get_discovery_brand_performance
+      description: Get the brands table, ranked by revenue.
+    - name: get_discovery_page_performance
+      description: Get the pages table, with entrances, exits, and bounce rates.
+  - group: product grid insights
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/product-grid-insights-tools
+    tools:
+    - name: get_discovery_product_performance
+      description: Get the performance metrics for a single product over the last 30 days.
+    - name: search_discovery_product_grid_insights
+      description: Preview how products rank for a query and verify your merchandising rules.
+  - group: ranking rules and audiences
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/ranking-rules-and-audiences-tools
+    tools:
+    - name: list_site_search_ranking_rules
+      description: List the query-specific site-search ranking rules.
+    - name: list_ranking_rules_global
+      description: List the global ranking rules that apply across site search and category pages.
+    - name: list_category_ranking_rules
+      description: List the query-specific category ranking rules.
+    - name: get_ranking_rule
+      description: Get the full configuration of a single ranking rule.
+    - name: list_discovery_audiences
+      description: List the audience segments used to target rules.
+    - name: create_ranking_rule
+      description: Create a new ranking rule that controls product ordering.
+    - name: update_ranking_rule
+      description: Update an existing ranking rule.
+    - name: delete_ranking_rule
+      description: Permanently delete a ranking rule.
+    - name: create_ranking_rule_variant
+      description: Create an A/B test variant of an existing ranking rule.
+  - group: redirects and api parameters
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/redirects-and-api-parameters-tools
+    tools:
+    - name: search_redirects
+      description: List the query-specific redirect rules, or fetch one by ID.
+    - name: list_api_params
+      description: List the API parameter override rules for an account. Contact your Bloomreach representative
+        for more details on API parameter overrides.
+    - name: create_redirect
+      description: Create a new keyword redirect rule.
+    - name: update_redirect
+      description: Update an existing redirect rule.
+    - name: delete_redirect
+      description: Permanently delete a redirect rule.
+  - group: synonyms
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/synonyms-tools
+    tools:
+    - name: list_synonyms_user
+      description: List the synonyms created by your team.
+    - name: list_synonyms_br_generated
+      description: List the automatically generated synonym suggestions.
+    - name: create_synonym
+      description: Create a new user synonym rule.
+    - name: update_synonym
+      description: Update an existing user synonym rule.
+    - name: delete_synonym
+      description: Permanently delete a user synonym rule.
+  - group: usage
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/usage-tools
+    tools:
+    - name: get_discovery_api_requests
+      description: Get API request usage statistics for an account over a date range.
+    - name: get_discovery_unique_visitors
+      description: Get monthly unique visitor counts for an account, with the contracted limit.
+  - group: catalogs jobs and system
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/catalogs-jobs-and-system-tools
+    tools:
+    - name: search_datahub_catalogs
+      description: List the unified catalogs in a project, or fetch one by ID.
+    - name: search_datahub_jobs
+      description: Search the pipeline jobs for a workspace or a project, or poll one job.
+    - name: get_datahub_system_configuration
+      description: Get the built-in system attribute model.
+  - group: item collection configuration
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/item-collection-configuration-tools
+    tools:
+    - name: get_item_collection_configuration
+      description: Get a collection's attribute schema, identifiers, and destinations.
+    - name: update_item_collection_configuration
+      description: Apply a change-list to a collection's configuration.
+    - name: compare_item_collection_configurations
+      description: Diff a candidate configuration against a stored version.
+    - name: validate_item_collection_attribute
+      description: Check one attribute definition before you write it.
+  - group: item collections
+    docs: https://documentation.bloomreach.com/loomi-connect/docs/item-collections-tools
+    tools:
+    - name: search_item_collections
+      description: List the item collections in a workspace, or fetch one by name.
+    - name: search_item_collection_fields
+      description: List the product fields observed in a collection, or get one field's detail.
+    - name: search_item_collection_items
+      description: List the transformed product items in a collection, or fetch one item or variant.
+    - name: search_item_collection_records
+      description: List the raw product records in a collection, or fetch one record or variant.
+    - name: create_item_collection
+      description: Create a new item collection in a workspace.
+    - name: update_item_collection_metadata
+      description: Update a collection's display name, description, or item types.
+    - name: delete_item_collection
+      description: Permanently delete an item collection and enqueue cleanup of its data.
+- name: Loomi Connect Conversations server
+  transport: http
+  protocol: streamable-http
+  status: prototype
+  url: https://uqa.api.exponea.dev/cocoaas/public/api/clarity-search/v1/mcp/019d4917-3c76-7479-9f00-06c620b231bb
+  docs: https://documentation.bloomreach.com/loomi-connect/docs/connect-the-conversations-server
+  auth:
+    type: none
+    note: Shared public prototype endpoint — no API key and no per-customer setup
+  probe:
+    method: POST initialize + tools/list
+    http_status: 200
+    server_info:
+      name: clarity-search
+      version: 1.0.0
+    protocol_version: '2025-06-18'
+    result: Live tool list with full inputSchema returned anonymously
+    fetched: '2026-08-13'
+  dataset:
+    catalog: Pacific Apparel
+    skus: ~13,000
+    brands: ~370
+    note: Fixed sample catalog — products, prices and attributes cannot be modified
+  tool_count: 4
+  tools:
+  - name: search_products
+    title: Product Search
+    description: Search products in the First catalog using natural language queries with optional structured
+      filters.
+  - name: get_product
+    title: Get Product
+    description: Look up a specific product by its identifier.
+  - name: search_productCollections
+    title: Product Search Collection (Composed Intent)
+    description: Execute multiple INDEPENDENT product searches in the First catalog for ORTHOGONAL user
+      intents.
+  - name: seeker_products
+    title: Product Seeker - Discovery Assistant
+    description: Use this tool when the visitor has a VAGUE or EXPLORATORY query without specific product
+      attributes.
+- name: Bloomreach Documentation MCP
+  transport: http
+  protocol: streamable-http
+  status: published
+  url: https://documentation.bloomreach.com/mcp
+  discovery:
+  - well-known/bloomreach-mcp-server-card.json
+  - well-known/bloomreach-content-mcp-server-card.json
+  - well-known/bloomreach-discovery-mcp-server-card.json
+  - well-known/bloomreach-engagement-mcp-server-card.json
+  auth:
+    type: none
+  provider_note: Provided by the ReadMe documentation platform and served from Bloomreach's own documentation
+    host. It is a documentation/API-reference explorer, not a product API server, and its server-card
+    name is com.readme/bloomreach* rather than a Bloomreach namespace.
+  probe:
+    method: POST initialize + tools/list
+    http_status: 200
+    server_info:
+      name: Bloomreach Documentation
+      version: 1.0.0
+    protocol_version: '2025-06-18'
+    fetched: '2026-08-13'
+  tool_count: 5
+  tools:
+  - name: list-endpoints
+    title: List API Endpoints
+    description: Lists all API paths and their HTTP methods with summaries, organized by path.
+  - name: get-endpoint
+    title: Get Endpoint Details
+    description: Gets detailed information about a specific API endpoint, including security schemes and
+      servers.
+  - name: search-endpoints
+    title: Search API Endpoints
+    description: Deep search through paths, operations and parameters to discover relevant API endpoints.
+  - name: list-specs
+    title: List OpenAPI Specs
+    description: Lists all available OpenAPI specs. Use the title to select a spec.
+  - name: execute-request
+    title: Execute API Request
+    description: Executes an API request with a given HAR request object.
+  exposes_specs: 43
+  specs_visible_to_agents:
+  - data-hub=Bloomreach Item Collections API
+  - data-hub=Unified Tracking
+  - data-hub=Workspace API
+  - content=Assets Delivery API 2.0
+  - content=Content Batch Export API
+  - content=Content Batch Import API
+  - content=Content Integrations Management API
+  - content=Content Management API
+  - content=Content Type Management API
+  - content=Delivery API Settings Management API
+  - content=Delivery Auth API 2.0
+  - content=Documents Delivery API 2.0
+  - content=Folder Management API
+  - content=Folders Delivery API 2.0
+  - content=Images Delivery API 2.0
+  - content=Project Management API
+  - content=Site Management API
+  - content=Webhook Management API
+  - discovery=Autosuggest API
+  - discovery=Bestseller API
+  - discovery=catalog-data-management-apis
+  - discovery=Catalog management API
+  - discovery=Content Search API
+  - discovery=Email Widget API
+  - discovery=just-for-you-jfy-api
+  - discovery=more-like-this-mlt-api
+  - discovery=Product and Category Search API
+  - discovery=Recommendations and Pathways API
+  - discovery=seo-apis
+  - discovery=site-crawl-content-search-api
+  - discovery=thematic-json-api
+  - discovery=widget-api
+  - engagement=analysis-api
+  - engagement=catalog-api
+  - engagement=channel-api-for-partners-inbound
+  - engagement=channel-api-for-partners-outbound
+  - engagement=channel-api-for-partners
+  - engagement=customer-api
+  - engagement=email-api
+  - engagement=imports-management-api
+  - engagement=managed-endpoints-api
+  - engagement=sms-api
+  - engagement=tracking-api
+summary:
+  servers: 3
+  remote: 3
+  local_stdio: 0
+  tools_total: 168
+  auth_gated_servers: 1
+  anonymous_servers: 2

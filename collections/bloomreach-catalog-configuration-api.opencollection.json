@@ -1,0 +1,159 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Imports Autosuggest API v2 Catalog configuration API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/configs/LATEST",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              }
+            ]
+          },
+          "docs": "Understand the current state of catalog configuration, including custom attributes configuration and all [catalog settings](https://documentation.bloomreach.com/discovery/docs/catalog-settings) present in the dashboard.\n"
+        },
+        {
+          "info": {
+            "name": "Modify current configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/configs/LATEST",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Programmatically modify the current catalog configuration to automate common tasks.\n"
+        },
+        {
+          "info": {
+            "name": "Get an older configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/configs/:config_id",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "config_id",
+                "value": "1324",
+                "type": "path",
+                "description": "The unique ID associated with a particular state of the catalog configuration."
+              }
+            ]
+          },
+          "docs": "Understand what the catalog configuration looked like at the point in time an index was generated. \n"
+        },
+        {
+          "info": {
+            "name": "Get reserved attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/reserved-attributes",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              }
+            ]
+          },
+          "docs": "Get a list of all [reserved attributes](https://documentation.bloomreach.com/discovery/reference/reserved-fields-api) for the catalog.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

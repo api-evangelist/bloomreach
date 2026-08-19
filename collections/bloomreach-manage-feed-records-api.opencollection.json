@@ -1,0 +1,529 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Imports Autosuggest API v2 Manage feed records API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manage feed records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "To navigate through paginated results, use the page number to switch between pages."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Specify the maximum number of pages to return in the response."
+              }
+            ]
+          },
+          "docs": "View the current state of product and item feed records in a catalog.\n"
+        },
+        {
+          "info": {
+            "name": "Upload full feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "To navigate through paginated results, use the page number to switch between pages."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Specify the maximum number of pages to return in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload the entire feed data at once.\n"
+        },
+        {
+          "info": {
+            "name": "Modify feed records",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "To navigate through paginated results, use the page number to switch between pages."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Specify the maximum number of pages to return in the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit/change or add particular product or item records in the feed. \n"
+        },
+        {
+          "info": {
+            "name": "Get record details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records/:record_id",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "record_id",
+                "value": "1111abcd",
+                "type": "path",
+                "description": "The unique ID associated with a product or item feed record."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "* raw - returns only the raw view/variant data of a feed record\n* preview - returns a preview of the complete feed record containing all attributes, views, and variants\n"
+              }
+            ]
+          },
+          "docs": "View the details of a product or item feed record.\n"
+        },
+        {
+          "info": {
+            "name": "Get record variants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records/:record_id/variants",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "record_id",
+                "value": "1111abcd",
+                "type": "path",
+                "description": "The unique ID associated with a product or item feed record."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "To navigate through paginated results, use the page number to switch between pages."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Specify the maximum number of pages to return in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "* raw - returns only the raw view/variant data of a feed record\n* preview - returns a preview of the complete feed record containing all attributes, views, and variants\n"
+              }
+            ]
+          },
+          "docs": "View the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a product or item feed record.\n"
+        },
+        {
+          "info": {
+            "name": "Get variant details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records/:record_id/variants/:variant_id",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "record_id",
+                "value": "1111abcd",
+                "type": "path",
+                "description": "The unique ID associated with a product or item feed record."
+              },
+              {
+                "name": "variant_id",
+                "value": "123xyz",
+                "type": "path",
+                "description": "A unique identifier for a specific variant of a product or item feed record."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "* raw - returns only the raw view/variant data of a feed record\n* preview - returns a preview of the complete feed record containing all attributes, views, and variants\n"
+              }
+            ]
+          },
+          "docs": "View the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) of any product or item in the feed data.\n"
+        },
+        {
+          "info": {
+            "name": "Get views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records/:record_id/views",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "record_id",
+                "value": "1111abcd",
+                "type": "path",
+                "description": "The unique ID associated with a product or item feed record."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "To navigate through paginated results, use the page number to switch between pages."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Specify the maximum number of pages to return in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "* raw - returns only the raw view/variant data of a feed record\n* preview - returns a preview of the complete feed record containing all attributes, views, and variants\n"
+              }
+            ]
+          },
+          "docs": "Get all the [views](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) associated with a product or item feed record.\n"
+        },
+        {
+          "info": {
+            "name": "Get view details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records/:record_id/views/:view_id",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "record_id",
+                "value": "1111abcd",
+                "type": "path",
+                "description": "The unique ID associated with a product or item feed record."
+              },
+              {
+                "name": "view_id",
+                "value": "1324abc",
+                "type": "path",
+                "description": "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.\n\nBloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. \nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "* raw - returns only the raw view/variant data of a feed record\n* preview - returns a preview of the complete feed record containing all attributes, views, and variants\n"
+              }
+            ]
+          },
+          "docs": "Get the details of a [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product or item feed record.\n"
+        },
+        {
+          "info": {
+            "name": "Get view variants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records/:record_id/views/:view_id/variants",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "record_id",
+                "value": "1111abcd",
+                "type": "path",
+                "description": "The unique ID associated with a product or item feed record."
+              },
+              {
+                "name": "view_id",
+                "value": "1324abc",
+                "type": "path",
+                "description": "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.\n\nBloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. \nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "To navigate through paginated results, use the page number to switch between pages."
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Specify the maximum number of pages to return in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "* raw - returns only the raw view/variant data of a feed record\n* preview - returns a preview of the complete feed record containing all attributes, views, and variants\n"
+              }
+            ]
+          },
+          "docs": "Get all the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product feed record.\n"
+        },
+        {
+          "info": {
+            "name": "Get view variant details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name/records/:record_id/views/:view_id/variants/:variant_id",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              },
+              {
+                "name": "record_id",
+                "value": "1111abcd",
+                "type": "path",
+                "description": "The unique ID associated with a product or item feed record."
+              },
+              {
+                "name": "view_id",
+                "value": "1324abc",
+                "type": "path",
+                "description": "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.\n\nBloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. \nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
+              },
+              {
+                "name": "variant_id",
+                "value": "123xyz",
+                "type": "path",
+                "description": "A unique identifier for a specific variant of a product or item feed record."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "* raw - returns only the raw view/variant data of a feed record\n* preview - returns a preview of the complete feed record containing all attributes, views, and variants\n"
+              }
+            ]
+          },
+          "docs": "Get the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) for a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of a product feed record.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -8,8 +8,7 @@ info:
     '
   version: '2.1'
 servers:
-- url: https://api.bloomreach.com
-  description: Bloomreach API
+- url: https://suggest.dxpapi.com/api/v2/suggest
 security:
 - basicAuth: []
 tags:

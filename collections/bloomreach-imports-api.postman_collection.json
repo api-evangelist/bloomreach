@@ -1,0 +1,436 @@
+{
+  "item": [
+    {
+      "id": "a773f117-5d37-4e53-9f81-e93dbacae220",
+      "name": "Imports",
+      "description": {
+        "content": "Operations for working with existing imports.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03057211-25dd-47a8-8b1f-167a28deaeb6",
+          "name": "Start import",
+          "request": {
+            "name": "Start import",
+            "description": {
+              "content": "Trigger the run of an existing workspace-scoped import programmatically.\n\nThe following types of imports can be triggered: [URL](https://documentation.bloomreach.com/data-hub/docs/url-imports), [File storage\n(GCS, S3, SFTP)](https://documentation.bloomreach.com/data-hub/docs/file-storage-imports), [Data warehouse](https://documentation.bloomreach.com/data-hub/docs/data-warehouse-imports).\n\nIf you're using a URL or File storage (GCS, SFTP) import, you can\noverride its original path or URL. When overridden, the path\napplies only to this specific run and does not modify the import\ndefinition.\n\nUse this endpoint with a [**workspace** API key](https://documentation.bloomreach.com/data-hub/reference/data-hub-api-prerequisites) (issued in\nWorkspace settings → Access management → API). The\n`{workspaceId}` in the path must match the workspace the API key\nwas issued for.\n\n### Authorization\n- **Access type:** Private access (workspace API key)\n- **Permission required:** Imports → Allow trigger imports\n\n### Limitations\n- Cannot trigger **Copy & paste** or **File upload** imports.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "v2",
+                "workspaces",
+                ":workspaceId",
+                "imports",
+                ":import_id",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspaceId",
+                  "description": "(Required) The ID of your Bloomreach Engagement workspace. Must match the\nworkspace the API key was issued for; otherwise the request is\nrejected with HTTP 403.\n"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "import_id",
+                  "description": "(Required) The ID of an existing import in the workspace."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"test_connection\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "70a475f3-16d3-4bf1-8a11-c5645f924331",
+              "name": "Import triggered successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v2",
+                    "workspaces",
+                    ":workspaceId",
+                    "imports",
+                    ":import_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The ID of your Bloomreach Engagement workspace. Must match the\nworkspace the API key was issued for; otherwise the request is\nrejected with HTTP 403.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) The ID of an existing import in the workspace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3532499-d096-4c93-b9a9-d69642f089f2",
+              "name": "Bad request — the request was malformed, contained invalid\nparameters, or the underlying import service rejected the run\n(for example, an invalid override path).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v2",
+                    "workspaces",
+                    ":workspaceId",
+                    "imports",
+                    ":import_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The ID of your Bloomreach Engagement workspace. Must match the\nworkspace the API key was issued for; otherwise the request is\nrejected with HTTP 403.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) The ID of an existing import in the workspace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": {\n    \"_global\": [\n      \"BadRequest: The browser (or proxy) sent a request that this server could not understand.\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99c978fc-a24e-4593-a2fc-426c69b7591e",
+              "name": "Authentication is missing or invalid. Provide HTTP Basic\ncredentials with a valid API Key ID and Secret.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v2",
+                    "workspaces",
+                    ":workspaceId",
+                    "imports",
+                    ":import_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The ID of your Bloomreach Engagement workspace. Must match the\nworkspace the API key was issued for; otherwise the request is\nrejected with HTTP 403.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) The ID of an existing import in the workspace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Basic realm=\"Login Required\"",
+                  "key": "WWW-Authenticate",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82df1054-0475-4348-9740-e9f4f6bf5aa6",
+              "name": "The API key lacks the **Imports → Allow trigger imports**\npermission, or the `workspaceId` in the path does not match the\nworkspace the API key was issued for.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v2",
+                    "workspaces",
+                    ":workspaceId",
+                    "imports",
+                    ":import_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The ID of your Bloomreach Engagement workspace. Must match the\nworkspace the API key was issued for; otherwise the request is\nrejected with HTTP 403.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) The ID of an existing import in the workspace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": {\n    \"_global\": [\n      \"No permission to allow trigger imports. Check Workspace settings -> Access management -> API -> Imports -> Allow trigger imports.\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bd77d7c-2cfc-4587-94d3-806aae65c24e",
+              "name": "No import with the given `import_id` exists in the addressed\nworkspace.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "v2",
+                    "workspaces",
+                    ":workspaceId",
+                    "imports",
+                    ":import_id",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspaceId",
+                      "description": "(Required) The ID of your Bloomreach Engagement workspace. Must match the\nworkspace the API key was issued for; otherwise the request is\nrejected with HTTP 403.\n"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "import_id",
+                      "description": "(Required) The ID of an existing import in the workspace."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"errors\": {\n    \"code\": \"NotFoundError\",\n    \"message\": \"The requested resource was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bloomreach.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "df5dc25d-b3be-4ee2-ade1-287867570e46",
+    "name": "Workspace Autosuggest API v2 Imports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to programmatically trigger an existing workspace-scoped\nimport in Bloomreach Engagement.\n",
+      "type": "text/plain"
+    }
+  }
+}

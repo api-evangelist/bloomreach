@@ -1,6 +1,12 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: derived
-source: openapi/bloomreach-data-hub-workspace-import-openapi.yml, openapi/bloomreach-discovery-catalog-management-openapi.yml
+source: openapi/bloomreach-autosuggest-api-v2-api-openapi.yml, openapi/bloomreach-bestseller-api-v1-api-openapi.yml,
+  openapi/bloomreach-catalog-configuration-api-openapi.yml, openapi/bloomreach-category-based-widget-api-openapi.yml,
+  openapi/bloomreach-category-based-widget-products-api-openapi.yml, openapi/bloomreach-content-search-api-v1-api-openapi.yml,
+  openapi/bloomreach-feed-indexing-api-openapi.yml, openapi/bloomreach-global-recommendation-widget-products-api-openapi.yml,
+  openapi/bloomreach-global-recommendations-widget-api-openapi.yml, openapi/bloomreach-imports-api-openapi.yml,
+  openapi/bloomreach-item-based-recommendation-widget-api-openapi.yml, openapi/bloomreach-item-based-recommendation-widget-products-api-openapi.yml
+  ...
 summary:
   types:
   - http
@@ -18,10 +24,24 @@ schemes:
     permission enabled in Workspace settings → Access management →
     API.
   sources:
-  - openapi/bloomreach-data-hub-workspace-import-openapi.yml
-- name: bearerAuth
-  type: http
-  scheme: bearer
-  bearerFormat: API Key
-  sources:
-  - openapi/bloomreach-discovery-catalog-management-openapi.yml
+  - openapi/bloomreach-autosuggest-api-v2-api-openapi.yml
+  - openapi/bloomreach-bestseller-api-v1-api-openapi.yml
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  - openapi/bloomreach-category-based-widget-api-openapi.yml
+  - openapi/bloomreach-category-based-widget-products-api-openapi.yml
+  - openapi/bloomreach-content-search-api-v1-api-openapi.yml
+  - openapi/bloomreach-feed-indexing-api-openapi.yml
+  - openapi/bloomreach-global-recommendation-widget-products-api-openapi.yml
+  - openapi/bloomreach-global-recommendations-widget-api-openapi.yml
+  - openapi/bloomreach-imports-api-openapi.yml
+  - openapi/bloomreach-item-based-recommendation-widget-api-openapi.yml
+  - openapi/bloomreach-item-based-recommendation-widget-products-api-openapi.yml
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  - openapi/bloomreach-keyword-based-widget-api-openapi.yml
+  - openapi/bloomreach-keyword-based-widget-products-api-openapi.yml
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  - openapi/bloomreach-personalization-based-widget-products-api-openapi.yml
+  - openapi/bloomreach-personalization-based-widgets-api-openapi.yml
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  - openapi/bloomreach-visual-search-api-openapi.yml

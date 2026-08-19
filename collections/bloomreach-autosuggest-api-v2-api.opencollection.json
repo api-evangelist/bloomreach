@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Imports Autosuggest API v2 API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Autosuggest API v2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get autosuggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://suggest.dxpapi.com/api/v2/suggest/",
+            "params": [
+              {
+                "name": "_br_uid_2",
+                "value": "{{ br_uid_2 }}",
+                "type": "query",
+                "description": "A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. <br><br> Use the default value provided, which is already encoded."
+              },
+              {
+                "name": "account_id",
+                "value": "{{ account_id }}",
+                "type": "query",
+                "description": "Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting. <br><br> The example value shown here, <i>6413</i>, is included for your convenience to send a request with <b>Try It</b>."
+              },
+              {
+                "name": "auth_key",
+                "value": "{{ auth_key }}",
+                "type": "query",
+                "description": "The authentication key provided by Bloomreach for the account that's sending the request. <br><br> Autosuggest API calls are client-side, so you can leave **auth_key** empty."
+              },
+              {
+                "name": "callback",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to return data wrapped in the function for cross-origin requests. <br><br> For server-side requests, use the value **br_server**. For native-app requests, use the value **br_app**."
+              },
+              {
+                "name": "catalog_views",
+                "value": "pacifichome",
+                "type": "query",
+                "description": "A list of catalog views that you want to see in your suggestions. You must specify the catalog name within the catalog view. For Product catalogs, the catalog name is the same value as your domain_key. <br><br> A **catalog_views** value contains the view_ids within a catalog separated by a colon. If you pass multiple catalogs in **catalog_views**, they must be pipe-separated. Attributes suggestions are enabled for the first two catalogs mentioned as part of catalog_views and only for the first view passed in each of the first two catalogs. <br><br> For example, **&catalog_views=product:store1,store2|recipe:premium|articles** would return text and attribute suggestions for the product catalog in the store1 view, and for the recipe catalog in the premium view; only text suggestions will be displayed for the articles catalog. <br><br> The example value shown here, <i>pacifichome</i>, is included for your convenience to send a request with <b>Try It</b>."
+              },
+              {
+                "name": "q",
+                "value": "cha",
+                "type": "query",
+                "description": "Your site visitor's partial search query that Autosuggest should operate on. <br><br> You can percent encode spaces between terms as %20, or you can leave the spaces unencoded. <br><br> The example value shown here, <i>cha</i>, is included for your convenience to send a request with <b>Try It</b>."
+              },
+              {
+                "name": "ref_url",
+                "value": "{{ ref_url }}",
+                "type": "query",
+                "description": "The URL of the page or HTTP referrer where the request is started."
+              },
+              {
+                "name": "request_id",
+                "value": "1703497216731",
+                "type": "query",
+                "description": "An ID to track site visitor clicks. We recommend generating unique, random values of 13 digits to enable click-tracking. <br><br> Bloomreach doesn't automatically enforce the requirements for this parameter. For example, you can enter test as your value for each instance of the request_id parameter without triggering an error message. However, using a unique value allows us to help you if you encounter a problem."
+              },
+              {
+                "name": "request_type",
+                "value": "suggest",
+                "type": "query",
+                "description": "The type of API request. Value should be **suggest** for Autosuggest requests."
+              },
+              {
+                "name": "url",
+                "value": "{{ url }}",
+                "type": "query",
+                "description": "The absolute URL of the page where the request is initiated. Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>."
+              },
+              {
+                "name": "user_agent",
+                "value": "",
+                "type": "query",
+                "description": "The user agent of the browser that's making the search request. <br><br> Make sure that this value in your API request is the same as the value in the original request from your user. We optimize pages in part by crawling and gathering data, and the original user_agent lets us distinguish between our internal Bloomreach users who QA pages and everyone else who visits your site."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The universal customer ID of the user. You only need to pass this field if your particular integration tracks customers this way.  The parameter captures user IDs from the customer side, and reuses the information when powering apps or enhancing cross-device linking. In this way, Bloomreach recognizes users in a way that's aligned with your system. <br><br> Use an anonymous string. Don't use email or other personally identifiable information. <br><br> If you do not track users this way, then omit this field."
+              }
+            ]
+          },
+          "docs": "This API returns product/category suggestions based on an inputted search query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

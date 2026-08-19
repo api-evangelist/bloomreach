@@ -1,0 +1,111 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/engagement/reference/technical-information, https://documentation.bloomreach.com/content/reference/api-authorization,
+  https://documentation.bloomreach.com/content/reference/updates-and-conflict-prevention, https://documentation.bloomreach.com/discovery/reference/api-rate-limits,
+  plus openapi/*.yml
+description: 'Cross-cutting request/response semantics for the three Bloomreach API families. They do
+  not share conventions: Engagement uses Token/Basic auth on api.exponea.com, Content uses an opaque x-auth-token
+  on a per-environment bloomreach.io host, and Discovery uses account/auth_key query parameters on the
+  dxpapi.com hosts. Nothing in the estate implements request idempotency.'
+authentication:
+  engagement:
+    public: 'Authorization: Token <api_token> (or ?access_token= query parameter)'
+    private: 'Authorization: Basic base64(APIKeyID:APISecret)'
+    grouping: API Groups bundle credentials and carry their own permission set (access minimization)
+    docs: https://documentation.bloomreach.com/engagement/reference/technical-information
+  content:
+    scheme: 'x-auth-token: <token>'
+    issuance: Setup > Content API keys in the Content application
+    lifetime: Content site developer role is capped at 30 days; site developer + site admin can issue
+      any duration
+    granularity: Per-API read and/or write checkboxes at token creation
+    docs: https://documentation.bloomreach.com/content/reference/api-authorization
+  discovery:
+    scheme: account_id + auth_key query parameters on the search/widget endpoints; HTTP Basic on Catalog
+      Management
+    docs: https://documentation.bloomreach.com/discovery/reference/welcome
+  artifact: authentication/bloomreach-authentication.yml
+idempotency:
+  supported: false
+  note: No Idempotency-Key header, request-id de-duplication or replay contract is documented or present
+    in any harvested spec. A retried Engagement write is a second write. Recorded as an explicit absence
+    — this artifact deliberately does NOT carry an Idempotency pointer.
+concurrency:
+  supported: true
+  style: optimistic (conditional update)
+  mechanisms:
+  - family: Discovery Catalog Management
+    field: if_match_etag
+    response: ETag on read; 412 Precondition Failed when if_match_etag does not match
+    operations: PATCH /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records
+  - family: Content Management APIs
+    header: X-Resource-Version
+    response: Update rejected when the supplied version does not match the current one
+    note: Partial update is not supported — the full resource must be sent on every write
+    docs: https://documentation.bloomreach.com/content/reference/updates-and-conflict-prevention
+pagination:
+  discovery_search:
+    style: offset
+    params:
+    - start
+    - rows
+    response_fields:
+    - numFound
+    - start
+  discovery_catalog:
+    style: offset
+    params:
+    - offset
+    - limit
+  engagement:
+    style: offset
+    params:
+    - skip
+    - count
+    constraint: skip + count must not exceed 1,000 on customer listing
+    note: Documented on the Loomi Connect list_customers tool, which fronts the same Marketing API
+error_envelope:
+  engagement:
+    shape: '{"errors": {"code": <int>, "description": "<string>"}}'
+    evidence: Observed live on https://api.exponea.com/openapi.json (404)
+  discovery:
+    shape: JSON body with a message/description field; plain nginx HTML on unmatched paths
+    evidence: Observed live on https://core.dxpapi.com/openapi.json (404 nginx HTML)
+  rfc9457: false
+  note: No application/problem+json anywhere in the harvested specs.
+  artifact: errors/bloomreach-problem-types.yml
+rate_limit_signaling:
+  status: 429
+  headers:
+  - Retry-After
+  note: Discovery Catalog Management documents 429 + Retry-After. The Loomi Connect MCP server signals
+    exhaustion in the tool error text rather than in headers, since MCP has no header channel.
+  artifact: rate-limits/bloomreach-rate-limits.yml
+versioning:
+  scheme: uri-path
+  examples:
+  - Discovery search /api/v1/core
+  - Autosuggest /api/v2/suggest
+  - Widgets /api/v2/widgets
+  - Catalog Management /dataconnect/api/v3
+  - Content Delivery /delivery/site/v1 and Delivery API 2.0
+  - Content Management /management/<api>/v1
+  - Data Hub /data/v2/workspaces
+  artifact: lifecycle/bloomreach-lifecycle.yml
+request_tracing:
+  documented: false
+  note: No request-id / correlation-id header is documented on any family.
+field_expansion:
+  documented: true
+  note: 'Response shaping is per-family rather than a shared convention: Discovery uses the `fl` field
+    list parameter on search; the Loomi/Marketing surface uses include_design / include_node_designs flags
+    to opt into large embedded payloads that are stripped by default.'
+content_negotiation:
+  request: application/json
+  response: application/json
+  note: 406 Invalid Content-Type is a declared response on the Data Hub import operation.
+multi_region:
+  supported: true
+  note: 'Bloomreach is region-partitioned end to end: login (us/eu/uk/ca/ap.login.bloomreach.com) and
+    the Loomi Connect MCP endpoints (us/eu/uk/ca/ap.connect.loomi.ai) both carry a region prefix, and
+    the Engagement base URL may be a custom per-organization host rather than api.exponea.com.'

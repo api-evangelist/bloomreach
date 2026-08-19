@@ -1,0 +1,107 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/discovery/changelog, https://documentation.bloomreach.com/engagement/changelog,
+  https://documentation.bloomreach.com/content/changelog, https://documentation.bloomreach.com/loomi-connect/changelog
+description: Four separate dated changelogs, one per product. Each is published on the documentation host
+  and is also enumerated in that section's llms.txt, so an agent can read the release history without
+  scraping.
+changelogs:
+- product: Discovery
+  url: https://documentation.bloomreach.com/discovery/changelog
+  scheme: ISO-week release train (YYYY-WW)
+  current: Release 2026-53
+  entries:
+  - version: 2026-53
+    url: https://documentation.bloomreach.com/discovery/changelog/release-2026-53
+  - version: 2026-52
+    url: https://documentation.bloomreach.com/discovery/changelog/release-2026-52
+  - version: 2026-51
+    url: https://documentation.bloomreach.com/discovery/changelog/release-2026-51
+  - version: 2026-43
+    url: https://documentation.bloomreach.com/discovery/changelog/release-2026-43
+  - version: 2026-41
+    url: https://documentation.bloomreach.com/discovery/changelog/release-2026-41
+  - version: 2026-32_2
+    url: https://documentation.bloomreach.com/discovery/changelog/unscheduled-release-32
+    note: Unscheduled release
+  - version: 2026-32
+    url: https://documentation.bloomreach.com/discovery/changelog/release-2026-32
+  - version: 2026-31
+    url: https://documentation.bloomreach.com/discovery/changelog/release-2026-31
+- product: Engagement (Marketing)
+  url: https://documentation.bloomreach.com/engagement/changelog
+  scheme: platform minor version
+  current: '1.315'
+  entries:
+  - version: '1.315'
+    url: https://documentation.bloomreach.com/engagement/changelog/1315
+  - version: '1.314'
+    url: https://documentation.bloomreach.com/engagement/changelog/1314
+  - version: '1.313'
+    url: https://documentation.bloomreach.com/engagement/changelog/1313
+  - version: '1.312'
+    title: Minor tweaks & Android SDK update
+    url: https://documentation.bloomreach.com/engagement/changelog/1312
+  - version: '1.311'
+    title: Messages archive, Mobile push improvements, Recommendations & Mobile SDK updates
+    url: https://documentation.bloomreach.com/engagement/changelog/1311
+  - version: '1.310'
+    title: Loomi Analytics improvements
+    url: https://documentation.bloomreach.com/engagement/changelog/1310
+  - version: '1.309'
+    title: Approval workflow for scenarios & Mobile SDK updates
+    url: https://documentation.bloomreach.com/engagement/changelog/1309
+  - version: '1.306'
+    title: API triggers, JWT authentication, Catalog schema automation & Prediction templates updates
+    url: https://documentation.bloomreach.com/engagement/changelog/1306
+- product: Content
+  url: https://documentation.bloomreach.com/content/changelog
+  scheme: release date (YYYYMMDD)
+  current: '20260805'
+  entries:
+  - version: '20260805'
+    date: '2026-08-05'
+    title: Continuous improvements
+    url: https://documentation.bloomreach.com/content/changelog/20260805
+  - version: '20260708'
+    date: '2026-07-08'
+    title: Bug fix
+    url: https://documentation.bloomreach.com/content/changelog/20260708
+  - version: '20260625'
+    date: '2026-06-25'
+    title: API fix
+    url: https://documentation.bloomreach.com/content/changelog/20260625
+  - version: '20260611'
+    date: '2026-06-11'
+    title: Bug fix
+    url: https://documentation.bloomreach.com/content/changelog/20260611
+  - version: '20260527'
+    date: '2026-05-27'
+    title: Bug fix
+    url: https://documentation.bloomreach.com/content/changelog/20260527
+  - version: '20260513'
+    date: '2026-05-13'
+    title: Bug fix
+    url: https://documentation.bloomreach.com/content/changelog/20260513
+  - version: '20260415'
+    date: '2026-04-15'
+    title: Continuous improvements
+    url: https://documentation.bloomreach.com/content/changelog/20260415
+- product: Loomi Connect
+  url: https://documentation.bloomreach.com/loomi-connect/changelog
+  scheme: semver pre-release
+  current: 0.1.0-beta.5
+  entries:
+  - version: 0.1.0-beta.5
+    url: https://documentation.bloomreach.com/loomi-connect/changelog/version-010-beta5
+  - version: 0.1.0-beta.4
+    url: https://documentation.bloomreach.com/loomi-connect/changelog/version-010-beta4
+  - version: 0.1.0-beta.1
+    url: https://documentation.bloomreach.com/loomi-connect/changelog/version-010-beta1
+  - version: 0.0.0
+    url: https://documentation.bloomreach.com/loomi-connect/changelog/version-000
+summary:
+  changelogs: 4
+  entries_recorded: 27
+  breaking_changes_flagged: 0
+  note: None of the four changelogs marks entries as breaking vs additive in a machine-readable way.

@@ -8,8 +8,8 @@ info:
     '
   version: '2.1'
 servers:
-- url: https://api.bloomreach.com
-  description: Bloomreach API
+- url: https://pathways-email.dxpapi.com
+- url: https://pathways-email-staging.dxpapi.com
 security:
 - basicAuth: []
 tags:

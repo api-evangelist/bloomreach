@@ -1,0 +1,81 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/<section>/.well-known/agent-skills/index.json (provider-published,
+  saved verbatim) plus skills generated from openapi/*.yml and the Loomi Connect tool reference
+description: Bloomreach publishes its own Agent Skills through the Agent Skills discovery 0.2.0 index
+  on the documentation host — one read-the-docs skill per documentation section. Those four are saved
+  verbatim. The three task skills are generated from real operationIds in the harvested OpenAPIs and from
+  the documented Loomi Connect tool contract.
+skills:
+- file: bloomreach-content-read-the-docs.md
+  name: read-the-docs
+  method: searched
+  source: https://documentation.bloomreach.com/content/.well-known/agent-skills/read-the-docs/SKILL.md
+  digest: sha256:61dc48d58e4ccc6509959970042f07b9378cfbf470d1cfb13f1eebee5ab5eae8
+  description: Provider-published. Points an agent at the Content llms.txt index.
+- file: bloomreach-discovery-read-the-docs.md
+  name: read-the-docs
+  method: searched
+  source: https://documentation.bloomreach.com/discovery/.well-known/agent-skills/read-the-docs/SKILL.md
+  digest: sha256:d0ffbebf996830b186df9ed880a15e8fc3823032dd5bdb3a0283427ea62795a9
+  description: Provider-published. Points an agent at the Discovery llms.txt index.
+- file: bloomreach-engagement-read-the-docs.md
+  name: read-the-docs
+  method: searched
+  source: https://documentation.bloomreach.com/engagement/.well-known/agent-skills/read-the-docs/SKILL.md
+  digest: sha256:64787eb913e6e44bdb1ce3102d426b532adbc811e58555158fc703f36341edd0
+  description: Provider-published. Points an agent at the Engagement llms.txt index.
+- file: bloomreach-loomi-connect-read-the-docs.md
+  name: read-the-docs
+  method: searched
+  source: https://documentation.bloomreach.com/loomi-connect/.well-known/agent-skills/read-the-docs/SKILL.md
+  digest: sha256:d415dff9094081fe126e917fb318936b740e9a5ee548db53ee25ec0ecfb08597
+  description: Provider-published. Points an agent at the Loomi Connect llms.txt index.
+- file: bloomreach-product-search.md
+  name: bloomreach-product-search
+  method: generated
+  api: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  operations:
+  - product-category-search-api
+  - content-search-api
+  - bestseller-api
+  description: Run a Discovery product/category search, read the response envelope, page correctly.
+- file: bloomreach-catalog-update.md
+  name: bloomreach-catalog-update
+  method: generated
+  api: openapi/bloomreach-manage-feed-records-api-openapi.yml
+  operations:
+  - GET .../records
+  - GET .../records/{record_id}
+  - PATCH .../records
+  - PUT .../records
+  - POST .../indexes
+  - GET .../jobs/{job_id}
+  description: Conditional catalog record update via ETag/if_match_etag, then trigger and poll an indexing
+    job.
+- file: bloomreach-loomi-connect-mcp.md
+  name: bloomreach-loomi-connect-mcp
+  method: generated
+  api: mcp/bloomreach-mcp.yml
+  operations:
+  - list_projects
+  - get_project_overview
+  - list_customers
+  - get_customer_properties
+  - search_scenarios
+  - create_scenario
+  - update_scenario
+  - delete_scenario
+  - search_email_campaigns
+  - execute_analytics_eql
+  - estimate_eql_cost
+  description: Connect, authenticate through Bloomreach SSO, and call Loomi Connect tools within the documented
+    rate limits.
+discovery:
+  index: https://documentation.bloomreach.com/.well-known/agent-skills/index.json
+  spec: https://schemas.agentskills.io/discovery/0.2.0/schema.json
+  saved: well-known/bloomreach-agent-skills-index.json
+summary:
+  skills: 7
+  provider_published: 4
+  generated: 3

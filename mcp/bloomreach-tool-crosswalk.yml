@@ -1,0 +1,805 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/bloomreach-mcp.yml + openapi/*.yml
+description: 'Binds the Loomi Connect MCP tool catalog to the OpenAPI operations Bloomreach publishes.
+  The divergence is the finding: Bloomreach exposes 163 product tools over MCP but publishes OpenAPI for
+  only the Discovery/Data Hub slice, so the overwhelming majority of the agent surface has no machine-readable
+  REST contract behind it. The Loomi docs say so directly — the tools "call the same APIs that power the
+  Bloomreach UI, not dedicated backend endpoints".'
+surfaces:
+  openapi:
+    files: 21
+    operations: 42
+    note: Discovery search/recommendation/catalog + one Data Hub workspace import operation. Refined from
+      Bloomreach's published specs in openapi/_original/.
+  openapi_visible_to_agents:
+    count: 43
+    via: https://documentation.bloomreach.com/mcp (list-specs)
+    note: The docs MCP server enumerates 43 OpenAPI specs across data-hub, content, discovery and engagement
+      — far more than the 8 originals harvested here. Those definitions are rendered in ReadMe but the
+      /openapi/<id> download endpoints now 302 to /404, so they could not be saved verbatim.
+  mcp:
+    url: https://us.connect.loomi.ai/mcp
+    gated: true
+    note: tools/list returns HTTP 401 invalid_token; tools mapped from the provider-published docs catalog.
+  mcp_public:
+    url: https://uqa.api.exponea.dev/cocoaas/public/api/clarity-search/v1/mcp/019d4917-3c76-7479-9f00-06c620b231bb
+    gated: false
+    note: Conversations prototype server; tools/list probed anonymously, inputSchemas are real.
+  graphql:
+    present: false
+    note: No GraphQL surface found on any Bloomreach host.
+crosswalk:
+- tool: get_autosuggest_results
+  category: Search
+  rest:
+  - openapi/bloomreach-autosuggest-api-v2-api-openapi.yml#autosuggest-api
+  binding: rest
+  confidence: high
+  note: Autosuggest API v2 on suggest.dxpapi.com is the single documented REST surface behind this tool.
+- tool: search_discovery_catalog_products
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records
+  binding: rest
+  confidence: medium
+  note: Catalog Management v3 record listing. The spec operation carries no operationId, so the path+method
+    is the binding key.
+- tool: search_discovery_catalog_product_variants
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/variants
+  binding: rest
+  confidence: medium
+  note: Variant listing for a catalog record.
+- tool: get_catalog_item
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}
+  binding: rest
+  confidence: medium
+  note: Single record fetch.
+- tool: get_discovery_catalog_config
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+  binding: rest
+  confidence: medium
+  note: Latest catalog configuration.
+- tool: get_catalog_configuration
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+  binding: rest
+  confidence: medium
+  note: Same backing operation as get_discovery_catalog_config; the two tools sit in different Loomi tool
+    groups.
+- tool: get_discovery_catalog_reserved_attributes
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/reserved-attributes
+  binding: rest
+  confidence: high
+  note: Name maps 1:1 onto the reserved-attributes operation.
+- tool: search_discovery_catalogs
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml#GET /accounts/{account_name}/catalogs
+  binding: rest
+  confidence: medium
+  note: Catalog listing for an account.
+- tool: search_catalogs
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml#GET /accounts/{account_name}/catalogs
+  binding: rest
+  confidence: low
+  note: Marketing-side catalog tool; Engagement catalogs are a different object than Discovery catalogs,
+    so this binding is by name only.
+- tool: search_discovery_catalog_jobs
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-job-processing-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/jobs
+  binding: rest
+  confidence: medium
+  note: Indexing job listing.
+- tool: list_catalog_jobs
+  category: Data Hub / catalog
+  rest:
+  - openapi/bloomreach-job-processing-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/jobs
+  binding: rest
+  confidence: medium
+  note: Same backing operation, Data Hub tool group.
+- tool: get_customer_recommendations
+  category: Recommendations
+  rest:
+  - openapi/bloomreach-personalization-based-widgets-api-openapi.yml#personalization-based-widget-api
+  - openapi/bloomreach-item-based-recommendation-widget-api-openapi.yml#item-based-recommendation-widget-api
+  - openapi/bloomreach-global-recommendations-widget-api-openapi.yml#global-recommendation-widget-api
+  binding: rest
+  confidence: low
+  note: Fans out across the Pathways widget APIs; the tool takes a widget/customer context rather than
+    a widget type, so the binding is one-to-many and inexact.
+- tool: search_recommendations
+  category: Recommendations
+  rest:
+  - openapi/bloomreach-personalization-based-widgets-api-openapi.yml#personalization-based-widget-api
+  binding: rest
+  confidence: low
+  note: Marketing-side recommendations object; mapped by semantics only.
+- tool: search_products
+  category: Conversations (search)
+  rest:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml#product-category-search-api
+  binding: rest
+  confidence: medium
+  note: The Conversations server is a Clarity Search front end over the same product-search core; probed
+    inputSchema exposes natural-language query + structured filters rather than the raw REST params.
+- tool: get_product
+  category: Conversations (search)
+  rest:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml#product-category-search-api
+  binding: rest
+  confidence: low
+  note: Identifier lookup is served by the same search operation with an id filter; no dedicated REST
+    get-by-id operation is published.
+mcp_only:
+- tool: search_scenarios
+  group: automation scenarios
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_scenario_nodes
+  group: automation scenarios
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_scenario_node
+  group: automation scenarios
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_scenario
+  group: automation scenarios
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_scenario
+  group: automation scenarios
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_scenario
+  group: automation scenarios
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_customers
+  group: customer profiles and event history
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_customer_properties
+  group: customer profiles and event history
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_customer_attribute_values
+  group: customer profiles and event history
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_customer_events
+  group: customer profiles and event history
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_customers_in_segment
+  group: customer profiles and event history
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_email_campaigns
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_sms_campaigns
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: generate_email_campaign_preview_link
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_email_campaign
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_email_campaign
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_email_campaign
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_sms_campaign
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_sms_campaign
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_sms_campaign
+  group: email and sms campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_initiatives
+  group: initiatives and campaign calendar
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_initiative_items
+  group: initiatives and campaign calendar
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_campaign_calendar
+  group: initiatives and campaign calendar
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_catalog_items
+  group: product catalogs and recommendations
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_catalog_usages
+  group: product catalogs and recommendations
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_customer_schema
+  group: project schema and data mapping
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_customer_property_schema
+  group: project schema and data mapping
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_event_schema
+  group: project schema and data mapping
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_mapping
+  group: project schema and data mapping
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_project_variables
+  group: project settings and access
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_consent_settings
+  group: project settings and access
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_frequency_policies
+  group: project settings and access
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_data_retention_rules
+  group: project settings and access
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_project_users
+  group: project settings and access
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_api_triggers
+  group: project settings and access
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_integrations
+  group: project settings and access
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_voucher_pools
+  group: voucher pools and codes
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_voucher_codes
+  group: voucher pools and codes
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_banners
+  group: web and mobile campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_in_app_messages
+  group: web and mobile campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_experiments
+  group: web and mobile campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_surveys
+  group: web and mobile campaigns
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_cloud_organizations
+  group: workspace and project basics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_cloud_organization_details
+  group: workspace and project basics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_workspaces
+  group: workspace and project basics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_projects
+  group: workspace and project basics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_projects_with_overview
+  group: workspace and project basics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_project_overview
+  group: workspace and project basics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: execute_analytics_eql
+  group: ad hoc analytics queries
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: estimate_eql_cost
+  group: ad hoc analytics queries
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: calculate_report
+  group: ad hoc analytics queries
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_expressions
+  group: analytics building blocks
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_aggregates
+  group: analytics building blocks
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_running_aggregates
+  group: analytics building blocks
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_event_segmentations
+  group: analytics building blocks
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_customer_filters
+  group: customer filters and segments
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_segmentations
+  group: customer filters and segments
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_autosegments
+  group: customer filters and segments
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_event_segmentations
+  group: customer filters and segments
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_customer_filter
+  group: customer filters and segments
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_dashboards
+  group: dashboards
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_predictions
+  group: predictive customer scores
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_customer_prediction_score
+  group: predictive customer scores
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_funnels
+  group: saved analyses
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_trends
+  group: saved analyses
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_reports
+  group: saved analyses
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_discovery_experiments
+  group: ab tests
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_experiment_report
+  group: ab tests
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_discovery_experiment
+  group: ab tests
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: start_discovery_experiment
+  group: ab tests
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: end_discovery_experiment
+  group: ab tests
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: archive_discovery_experiment
+  group: ab tests
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_discovery_accounts
+  group: accounts and sites
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_discovery_sites
+  group: accounts and sites
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_autosuggest_exclusion_rules
+  group: autosuggest
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_autosuggest_exclusion_rule
+  group: autosuggest
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_autosuggest_exclusion_rule
+  group: autosuggest
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_autosuggest_exclusion_rule
+  group: autosuggest
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: bulk_update_autosuggest_exclusion_rules
+  group: autosuggest
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_categories
+  group: categories
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_dynamic_categories
+  group: categories
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_pixel_health_status
+  group: event diagnostics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_pixel_event_stream
+  group: event diagnostics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_pixel_event_details
+  group: event diagnostics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_site_search_facets
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_facets_global
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_category_facets
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_facet_attributes
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_facet_rule
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_facet_rule
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_facet_rule
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_facet_rule
+  group: facet rules
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_site_search_media_rules
+  group: media rules and assets
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_category_media_rules
+  group: media rules and assets
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_global_media_rules
+  group: media rules and assets
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_media_rule
+  group: media rules and assets
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_discovery_assets
+  group: media rules and assets
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_weblayer_customizations
+  group: media rules and assets
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_multi_slot_customizations
+  group: media rules and assets
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_overall_performance
+  group: performance analytics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_search_performance
+  group: performance analytics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_category_performance
+  group: performance analytics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_products_overview
+  group: performance analytics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_trend
+  group: performance analytics
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_query_performance
+  group: performance table
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_category_performance_table
+  group: performance table
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_product_performance_table
+  group: performance table
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_brand_performance
+  group: performance table
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_page_performance
+  group: performance table
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_product_performance
+  group: product grid insights
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_discovery_product_grid_insights
+  group: product grid insights
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_site_search_ranking_rules
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_ranking_rules_global
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_category_ranking_rules
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_ranking_rule
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_discovery_audiences
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_ranking_rule
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_ranking_rule
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_ranking_rule
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_ranking_rule_variant
+  group: ranking rules and audiences
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_redirects
+  group: redirects and api parameters
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_api_params
+  group: redirects and api parameters
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_redirect
+  group: redirects and api parameters
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_redirect
+  group: redirects and api parameters
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_redirect
+  group: redirects and api parameters
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_synonyms_user
+  group: synonyms
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: list_synonyms_br_generated
+  group: synonyms
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_synonym
+  group: synonyms
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_synonym
+  group: synonyms
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_synonym
+  group: synonyms
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_api_requests
+  group: usage
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_discovery_unique_visitors
+  group: usage
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_datahub_catalogs
+  group: catalogs jobs and system
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_datahub_jobs
+  group: catalogs jobs and system
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_datahub_system_configuration
+  group: catalogs jobs and system
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: get_item_collection_configuration
+  group: item collection configuration
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_item_collection_configuration
+  group: item collection configuration
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: compare_item_collection_configurations
+  group: item collection configuration
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: validate_item_collection_attribute
+  group: item collection configuration
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_item_collections
+  group: item collections
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_item_collection_fields
+  group: item collections
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_item_collection_items
+  group: item collections
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_item_collection_records
+  group: item collections
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: create_item_collection
+  group: item collections
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: update_item_collection_metadata
+  group: item collections
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: delete_item_collection
+  group: item collections
+  reason: No public REST operation in the harvested OpenAPI set. Backed by the same dashboard-level APIs
+    that power the Bloomreach UI, which are not published as OpenAPI.
+- tool: search_productCollections
+  group: conversations server
+  reason: Server-side composite — runs multiple independent product searches in one call. No single REST
+    operation corresponds.
+- tool: seeker_products
+  group: conversations server
+  reason: Conversational narrowing tool for vague queries; a server-side behaviour with no REST equivalent.
+rest_only:
+- operation: openapi/bloomreach-bestseller-api-v1-api-openapi.yml#bestseller-api
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#POST /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-catalog-configuration-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/{config_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-category-based-widget-api-openapi.yml#category-based-widget-api
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-category-based-widget-products-api-openapi.yml#GET /api/v2/widgets/image/category/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-category-based-widget-products-api-openapi.yml#GET /api/v2/widgets/proxy/category/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-content-search-api-v1-api-openapi.yml#content-search-api
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-feed-indexing-api-openapi.yml#POST /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/indexes
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-global-recommendation-widget-products-api-openapi.yml#GET /api/v2/widgets/image/global/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-global-recommendation-widget-products-api-openapi.yml#GET /api/v2/widgets/proxy/global/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-imports-api-openapi.yml#startWorkspaceImport
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-item-based-recommendation-widget-products-api-openapi.yml#GET /api/v2/widgets/image/item/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-item-based-recommendation-widget-products-api-openapi.yml#GET /api/v2/widgets/proxy/item/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-job-processing-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/jobs/{job_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-keyword-based-widget-api-openapi.yml#keyword-based-widget-api
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-keyword-based-widget-products-api-openapi.yml#GET /api/v2/widgets/image/keyword/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-keyword-based-widget-products-api-openapi.yml#GET /api/v2/widgets/proxy/keyword/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#PUT /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#PATCH /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/variants/{variant_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}/variants
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-manage-feed-records-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}/variants/{variant_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-personalization-based-widget-products-api-openapi.yml#GET /api/v2/widgets/image/personalized/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-personalization-based-widget-products-api-openapi.yml#GET /api/v2/widgets/proxy/personalized/{widget_id}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-personalization-based-widgets-api-openapi.yml#recently-viewed-widget-api
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-view-catalogs-data-api-openapi.yml#GET /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-visual-search-api-openapi.yml#upload-api
+  reason: No Loomi Connect tool names this operation.
+- operation: openapi/bloomreach-visual-search-api-openapi.yml#visual-search-response-api
+  reason: No Loomi Connect tool names this operation.
+coverage:
+  tools_named: 162
+  tools_bound: 15
+  mcp_only: 148
+  rest_operations_total: 42
+  rest_operations_with_a_tool: 12
+  rest_only: 30

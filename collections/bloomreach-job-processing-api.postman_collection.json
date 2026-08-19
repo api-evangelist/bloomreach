@@ -1,0 +1,1005 @@
+{
+  "item": [
+    {
+      "id": "804bfb35-67fa-40a2-8ada-2f0e02081ec9",
+      "name": "Job processing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "074ca150-fb2c-43c2-85a9-e761c0382b99",
+          "name": "Get job details",
+          "request": {
+            "name": "Get job details",
+            "description": {
+              "content": "Get all the details about a particular job including its status.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_name",
+                "catalogs",
+                ":catalog_name",
+                "environments",
+                ":environment_name",
+                "jobs",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_name",
+                  "description": "(Required) Your unique account name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environment_name",
+                  "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "job_id",
+                  "description": "(Required) The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "507b50c6-55b7-4770-bb87-274d74a4500a",
+              "name": "OK. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"job\": {\n      \"id\": \"string\",\n      \"type\": \"suggest\",\n      \"status\": \"queued\",\n      \"status_code\": 430,\n      \"created_at\": \"1994-01-07T01:25:54.696Z\",\n      \"updated_at\": \"1979-12-05T18:40:33.840Z\",\n      \"details\": [\n        {\n          \"class\": \"error\",\n          \"type\": \"string\",\n          \"title\": \"string\",\n          \"detail\": \"string\",\n          \"resolution\": \"string\"\n        },\n        {\n          \"class\": \"error\",\n          \"type\": \"string\",\n          \"title\": \"string\",\n          \"detail\": \"string\",\n          \"resolution\": \"string\"\n        }\n      ],\n      \"stats\": {\n        \"patch_operation_count\": 3257,\n        \"patch_operation_add_product_count\": 6352,\n        \"patch_operation_add_product_attribute_count\": 3725,\n        \"patch_operation_add_product_attributes_count\": 8685,\n        \"patch_operation_add_product_variant_count\": 1244,\n        \"patch_operation_add_product_variant_attribute_count\": 6418,\n        \"patch_operation_add_product_variant_attributes_count\": 570,\n        \"patch_operation_add_product_variants_count\": 8210,\n        \"patch_operation_add_product_view_count\": 1126,\n        \"patch_operation_add_product_view_attribute_count\": 5742,\n        \"patch_operation_add_product_view_attributes_count\": 6033,\n        \"patch_operation_add_product_views_count\": 6094,\n        \"patch_operation_add_product_views_group_count\": 4823,\n        \"patch_operation_add_product_views_variant_count\": 4106,\n        \"patch_operation_add_product_view_variant_count\": 8363,\n        \"patch_operation_add_product_view_variant_attribute_count\": 1102,\n        \"patch_operation_add_product_view_variant_attributes_count\": 6559,\n        \"patch_operation_add_product_view_variant_exclusion_count\": 4420,\n        \"patch_operation_add_product_view_variants_count\": 6443,\n        \"patch_operation_remove_product_count\": 6488,\n        \"patch_operation_remove_product_attribute_count\": 2462,\n        \"patch_operation_remove_product_attributes_count\": 1096,\n        \"patch_operation_remove_product_variant_count\": 9065,\n        \"patch_operation_remove_product_variant_attribute_count\": 6260,\n        \"patch_operation_remove_product_variant_attributes_count\": 5546,\n        \"patch_operation_remove_product_variants_count\": 2007,\n        \"patch_operation_remove_product_view_count\": 4641,\n        \"patch_operation_remove_product_view_attribute_count\": 4692,\n        \"patch_operation_remove_product_view_attributes_count\": 9423,\n        \"patch_operation_remove_product_views_count\": 7382,\n        \"patch_operation_remove_product_views_group_count\": 7422,\n        \"patch_operation_remove_product_views_groups_count\": 7494,\n        \"patch_operation_remove_product_view_variant_count\": 1741,\n        \"patch_operation_remove_product_view_variant_attribute_count\": 6523,\n        \"patch_operation_remove_product_view_variant_attributes_count\": 3567,\n        \"patch_operation_remove_product_view_variants_count\": 7536,\n        \"patch_operation_update_product_count\": 6888,\n        \"patch_operation_update_product_attributes_count\": 4536,\n        \"patch_operation_update_product_view_count\": 3897,\n        \"patch_operation_update_product_view_attributes_count\": 808\n      },\n      \"properties\": {\n        \"feed_data_type\": \"product\",\n        \"feed_mode\": \"delta\",\n        \"input_source\": \"sftp_file_upload\",\n        \"input_filenames\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"started_at\": \"2026-03-11T20:21:57.070Z\",\n      \"stopped_at\": \"1965-06-15T19:04:00.608Z\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9017b83-7a45-46fd-9e8b-af0136eddb49",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef8c0a66-e307-4bf1-955d-9ba4874bfb9e",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8bb1e76-bd86-4d4f-8b76-ff3f6fb9d7d5",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "022032ce-62bc-4f43-8f23-40f9a851466a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "job_id",
+                      "description": "(Required) The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0440cea8-689e-483e-92dd-ce8f6ce07595",
+          "name": "Get all jobs",
+          "request": {
+            "name": "Get all jobs",
+            "description": {
+              "content": "Get all the jobs associated with a catalog.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_name",
+                "catalogs",
+                ":catalog_name",
+                "environments",
+                ":environment_name",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "To navigate through paginated results, use the page number to switch between pages."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Specify the maximum number of pages to return in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "class",
+                  "value": "<string>",
+                  "description": "Filter the jobs based on comma-separated class values:\n\n* feed_records_full — Include full feed jobs in response, that is, if type=feed and feed_mode=full\n* feed_records_delta - Include delta feed jobs in response, that is, if type=feed and feed_mode=delta\n* index_update - Include update index jobs from search quality in response, that is, if type=index, index_mode=update\n* index_refresh - Include refresh index jobs in response, that is, if type=index, index_mode=refresh\n* suggest_refresh - Include suggestions for refresh jobs in response\n\nIf no filter value is provided, all jobs are returned by default, regardless of job class. This is equivalent to passing all job class values in the parameter.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_name",
+                  "description": "(Required) Your unique account name."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalog_name",
+                  "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "environment_name",
+                  "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "687fd17a-2aad-476c-bdaf-a817d35419c8",
+              "name": "OK. Click to see the response structure.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "class",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"previous_page\": 9165,\n    \"next_page\": 6678\n  },\n  \"data\": {\n    \"jobs\": [\n      {\n        \"id\": \"string\",\n        \"type\": \"suggest\",\n        \"status\": \"queued\",\n        \"status_code\": 101,\n        \"created_at\": \"2020-03-02T08:18:01.862Z\",\n        \"updated_at\": \"1962-08-17T18:28:46.981Z\",\n        \"details\": [\n          {\n            \"class\": \"error\",\n            \"type\": \"string\",\n            \"title\": \"string\",\n            \"detail\": \"string\",\n            \"resolution\": \"string\"\n          },\n          {\n            \"class\": \"error\",\n            \"type\": \"string\",\n            \"title\": \"string\",\n            \"detail\": \"string\",\n            \"resolution\": \"string\"\n          }\n        ],\n        \"stats\": {\n          \"patch_operation_count\": 1306,\n          \"patch_operation_add_product_count\": 6045,\n          \"patch_operation_add_product_attribute_count\": 9166,\n          \"patch_operation_add_product_attributes_count\": 8770,\n          \"patch_operation_add_product_variant_count\": 1695,\n          \"patch_operation_add_product_variant_attribute_count\": 6875,\n          \"patch_operation_add_product_variant_attributes_count\": 9076,\n          \"patch_operation_add_product_variants_count\": 478,\n          \"patch_operation_add_product_view_count\": 6305,\n          \"patch_operation_add_product_view_attribute_count\": 660,\n          \"patch_operation_add_product_view_attributes_count\": 7035,\n          \"patch_operation_add_product_views_count\": 9132,\n          \"patch_operation_add_product_views_group_count\": 6133,\n          \"patch_operation_add_product_views_variant_count\": 2502,\n          \"patch_operation_add_product_view_variant_count\": 6752,\n          \"patch_operation_add_product_view_variant_attribute_count\": 5312,\n          \"patch_operation_add_product_view_variant_attributes_count\": 687,\n          \"patch_operation_add_product_view_variant_exclusion_count\": 8470,\n          \"patch_operation_add_product_view_variants_count\": 7123,\n          \"patch_operation_remove_product_count\": 2451,\n          \"patch_operation_remove_product_attribute_count\": 2829,\n          \"patch_operation_remove_product_attributes_count\": 5112,\n          \"patch_operation_remove_product_variant_count\": 6091,\n          \"patch_operation_remove_product_variant_attribute_count\": 1766,\n          \"patch_operation_remove_product_variant_attributes_count\": 8504,\n          \"patch_operation_remove_product_variants_count\": 1280,\n          \"patch_operation_remove_product_view_count\": 3358,\n          \"patch_operation_remove_product_view_attribute_count\": 3027,\n          \"patch_operation_remove_product_view_attributes_count\": 6721,\n          \"patch_operation_remove_product_views_count\": 9108,\n          \"patch_operation_remove_product_views_group_count\": 4289,\n          \"patch_operation_remove_product_views_groups_count\": 7456,\n          \"patch_operation_remove_product_view_variant_count\": 248,\n          \"patch_operation_remove_product_view_variant_attribute_count\": 1327,\n          \"patch_operation_remove_product_view_variant_attributes_count\": 9513,\n          \"patch_operation_remove_product_view_variants_count\": 8950,\n          \"patch_operation_update_product_count\": 30,\n          \"patch_operation_update_product_attributes_count\": 1006,\n          \"patch_operation_update_product_view_count\": 402,\n          \"patch_operation_update_product_view_attributes_count\": 7822\n        },\n        \"properties\": {\n          \"feed_data_type\": \"product\",\n          \"feed_mode\": \"delta\",\n          \"input_source\": \"api_request_body\",\n          \"input_filenames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"started_at\": \"2003-11-08T17:55:29.293Z\",\n        \"stopped_at\": \"1951-12-31T01:56:11.394Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"type\": \"suggest\",\n        \"status\": \"queued\",\n        \"status_code\": 360,\n        \"created_at\": \"2017-03-03T01:54:14.520Z\",\n        \"updated_at\": \"2017-09-26T17:34:15.400Z\",\n        \"details\": [\n          {\n            \"class\": \"error\",\n            \"type\": \"string\",\n            \"title\": \"string\",\n            \"detail\": \"string\",\n            \"resolution\": \"string\"\n          },\n          {\n            \"class\": \"error\",\n            \"type\": \"string\",\n            \"title\": \"string\",\n            \"detail\": \"string\",\n            \"resolution\": \"string\"\n          }\n        ],\n        \"stats\": {\n          \"patch_operation_count\": 1837,\n          \"patch_operation_add_product_count\": 3480,\n          \"patch_operation_add_product_attribute_count\": 343,\n          \"patch_operation_add_product_attributes_count\": 2144,\n          \"patch_operation_add_product_variant_count\": 4962,\n          \"patch_operation_add_product_variant_attribute_count\": 9315,\n          \"patch_operation_add_product_variant_attributes_count\": 9780,\n          \"patch_operation_add_product_variants_count\": 7848,\n          \"patch_operation_add_product_view_count\": 2508,\n          \"patch_operation_add_product_view_attribute_count\": 6795,\n          \"patch_operation_add_product_view_attributes_count\": 5484,\n          \"patch_operation_add_product_views_count\": 3398,\n          \"patch_operation_add_product_views_group_count\": 6910,\n          \"patch_operation_add_product_views_variant_count\": 5232,\n          \"patch_operation_add_product_view_variant_count\": 4727,\n          \"patch_operation_add_product_view_variant_attribute_count\": 5523,\n          \"patch_operation_add_product_view_variant_attributes_count\": 3422,\n          \"patch_operation_add_product_view_variant_exclusion_count\": 4797,\n          \"patch_operation_add_product_view_variants_count\": 4254,\n          \"patch_operation_remove_product_count\": 5479,\n          \"patch_operation_remove_product_attribute_count\": 2496,\n          \"patch_operation_remove_product_attributes_count\": 1906,\n          \"patch_operation_remove_product_variant_count\": 732,\n          \"patch_operation_remove_product_variant_attribute_count\": 3777,\n          \"patch_operation_remove_product_variant_attributes_count\": 4991,\n          \"patch_operation_remove_product_variants_count\": 4575,\n          \"patch_operation_remove_product_view_count\": 4546,\n          \"patch_operation_remove_product_view_attribute_count\": 9242,\n          \"patch_operation_remove_product_view_attributes_count\": 6324,\n          \"patch_operation_remove_product_views_count\": 2932,\n          \"patch_operation_remove_product_views_group_count\": 6025,\n          \"patch_operation_remove_product_views_groups_count\": 4132,\n          \"patch_operation_remove_product_view_variant_count\": 6624,\n          \"patch_operation_remove_product_view_variant_attribute_count\": 5811,\n          \"patch_operation_remove_product_view_variant_attributes_count\": 3618,\n          \"patch_operation_remove_product_view_variants_count\": 4888,\n          \"patch_operation_update_product_count\": 4465,\n          \"patch_operation_update_product_attributes_count\": 3049,\n          \"patch_operation_update_product_view_count\": 8751,\n          \"patch_operation_update_product_view_attributes_count\": 9917\n        },\n        \"properties\": {\n          \"feed_data_type\": \"content\",\n          \"feed_mode\": \"delta\",\n          \"input_source\": \"api_request_body\",\n          \"input_filenames\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"started_at\": \"2015-11-26T03:29:05.898Z\",\n        \"stopped_at\": \"1951-05-05T05:07:22.514Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9afd4b4-bc9b-4f3e-be1c-fa0eff5f3b28",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "class",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75dd92be-c3dd-4ffa-a13b-d3f47d8fdcdb",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "class",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd520567-75de-4522-a752-e6e2ff7f5c49",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "class",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"error\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cfb03c3-f552-4289-99ed-843998b7640b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_name",
+                    "catalogs",
+                    ":catalog_name",
+                    "environments",
+                    ":environment_name",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "class",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_name",
+                      "description": "(Required) Your unique account name."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalog_name",
+                      "description": "(Required) \"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "environment_name",
+                      "description": "(Required) The type of environment you want to use for the request (Production/Staging)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": [\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    },\n    {\n      \"type\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"class\": \"warning\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://discovery.bloomreach.com/dataconnect/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "82140c38-a0a3-4483-ae28-fd2030b6605e",
+    "name": "Workspace Imports Autosuggest API v2 Job processing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to programmatically trigger an existing workspace-scoped\nimport in Bloomreach Engagement.\n",
+      "type": "text/plain"
+    }
+  }
+}

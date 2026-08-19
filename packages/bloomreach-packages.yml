@@ -1,0 +1,223 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  registry.npmjs.org, search.maven.org, trunk.cocoapods.org, packagist.org, pypi.org and
+  github.com/bloomreach — every version/published pair below was read from the registry
+  metadata endpoint on 2026-08-13.
+description: >-
+  Bloomreach ships first-party client libraries across three product lines that were built by
+  three different engineering histories: the Content/brXM SPA SDKs (@bloomreach/* on npm, still
+  released weekly), the Engagement/Exponea mobile + React Native SDKs (published under the legacy
+  exponea namespace on CocoaPods, Maven Central and npm, still current), and the Discovery front-end
+  SDKs (npm + GitHub, some going stale). There is no first-party Python, Go, Ruby, PHP or .NET
+  client for any Bloomreach API.
+
+packages:
+
+  # ---- Content / brXM SPA SDK family (npm, first-party, actively released) ----
+  - language: javascript
+    registry: npm
+    name: "@bloomreach/spa-sdk"
+    url: https://www.npmjs.com/package/@bloomreach/spa-sdk
+    install: npm install @bloomreach/spa-sdk
+    repository: https://github.com/bloomreach/spa-sdk
+    api: Bloomreach Content Delivery API
+    official: true
+    version: 28.1.0
+    published: '2026-08-06'
+
+  - language: javascript
+    registry: npm
+    name: "@bloomreach/react-sdk"
+    url: https://www.npmjs.com/package/@bloomreach/react-sdk
+    install: npm install @bloomreach/react-sdk
+    repository: https://github.com/bloomreach/spa-sdk
+    api: Bloomreach Content Delivery API
+    official: true
+    version: 28.1.0
+    published: '2026-08-06'
+
+  - language: javascript
+    registry: npm
+    name: "@bloomreach/ng-sdk"
+    url: https://www.npmjs.com/package/@bloomreach/ng-sdk
+    install: npm install @bloomreach/ng-sdk
+    repository: https://github.com/bloomreach/spa-sdk
+    api: Bloomreach Content Delivery API
+    official: true
+    version: 28.1.0
+    published: '2026-08-06'
+
+  - language: javascript
+    registry: npm
+    name: "@bloomreach/vue-sdk"
+    url: https://www.npmjs.com/package/@bloomreach/vue-sdk
+    install: npm install @bloomreach/vue-sdk
+    repository: https://github.com/bloomreach/spa-sdk
+    api: Bloomreach Content Delivery API
+    official: true
+    version: 28.1.0
+    published: '2026-08-06'
+
+  # ---- Discovery front-end SDKs ----
+  - language: typescript
+    registry: npm
+    name: "@bloomreach/discovery-web-sdk"
+    url: https://www.npmjs.com/package/@bloomreach/discovery-web-sdk
+    install: npm install @bloomreach/discovery-web-sdk
+    repository: https://github.com/bloomreach/discovery-web-sdk
+    api: Bloomreach Discovery (Product & Category Search, Autosuggest, Widgets)
+    official: true
+    version: 2.0.2
+    published: '2025-12-10'
+    note: >-
+      Eight months since the last release, against a Discovery API surface whose docs changed
+      in the last 30 days. The GitHub repo was last pushed 2025-12-10 as well.
+
+  - language: typescript
+    registry: npm
+    name: "@bloomreach/limitless-ui-react"
+    url: https://www.npmjs.com/package/@bloomreach/limitless-ui-react
+    install: npm install @bloomreach/limitless-ui-react
+    repository: https://github.com/bloomreach/limitless-ui-react
+    api: Bloomreach Discovery
+    official: true
+    version: 1.0.0
+    published: '2024-12-09'
+    note: >-
+      React component library for Discovery storefronts. Still at its 1.0.0 first release from
+      December 2024 — the strongest abandonment signal in this set.
+
+  - language: typescript
+    registry: github
+    name: discovery-connector-sdk
+    url: https://github.com/bloomreach/discovery-connector-sdk
+    api: Bloomreach Discovery
+    official: true
+    version: null
+    published: null
+    note: >-
+      "An SDK for foundational Bloomreach Discovery front end integration." Distributed from
+      GitHub only — no npm package of this name exists, so there is no registry metadata
+      endpoint to read a version from. Repo last pushed 2025-08-11.
+
+  # ---- Engagement (Exponea) mobile + cross-platform SDKs ----
+  - language: swift
+    registry: cocoapods
+    name: ExponeaSDK
+    url: https://cocoapods.org/pods/ExponeaSDK
+    install: pod 'ExponeaSDK'
+    repository: https://github.com/exponea/exponea-ios-sdk
+    api: Bloomreach Engagement (Marketing) API
+    official: true
+    version: 4.3.0
+    published: '2026-08-12'
+    note: >-
+      Trunk owners are all @bloomreach.com addresses, confirming first-party ownership of the
+      legacy Exponea namespace.
+
+  - language: kotlin
+    registry: maven
+    name: com.exponea.sdk:sdk
+    url: https://central.sonatype.com/artifact/com.exponea.sdk/sdk
+    install: implementation 'com.exponea.sdk:sdk:4.3.0'
+    api: Bloomreach Engagement (Marketing) API
+    official: true
+    version: 4.3.0
+    published: '2025-04-09'
+
+  - language: javascript
+    registry: npm
+    name: react-native-exponea-sdk
+    url: https://www.npmjs.com/package/react-native-exponea-sdk
+    install: npm install react-native-exponea-sdk
+    repository: https://github.com/exponea/exponea-react-native-sdk
+    api: Bloomreach Engagement (Marketing) API
+    official: true
+    version: 4.0.0
+    published: '2026-06-26'
+    note: Published by the br-msdk-bot npm account (Bloomreach mobile SDK release automation).
+
+  - language: javascript
+    registry: npm
+    name: "@bloomreach/segmentation"
+    url: https://www.npmjs.com/package/@bloomreach/segmentation
+    install: npm install @bloomreach/segmentation
+    api: Bloomreach Engagement segmentation
+    official: true
+    version: 0.0.16
+    published: '2023-04-18'
+    note: Pre-1.0 and untouched since April 2023.
+
+  # ---- Mobile Discovery SDKs (source-only) ----
+  - language: swift
+    registry: github
+    name: discovery-ios-sdk
+    url: https://github.com/bloomreach/discovery-ios-sdk
+    api: Bloomreach Discovery
+    official: true
+    version: null
+    published: null
+    note: >-
+      No CocoaPods/SwiftPM registry entry found under this name, so no metadata endpoint could
+      be queried. Repo actively maintained — last push 2026-08-10.
+
+  - language: kotlin
+    registry: github
+    name: discovery-android-sdk
+    url: https://github.com/bloomreach/discovery-android-sdk
+    api: Bloomreach Discovery
+    official: true
+    version: null
+    published: null
+    note: >-
+      Not found on Maven Central under a com.bloomreach group. Repo last pushed 2026-08-10.
+
+  - language: kotlin
+    registry: github
+    name: bloomreach-discovery-kotlin-sdk
+    url: https://github.com/bloomreach/bloomreach-discovery-kotlin-sdk
+    api: Bloomreach Discovery
+    official: true
+    version: null
+    published: null
+    note: Not on Maven Central. Repo last pushed 2024-12-30.
+
+  # ---- Platform connectors ----
+  - language: php
+    registry: packagist
+    name: bloomreach/bloomreach-connector-magento
+    url: https://packagist.org/packages/bloomreach/bloomreach-connector-magento
+    install: composer require bloomreach/bloomreach-connector-magento
+    api: Bloomreach Discovery
+    official: true
+    version: null
+    published: null
+    note: >-
+      Present in Packagist search results but the package metadata endpoint returned no
+      version data on 2026-08-13. Checked, nothing to record.
+
+registries_checked_with_no_first_party_package:
+  - registry: pypi
+    note: No first-party Bloomreach or Engagement Python client. `exponea` on PyPI is 0.0.0 and unrelated.
+  - registry: rubygems
+    note: No first-party gem.
+  - registry: nuget
+    note: No first-party .NET client.
+  - registry: crates.io
+    note: No first-party Rust crate.
+  - registry: pkg.go.dev
+    note: No first-party Go module.
+
+summary:
+  packages: 15
+  official: 15
+  with_registry_version: 9
+  registry_only_github: 5
+  languages: [javascript, typescript, swift, kotlin, php]
+  finding: >-
+    The Content SPA SDK family is on a current weekly release train (28.1.0, 2026-08-06) and the
+    Engagement mobile SDKs are current (4.3.0, 2026-08-12), but every Discovery front-end library
+    is stale — discovery-web-sdk eight months old, limitless-ui-react twenty months old at its
+    first release — and the Discovery mobile SDKs are distributed from GitHub with no registry
+    version a consumer can pin.

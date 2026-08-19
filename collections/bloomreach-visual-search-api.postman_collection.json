@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "e408dc6b-a257-42f4-bbe7-2be79cf4168f",
+      "name": "Visual search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5247619a-cd99-496d-9eb0-4c8cb02ef0ec",
+          "name": "Upload image",
+          "request": {
+            "name": "Upload image",
+            "description": {},
+            "url": {
+              "path": [
+                "visual",
+                "upload",
+                ":widget_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "6276",
+                  "description": "(Required) Your site's numerical Bloomreach account ID.\n\nYour Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.\nThe example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_key",
+                  "value": "bloomreach_devdocs",
+                  "description": "(Required) Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.\n\nThis parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.\nThe example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "auth_key",
+                  "value": "<string>",
+                  "description": "The unique key shared during the integration phase. This is used to authenticate your API call.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "1jwy7eg9",
+                  "key": "widget_id",
+                  "description": "(Required) The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.\n\nThe example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) This specifies the form field as \"image\" and the suggested filename of the image being uploaded.         \nExample syntax: `Content-Disposition: form-data; name=\"image\"; filename=\"filename.jpg\"`\n",
+                "key": "Content-Disposition",
+                "value": "form-data; name=\"image\"; filename=\"filename.jpg\""
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12d43a08-cc75-4f9e-980f-43b846034edb",
+          "name": "Run visual search",
+          "request": {
+            "name": "Run visual search",
+            "description": {},
+            "url": {
+              "path": [
+                "visual",
+                "search",
+                ":widget_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "6276",
+                  "description": "(Required) Your site's numerical Bloomreach account ID.\n\nYour Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.\nThe example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "_br_uid_2",
+                  "value": "uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55",
+                  "description": "(Required) A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).\nThis cookie creates a unique, anonymous identifier for every browser or device.\nUse the default value provided, which is already encoded.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "domain_key",
+                  "value": "bloomreach_devdocs",
+                  "description": "(Required) Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.\n\nThis parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.\nThe example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "https://www.documentation-site.com",
+                  "description": "(Required) The absolute URL of the page where the request is initiated. Don't use a relative URL.\n\nThe example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "A comma-separated list of fields to be sent in the request.\n\nAlternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.\nThis parameter is required if not sent via the Dashboard.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.\n\nAny facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.\nLet your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.\n\nYou can filter results based on numeric ranges. For example, `&filter=(price:[\"100\" TO \"*\"])`.\nNote that a negative filter on ranges isn't supported.\nTo provide multiple filters, send multiple filter parameters.\nFor example, `&filter=(price:[\"*\" TO \"100\"])&filter=(color_groups: (\"blue\"))`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "content_injection",
+                  "value": "<boolean>",
+                  "description": "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+                },
+                {
+                  "disabled": false,
+                  "key": "rows",
+                  "value": "<integer>",
+                  "description": "The number of matching items to return per results page in the API response. The maximum value is 200.\nThe result size is used from the Dashboard if it isn't sent in the API.\n\nTo enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "image_id",
+                  "value": "str123",
+                  "description": "You’ll get this value in the Upload API response once an image is uploaded.\nYou can use `image_id` to make any number of subsequent queries for widget responses (with different parameters/filters and objects) without the need to re-upload.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "item_ids",
+                  "value": "pid123",
+                  "description": "Item ID/PID of the item for which you want visual recommendations. \nPassing this parameter makes it a [Visual Recommendations](https://documentation.bloomreach.com/discovery/reference/visual-search-response-api#visual-recommendations-api) request.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sku_id",
+                  "value": "<string>",
+                  "description": "If you have SKUs in the catalog, `sku_id` should be passed, else this can be skipped.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<int32>",
+                  "description": "By default, you will get the recommendations for the whole image you uploaded if you make an API call without the object_id [denoted by -1]. \nTo get more targeted results, you can also make API calls specific to an `object_id`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "auth_key",
+                  "value": "<string>",
+                  "description": "The unique key shared during the integration phase. This is used to authenticate your API call.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "1jwy7eg9",
+                  "key": "widget_id",
+                  "description": "(Required) The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.\n\nThe example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.\n"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pathways.dxpapi.com/api/v2/widgets",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18bfe34f-5af3-4eca-9746-f0ac0b25b5c3",
+    "name": "Workspace Imports Autosuggest API v2 Visual search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to programmatically trigger an existing workspace-scoped\nimport in Bloomreach Engagement.\n",
+      "type": "text/plain"
+    }
+  }
+}

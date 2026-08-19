@@ -1,0 +1,785 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/*.yml components.schemas $ref graph
+description: 'Entity graph derived from every components.schemas block in the harvested Bloomreach OpenAPIs.
+  The graph is Discovery-shaped because that is where Bloomreach publishes machine-readable contracts:
+  catalogs contain records, records fan out into variants and views, and search/widget responses wrap
+  product documents. The Engagement domain — customers, events, scenarios, campaigns, segments, initiatives,
+  vouchers — is entirely absent from the specs and is only visible through the Loomi Connect MCP tool
+  catalogue.'
+domains:
+- domain: Discovery catalog
+  root: Catalog
+  chain: Account > Catalog > Environment > Record > (Variant | View > Variant)
+  identifiers:
+    account_name: path
+    catalog_name: path
+    environment_name: path
+    record_id: path
+    variant_id: path
+    view_id: path
+  concurrency: Records carry an ETag; conditional PATCH uses if_match_etag
+- domain: Discovery search
+  root: SearchResponse
+  note: Search, autosuggest, bestseller and content-search all return a response envelope wrapping product
+    documents plus facets.
+- domain: Discovery widgets
+  root: Widget
+  note: Widgets are addressed by widget_id and typed by strategy — category, keyword, item, global, personalized,
+    recently-viewed, visual.
+- domain: Data Hub imports
+  root: Import
+  chain: Workspace > Import > Job
+  note: startWorkspaceImport is the single published write operation.
+- domain: Engagement / Marketing
+  root: null
+  note: 'No OpenAPI is harvested for this domain. Its entity vocabulary is recoverable from the Loomi
+    Connect tool names: Organization > Workspace > Project > (Customer, Event, Scenario, EmailCampaign,
+    SmsCampaign, Segment, CustomerFilter, Initiative, VoucherPool, VoucherCode, Catalog, Recommendation,
+    Report, Dashboard, Prediction, Experiment). See mcp/bloomreach-tool-crosswalk.yml.'
+- domain: Content
+  root: Channel
+  note: No OpenAPI is harvested for this domain either. The Content reference names Channel, Page, Component,
+    Route, Menu, Layout, Document, Folder, ResourceBundle, ContentType, Project and Webhook as the managed
+    resources, each with its own management API.
+entities:
+- entity: 404Response
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  - openapi/bloomreach-feed-indexing-api-openapi.yml
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - details
+  description: Not Found
+- entity: 406Response
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - details
+  description: Not Acceptable
+- entity: 412Response
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  fields:
+  - details
+  description: Precondition Failed
+- entity: 413Response
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - details
+  description: Content Too Large
+- entity: 429Response
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  - openapi/bloomreach-feed-indexing-api-openapi.yml
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - details
+  description: Too Many Requests
+- entity: 500Response
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  - openapi/bloomreach-feed-indexing-api-openapi.yml
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - details
+  description: Internal Server Error
+- entity: ContentCatalog
+  sources:
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - config_etag
+  - data_type
+  - environment
+  - language
+  - name
+  - stats
+  description: null
+- entity: ContentCatalogStats
+  sources:
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - item_doc_count
+  - item_record_count
+  - item_view_override_record_count
+  - last_feed_delta_update_at
+  - last_feed_full_update_at
+  - last_index_update_at
+  - last_index_update_config_etag
+  description: null
+- entity: ContentConfiguration
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  fields:
+  - custom_attributes
+  - custom_attributes_defaults
+  - feed
+  - index
+  description: null
+- entity: ContentFeedJobStats
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - patch_operation_add_item_attribute_count
+  - patch_operation_add_item_attributes_count
+  - patch_operation_add_item_count
+  - patch_operation_add_item_view_attribute_count
+  - patch_operation_add_item_view_attributes_count
+  - patch_operation_add_item_view_count
+  - patch_operation_add_item_views_count
+  - patch_operation_count
+  - patch_operation_remove_item_count
+  - patch_operation_remove_item_view_attribute_count
+  - patch_operation_remove_item_view_attributes_count
+  - patch_operation_remove_item_view_count
+  - patch_operation_remove_item_views_attribute_count
+  - patch_operation_remove_item_views_attributes_count
+  - patch_operation_remove_item_views_count
+  description: null
+- entity: ContentIndexJobStats
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - deleted_parent_count
+  - item_doc_count
+  - search_item_count
+  description: null
+- entity: ContentReservedAttributes
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  fields:
+  - item
+  description: null
+- entity: ErrorResponse
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  - openapi/bloomreach-feed-indexing-api-openapi.yml
+  - openapi/bloomreach-imports-api-openapi.yml
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - class
+  - detail
+  - error
+  - errors
+  - success
+  - title
+  - type
+  description: 'Error response. Most errors use the `success` + `errors._global`
+
+    shape; some failures returned by the underlying import service
+
+    are surfaced verbatim and use the alternative `error'
+- entity: FeedJobProperties
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - feed_data_type
+  - feed_mode
+  - input_filenames
+  - input_source
+  description: null
+- entity: IndexJobProperties
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - config_etag
+  - ignore_count_drop
+  - index_config_etag
+  - index_data_type
+  - index_mode
+  description: null
+- entity: Item
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - views
+  description: null
+- entity: ItemSummary
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - id
+  - view_count
+  description: null
+- entity: ItemView
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  description: null
+- entity: ItemViewPreview
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  description: null
+- entity: ItemViewSummary
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - id
+  description: null
+- entity: ItemViewsetPreview
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - view_ids
+  description: null
+- entity: Job
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - created_at
+  - details
+  - id
+  - properties
+  - started_at
+  - stats
+  - status
+  - status_code
+  - stopped_at
+  - type
+  - updated_at
+  description: null
+- entity: JobErrorDetail
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - class
+  - detail
+  - resolution
+  - title
+  - type
+  description: null
+- entity: NotFoundErrorResponse
+  sources:
+  - openapi/bloomreach-imports-api-openapi.yml
+  fields:
+  - errors
+  - success
+  description: null
+- entity: Product
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - variants
+  - views
+  description: null
+- entity: ProductCatalog
+  sources:
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - config_etag
+  - data_type
+  - environment
+  - language
+  - name
+  - properties
+  - stats
+  description: null
+- entity: ProductCatalogProperties
+  sources:
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - feed_version
+  - index_version
+  description: null
+- entity: ProductCatalogStats
+  sources:
+  - openapi/bloomreach-view-catalogs-data-api-openapi.yml
+  fields:
+  - catalog_displayable_byte_count
+  - catalog_facetable_auto_byte_count
+  - catalog_facetable_manual_byte_count
+  - catalog_searchable_byte_count
+  - last_feed_delta_update_at
+  - last_feed_full_update_at
+  - last_index_refresh_at
+  - last_index_update_at
+  - last_index_update_config_etag
+  - last_keyword_suggest_refresh_at
+  - product_doc_byte_count
+  - product_doc_count
+  - product_record_count
+  - product_view_override_record_count
+  - unique_view_count
+  - variant_doc_byte_count
+  - variant_doc_count
+  - variant_record_count
+  - variant_view_override_record_count
+  description: null
+- entity: ProductConfiguration
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  fields:
+  - autosuggest
+  - core_attribute_searchability
+  - custom_attributes
+  - custom_attributes_defaults
+  - feed
+  - index
+  - reserved_attribute_searchability
+  - variants
+  description: null
+- entity: ProductFeedJobStats
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - patch_operation_add_product_attribute_count
+  - patch_operation_add_product_attributes_count
+  - patch_operation_add_product_count
+  - patch_operation_add_product_variant_attribute_count
+  - patch_operation_add_product_variant_attributes_count
+  - patch_operation_add_product_variant_count
+  - patch_operation_add_product_variants_count
+  - patch_operation_add_product_view_attribute_count
+  - patch_operation_add_product_view_attributes_count
+  - patch_operation_add_product_view_count
+  - patch_operation_add_product_view_variant_attribute_count
+  - patch_operation_add_product_view_variant_attributes_count
+  - patch_operation_add_product_view_variant_count
+  - patch_operation_add_product_view_variant_exclusion_count
+  - patch_operation_add_product_view_variants_count
+  - patch_operation_add_product_views_count
+  - patch_operation_add_product_views_group_count
+  - patch_operation_add_product_views_variant_count
+  - patch_operation_count
+  - patch_operation_remove_product_attribute_count
+  - patch_operation_remove_product_attributes_count
+  - patch_operation_remove_product_count
+  - patch_operation_remove_product_variant_attribute_count
+  - patch_operation_remove_product_variant_attributes_count
+  - patch_operation_remove_product_variant_count
+  description: null
+- entity: ProductIndexJobStats
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields:
+  - deleted_parent_count
+  - invalid_products_count
+  - invalid_products_empty_product_id_count
+  - invalid_products_invalid_price_data_count
+  - invalid_products_no_price_data_count
+  - invalid_variants_count
+  - invalid_variants_no_price_data_count
+  - modified_product_record_count
+  - modified_variant_record_count
+  - product_doc_count
+  - products_no_title_count
+  - products_no_url_count
+  - search_document_count
+  - search_documents_byte_count
+  - search_product_count
+  - search_variant_count
+  - unavailable_products_all_variants_unavailable_count
+  - unavailable_products_count
+  - unavailable_variants_count
+  - variant_doc_count
+  description: null
+- entity: ProductSummary
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - id
+  - product_view_override_record_count
+  - variant_record_count
+  - variant_view_override_record_count
+  - view_count
+  description: null
+- entity: ProductVariant
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  description: null
+- entity: ProductVariantSummary
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - id
+  description: null
+- entity: ProductVariantView
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - exclude_from_view
+  - id
+  description: null
+- entity: ProductVariantViewSummary
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - exclude_from_view
+  - id
+  description: null
+- entity: ProductView
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - variants
+  description: null
+- entity: ProductViewPreview
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - variants
+  description: null
+- entity: ProductViewSummary
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - id
+  - variant_override_record_count
+  description: null
+- entity: ProductViewsetPreview
+  sources:
+  - openapi/bloomreach-manage-feed-records-api-openapi.yml
+  fields:
+  - attributes
+  - variants
+  - view_ids
+  description: null
+- entity: SearchResponse
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - autoCorrectQuery
+  - category_map
+  - did_you_mean
+  - facet_counts
+  - group_response
+  - keywordRedirect
+  - metadata
+  - response
+  - stats
+  description: null
+- entity: SearchResponseDoc
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - brand
+  - description
+  - pid
+  - price
+  - price_range
+  - promotions
+  - sale_price
+  - sale_price_range
+  - score
+  - thumb_image
+  - title
+  - url
+  - variants
+  description: null
+- entity: SearchResponseFacetCounts
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - facet_fields
+  - facet_queries
+  - facet_ranges
+  - facets
+  description: null
+- entity: SearchResponseFacetCountsFacetFields
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - category
+  description: null
+- entity: SearchResponseFacetCountsFacetFieldsCategory
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - cat_id
+  - cat_name
+  - count
+  - crumb
+  - parent
+  - tree_path
+  description: null
+- entity: SearchResponseFacetCountsFacetRanges
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - price
+  description: null
+- entity: SearchResponseFacetCountsFacetRangesPrice
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - count
+  - end
+  - start
+  description: null
+- entity: SearchResponseFacetCountsFacets
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields: []
+  description: null
+- entity: SearchResponseGroupResponse
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields: []
+  description: null
+- entity: SearchResponseGroupResponseGroupList
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - groups
+  - matches
+  description: null
+- entity: SearchResponseGroupResponseGroupListGroup
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - doclist
+  - groupValue
+  description: null
+- entity: SearchResponseKeywords
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - original_query
+  - redirected_query
+  - redirected_url
+  description: null
+- entity: SearchResponseMetadata
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - experiments
+  - query
+  description: null
+- entity: SearchResponseResponse
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - docs
+  - maxScore
+  - numFound
+  - start
+  description: null
+- entity: SearchResponseStats
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - stats_fields
+  description: null
+- entity: SearchResponseStatsStatsFields
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - price
+  - sale_price
+  description: null
+- entity: SearchResponseStatsStatsFieldsPrice
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - max
+  - min
+  description: null
+- entity: SnapReservedAttributes
+  sources:
+  - openapi/bloomreach-catalog-configuration-api-openapi.yml
+  fields:
+  - product
+  - variant
+  description: null
+- entity: StartImportRequest
+  sources:
+  - openapi/bloomreach-imports-api-openapi.yml
+  fields:
+  - path
+  - test_connection
+  description: null
+- entity: SuccessResponse
+  sources:
+  - openapi/bloomreach-imports-api-openapi.yml
+  fields:
+  - success
+  description: null
+- entity: SuggestJobProperties
+  sources:
+  - openapi/bloomreach-job-processing-api-openapi.yml
+  fields: []
+  description: null
+- entity: SuggestResponse
+  sources:
+  - openapi/bloomreach-autosuggest-api-v2-api-openapi.yml
+  fields:
+  - queryContext
+  - suggestionGroups
+  description: null
+- entity: Variant
+  sources:
+  - openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+  fields:
+  - sku_color_group
+  - sku_price
+  - sku_sale_price
+  - sku_swatch_images
+  - sku_thumb_images
+  - skuid
+  description: null
+relationships:
+- from: 429Response
+  to: ErrorResponse
+  type: has_many
+  via: details
+  source: openapi/bloomreach-catalog-configuration-api-openapi.yml
+- from: 412Response
+  to: ErrorResponse
+  type: has_many
+  via: details
+  source: openapi/bloomreach-catalog-configuration-api-openapi.yml
+- from: 404Response
+  to: ErrorResponse
+  type: has_many
+  via: details
+  source: openapi/bloomreach-catalog-configuration-api-openapi.yml
+- from: 500Response
+  to: ErrorResponse
+  type: has_many
+  via: details
+  source: openapi/bloomreach-catalog-configuration-api-openapi.yml
+- from: Job
+  to: JobErrorDetail
+  type: has_many
+  via: details
+  source: openapi/bloomreach-job-processing-api-openapi.yml
+- from: 406Response
+  to: ErrorResponse
+  type: has_many
+  via: details
+  source: openapi/bloomreach-manage-feed-records-api-openapi.yml
+- from: 413Response
+  to: ErrorResponse
+  type: has_many
+  via: details
+  source: openapi/bloomreach-manage-feed-records-api-openapi.yml
+- from: SearchResponseDoc
+  to: Variant
+  type: has_many
+  via: variants
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseResponse
+  to: SearchResponseDoc
+  type: has_many
+  via: docs
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseStats
+  to: SearchResponseStatsStatsFields
+  type: has_one
+  via: stats_fields
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseStatsStatsFields
+  to: SearchResponseStatsStatsFieldsPrice
+  type: has_one
+  via: price
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseStatsStatsFields
+  to: SearchResponseStatsStatsFieldsPrice
+  type: has_one
+  via: sale_price
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponse
+  to: SearchResponseResponse
+  type: has_one
+  via: response
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponse
+  to: SearchResponseFacetCounts
+  type: has_one
+  via: facet_counts
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponse
+  to: SearchResponseKeywords
+  type: has_one
+  via: keywordRedirect
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponse
+  to: SearchResponseGroupResponse
+  type: has_one
+  via: group_response
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponse
+  to: SearchResponseStats
+  type: has_one
+  via: stats
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponse
+  to: SearchResponseMetadata
+  type: has_one
+  via: metadata
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseGroupResponseGroupList
+  to: SearchResponseGroupResponseGroupListGroup
+  type: has_many
+  via: groups
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseFacetCounts
+  to: SearchResponseFacetCountsFacets
+  type: has_one
+  via: facets
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseFacetCounts
+  to: SearchResponseFacetCountsFacetFields
+  type: has_one
+  via: facet_fields
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseFacetCounts
+  to: SearchResponseFacetCountsFacetRanges
+  type: has_one
+  via: facet_ranges
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseFacetCountsFacetRanges
+  to: SearchResponseFacetCountsFacetRangesPrice
+  type: has_many
+  via: price
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: SearchResponseFacetCountsFacetFields
+  to: SearchResponseFacetCountsFacetFieldsCategory
+  type: has_many
+  via: category
+  source: openapi/bloomreach-product-category-search-api-v1-api-openapi.yml
+- from: ProductCatalog
+  to: ProductCatalogStats
+  type: has_one
+  via: stats
+  source: openapi/bloomreach-view-catalogs-data-api-openapi.yml
+- from: ProductCatalog
+  to: ProductCatalogProperties
+  type: has_one
+  via: properties
+  source: openapi/bloomreach-view-catalogs-data-api-openapi.yml
+- from: ContentCatalog
+  to: ContentCatalogStats
+  type: has_one
+  via: stats
+  source: openapi/bloomreach-view-catalogs-data-api-openapi.yml
+summary:
+  entities: 63
+  relationships: 27
+  domains_with_a_spec: 4
+  domains_without_a_spec: 2

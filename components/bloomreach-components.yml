@@ -1,0 +1,69 @@
+generated: '2026-08-13'
+method: searched
+source: https://documentation.bloomreach.com/content/docs/bloomreach-spa-sdk, https://github.com/bloomreach,
+  registry.npmjs.org
+description: Bloomreach ships client-side rendering components on two of its three product lines. Content
+  ships the SPA SDK family — framework bindings that render Bloomreach-managed pages and enable in-context
+  editing from the Experience Manager. Discovery ships a React component library plus front-end connector
+  SDKs for the major commerce platforms. Engagement renders in-page surfaces (weblayers, in-app messages)
+  through the platform rather than through a library the developer installs.
+families:
+- family: Content SPA SDK
+  purpose: Render Bloomreach Content pages in a single-page app and enable Experience Manager preview/editing
+  docs: https://documentation.bloomreach.com/content/docs/bloomreach-spa-sdk
+  loaders:
+  - name: '@bloomreach/spa-sdk'
+    role: framework-agnostic core
+    version: 28.1.0
+  - name: '@bloomreach/react-sdk'
+    role: React bindings
+    version: 28.1.0
+  - name: '@bloomreach/ng-sdk'
+    role: Angular bindings
+    version: 28.1.0
+  - name: '@bloomreach/vue-sdk'
+    role: Vue bindings
+    version: 28.1.0
+  components:
+  - BrPage
+  - BrComponent
+  - BrManageContentButton
+  - BrManageMenuButton
+  reference_app: https://github.com/bloomreach/bloomreach-reference-spa
+  note: Component names are the documented public surface of the SPA SDK; versions read from npm on 2026-08-13.
+- family: Discovery Limitless UI
+  purpose: Prebuilt React components for search, autosuggest and product grids
+  loaders:
+  - name: '@bloomreach/limitless-ui-react'
+    version: 1.0.0
+    published: '2024-12-09'
+  repository: https://github.com/bloomreach/limitless-ui-react
+  note: Still at its first release; treat as unmaintained until a 1.x follow-up ships.
+- family: Discovery front-end SDKs
+  purpose: Wire a storefront to the Discovery search and widget APIs
+  loaders:
+  - name: '@bloomreach/discovery-web-sdk'
+    version: 2.0.2
+    published: '2025-12-10'
+  - name: discovery-connector-sdk
+    distribution: github
+    version: null
+  platform_connectors:
+  - Magento
+  - Shopify
+  - SAP Commerce Cloud
+  - Salesforce Commerce Cloud (B2C and Composable)
+- family: Content Open UI extensions
+  purpose: Embed third-party UIs (DAM, analytics, pickers) inside the Content authoring application
+  management_api: https://documentation.bloomreach.com/content/reference/content-integrations-management-api
+  samples: https://github.com/bloomreach/ui-extensions
+  note: The extension surface is configured through the Content Integrations Management API, so it is
+    both a component surface and an API surface.
+- family: Engagement in-page surfaces
+  purpose: Weblayers, banners, in-app messages and surveys rendered by the Engagement JS pixel
+  note: Delivered by the platform rather than by an installable component library; configured in the Engagement
+    dashboard and exposed to agents through the Loomi Connect search_banners / search_in_app_messages
+    / search_surveys tools.
+summary:
+  families: 5
+  installable_packages: 7

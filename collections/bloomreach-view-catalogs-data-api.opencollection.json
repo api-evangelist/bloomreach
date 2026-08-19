@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workspace Imports Autosuggest API v2 View Catalogs data API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "View Catalogs data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              }
+            ]
+          },
+          "docs": "Get all the catalogs present for an account.\n"
+        },
+        {
+          "info": {
+            "name": "Get catalog details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://discovery.bloomreach.com/dataconnect/api/v3/accounts/:account_name/catalogs/:catalog_name/environments/:environment_name",
+            "params": [
+              {
+                "name": "account_name",
+                "value": "homeoasis",
+                "type": "path",
+                "description": "Your unique account name."
+              },
+              {
+                "name": "catalog_name",
+                "value": "homeoasis_fr",
+                "type": "path",
+                "description": "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
+              },
+              {
+                "name": "environment_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of environment you want to use for the request (Production/Staging)."
+              }
+            ]
+          },
+          "docs": "View the current state of a catalog. This returns the entire catalog with product and item feed record data.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
