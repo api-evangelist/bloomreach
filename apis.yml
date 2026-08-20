@@ -39,6 +39,19 @@ tags:
   - Marketing Automation
   - Headless CMS
   - Personalization
+  - E-Commerce
+tags_raw:
+  - Digital Commerce
+  - Search
+  - Merchandising
+  - Recommendations
+  - Customer Data Platform
+  - CDP
+  - Email Marketing
+  - SMS Marketing
+  - Marketing Automation
+  - Headless CMS
+  - Personalization
   - E-commerce
 
 apis:
@@ -74,6 +87,12 @@ apis:
   - Headless CMS
   - Content Management
   - Channels
+  - Webhook
+  - Project
+  tags_raw:
+  - Headless CMS
+  - Content Management
+  - Channels
   - Webhooks
   - Projects
   properties:
@@ -89,6 +108,12 @@ apis:
   humanURL: https://documentation.bloomreach.com/content/reference/delivery-api
   baseURL: https://{environment_name}.bloomreach.io/delivery/site/v1
   tags:
+  - Headless CMS
+  - Content Delivery
+  - Spa
+  - Channels
+  - Pages
+  tags_raw:
   - Headless CMS
   - Content Delivery
   - SPA
@@ -178,6 +203,8 @@ apis:
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
   baseURL: https://discovery.bloomreach.com/dataconnect/api/v3
   tags:
+  - Catalog Configuration
+  tags_raw:
   - Catalog configuration
   properties:
   - type: OpenAPI
@@ -862,6 +889,8 @@ apis:
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
   baseURL: https://pathways.dxpapi.com/api/v2/widgets
   tags:
+  - Visual Search
+  tags_raw:
   - Visual search
   properties:
   - type: OpenAPI
