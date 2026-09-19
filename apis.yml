@@ -415,6 +415,8 @@ apis:
   humanURL: https://documentation.bloomreach.com/discovery/reference/welcome
   baseURL: https://api.bloomreach.com
   tags:
+  - Import
+  tags_raw:
   - Imports
   properties:
   - type: OpenAPI
