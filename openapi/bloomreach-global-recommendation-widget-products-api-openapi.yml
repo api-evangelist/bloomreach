@@ -1,17 +1,16 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workspace Imports Autosuggest API v2 Global Recommendation Widget Products API
-  description: 'API to programmatically trigger an existing workspace-scoped
-
-    import in Bloomreach Engagement.
-
-    '
-  version: '2.1'
+  title: Email Widget Global Recommendation Widget Products API
+  description: API Specification For Bloomreach Email Widget APIs
+  version: 2.0.0
+  contact:
+    name: Metal
+    email: recs-pathways@bloomreach.com
 servers:
 - url: https://pathways-email.dxpapi.com
+  description: Production
 - url: https://pathways-email-staging.dxpapi.com
-security:
-- basicAuth: []
+  description: Staging
 tags:
 - name: Global Recommendation Widget Products
 paths:
@@ -60,6 +59,8 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
+      operationId: getApiV2WidgetsImageGlobalByWidgetId
+      x-operation-id-source: derived
   /api/v2/widgets/proxy/global/{widget_id}:
     description: Email proxy api calls for trending products
     parameters:
@@ -105,8 +106,78 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
+      operationId: getApiV2WidgetsProxyGlobalByWidgetId
+      x-operation-id-source: derived
 components:
   parameters:
+    _br_uid_2:
+      name: _br_uid_2
+      in: query
+      description: A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. </br></br> Mostly the default value provided is used, which is already encoded.
+      required: true
+      schema:
+        type: string
+        default: uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13
+    ref_url:
+      name: ref_url
+      in: query
+      description: The URL of the page or HTTP referrer where the request is started.
+      required: false
+      schema:
+        type: string
+        format: uri
+        default: https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items
+    rows:
+      name: rows
+      in: query
+      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+      required: false
+      schema:
+        type: integer
+        default: 5
+        minimum: 0
+        maximum: 200
+    view_id:
+      name: view_id
+      in: query
+      description: A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+      required: false
+      schema:
+        type: string
+    request_id:
+      name: request_id
+      in: query
+      description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
+      required: false
+      example: 1234567891234
+      schema:
+        type: string
+    domain_key:
+      name: domain_key
+      in: query
+      description: Your site domain's ID, which is provided by Bloomreach during initial scoping and integration. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
+      required: true
+      schema:
+        type: string
+        default: pacific_supply
+    fields:
+      name: fields
+      in: query
+      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response.
+      required: false
+      schema:
+        type: string
+        default: pid
+    start:
+      name: start
+      in: query
+      description: The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. The maximum value is 10000.
+      required: false
+      example: 3
+      schema:
+        type: integer
+        default: 3
+        minimum: 0
     filter:
       name: filter
       in: query
@@ -126,32 +197,6 @@ components:
       required: false
       schema:
         type: string
-    request_id:
-      name: request_id
-      in: query
-      description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
-      required: false
-      example: 1234567891234
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response.
-      required: false
-      schema:
-        type: string
-        default: pid
-    start:
-      name: start
-      in: query
-      description: The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. The maximum value is 10000.
-      required: false
-      example: 3
-      schema:
-        type: integer
-        default: 3
-        minimum: 0
     url:
       name: url
       in: query
@@ -168,64 +213,7 @@ components:
       required: false
       schema:
         type: string
-    _br_uid_2:
-      name: _br_uid_2
-      in: query
-      description: A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device. </br></br> Mostly the default value provided is used, which is already encoded.
-      required: true
-      schema:
-        type: string
-        default: uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13
-    domain_key:
-      name: domain_key
-      in: query
-      description: Your site domain's ID, which is provided by Bloomreach during initial scoping and integration. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
-      required: true
-      schema:
-        type: string
-        default: pacific_supply
-    rows:
-      name: rows
-      in: query
-      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
-      required: false
-      schema:
-        type: integer
-        default: 5
-        minimum: 0
-        maximum: 200
-    ref_url:
-      name: ref_url
-      in: query
-      description: The URL of the page or HTTP referrer where the request is started.
-      required: false
-      schema:
-        type: string
-        format: uri
-        default: https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items
-    view_id:
-      name: view_id
-      in: query
-      description: A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
-      required: false
-      schema:
-        type: string
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: 'HTTP Basic authentication using an API Key ID and API Secret.
-
-        For this workspace-scoped endpoint, use a workspace API key.
-
-
-        `Authorization: Basic <base64(APIKeyID:APISecret)>`
-
-
-        The API key must have the **Imports → Allow trigger imports**
-
-        permission enabled in Workspace settings → Access management →
-
-        API.
-
-        '
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true

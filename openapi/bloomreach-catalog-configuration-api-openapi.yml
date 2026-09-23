@@ -1,18 +1,13 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workspace Imports Autosuggest API v2 Catalog configuration API
-  description: 'API to programmatically trigger an existing workspace-scoped
-
-    import in Bloomreach Engagement.
-
-    '
-  version: '2.1'
+  title: Catalog management Catalog configuration API
+  version: 3.0.0
 servers:
 - url: https://discovery.bloomreach.com/dataconnect/api/v3
 security:
-- basicAuth: []
+- bearerAuth: []
 tags:
-- name: Catalog configuration
+- name: Catalog Configuration
 paths:
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/LATEST:
     parameters:
@@ -21,11 +16,9 @@ paths:
     - $ref: '#/components/parameters/EnvironmentName'
     get:
       tags:
-      - Catalog configuration
+      - Catalog Configuration
       summary: Get current configuration
-      description: 'Understand the current state of catalog configuration, including custom attributes configuration and all [catalog settings](https://documentation.bloomreach.com/discovery/docs/catalog-settings) present in the dashboard.
-
-        '
+      description: Understand the current state of catalog configuration, including custom attributes configuration and all catalog settings present in the dashboard.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -77,13 +70,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameConfigsLATEST
+      x-operation-id-source: derived
     post:
       tags:
-      - Catalog configuration
+      - Catalog Configuration
       summary: Modify current configuration
-      description: 'Programmatically modify the current catalog configuration to automate common tasks.
-
-        '
+      description: Programmatically modify the current catalog configuration to automate common tasks.
       requestBody:
         content:
           application/json:
@@ -190,6 +183,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: postAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameConfigsLATEST
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/configs/{config_id}:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -198,9 +193,9 @@ paths:
     - $ref: '#/components/parameters/ConfigId'
     get:
       tags:
-      - Catalog configuration
+      - Catalog Configuration
       summary: Get an older configuration
-      description: "Understand what the catalog configuration looked like at the point in time an index was generated. \n"
+      description: Understand what the catalog configuration looked like at the point in time an index was generated.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -252,6 +247,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameConfigsByConfigId
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/reserved-attributes:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -259,11 +256,9 @@ paths:
     - $ref: '#/components/parameters/EnvironmentName'
     get:
       tags:
-      - Catalog configuration
+      - Catalog Configuration
       summary: Get reserved attributes
-      description: 'Get a list of all [reserved attributes](https://documentation.bloomreach.com/discovery/reference/reserved-fields-api) for the catalog.
-
-        '
+      description: Get a list of all reserved attributes for the catalog.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -310,8 +305,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameReservedAttributes
+      x-operation-id-source: derived
 components:
   schemas:
+    ContentConfiguration:
+      type: object
+      properties:
+        feed:
+          type: object
+          properties:
+            enable_feed_jobs:
+              type: boolean
+        index:
+          type: object
+          properties:
+            enable_index_jobs:
+              type: boolean
+            search_docs_drop_threshold:
+              type: number
+        custom_attributes_defaults:
+          type: object
+          properties:
+            facetable:
+              type: string
+              enum:
+              - auto
+              - manual
+              - false
+            searchable:
+              type: boolean
+        custom_attributes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              level:
+                type: string
+                enum:
+                - product
+                - variant
+              displayable:
+                type: boolean
+              facetable:
+                type: string
+                enum:
+                - auto
+                - manual
+                - false
+              searchable:
+                type: boolean
+              multi_valued:
+                type: boolean
+              data_type:
+                type: string
+                enum:
+                - text
+                - number
     SnapReservedAttributes:
       type: object
       properties:
@@ -377,22 +427,16 @@ components:
             sku_id: {}
             swatch_image: {}
             thumb_image: {}
-    429Response:
-      description: Too Many Requests
+    ContentReservedAttributes:
       type: object
       properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    412Response:
-      description: Precondition Failed
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
+        item:
+          additionalProperties:
+            type: object
+          example:
+            uid: {}
+            item_id: {}
+            catalog_views: {}
     ErrorResponse:
       type: object
       properties:
@@ -407,85 +451,22 @@ components:
           enum:
           - error
           - warning
-    404Response:
-      description: Not Found
+    412Response:
+      description: Precondition Failed
       type: object
       properties:
         details:
           type: array
           items:
             $ref: '#/components/schemas/ErrorResponse'
-    ContentReservedAttributes:
-      type: object
-      properties:
-        item:
-          additionalProperties:
-            type: object
-          example:
-            uid: {}
-            item_id: {}
-            catalog_views: {}
-    500Response:
-      description: Internal Server Error
+    429Response:
+      description: Too Many Requests
       type: object
       properties:
         details:
           type: array
           items:
             $ref: '#/components/schemas/ErrorResponse'
-    ContentConfiguration:
-      type: object
-      properties:
-        feed:
-          type: object
-          properties:
-            enable_feed_jobs:
-              type: boolean
-        index:
-          type: object
-          properties:
-            enable_index_jobs:
-              type: boolean
-            search_docs_drop_threshold:
-              type: number
-        custom_attributes_defaults:
-          type: object
-          properties:
-            facetable:
-              type: string
-              enum:
-              - auto
-              - manual
-              - false
-            searchable:
-              type: boolean
-        custom_attributes:
-          type: object
-          additionalProperties:
-            type: object
-            properties:
-              level:
-                type: string
-                enum:
-                - product
-                - variant
-              displayable:
-                type: boolean
-              facetable:
-                type: string
-                enum:
-                - auto
-                - manual
-                - false
-              searchable:
-                type: boolean
-              multi_valued:
-                type: boolean
-              data_type:
-                type: string
-                enum:
-                - text
-                - number
     ProductConfiguration:
       type: object
       properties:
@@ -659,6 +640,22 @@ components:
               type: boolean
             color_group:
               type: boolean
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     EnvironmentName:
       description: The type of environment you want to use for the request (Production/Staging).
@@ -672,26 +669,6 @@ components:
         - production
         - staging
       required: true
-    CatalogName:
-      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
-      name: catalog_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis_fr
-    AccountName:
-      description: Your unique account name.
-      name: account_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis
     ConfigId:
       description: The unique ID associated with a particular state of the catalog configuration.
       name: config_id
@@ -702,22 +679,28 @@ components:
         maxLength: 64
       required: true
       example: '1324'
+    AccountName:
+      description: Your unique account name.
+      name: account_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
   securitySchemes:
-    basicAuth:
+    bearerAuth:
       type: http
-      scheme: basic
-      description: 'HTTP Basic authentication using an API Key ID and API Secret.
-
-        For this workspace-scoped endpoint, use a workspace API key.
-
-
-        `Authorization: Basic <base64(APIKeyID:APISecret)>`
-
-
-        The API key must have the **Imports → Allow trigger imports**
-
-        permission enabled in Workspace settings → Access management →
-
-        API.
-
-        '
+      scheme: bearer
+      bearerFormat: API Key

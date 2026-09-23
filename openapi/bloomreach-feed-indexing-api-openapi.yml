@@ -1,16 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workspace Imports Autosuggest API v2 Feed indexing API
-  description: 'API to programmatically trigger an existing workspace-scoped
-
-    import in Bloomreach Engagement.
-
-    '
-  version: '2.1'
+  title: Catalog management Feed indexing API
+  version: 3.0.0
 servers:
 - url: https://discovery.bloomreach.com/dataconnect/api/v3
 security:
-- basicAuth: []
+- bearerAuth: []
 tags:
 - name: Feed indexing
 paths:
@@ -25,9 +20,7 @@ paths:
       tags:
       - Feed indexing
       summary: Run an indexing job
-      description: 'Trigger an indexing job to [update the catalog''s index](https://documentation.bloomreach.com/discovery/docs/promoting-changes-viewing-jobs#3-update-catalogs-index).
-
-        '
+      description: Trigger an indexing job to update the catalog's index.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -72,8 +65,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: postAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameIndexes
+      x-operation-id-source: derived
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
     429Response:
       description: Too Many Requests
       type: object
@@ -98,21 +107,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        class:
-          type: string
-          enum:
-          - error
-          - warning
   parameters:
+    IgnoreCountDropHeader:
+      description: Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.
+      name: BR-Ignore-Document-Count-Drop
+      in: header
+      schema:
+        type: boolean
+      required: false
     EnvironmentName:
       description: The type of environment you want to use for the request (Production/Staging).
       name: environment_name
@@ -125,6 +127,16 @@ components:
         - production
         - staging
       required: true
+    AccountName:
+      description: Your unique account name.
+      name: account_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis
     IndexRefreshHeader:
       description: 'Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.
 
@@ -145,39 +157,8 @@ components:
         maxLength: 64
       required: true
       example: homeoasis_fr
-    IgnoreCountDropHeader:
-      description: Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.
-      name: BR-Ignore-Document-Count-Drop
-      in: header
-      schema:
-        type: boolean
-      required: false
-    AccountName:
-      description: Your unique account name.
-      name: account_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis
   securitySchemes:
-    basicAuth:
+    bearerAuth:
       type: http
-      scheme: basic
-      description: 'HTTP Basic authentication using an API Key ID and API Secret.
-
-        For this workspace-scoped endpoint, use a workspace API key.
-
-
-        `Authorization: Basic <base64(APIKeyID:APISecret)>`
-
-
-        The API key must have the **Imports → Allow trigger imports**
-
-        permission enabled in Workspace settings → Access management →
-
-        API.
-
-        '
+      scheme: bearer
+      bearerFormat: API Key

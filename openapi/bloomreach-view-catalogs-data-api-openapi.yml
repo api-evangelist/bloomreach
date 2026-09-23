@@ -1,16 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workspace Imports Autosuggest API v2 View Catalogs data API
-  description: 'API to programmatically trigger an existing workspace-scoped
-
-    import in Bloomreach Engagement.
-
-    '
-  version: '2.1'
+  title: Catalog management View Catalogs data API
+  version: 3.0.0
 servers:
 - url: https://discovery.bloomreach.com/dataconnect/api/v3
 security:
-- basicAuth: []
+- bearerAuth: []
 tags:
 - name: View Catalogs data
 paths:
@@ -21,9 +16,7 @@ paths:
       tags:
       - View Catalogs data
       summary: Get all catalogs
-      description: 'Get all the catalogs present for an account.
-
-        '
+      description: Get all the catalogs present for an account.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -57,6 +50,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogs
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -66,9 +61,7 @@ paths:
       tags:
       - View Catalogs data
       summary: Get catalog details
-      description: 'View the current state of a catalog. This returns the entire catalog with product and item feed record data.
-
-        '
+      description: View the current state of a catalog. This returns the entire catalog with product and item feed record data.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -111,17 +104,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentName
+      x-operation-id-source: derived
 components:
   schemas:
-    429Response:
-      description: Too Many Requests
+    ContentCatalogStats:
       type: object
       properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    ProductCatalog:
+        last_index_update_config_etag:
+          description: ''
+          type: string
+          example: 5613f704b80030ef908f1395100fbd1d
+        last_index_update_at:
+          description: ''
+          format: date-time
+          type: string
+          example: '2024-01-01T00:00:00.000000Z'
+        last_feed_full_update_at:
+          description: ''
+          format: date-time
+          type: string
+          example: '2024-01-01T00:00:00.000000Z'
+        last_feed_delta_update_at:
+          description: ''
+          format: date-time
+          type: string
+          example: '2024-01-01T00:00:00.000000Z'
+        item_doc_count:
+          description: ''
+          format: date-time
+          type: string
+          example: '2024-01-01T00:00:00.000000Z'
+        item_record_count:
+          description: ''
+          format: date-time
+          type: string
+          example: '2024-01-01T00:00:00.000000Z'
+        item_view_override_record_count:
+          description: ''
+          type: integer
+    ContentCatalog:
       type: object
       properties:
         name:
@@ -135,9 +157,46 @@ components:
         config_etag:
           type: string
         stats:
-          $ref: '#/components/schemas/ProductCatalogStats'
-        properties:
-          $ref: '#/components/schemas/ProductCatalogProperties'
+          $ref: '#/components/schemas/ContentCatalogStats'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProductCatalogProperties:
+      type: object
+      properties:
+        feed_version:
+          description: ''
+          type: integer
+        index_version:
+          description: ''
+          type: integer
     ProductCatalogStats:
       type: object
       properties:
@@ -209,73 +268,7 @@ components:
         unique_view_count:
           description: ''
           type: integer
-    ProductCatalogProperties:
-      type: object
-      properties:
-        feed_version:
-          description: ''
-          type: integer
-        index_version:
-          description: ''
-          type: integer
-    ContentCatalogStats:
-      type: object
-      properties:
-        last_index_update_config_etag:
-          description: ''
-          type: string
-          example: 5613f704b80030ef908f1395100fbd1d
-        last_index_update_at:
-          description: ''
-          format: date-time
-          type: string
-          example: '2024-01-01T00:00:00.000000Z'
-        last_feed_full_update_at:
-          description: ''
-          format: date-time
-          type: string
-          example: '2024-01-01T00:00:00.000000Z'
-        last_feed_delta_update_at:
-          description: ''
-          format: date-time
-          type: string
-          example: '2024-01-01T00:00:00.000000Z'
-        item_doc_count:
-          description: ''
-          format: date-time
-          type: string
-          example: '2024-01-01T00:00:00.000000Z'
-        item_record_count:
-          description: ''
-          format: date-time
-          type: string
-          example: '2024-01-01T00:00:00.000000Z'
-        item_view_override_record_count:
-          description: ''
-          type: integer
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        class:
-          type: string
-          enum:
-          - error
-          - warning
-    ContentCatalog:
+    ProductCatalog:
       type: object
       properties:
         name:
@@ -289,7 +282,9 @@ components:
         config_etag:
           type: string
         stats:
-          $ref: '#/components/schemas/ContentCatalogStats'
+          $ref: '#/components/schemas/ProductCatalogStats'
+        properties:
+          $ref: '#/components/schemas/ProductCatalogProperties'
   parameters:
     EnvironmentName:
       description: The type of environment you want to use for the request (Production/Staging).
@@ -303,16 +298,6 @@ components:
         - production
         - staging
       required: true
-    CatalogName:
-      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
-      name: catalog_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis_fr
     AccountName:
       description: Your unique account name.
       name: account_name
@@ -323,22 +308,18 @@ components:
         maxLength: 64
       required: true
       example: homeoasis
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
   securitySchemes:
-    basicAuth:
+    bearerAuth:
       type: http
-      scheme: basic
-      description: 'HTTP Basic authentication using an API Key ID and API Secret.
-
-        For this workspace-scoped endpoint, use a workspace API key.
-
-
-        `Authorization: Basic <base64(APIKeyID:APISecret)>`
-
-
-        The API key must have the **Imports → Allow trigger imports**
-
-        permission enabled in Workspace settings → Access management →
-
-        API.
-
-        '
+      scheme: bearer
+      bearerFormat: API Key

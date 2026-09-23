@@ -1,16 +1,9 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workspace Imports Autosuggest API v2 API
-  description: 'API to programmatically trigger an existing workspace-scoped
-
-    import in Bloomreach Engagement.
-
-    '
-  version: '2.1'
+  title: Autosuggest API v2 API
+  version: '2.0'
 servers:
 - url: https://suggest.dxpapi.com/api/v2/suggest
-security:
-- basicAuth: []
 tags:
 - name: Autosuggest API v2
 paths:
@@ -196,22 +189,9 @@ components:
             type: object
           type: array
       type: object
-  securitySchemes:
-    basicAuth:
-      type: http
-      scheme: basic
-      description: 'HTTP Basic authentication using an API Key ID and API Secret.
-
-        For this workspace-scoped endpoint, use a workspace API key.
-
-
-        `Authorization: Basic <base64(APIKeyID:APISecret)>`
-
-
-        The API key must have the **Imports → Allow trigger imports**
-
-        permission enabled in Workspace settings → Access management →
-
-        API.
-
-        '
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+x-readme-fauxas: true

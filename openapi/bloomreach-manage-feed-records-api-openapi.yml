@@ -1,16 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Workspace Imports Autosuggest API v2 Manage feed records API
-  description: 'API to programmatically trigger an existing workspace-scoped
-
-    import in Bloomreach Engagement.
-
-    '
-  version: '2.1'
+  title: Catalog management Manage feed records API
+  version: 3.0.0
 servers:
 - url: https://discovery.bloomreach.com/dataconnect/api/v3
 security:
-- basicAuth: []
+- bearerAuth: []
 tags:
 - name: Manage feed records
 paths:
@@ -25,9 +20,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get current records
-      description: 'View the current state of product and item feed records in a catalog.
-
-        '
+      description: View the current state of product and item feed records in a catalog.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -78,13 +71,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecords
+      x-operation-id-source: derived
     put:
       tags:
       - Manage feed records
       summary: Upload full feed
-      description: 'Upload the entire feed data at once.
-
-        '
+      description: Upload the entire feed data at once.
       requestBody:
         content:
           application/json:
@@ -145,11 +138,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/429Response'
+      operationId: putAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecords
+      x-operation-id-source: derived
     patch:
       tags:
       - Manage feed records
       summary: Modify feed records
-      description: "Edit/change or add particular product or item records in the feed. \n"
+      description: Edit/change or add particular product or item records in the feed.
       requestBody:
         content:
           application/json:
@@ -210,6 +205,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/429Response'
+      operationId: patchAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecords
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -221,9 +218,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get record details
-      description: 'View the details of a product or item feed record.
-
-        '
+      description: View the details of a product or item feed record.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -261,6 +256,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecordsByRecordId
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/variants:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -274,9 +271,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get record variants
-      description: 'View the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a product or item feed record.
-
-        '
+      description: View the variants associated with a product or item feed record.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -338,6 +333,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecordsByRecordIdVariants
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/variants/{variant_id}:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -350,9 +347,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get variant details
-      description: 'View the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) of any product or item in the feed data.
-
-        '
+      description: View the details of a variant of any product or item in the feed data.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -399,6 +394,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecordsByRecordIdVariantsByVariantId
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -412,9 +409,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get views
-      description: 'Get all the [views](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) associated with a product or item feed record.
-
-        '
+      description: Get all the views associated with a product or item feed record.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -496,6 +491,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecordsByRecordIdViews
+      x-operation-id-source: derived
   /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}:
     parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -508,9 +505,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get view details
-      description: 'Get the details of a [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product or item feed record.
-
-        '
+      description: Get the details of a view of any product or item feed record.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -565,6 +560,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecordsByRecordIdViewsByViewId
+      x-operation-id-source: derived
   ? /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}/variants
   : parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -579,9 +576,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get view variants
-      description: 'Get all the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product feed record.
-
-        '
+      description: Get all the variants associated with a different view of any product feed record.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -650,6 +645,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecordsByRecordIdViewsByViewIdVariants
+      x-operation-id-source: derived
   ? /accounts/{account_name}/catalogs/{catalog_name}/environments/{environment_name}/records/{record_id}/views/{view_id}/variants/{variant_id}
   : parameters:
     - $ref: '#/components/parameters/AccountName'
@@ -663,9 +660,7 @@ paths:
       tags:
       - Manage feed records
       summary: Get view variant details
-      description: 'Get the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) for a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of a product feed record.
-
-        '
+      description: Get the details of a variant for a different view of a product feed record.
       responses:
         200:
           description: OK. Click to see the response structure.
@@ -712,8 +707,126 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/500Response'
+      operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameRecordsByRecordIdViewsByViewIdVariantsByVariantId
+      x-operation-id-source: derived
 components:
   schemas:
+    ProductVariantViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        exclude_from_view:
+          type: boolean
+      required:
+      - id
+      - attributes
+      - exclude_from_view
+    ProductSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        variant_record_count:
+          type: integer
+        view_count:
+          type: integer
+        product_view_override_record_count:
+          type: integer
+        variant_view_override_record_count:
+          type: integer
+      required:
+      - id
+      - attributes
+    406Response:
+      description: Not Acceptable
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    Product:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+        variants:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ProductVariant'
+        views:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ProductView'
+      required:
+      - attributes
+    Item:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+        views:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ItemView'
+      required:
+      - attributes
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProductVariantSummary:
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+      required:
+      - id
+      - attributes
+    ProductVariant:
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ProductViewPreview:
+      description: ''
+      type: object
+      properties:
+        variants:
+          type: object
+        attributes:
+          type: object
+      required:
+      - variants
+      - attributes
+    ItemViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+      required:
+      - id
+      - attributes
     ItemViewsetPreview:
       description: ''
       type: object
@@ -727,18 +840,65 @@ components:
       required:
       - view_ids
       - attributes
-    ProductVariantSummary:
+    ItemView:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ItemSummary:
+      description: ''
       type: object
       properties:
         id:
           type: string
         attributes:
           type: object
+        view_count:
+          type: integer
       required:
       - id
       - attributes
-    404Response:
-      description: Not Found
+    ItemViewPreview:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
+    ProductViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        variant_override_record_count:
+          type: integer
+      required:
+      - id
+      - attributes
+      - variant_override_record_count
+    413Response:
+      description: Content Too Large
       type: object
       properties:
         details:
@@ -761,111 +921,6 @@ components:
       - view_ids
       - variants
       - attributes
-    ProductViewSummary:
-      description: ''
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-        variant_override_record_count:
-          type: integer
-      required:
-      - id
-      - attributes
-      - variant_override_record_count
-    ProductVariant:
-      type: object
-      properties:
-        attributes:
-          type: object
-      required:
-      - attributes
-    406Response:
-      description: Not Acceptable
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    ItemSummary:
-      description: ''
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-        view_count:
-          type: integer
-      required:
-      - id
-      - attributes
-    413Response:
-      description: Content Too Large
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    Item:
-      description: ''
-      type: object
-      properties:
-        attributes:
-          type: object
-        views:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ItemView'
-      required:
-      - attributes
-    ItemView:
-      description: ''
-      type: object
-      properties:
-        attributes:
-          type: object
-      required:
-      - attributes
-    ProductViewPreview:
-      description: ''
-      type: object
-      properties:
-        variants:
-          type: object
-        attributes:
-          type: object
-      required:
-      - variants
-      - attributes
-    Product:
-      description: ''
-      type: object
-      properties:
-        attributes:
-          type: object
-        variants:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ProductVariant'
-        views:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ProductView'
-      required:
-      - attributes
-    429Response:
-      description: Too Many Requests
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
     ProductView:
       description: ''
       type: object
@@ -879,80 +934,6 @@ components:
       required:
       - attributes
       - variants
-    ItemViewPreview:
-      description: ''
-      type: object
-      properties:
-        attributes:
-          type: object
-      required:
-      - attributes
-    ProductSummary:
-      description: ''
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-        variant_record_count:
-          type: integer
-        view_count:
-          type: integer
-        product_view_override_record_count:
-          type: integer
-        variant_view_override_record_count:
-          type: integer
-      required:
-      - id
-      - attributes
-    ProductVariantViewSummary:
-      description: ''
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-        exclude_from_view:
-          type: boolean
-      required:
-      - id
-      - attributes
-      - exclude_from_view
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        class:
-          type: string
-          enum:
-          - error
-          - warning
-    ItemViewSummary:
-      description: ''
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-      required:
-      - id
-      - attributes
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
     ProductVariantView:
       description: ''
       type: object
@@ -967,59 +948,33 @@ components:
       - id
       - attributes
       - exclude_from_view
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    PageNumber:
-      description: To navigate through paginated results, use the page number to switch between pages.
-      name: page
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-      required: false
-      example: 1
-    AccountName:
-      description: Your unique account name.
-      name: account_name
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
       in: path
       schema:
         type: string
         minLength: 1
         maxLength: 64
       required: true
-      example: homeoasis
-    RecordId:
-      description: The unique ID associated with a product or item feed record.
-      name: record_id
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: 1111abcd
-    EnvironmentName:
-      description: The type of environment you want to use for the request (Production/Staging).
-      name: environment_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-        enum:
-        - production
-        - staging
-      required: true
-    ViewId:
-      description: "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.\n\nBloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. \nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
-      name: view_id
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: 1324abc
+      example: homeoasis_fr
     Mode:
       description: '* raw - returns only the raw view/variant data of a feed record
 
@@ -1034,6 +989,26 @@ components:
         - raw
         - preview
       required: false
+    ViewId:
+      description: "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.\n\nBloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. \nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
+      name: view_id
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: 1324abc
+    RecordId:
+      description: The unique ID associated with a product or item feed record.
+      name: record_id
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: 1111abcd
     VariantId:
       description: A unique identifier for a specific variant of a product or item feed record.
       name: variant_id
@@ -1055,32 +1030,40 @@ components:
         default: 20
       required: false
       example: 10
-    CatalogName:
-      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
-      name: catalog_name
+    AccountName:
+      description: Your unique account name.
+      name: account_name
       in: path
       schema:
         type: string
         minLength: 1
         maxLength: 64
       required: true
-      example: homeoasis_fr
+      example: homeoasis
+    PageNumber:
+      description: To navigate through paginated results, use the page number to switch between pages.
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      required: false
+      example: 1
+    EnvironmentName:
+      description: The type of environment you want to use for the request (Production/Staging).
+      name: environment_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+        enum:
+        - production
+        - staging
+      required: true
   securitySchemes:
-    basicAuth:
+    bearerAuth:
       type: http
-      scheme: basic
-      description: 'HTTP Basic authentication using an API Key ID and API Secret.
-
-        For this workspace-scoped endpoint, use a workspace API key.
-
-
-        `Authorization: Basic <base64(APIKeyID:APISecret)>`
-
-
-        The API key must have the **Imports → Allow trigger imports**
-
-        permission enabled in Workspace settings → Access management →
-
-        API.
-
-        '
+      scheme: bearer
+      bearerFormat: API Key
