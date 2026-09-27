@@ -114,6 +114,8 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    SuggestJobProperties:
+      type: object
     IndexJobProperties:
       type: object
       properties:
@@ -135,6 +137,71 @@ components:
           description: The index configuration version used at time of job processing.
           type: string
           example: 3613f704b80020ef908f0375100fbd1d
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
+    ProductIndexJobStats:
+      type: object
+      properties:
+        search_product_count:
+          type: integer
+        search_document_count:
+          type: integer
+        search_documents_byte_count:
+          type: integer
+        deleted_parent_count:
+          type: integer
+        product_doc_count:
+          type: integer
+        variant_doc_count:
+          type: integer
+        search_variant_count:
+          type: integer
+        products_no_title_count:
+          type: integer
+        products_no_url_count:
+          type: integer
+        invalid_products_count:
+          type: integer
+        invalid_variants_count:
+          type: integer
+        invalid_products_no_price_data_count:
+          type: integer
+        invalid_products_invalid_price_data_count:
+          type: integer
+        invalid_products_empty_product_id_count:
+          type: integer
+        invalid_variants_no_price_data_count:
+          type: integer
+        unavailable_products_count:
+          type: integer
+        unavailable_variants_count:
+          type: integer
+        unavailable_products_all_variants_unavailable_count:
+          type: integer
+        modified_product_record_count:
+          type: integer
+        modified_variant_record_count:
+          type: integer
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
     FeedJobProperties:
       type: object
       properties:
@@ -157,14 +224,89 @@ components:
           type: array
           items:
             type: string
-    429Response:
-      description: Too Many Requests
+    Job:
       type: object
       properties:
         details:
           type: array
           items:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/JobErrorDetail'
+        id:
+          type: string
+        stats:
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/ProductFeedJobStats'
+          - $ref: '#/components/schemas/ProductIndexJobStats'
+          - $ref: '#/components/schemas/ContentFeedJobStats'
+          - $ref: '#/components/schemas/ContentIndexJobStats'
+        properties:
+          type: object
+          oneOf:
+          - $ref: '#/components/schemas/FeedJobProperties'
+          - $ref: '#/components/schemas/IndexJobProperties'
+          - $ref: '#/components/schemas/SuggestJobProperties'
+        type:
+          enum:
+          - feed
+          - index
+          - suggest
+          type: string
+        status:
+          enum:
+          - running
+          - skipped
+          - queued
+          - failed
+          - success
+          - killed
+          type: string
+        status_code:
+          enum:
+          - 100
+          - 101
+          - 102
+          - 105
+          - 200
+          - 210
+          - 305
+          - 310
+          - 350
+          - 360
+          - 430
+          - 440
+          - 450
+          - 500
+          - 550
+          type: number
+        created_at:
+          format: date-time
+          type: string
+        started_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        stopped_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - type
+      - status
+      - status_code
+      - created_at
+      - updated_at
+    ContentIndexJobStats:
+      type: object
+      properties:
+        item_doc_count:
+          type: integer
+        search_item_count:
+          type: integer
+        deleted_parent_count:
+          type: integer
     ContentFeedJobStats:
       type: object
       properties:
@@ -198,6 +340,38 @@ components:
           type: integer
         patch_operation_remove_item_view_attributes_count:
           type: integer
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    JobErrorDetail:
+      type: object
+      properties:
+        class:
+          type: string
+          enum:
+          - warning
+          - error
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        resolution:
+          type: string
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
     ProductFeedJobStats:
       type: object
       properties:
@@ -281,191 +455,40 @@ components:
           type: integer
         patch_operation_update_product_view_attributes_count:
           type: integer
-    ContentIndexJobStats:
-      type: object
-      properties:
-        item_doc_count:
-          type: integer
-        search_item_count:
-          type: integer
-        deleted_parent_count:
-          type: integer
-    ProductIndexJobStats:
-      type: object
-      properties:
-        search_product_count:
-          type: integer
-        search_document_count:
-          type: integer
-        search_documents_byte_count:
-          type: integer
-        deleted_parent_count:
-          type: integer
-        product_doc_count:
-          type: integer
-        variant_doc_count:
-          type: integer
-        search_variant_count:
-          type: integer
-        products_no_title_count:
-          type: integer
-        products_no_url_count:
-          type: integer
-        invalid_products_count:
-          type: integer
-        invalid_variants_count:
-          type: integer
-        invalid_products_no_price_data_count:
-          type: integer
-        invalid_products_invalid_price_data_count:
-          type: integer
-        invalid_products_empty_product_id_count:
-          type: integer
-        invalid_variants_no_price_data_count:
-          type: integer
-        unavailable_products_count:
-          type: integer
-        unavailable_variants_count:
-          type: integer
-        unavailable_products_all_variants_unavailable_count:
-          type: integer
-        modified_product_record_count:
-          type: integer
-        modified_variant_record_count:
-          type: integer
-    Job:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/JobErrorDetail'
-        id:
-          type: string
-        stats:
-          type: object
-          oneOf:
-          - $ref: '#/components/schemas/ProductFeedJobStats'
-          - $ref: '#/components/schemas/ProductIndexJobStats'
-          - $ref: '#/components/schemas/ContentFeedJobStats'
-          - $ref: '#/components/schemas/ContentIndexJobStats'
-        properties:
-          type: object
-          oneOf:
-          - $ref: '#/components/schemas/FeedJobProperties'
-          - $ref: '#/components/schemas/IndexJobProperties'
-          - $ref: '#/components/schemas/SuggestJobProperties'
-        type:
-          enum:
-          - feed
-          - index
-          - suggest
-          type: string
-        status:
-          enum:
-          - running
-          - skipped
-          - queued
-          - failed
-          - success
-          - killed
-          type: string
-        status_code:
-          enum:
-          - 100
-          - 101
-          - 102
-          - 105
-          - 200
-          - 210
-          - 305
-          - 310
-          - 350
-          - 360
-          - 430
-          - 440
-          - 450
-          - 500
-          - 550
-          type: number
-        created_at:
-          format: date-time
-          type: string
-        started_at:
-          format: date-time
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        stopped_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - type
-      - status
-      - status_code
-      - created_at
-      - updated_at
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        class:
-          type: string
-          enum:
-          - error
-          - warning
-    JobErrorDetail:
-      type: object
-      properties:
-        class:
-          type: string
-          enum:
-          - warning
-          - error
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        resolution:
-          type: string
-    SuggestJobProperties:
-      type: object
-    404Response:
-      description: Not Found
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    CatalogName:
-      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
-      name: catalog_name
+    EnvironmentName:
+      description: The type of environment you want to use for the request (Production/Staging).
+      name: environment_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+        enum:
+        - production
+        - staging
+      required: true
+    AccountName:
+      description: Your unique account name.
+      name: account_name
       in: path
       schema:
         type: string
         minLength: 1
         maxLength: 64
       required: true
-      example: homeoasis_fr
+      example: homeoasis
+    PageLimit:
+      description: Specify the maximum number of pages to return in the response.
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+      required: false
+      example: 10
     JobClass:
       description: 'Filter the jobs based on comma-separated class values:
 
@@ -501,6 +524,16 @@ components:
       example:
       - feed_products_full,feed_products_delta
       - index_update
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
     JobId:
       description: The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records)).
       name: job_id
@@ -511,27 +544,6 @@ components:
         maxLength: 64
       required: true
       example: '1324'
-    PageLimit:
-      description: Specify the maximum number of pages to return in the response.
-      name: limit
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 20
-      required: false
-      example: 10
-    AccountName:
-      description: Your unique account name.
-      name: account_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis
     PageNumber:
       description: To navigate through paginated results, use the page number to switch between pages.
       name: page
@@ -542,18 +554,6 @@ components:
         default: 1
       required: false
       example: 1
-    EnvironmentName:
-      description: The type of environment you want to use for the request (Production/Staging).
-      name: environment_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-        enum:
-        - production
-        - staging
-      required: true
   securitySchemes:
     bearerAuth:
       type: http

@@ -73,65 +73,112 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    SuccessResponse:
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    NotFoundErrorResponse:
-      type: object
-      required:
-      - success
-      - errors
-      properties:
-        success:
-          type: boolean
-          example: false
-        errors:
-          type: object
-          required:
-          - code
-          - message
-          properties:
-            code:
-              type: string
-              example: NotFoundError
-            message:
-              type: string
-              example: The requested resource was not found.
-    ErrorResponse:
-      type: object
-      description: 'Error response. Most errors use the `success` + `errors._global`
+  responses:
+    Forbidden:
+      description: 'The API key lacks the **Imports → Allow trigger imports**
 
-        shape; some failures returned by the underlying import service
+        permission, or the `workspaceId` in the path does not match the
 
-        are surfaced verbatim and use the alternative `error` shape.
+        workspace the API key was issued for.
 
         '
-      properties:
-        success:
-          type: boolean
-          example: false
-        errors:
-          type: object
-          description: Map of error categories to error messages.
-          properties:
-            _global:
-              type: array
-              description: Errors not tied to a specific field.
-              items:
-                type: string
-        error:
-          type: string
-          description: 'Single error message returned by the underlying import
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            noPermission:
+              value:
+                success: false
+                errors:
+                  _global:
+                  - No permission to allow trigger imports. Check Workspace settings -> Access management -> API -> Imports -> Allow trigger imports.
+    Started:
+      description: Import triggered successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessResponse'
+          examples:
+            success:
+              value:
+                success: true
+    NotFound:
+      description: 'No import with the given `import_id` exists in the addressed
 
-            service for some failure modes.
+        workspace.
 
-            '
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NotFoundErrorResponse'
+          examples:
+            notFound:
+              value:
+                success: false
+                errors:
+                  code: NotFoundError
+                  message: The requested resource was not found.
+    Unauthorized:
+      description: 'Authentication is missing or invalid. Provide HTTP Basic
+
+        credentials with a valid API Key ID and Secret.
+
+        '
+      headers:
+        WWW-Authenticate:
+          description: Basic realm="Login Required"
+          schema:
+            type: string
+    BadRequest:
+      description: 'Bad request — the request was malformed, contained invalid
+
+        parameters, or the underlying import service rejected the run
+
+        (for example, an invalid override path).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            globalError:
+              summary: Validation or restriction error
+              value:
+                success: false
+                errors:
+                  _global:
+                  - 'BadRequest: The browser (or proxy) sent a request that this server could not understand.'
+            passthroughError:
+              summary: Error returned by the import service
+              value:
+                error: bad path
+  parameters:
+    ImportId:
+      name: import_id
+      in: path
+      required: true
+      description: The ID of an existing import in the workspace.
+      schema:
+        type: string
+        example: 5f8a3b2e1c9d4e6f7a8b9c0d
+    WorkspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      description: 'The ID of your Bloomreach Engagement workspace. Must match the
+
+        workspace the API key was issued for; otherwise the request is
+
+        rejected with HTTP 403.
+
+        '
+      schema:
+        type: string
+        example: 12345678-1234-1234-1234-123456789abc
+  schemas:
     StartImportRequest:
       type: object
       additionalProperties: false
@@ -162,88 +209,64 @@ components:
 
             '
           default: true
-  responses:
-    Started:
-      description: Import triggered successfully.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/SuccessResponse'
-          examples:
-            success:
-              value:
-                success: true
-    Forbidden:
-      description: 'The API key lacks the **Imports → Allow trigger imports**
+    ErrorResponse:
+      type: object
+      description: 'Error response. Most errors use the `success` + `errors._global`
 
-        permission, or the `workspaceId` in the path does not match the
+        shape; some failures returned by the underlying import service
 
-        workspace the API key was issued for.
+        are surfaced verbatim and use the alternative `error` shape.
 
         '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            noPermission:
-              value:
-                success: false
-                errors:
-                  _global:
-                  - No permission to allow trigger imports. Check Workspace settings -> Access management -> API -> Imports -> Allow trigger imports.
-    NotFound:
-      description: 'No import with the given `import_id` exists in the addressed
+      properties:
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: object
+          description: Map of error categories to error messages.
+          properties:
+            _global:
+              type: array
+              description: Errors not tied to a specific field.
+              items:
+                type: string
+        error:
+          type: string
+          description: 'Single error message returned by the underlying import
 
-        workspace.
+            service for some failure modes.
 
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/NotFoundErrorResponse'
-          examples:
-            notFound:
-              value:
-                success: false
-                errors:
-                  code: NotFoundError
-                  message: The requested resource was not found.
-    BadRequest:
-      description: 'Bad request — the request was malformed, contained invalid
-
-        parameters, or the underlying import service rejected the run
-
-        (for example, an invalid override path).
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          examples:
-            globalError:
-              summary: Validation or restriction error
-              value:
-                success: false
-                errors:
-                  _global:
-                  - 'BadRequest: The browser (or proxy) sent a request that this server could not understand.'
-            passthroughError:
-              summary: Error returned by the import service
-              value:
-                error: bad path
-    Unauthorized:
-      description: 'Authentication is missing or invalid. Provide HTTP Basic
-
-        credentials with a valid API Key ID and Secret.
-
-        '
-      headers:
-        WWW-Authenticate:
-          description: Basic realm="Login Required"
-          schema:
-            type: string
+            '
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
+    NotFoundErrorResponse:
+      type: object
+      required:
+      - success
+      - errors
+      properties:
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              example: NotFoundError
+            message:
+              type: string
+              example: The requested resource was not found.
   requestBodies:
     StartImportBody:
       required: false
@@ -266,29 +289,6 @@ components:
               summary: Run without testing the source connection
               value:
                 test_connection: false
-  parameters:
-    ImportId:
-      name: import_id
-      in: path
-      required: true
-      description: The ID of an existing import in the workspace.
-      schema:
-        type: string
-        example: 5f8a3b2e1c9d4e6f7a8b9c0d
-    WorkspaceId:
-      name: workspaceId
-      in: path
-      required: true
-      description: 'The ID of your Bloomreach Engagement workspace. Must match the
-
-        workspace the API key was issued for; otherwise the request is
-
-        rejected with HTTP 403.
-
-        '
-      schema:
-        type: string
-        example: 12345678-1234-1234-1234-123456789abc
   securitySchemes:
     basicAuth:
       type: http

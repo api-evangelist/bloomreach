@@ -107,28 +107,33 @@ paths:
         required: false
 components:
   parameters:
-    Rows:
-      name: rows
-      in: query
-      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
-
-        The result size is used from the Dashboard if it isn''t sent in the API.
+    WidgetId:
+      name: widget_id
+      in: path
+      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
 
 
-        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
 
         '
       schema:
-        type: integer
-        format: int32
-    ContentInjection:
-      name: content_injection
+        type: string
+        default: 1jwy7eg9
+      required: true
+      example: 1jwy7eg9
+    Fields:
+      name: fields
       in: query
-      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
-      required: false
-      example: true
+      description: 'A comma-separated list of fields to be sent in the request.
+
+
+        Alternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.
+
+        This parameter is required if not sent via the Dashboard.
+
+        '
       schema:
-        type: boolean
+        type: string
     BrUid:
       name: _br_uid_2
       in: query
@@ -144,49 +149,6 @@ components:
       schema:
         type: string
         default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
-    Fields:
-      name: fields
-      in: query
-      description: 'A comma-separated list of fields to be sent in the request.
-
-
-        Alternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.
-
-        This parameter is required if not sent via the Dashboard.
-
-        '
-      schema:
-        type: string
-    WidgetId:
-      name: widget_id
-      in: path
-      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
-
-
-        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
-
-        '
-      schema:
-        type: string
-        default: 1jwy7eg9
-      required: true
-      example: 1jwy7eg9
-    DomainKey:
-      name: domain_key
-      in: query
-      description: 'Your site domain''s ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
-
-
-        This parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.
-
-        The example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.
-
-        '
-      required: true
-      example: bloomreach_devdocs
-      schema:
-        type: string
-        default: bloomreach_devdocs
     Filter:
       name: filter
       in: query
@@ -209,6 +171,14 @@ components:
         '
       schema:
         type: string
+    ContentInjection:
+      name: content_injection
+      in: query
+      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+      required: false
+      example: true
+      schema:
+        type: boolean
     Url:
       name: url
       in: query
@@ -240,6 +210,36 @@ components:
         type: integer
         format: int32
         default: 6276
+    Rows:
+      name: rows
+      in: query
+      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
+
+        The result size is used from the Dashboard if it isn''t sent in the API.
+
+
+        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+
+        '
+      schema:
+        type: integer
+        format: int32
+    DomainKey:
+      name: domain_key
+      in: query
+      description: 'Your site domain''s ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
+
+
+        This parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.
+
+        The example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: bloomreach_devdocs
+      schema:
+        type: string
+        default: bloomreach_devdocs
 x-readme:
   headers: []
   explorer-enabled: true
