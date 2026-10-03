@@ -114,8 +114,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SuggestJobProperties:
+    429Response:
+      description: Too Many Requests
       type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    JobErrorDetail:
+      type: object
+      properties:
+        class:
+          type: string
+          enum:
+          - warning
+          - error
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        resolution:
+          type: string
     IndexJobProperties:
       type: object
       properties:
@@ -137,20 +159,63 @@ components:
           description: The index configuration version used at time of job processing.
           type: string
           example: 3613f704b80020ef908f0375100fbd1d
-    ErrorResponse:
+    SuggestJobProperties:
+      type: object
+    FeedJobProperties:
       type: object
       properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        class:
-          type: string
+        feed_data_type:
           enum:
-          - error
-          - warning
+          - product
+          - content
+          type: string
+        feed_mode:
+          enum:
+          - full
+          - delta
+          type: string
+        input_source:
+          enum:
+          - sftp_file_upload
+          - api_request_body
+          type: string
+        input_filenames:
+          type: array
+          items:
+            type: string
+    ContentFeedJobStats:
+      type: object
+      properties:
+        patch_operation_count:
+          type: integer
+        patch_operation_add_item_count:
+          type: integer
+        patch_operation_add_item_view_count:
+          type: integer
+        patch_operation_add_item_views_count:
+          type: integer
+        patch_operation_add_item_attributes_count:
+          type: integer
+        patch_operation_add_item_view_attributes_count:
+          type: integer
+        patch_operation_add_item_attribute_count:
+          type: integer
+        patch_operation_add_item_view_attribute_count:
+          type: integer
+        patch_operation_remove_item_count:
+          type: integer
+        patch_operation_remove_item_views_count:
+          type: integer
+        patch_operation_remove_item_views_attribute_count:
+          type: integer
+        patch_operation_remove_item_views_attributes_count:
+          type: integer
+        patch_operation_remove_item_view_count:
+          type: integer
+        patch_operation_remove_item_view_attribute_count:
+          type: integer
+        patch_operation_remove_item_view_attributes_count:
+          type: integer
     ProductIndexJobStats:
       type: object
       properties:
@@ -194,36 +259,6 @@ components:
           type: integer
         modified_variant_record_count:
           type: integer
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    FeedJobProperties:
-      type: object
-      properties:
-        feed_data_type:
-          enum:
-          - product
-          - content
-          type: string
-        feed_mode:
-          enum:
-          - full
-          - delta
-          type: string
-        input_source:
-          enum:
-          - sftp_file_upload
-          - api_request_body
-          type: string
-        input_filenames:
-          type: array
-          items:
-            type: string
     Job:
       type: object
       properties:
@@ -307,71 +342,6 @@ components:
           type: integer
         deleted_parent_count:
           type: integer
-    ContentFeedJobStats:
-      type: object
-      properties:
-        patch_operation_count:
-          type: integer
-        patch_operation_add_item_count:
-          type: integer
-        patch_operation_add_item_view_count:
-          type: integer
-        patch_operation_add_item_views_count:
-          type: integer
-        patch_operation_add_item_attributes_count:
-          type: integer
-        patch_operation_add_item_view_attributes_count:
-          type: integer
-        patch_operation_add_item_attribute_count:
-          type: integer
-        patch_operation_add_item_view_attribute_count:
-          type: integer
-        patch_operation_remove_item_count:
-          type: integer
-        patch_operation_remove_item_views_count:
-          type: integer
-        patch_operation_remove_item_views_attribute_count:
-          type: integer
-        patch_operation_remove_item_views_attributes_count:
-          type: integer
-        patch_operation_remove_item_view_count:
-          type: integer
-        patch_operation_remove_item_view_attribute_count:
-          type: integer
-        patch_operation_remove_item_view_attributes_count:
-          type: integer
-    429Response:
-      description: Too Many Requests
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    JobErrorDetail:
-      type: object
-      properties:
-        class:
-          type: string
-          enum:
-          - warning
-          - error
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        resolution:
-          type: string
-    404Response:
-      description: Not Found
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
     ProductFeedJobStats:
       type: object
       properties:
@@ -455,19 +425,47 @@ components:
           type: integer
         patch_operation_update_product_view_attributes_count:
           type: integer
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
   parameters:
-    EnvironmentName:
-      description: The type of environment you want to use for the request (Production/Staging).
-      name: environment_name
+    JobId:
+      description: The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records)).
+      name: job_id
       in: path
       schema:
         type: string
         minLength: 1
         maxLength: 64
-        enum:
-        - production
-        - staging
       required: true
+      example: '1324'
     AccountName:
       description: Your unique account name.
       name: account_name
@@ -478,17 +476,6 @@ components:
         maxLength: 64
       required: true
       example: homeoasis
-    PageLimit:
-      description: Specify the maximum number of pages to return in the response.
-      name: limit
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 200
-        default: 20
-      required: false
-      example: 10
     JobClass:
       description: 'Filter the jobs based on comma-separated class values:
 
@@ -524,26 +511,18 @@ components:
       example:
       - feed_products_full,feed_products_delta
       - index_update
-    CatalogName:
-      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
-      name: catalog_name
+    EnvironmentName:
+      description: The type of environment you want to use for the request (Production/Staging).
+      name: environment_name
       in: path
       schema:
         type: string
         minLength: 1
         maxLength: 64
+        enum:
+        - production
+        - staging
       required: true
-      example: homeoasis_fr
-    JobId:
-      description: The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records)).
-      name: job_id
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: '1324'
     PageNumber:
       description: To navigate through paginated results, use the page number to switch between pages.
       name: page
@@ -554,6 +533,27 @@ components:
         default: 1
       required: false
       example: 1
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
+    PageLimit:
+      description: Specify the maximum number of pages to return in the response.
+      name: limit
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 20
+      required: false
+      example: 10
   securitySchemes:
     bearerAuth:
       type: http

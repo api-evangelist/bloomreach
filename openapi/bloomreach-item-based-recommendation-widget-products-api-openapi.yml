@@ -98,6 +98,48 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    domain_key:
+      name: domain_key
+      in: query
+      description: Your site domain's ID, which is provided by Bloomreach during initial scoping and integration. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
+      required: true
+      schema:
+        type: string
+        default: pacific_supply
+    request_id:
+      name: request_id
+      in: query
+      description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
+      required: false
+      example: 1234567891234
+      schema:
+        type: string
+    item_ids:
+      name: item_ids
+      in: query
+      description: Specifies access to a particular set of items. For product catalog, this would be the PID(s).
+      required: true
+      schema:
+        type: string
+        default: 2678155
+    fields:
+      name: fields
+      in: query
+      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response.
+      required: false
+      schema:
+        type: string
+        default: pid
+    rows:
+      name: rows
+      in: query
+      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+      required: false
+      schema:
+        type: integer
+        default: 5
+        minimum: 0
+        maximum: 200
     auth_key:
       name: auth_key
       in: query
@@ -142,14 +184,6 @@ components:
         type: string
         format: uri
         default: https%3A%2F%2Fwww.pacific.com%2Fso3005719.html
-    fields:
-      name: fields
-      in: query
-      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response.
-      required: false
-      schema:
-        type: string
-        default: pid
     account_id:
       name: account_id
       in: query
@@ -166,14 +200,6 @@ components:
       schema:
         type: string
         default: uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13
-    domain_key:
-      name: domain_key
-      in: query
-      description: Your site domain's ID, which is provided by Bloomreach during initial scoping and integration. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
-      required: true
-      schema:
-        type: string
-        default: pacific_supply
     view_id:
       name: view_id
       in: query
@@ -181,32 +207,6 @@ components:
       required: false
       schema:
         type: string
-    request_id:
-      name: request_id
-      in: query
-      description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
-      required: false
-      example: 1234567891234
-      schema:
-        type: string
-    item_ids:
-      name: item_ids
-      in: query
-      description: Specifies access to a particular set of items. For product catalog, this would be the PID(s).
-      required: true
-      schema:
-        type: string
-        default: 2678155
-    rows:
-      name: rows
-      in: query
-      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
-      required: false
-      schema:
-        type: integer
-        default: 5
-        minimum: 0
-        maximum: 200
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

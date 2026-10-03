@@ -73,7 +73,40 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    WorkspaceId:
+      name: workspaceId
+      in: path
+      required: true
+      description: 'The ID of your Bloomreach Engagement workspace. Must match the
+
+        workspace the API key was issued for; otherwise the request is
+
+        rejected with HTTP 403.
+
+        '
+      schema:
+        type: string
+        example: 12345678-1234-1234-1234-123456789abc
+    ImportId:
+      name: import_id
+      in: path
+      required: true
+      description: The ID of an existing import in the workspace.
+      schema:
+        type: string
+        example: 5f8a3b2e1c9d4e6f7a8b9c0d
   responses:
+    Started:
+      description: Import triggered successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessResponse'
+          examples:
+            success:
+              value:
+                success: true
     Forbidden:
       description: 'The API key lacks the **Imports → Allow trigger imports**
 
@@ -93,16 +126,17 @@ components:
                 errors:
                   _global:
                   - No permission to allow trigger imports. Check Workspace settings -> Access management -> API -> Imports -> Allow trigger imports.
-    Started:
-      description: Import triggered successfully.
-      content:
-        application/json:
+    Unauthorized:
+      description: 'Authentication is missing or invalid. Provide HTTP Basic
+
+        credentials with a valid API Key ID and Secret.
+
+        '
+      headers:
+        WWW-Authenticate:
+          description: Basic realm="Login Required"
           schema:
-            $ref: '#/components/schemas/SuccessResponse'
-          examples:
-            success:
-              value:
-                success: true
+            type: string
     NotFound:
       description: 'No import with the given `import_id` exists in the addressed
 
@@ -120,17 +154,6 @@ components:
                 errors:
                   code: NotFoundError
                   message: The requested resource was not found.
-    Unauthorized:
-      description: 'Authentication is missing or invalid. Provide HTTP Basic
-
-        credentials with a valid API Key ID and Secret.
-
-        '
-      headers:
-        WWW-Authenticate:
-          description: Basic realm="Login Required"
-          schema:
-            type: string
     BadRequest:
       description: 'Bad request — the request was malformed, contained invalid
 
@@ -155,29 +178,28 @@ components:
               summary: Error returned by the import service
               value:
                 error: bad path
-  parameters:
-    ImportId:
-      name: import_id
-      in: path
-      required: true
-      description: The ID of an existing import in the workspace.
-      schema:
-        type: string
-        example: 5f8a3b2e1c9d4e6f7a8b9c0d
-    WorkspaceId:
-      name: workspaceId
-      in: path
-      required: true
-      description: 'The ID of your Bloomreach Engagement workspace. Must match the
+  requestBodies:
+    StartImportBody:
+      required: false
+      description: 'Optional body to override the source path or skip the
 
-        workspace the API key was issued for; otherwise the request is
-
-        rejected with HTTP 403.
+        connection-test step. The body may be omitted entirely.
 
         '
-      schema:
-        type: string
-        example: 12345678-1234-1234-1234-123456789abc
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/StartImportRequest'
+          examples:
+            overridePath:
+              summary: Override the source path for this run
+              value:
+                path: https://example.com/data.csv
+                test_connection: true
+            skipConnectionTest:
+              summary: Run without testing the source connection
+              value:
+                test_connection: false
   schemas:
     StartImportRequest:
       type: object
@@ -209,6 +231,35 @@ components:
 
             '
           default: true
+    NotFoundErrorResponse:
+      type: object
+      required:
+      - success
+      - errors
+      properties:
+        success:
+          type: boolean
+          example: false
+        errors:
+          type: object
+          required:
+          - code
+          - message
+          properties:
+            code:
+              type: string
+              example: NotFoundError
+            message:
+              type: string
+              example: The requested resource was not found.
+    SuccessResponse:
+      type: object
+      required:
+      - success
+      properties:
+        success:
+          type: boolean
+          example: true
     ErrorResponse:
       type: object
       description: 'Error response. Most errors use the `success` + `errors._global`
@@ -238,57 +289,6 @@ components:
             service for some failure modes.
 
             '
-    SuccessResponse:
-      type: object
-      required:
-      - success
-      properties:
-        success:
-          type: boolean
-          example: true
-    NotFoundErrorResponse:
-      type: object
-      required:
-      - success
-      - errors
-      properties:
-        success:
-          type: boolean
-          example: false
-        errors:
-          type: object
-          required:
-          - code
-          - message
-          properties:
-            code:
-              type: string
-              example: NotFoundError
-            message:
-              type: string
-              example: The requested resource was not found.
-  requestBodies:
-    StartImportBody:
-      required: false
-      description: 'Optional body to override the source path or skip the
-
-        connection-test step. The body may be omitted entirely.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/StartImportRequest'
-          examples:
-            overridePath:
-              summary: Override the source path for this run
-              value:
-                path: https://example.com/data.csv
-                test_connection: true
-            skipConnectionTest:
-              summary: Run without testing the source connection
-              value:
-                test_connection: false
   securitySchemes:
     basicAuth:
       type: http

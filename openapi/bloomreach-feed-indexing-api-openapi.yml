@@ -68,27 +68,53 @@ paths:
       operationId: postAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentNameIndexes
       x-operation-id-source: derived
 components:
+  schemas:
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
   parameters:
-    AccountName:
-      description: Your unique account name.
-      name: account_name
-      in: path
+    IgnoreCountDropHeader:
+      description: Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.
+      name: BR-Ignore-Document-Count-Drop
+      in: header
       schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis
-    CatalogName:
-      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
-      name: catalog_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis_fr
+        type: boolean
+      required: false
     EnvironmentName:
       description: The type of environment you want to use for the request (Production/Staging).
       name: environment_name
@@ -111,52 +137,26 @@ components:
       schema:
         type: boolean
       required: false
-    IgnoreCountDropHeader:
-      description: Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.
-      name: BR-Ignore-Document-Count-Drop
-      in: header
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
       schema:
-        type: boolean
-      required: false
-  schemas:
-    429Response:
-      description: Too Many Requests
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        class:
-          type: string
-          enum:
-          - error
-          - warning
-    404Response:
-      description: Not Found
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
+    AccountName:
+      description: Your unique account name.
+      name: account_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis
   securitySchemes:
     bearerAuth:
       type: http

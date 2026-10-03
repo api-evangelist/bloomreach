@@ -29,20 +29,6 @@ paths:
       deprecated: false
 components:
   parameters:
-    WidgetId:
-      name: widget_id
-      in: path
-      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
-
-
-        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
-
-        '
-      schema:
-        type: string
-        default: 1jwy7eg9
-      required: true
-      example: 1jwy7eg9
     Fields:
       name: fields
       in: query
@@ -56,21 +42,39 @@ components:
         '
       schema:
         type: string
-    BrUid:
-      name: _br_uid_2
+    Url:
+      name: url
       in: query
-      description: 'A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
+      description: 'The absolute URL of the page where the request is initiated. Don''t use a relative URL.
 
-        This cookie creates a unique, anonymous identifier for every browser or device.
 
-        Use the default value provided, which is already encoded.
+        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
 
         '
       required: true
-      example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      example: https://www.documentation-site.com
       schema:
         type: string
-        default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+        default: https://www.documentation-site.com
+    ContentInjection:
+      name: content_injection
+      in: query
+      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+      required: false
+      example: true
+      schema:
+        type: boolean
+    RefUrl:
+      name: ref_url
+      in: query
+      description: 'The URL of the page or HTTP referrer where the request is started.
+
+
+        Required if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).
+
+        '
+      schema:
+        type: string
     Filter:
       name: filter
       in: query
@@ -93,14 +97,21 @@ components:
         '
       schema:
         type: string
-    ContentInjection:
-      name: content_injection
+    BrUid:
+      name: _br_uid_2
       in: query
-      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
-      required: false
-      example: true
+      description: 'A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
+
+        This cookie creates a unique, anonymous identifier for every browser or device.
+
+        Use the default value provided, which is already encoded.
+
+        '
+      required: true
+      example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
       schema:
-        type: boolean
+        type: string
+        default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
     RequestId:
       name: request_id
       in: query
@@ -114,48 +125,20 @@ components:
       schema:
         type: string
         default: abh3kjh1kjnd8
-    Url:
-      name: url
+    Rows:
+      name: rows
       in: query
-      description: 'The absolute URL of the page where the request is initiated. Don''t use a relative URL.
+      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
+
+        The result size is used from the Dashboard if it isn''t sent in the API.
 
 
-        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
 
         '
-      required: true
-      example: https://www.documentation-site.com
-      schema:
-        type: string
-        default: https://www.documentation-site.com
-    AccountId:
-      name: account_id
-      in: query
-      description: 'Your site''s numerical Bloomreach account ID.
-
-
-        Your Bloomreach representative gives your site''s account ID to you before or during your integration kickoff meeting.
-
-        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
-
-        '
-      required: true
-      example: 6276
       schema:
         type: integer
         format: int32
-        default: 6276
-    RefUrl:
-      name: ref_url
-      in: query
-      description: 'The URL of the page or HTTP referrer where the request is started.
-
-
-        Required if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).
-
-        '
-      schema:
-        type: string
     ViewId:
       name: view_id
       in: query
@@ -187,20 +170,37 @@ components:
       schema:
         type: string
         default: bloomreach_devdocs
-    Rows:
-      name: rows
-      in: query
-      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
-
-        The result size is used from the Dashboard if it isn''t sent in the API.
+    WidgetId:
+      name: widget_id
+      in: path
+      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
 
 
-        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
 
         '
       schema:
+        type: string
+        default: 1jwy7eg9
+      required: true
+      example: 1jwy7eg9
+    AccountId:
+      name: account_id
+      in: query
+      description: 'Your site''s numerical Bloomreach account ID.
+
+
+        Your Bloomreach representative gives your site''s account ID to you before or during your integration kickoff meeting.
+
+        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: 6276
+      schema:
         type: integer
         format: int32
+        default: 6276
 x-readme:
   headers: []
   explorer-enabled: true
