@@ -108,23 +108,8 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ContentCatalog:
-      type: object
-      properties:
-        name:
-          type: string
-        language:
-          type: string
-        data_type:
-          type: string
-        environment:
-          type: string
-        config_etag:
-          type: string
-        stats:
-          $ref: '#/components/schemas/ContentCatalogStats'
-    429Response:
-      description: Too Many Requests
+    500Response:
+      description: Internal Server Error
       type: object
       properties:
         details:
@@ -166,23 +151,23 @@ components:
         item_view_override_record_count:
           description: ''
           type: integer
-    ProductCatalog:
+    429Response:
+      description: Too Many Requests
       type: object
       properties:
-        name:
-          type: string
-        language:
-          type: string
-        data_type:
-          type: string
-        environment:
-          type: string
-        config_etag:
-          type: string
-        stats:
-          $ref: '#/components/schemas/ProductCatalogStats'
-        properties:
-          $ref: '#/components/schemas/ProductCatalogProperties'
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProductCatalogProperties:
+      type: object
+      properties:
+        feed_version:
+          description: ''
+          type: integer
+        index_version:
+          description: ''
+          type: integer
     ProductCatalogStats:
       type: object
       properties:
@@ -254,23 +239,21 @@ components:
         unique_view_count:
           description: ''
           type: integer
-    ProductCatalogProperties:
+    ContentCatalog:
       type: object
       properties:
-        feed_version:
-          description: ''
-          type: integer
-        index_version:
-          description: ''
-          type: integer
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
+        name:
+          type: string
+        language:
+          type: string
+        data_type:
+          type: string
+        environment:
+          type: string
+        config_etag:
+          type: string
+        stats:
+          $ref: '#/components/schemas/ContentCatalogStats'
     ErrorResponse:
       type: object
       properties:
@@ -285,6 +268,23 @@ components:
           enum:
           - error
           - warning
+    ProductCatalog:
+      type: object
+      properties:
+        name:
+          type: string
+        language:
+          type: string
+        data_type:
+          type: string
+        environment:
+          type: string
+        config_etag:
+          type: string
+        stats:
+          $ref: '#/components/schemas/ProductCatalogStats'
+        properties:
+          $ref: '#/components/schemas/ProductCatalogProperties'
   parameters:
     EnvironmentName:
       description: The type of environment you want to use for the request (Production/Staging).

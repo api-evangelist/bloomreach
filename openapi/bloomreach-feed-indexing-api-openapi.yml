@@ -69,14 +69,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    429Response:
-      description: Too Many Requests
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
     500Response:
       description: Internal Server Error
       type: object
@@ -85,8 +77,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorResponse'
-    404Response:
-      description: Not Found
+    429Response:
+      description: Too Many Requests
       type: object
       properties:
         details:
@@ -107,10 +99,21 @@ components:
           enum:
           - error
           - warning
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    IgnoreCountDropHeader:
-      description: Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.
-      name: BR-Ignore-Document-Count-Drop
+    IndexRefreshHeader:
+      description: 'Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.
+
+
+        This only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.'
+      name: Index-Refresh
       in: header
       schema:
         type: boolean
@@ -127,16 +130,6 @@ components:
         - production
         - staging
       required: true
-    IndexRefreshHeader:
-      description: 'Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.
-
-
-        This only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected.'
-      name: Index-Refresh
-      in: header
-      schema:
-        type: boolean
-      required: false
     CatalogName:
       description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
       name: catalog_name
@@ -147,6 +140,13 @@ components:
         maxLength: 64
       required: true
       example: homeoasis_fr
+    IgnoreCountDropHeader:
+      description: Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold.
+      name: BR-Ignore-Document-Count-Drop
+      in: header
+      schema:
+        type: boolean
+      required: false
     AccountName:
       description: Your unique account name.
       name: account_name

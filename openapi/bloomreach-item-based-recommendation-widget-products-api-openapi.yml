@@ -98,6 +98,13 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    view_id:
+      name: view_id
+      in: query
+      description: A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+      required: false
+      schema:
+        type: string
     domain_key:
       name: domain_key
       in: query
@@ -112,39 +119,6 @@ components:
       description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
       required: false
       example: 1234567891234
-      schema:
-        type: string
-    item_ids:
-      name: item_ids
-      in: query
-      description: Specifies access to a particular set of items. For product catalog, this would be the PID(s).
-      required: true
-      schema:
-        type: string
-        default: 2678155
-    fields:
-      name: fields
-      in: query
-      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response.
-      required: false
-      schema:
-        type: string
-        default: pid
-    rows:
-      name: rows
-      in: query
-      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
-      required: false
-      schema:
-        type: integer
-        default: 5
-        minimum: 0
-        maximum: 200
-    auth_key:
-      name: auth_key
-      in: query
-      description: Unique key shared by your Bloomreach representative during integration. This is used to authenticate a merchant API call.
-      required: false
       schema:
         type: string
     filter:
@@ -166,15 +140,6 @@ components:
       required: false
       schema:
         type: string
-    ref_url:
-      name: ref_url
-      in: query
-      description: The URL of the page or HTTP referrer where the request is started.
-      required: false
-      schema:
-        type: string
-        format: uri
-        default: https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items
     url:
       name: url
       in: query
@@ -184,14 +149,22 @@ components:
         type: string
         format: uri
         default: https%3A%2F%2Fwww.pacific.com%2Fso3005719.html
-    account_id:
-      name: account_id
+    item_ids:
+      name: item_ids
       in: query
-      description: Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.
+      description: Specifies access to a particular set of items. For product catalog, this would be the PID(s).
       required: true
       schema:
         type: string
-        default: 6370
+        default: 2678155
+    fields:
+      name: fields
+      in: query
+      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Only the attributes passed in the fields parameter will be returned in the doc section as part of response.
+      required: false
+      schema:
+        type: string
+        default: pid
     _br_uid_2:
       name: _br_uid_2
       in: query
@@ -200,13 +173,40 @@ components:
       schema:
         type: string
         default: uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13
-    view_id:
-      name: view_id
+    account_id:
+      name: account_id
       in: query
-      description: A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+      description: Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.
+      required: true
+      schema:
+        type: string
+        default: 6370
+    auth_key:
+      name: auth_key
+      in: query
+      description: Unique key shared by your Bloomreach representative during integration. This is used to authenticate a merchant API call.
       required: false
       schema:
         type: string
+    ref_url:
+      name: ref_url
+      in: query
+      description: The URL of the page or HTTP referrer where the request is started.
+      required: false
+      schema:
+        type: string
+        format: uri
+        default: https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items
+    rows:
+      name: rows
+      in: query
+      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+      required: false
+      schema:
+        type: integer
+        default: 5
+        minimum: 0
+        maximum: 200
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
