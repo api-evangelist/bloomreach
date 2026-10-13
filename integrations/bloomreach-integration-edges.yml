@@ -1,16 +1,33 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/bloomreach/integrations
 - https://n8n.io/integrations/bloomreach/
 - https://composio.dev/toolkits/bloomreach
 - https://monid.ai/tools/bloomreach
 checked:
+- https://aws.amazon.com/marketplace/
 - https://composio.dev/toolkits/bloomreach
 - https://monid.ai/tools/bloomreach
 - https://n8n.io/integrations/bloomreach/
 - https://zapier.com/apps/bloomreach/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: platform-app
+  direction: provider-built
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=seller-5z5n4hfk5s4qi
+  listing_count: 2
+  apps:
+  - Bloomreach Discovery - Autonomous AI-Powered Ecommerce Search
+  - Bloomreach Engagement - AI-powered Marketing Automation
+  seller_name: Bloomreach, Inc.
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-13'
 templates: []
