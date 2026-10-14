@@ -8,8 +8,11 @@ source:
 checked:
 - https://aws.amazon.com/marketplace/
 - https://composio.dev/toolkits/bloomreach
+- https://github.com/rudderlabs/rudder-integrations-config/tree/main/src/configurations/destinations/bloomreach
+- https://hightouch.com/docs/destinations/bloomreach
 - https://monid.ai/tools/bloomreach
 - https://n8n.io/integrations/bloomreach/
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/bloomreach-engagement
 - https://zapier.com/apps/bloomreach/integrations
 summary: null
 marketplace_apps: []
@@ -30,4 +33,85 @@ edges:
   seller_name: Bloomreach, Inc.
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/bloomreach-engagement
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bloomreach-engagement
+      status: PUBLIC
+      partner_owned: true
+      connection_modes:
+      - cloud:mobile
+      - cloud:server
+      - cloud:web
+      accepted_methods:
+      - Alias
+      - Group
+      - Identify
+      - Page
+      - Track
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: RudderStack
+  partner: rudderstack
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://github.com/rudderlabs/rudder-integrations-config/tree/main/src/configurations/destinations/bloomreach
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bloomreach
+      - bloomreach_catalog
+      connection_modes:
+      - cloud
+      cloud_event_types:
+      - identify
+      - page
+      - record
+      - screen
+      - track
+      source_types: 13
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
+- partner_name: Hightouch
+  partner: hightouch
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://hightouch.com/docs/destinations/bloomreach
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - bloomreach
+      status: released
+      sync_types:
+      - Catalogs
+      - Customers
+      - Events
+      sync_modes:
+      - insert
+      - upsert
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 templates: []
