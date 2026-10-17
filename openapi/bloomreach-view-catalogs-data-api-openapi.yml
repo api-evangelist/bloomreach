@@ -107,15 +107,40 @@ paths:
       operationId: getAccountsByAccountNameCatalogsByCatalogNameEnvironmentsByEnvironmentName
       x-operation-id-source: derived
 components:
+  parameters:
+    CatalogName:
+      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
+      name: catalog_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis_fr
+    EnvironmentName:
+      description: The type of environment you want to use for the request (Production/Staging).
+      name: environment_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+        enum:
+        - production
+        - staging
+      required: true
+    AccountName:
+      description: Your unique account name.
+      name: account_name
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: homeoasis
   schemas:
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
     ContentCatalogStats:
       type: object
       properties:
@@ -151,14 +176,52 @@ components:
         item_view_override_record_count:
           description: ''
           type: integer
-    429Response:
-      description: Too Many Requests
+    ProductCatalog:
       type: object
       properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
+        name:
+          type: string
+        language:
+          type: string
+        data_type:
+          type: string
+        environment:
+          type: string
+        config_etag:
+          type: string
+        stats:
+          $ref: '#/components/schemas/ProductCatalogStats'
+        properties:
+          $ref: '#/components/schemas/ProductCatalogProperties'
+    ContentCatalog:
+      type: object
+      properties:
+        name:
+          type: string
+        language:
+          type: string
+        data_type:
+          type: string
+        environment:
+          type: string
+        config_etag:
+          type: string
+        stats:
+          $ref: '#/components/schemas/ContentCatalogStats'
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        class:
+          type: string
+          enum:
+          - error
+          - warning
     ProductCatalogProperties:
       type: object
       properties:
@@ -168,6 +231,14 @@ components:
         index_version:
           description: ''
           type: integer
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
     ProductCatalogStats:
       type: object
       properties:
@@ -239,85 +310,14 @@ components:
         unique_view_count:
           description: ''
           type: integer
-    ContentCatalog:
+    429Response:
+      description: Too Many Requests
       type: object
       properties:
-        name:
-          type: string
-        language:
-          type: string
-        data_type:
-          type: string
-        environment:
-          type: string
-        config_etag:
-          type: string
-        stats:
-          $ref: '#/components/schemas/ContentCatalogStats'
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        detail:
-          type: string
-        class:
-          type: string
-          enum:
-          - error
-          - warning
-    ProductCatalog:
-      type: object
-      properties:
-        name:
-          type: string
-        language:
-          type: string
-        data_type:
-          type: string
-        environment:
-          type: string
-        config_etag:
-          type: string
-        stats:
-          $ref: '#/components/schemas/ProductCatalogStats'
-        properties:
-          $ref: '#/components/schemas/ProductCatalogProperties'
-  parameters:
-    EnvironmentName:
-      description: The type of environment you want to use for the request (Production/Staging).
-      name: environment_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-        enum:
-        - production
-        - staging
-      required: true
-    CatalogName:
-      description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
-      name: catalog_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis_fr
-    AccountName:
-      description: Your unique account name.
-      name: account_name
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: homeoasis
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

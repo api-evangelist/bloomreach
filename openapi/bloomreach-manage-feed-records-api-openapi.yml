@@ -711,6 +711,59 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ProductViewsetPreview:
+      description: ''
+      type: object
+      properties:
+        view_ids:
+          type: array
+          items:
+            type: string
+        variants:
+          type: object
+        attributes:
+          type: object
+      required:
+      - view_ids
+      - variants
+      - attributes
+    406Response:
+      description: Not Acceptable
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ProductVariant:
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ItemView:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ProductVariantViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+        exclude_from_view:
+          type: boolean
+      required:
+      - id
+      - attributes
+      - exclude_from_view
     ProductViewSummary:
       description: ''
       type: object
@@ -725,17 +778,74 @@ components:
       - id
       - attributes
       - variant_override_record_count
-    Item:
+    ProductView:
       description: ''
       type: object
       properties:
         attributes:
           type: object
-        views:
+        variants:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/ItemView'
+            $ref: '#/components/schemas/ProductVariantView'
       required:
+      - attributes
+      - variants
+    500Response:
+      description: Internal Server Error
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    404Response:
+      description: Not Found
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    429Response:
+      description: Too Many Requests
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ItemViewPreview:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+      required:
+      - attributes
+    ProductViewPreview:
+      description: ''
+      type: object
+      properties:
+        variants:
+          type: object
+        attributes:
+          type: object
+      required:
+      - variants
+      - attributes
+    ItemViewsetPreview:
+      description: ''
+      type: object
+      properties:
+        view_ids:
+          type: array
+          items:
+            type: string
+        attributes:
+          type: object
+      required:
+      - view_ids
       - attributes
     ErrorResponse:
       type: object
@@ -770,62 +880,17 @@ components:
       required:
       - id
       - attributes
-    ProductViewPreview:
-      description: ''
+    ProductVariantSummary:
       type: object
       properties:
-        variants:
-          type: object
+        id:
+          type: string
         attributes:
           type: object
       required:
-      - variants
+      - id
       - attributes
-    500Response:
-      description: Internal Server Error
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    413Response:
-      description: Content Too Large
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    404Response:
-      description: Not Found
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    ProductVariant:
-      type: object
-      properties:
-        attributes:
-          type: object
-      required:
-      - attributes
-    ItemViewsetPreview:
-      description: ''
-      type: object
-      properties:
-        view_ids:
-          type: array
-          items:
-            type: string
-        attributes:
-          type: object
-      required:
-      - view_ids
-      - attributes
-    ProductVariantViewSummary:
+    ProductVariantView:
       description: ''
       type: object
       properties:
@@ -839,6 +904,37 @@ components:
       - id
       - attributes
       - exclude_from_view
+    413Response:
+      description: Content Too Large
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResponse'
+    ItemViewSummary:
+      description: ''
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+          type: object
+      required:
+      - id
+      - attributes
+    Item:
+      description: ''
+      type: object
+      properties:
+        attributes:
+          type: object
+        views:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ItemView'
+      required:
+      - attributes
     Product:
       description: ''
       type: object
@@ -855,44 +951,6 @@ components:
             $ref: '#/components/schemas/ProductView'
       required:
       - attributes
-    429Response:
-      description: Too Many Requests
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    ProductVariantView:
-      description: ''
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-        exclude_from_view:
-          type: boolean
-      required:
-      - id
-      - attributes
-      - exclude_from_view
-    ProductViewsetPreview:
-      description: ''
-      type: object
-      properties:
-        view_ids:
-          type: array
-          items:
-            type: string
-        variants:
-          type: object
-        attributes:
-          type: object
-      required:
-      - view_ids
-      - variants
-      - attributes
     ItemSummary:
       description: ''
       type: object
@@ -906,79 +964,27 @@ components:
       required:
       - id
       - attributes
-    ItemView:
-      description: ''
-      type: object
-      properties:
-        attributes:
-          type: object
-      required:
-      - attributes
-    406Response:
-      description: Not Acceptable
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorResponse'
-    ProductVariantSummary:
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-      required:
-      - id
-      - attributes
-    ItemViewSummary:
-      description: ''
-      type: object
-      properties:
-        id:
-          type: string
-        attributes:
-          type: object
-      required:
-      - id
-      - attributes
-    ItemViewPreview:
-      description: ''
-      type: object
-      properties:
-        attributes:
-          type: object
-      required:
-      - attributes
-    ProductView:
-      description: ''
-      type: object
-      properties:
-        attributes:
-          type: object
-        variants:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ProductVariantView'
-      required:
-      - attributes
-      - variants
   parameters:
-    Mode:
-      description: '* raw - returns only the raw view/variant data of a feed record
-
-        * preview - returns a preview of the complete feed record containing all attributes, views, and variants
-
-        '
-      name: mode
-      in: query
+    VariantId:
+      description: A unique identifier for a specific variant of a product or item feed record.
+      name: variant_id
+      in: path
       schema:
         type: string
-        enum:
-        - raw
-        - preview
-      required: false
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: 123xyz
+    RecordId:
+      description: The unique ID associated with a product or item feed record.
+      name: record_id
+      in: path
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 64
+      required: true
+      example: 1111abcd
     EnvironmentName:
       description: The type of environment you want to use for the request (Production/Staging).
       name: environment_name
@@ -1002,26 +1008,30 @@ components:
         default: 20
       required: false
       example: 10
-    VariantId:
-      description: A unique identifier for a specific variant of a product or item feed record.
-      name: variant_id
-      in: path
+    PageNumber:
+      description: To navigate through paginated results, use the page number to switch between pages.
+      name: page
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      required: false
+      example: 1
+    Mode:
+      description: '* raw - returns only the raw view/variant data of a feed record
+
+        * preview - returns a preview of the complete feed record containing all attributes, views, and variants
+
+        '
+      name: mode
+      in: query
       schema:
         type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: 123xyz
-    RecordId:
-      description: The unique ID associated with a product or item feed record.
-      name: record_id
-      in: path
-      schema:
-        type: string
-        minLength: 1
-        maxLength: 64
-      required: true
-      example: 1111abcd
+        enum:
+        - raw
+        - preview
+      required: false
     ViewId:
       description: "A unique identifier for a specific view of your product catalog.\nIf you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.\n\nBloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. \nYou can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.\n"
       name: view_id
@@ -1042,16 +1052,6 @@ components:
         maxLength: 64
       required: true
       example: homeoasis
-    PageNumber:
-      description: To navigate through paginated results, use the page number to switch between pages.
-      name: page
-      in: query
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-      required: false
-      example: 1
     CatalogName:
       description: '"Catalog name" is also called domain key. Use the same value as your domain key in your search API requests.'
       name: catalog_name

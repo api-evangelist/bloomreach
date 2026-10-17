@@ -120,6 +120,88 @@ components:
         '
       schema:
         type: string
+    Url:
+      name: url
+      in: query
+      description: 'The absolute URL of the page where the request is initiated. Don''t use a relative URL.
+
+
+        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: https://www.documentation-site.com
+      schema:
+        type: string
+        default: https://www.documentation-site.com
+    Rows:
+      name: rows
+      in: query
+      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
+
+        The result size is used from the Dashboard if it isn''t sent in the API.
+
+
+        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+
+        '
+      schema:
+        type: integer
+        format: int32
+    AccountId:
+      name: account_id
+      in: query
+      description: 'Your site''s numerical Bloomreach account ID.
+
+
+        Your Bloomreach representative gives your site''s account ID to you before or during your integration kickoff meeting.
+
+        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      required: true
+      example: 6276
+      schema:
+        type: integer
+        format: int32
+        default: 6276
+    WidgetId:
+      name: widget_id
+      in: path
+      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
+
+
+        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
+
+        '
+      schema:
+        type: string
+        default: 1jwy7eg9
+      required: true
+      example: 1jwy7eg9
+    ContentInjection:
+      name: content_injection
+      in: query
+      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
+      required: false
+      example: true
+      schema:
+        type: boolean
+    BrUid:
+      name: _br_uid_2
+      in: query
+      description: 'A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
+
+        This cookie creates a unique, anonymous identifier for every browser or device.
+
+        Use the default value provided, which is already encoded.
+
+        '
+      required: true
+      example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+      schema:
+        type: string
+        default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
     DomainKey:
       name: domain_key
       in: query
@@ -158,88 +240,6 @@ components:
         '
       schema:
         type: string
-    ContentInjection:
-      name: content_injection
-      in: query
-      description: "This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.\n<br>If `true`, the API response includes media objects along with product results.\nThe content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. \n"
-      required: false
-      example: true
-      schema:
-        type: boolean
-    WidgetId:
-      name: widget_id
-      in: path
-      description: 'The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
-
-
-        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
-
-        '
-      schema:
-        type: string
-        default: 1jwy7eg9
-      required: true
-      example: 1jwy7eg9
-    AccountId:
-      name: account_id
-      in: query
-      description: 'Your site''s numerical Bloomreach account ID.
-
-
-        Your Bloomreach representative gives your site''s account ID to you before or during your integration kickoff meeting.
-
-        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
-
-        '
-      required: true
-      example: 6276
-      schema:
-        type: integer
-        format: int32
-        default: 6276
-    Rows:
-      name: rows
-      in: query
-      description: 'The number of matching items to return per results page in the API response. The maximum value is 200.
-
-        The result size is used from the Dashboard if it isn''t sent in the API.
-
-
-        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
-
-        '
-      schema:
-        type: integer
-        format: int32
-    BrUid:
-      name: _br_uid_2
-      in: query
-      description: 'A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
-
-        This cookie creates a unique, anonymous identifier for every browser or device.
-
-        Use the default value provided, which is already encoded.
-
-        '
-      required: true
-      example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
-      schema:
-        type: string
-        default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
-    Url:
-      name: url
-      in: query
-      description: 'The absolute URL of the page where the request is initiated. Don''t use a relative URL.
-
-
-        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
-
-        '
-      required: true
-      example: https://www.documentation-site.com
-      schema:
-        type: string
-        default: https://www.documentation-site.com
 x-readme:
   headers: []
   explorer-enabled: true
