@@ -6,12 +6,19 @@ source:
 - https://composio.dev/toolkits/bloomreach
 - https://monid.ai/tools/bloomreach
 checked:
+- https://api.nuget.org/v3
 - https://aws.amazon.com/marketplace/
 - https://composio.dev/toolkits/bloomreach
+- https://crates.io/api/v1
 - https://github.com/rudderlabs/rudder-integrations-config/tree/main/src/configurations/destinations/bloomreach
 - https://hightouch.com/docs/destinations/bloomreach
 - https://monid.ai/tools/bloomreach
 - https://n8n.io/integrations/bloomreach/
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/bloomreach-engagement
 - https://zapier.com/apps/bloomreach/integrations
 summary: null
@@ -114,4 +121,70 @@ edges:
       - upsert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@bloomreach/ng-sdk
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@bloomreach/ng-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/ng-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/react-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/react-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/segmentation'
+      version: 0.0.16
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/segmentation
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/spa-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/spa-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/vue-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/vue-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 templates: []

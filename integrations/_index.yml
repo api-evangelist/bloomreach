@@ -51,3 +51,70 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: bloomreach-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@bloomreach/ng-sdk
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@bloomreach/ng-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/ng-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/react-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/react-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/segmentation'
+      version: 0.0.16
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/segmentation
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/spa-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/spa-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    - name: '@bloomreach/vue-sdk'
+      version: 28.1.0
+      released: '2026-09-04'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@bloomreach/vue-sdk
+      repo_leg: domain:bloomreach.com
+      publisher_leg: email:bloomreach.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
