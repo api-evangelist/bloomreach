@@ -118,6 +118,40 @@
   relationship: connector-coverage
   status: not-a-workflow
   arazzo: null
+- slug: bloomreach-mach-alliance
+  label: MACH Alliance
+  partner_name: MACH Alliance
+  category: composable (MACH) commerce alliance membership
+  type: register
+  channel: standard-directory
+  evidence: https://machalliance.org/members/bloomreach
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: MACH Alliance members directory (machalliance.org/members)
+    standard: MACH Alliance (Microservices, API-first, Cloud-native SaaS, Headless)
+    spec_file: null
+    role: mach-certified-vendor
+    registered_name: Bloomreach
+    register_id: bloomreach
+    register_category: MACH Certified ISVs
+    register_country: US
+    matched_domain: bloomreach.com
+    matched_by: domain
+    signal_note: certified_products = ONE entry for the vendor's MACH certification (the Alliance certifies the
+      vendor against the MACH criteria; no per-product list); awards and self-listed partnerships are context, never
+      counted
+    detected_by: sweep-mach-headless-commerce.py
+    detected: '2026-10-20'
+    certified_products:
+    - product: MACH certified ISV
+      product_type: MACH certified ISV
+      certifier: MACH Alliance
+      lapsed: false
+    awards_context:
+    - Agent Ready Award 2026
+  status: not-a-workflow
+  arazzo: null
 - slug: bloomreach-gorgias-own
   label: Gorgias (own)
   partner: gorgias
@@ -139,6 +173,33 @@
   marketplace: own
   channel: partner-built
   evidence: https://www.zendesk.com/marketplace/apps/support/829915/bloomreach-engagement-sidebar/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: bloomreach-bigcommerce-own
+  label: BigCommerce (own)
+  partner: bigcommerce
+  partner_name: BigCommerce (own)
+  category: Marketing, Customer Acquisition & Retention, Marketing, Digital Marketing & Advertising, Marketing,
+    Email Marketing, Marketing, Marketing Automation, Analytics & Reporting, Customer Analytics
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.bigcommerce.com/apps/bloomreach/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: bloomreach-salesforce-commerce-cloud-own
+  label: Salesforce Commerce Cloud (own)
+  partner: salesforce-commerce-cloud
+  partner_name: Salesforce Commerce Cloud (own)
+  category: eCommerce
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=77a10256-cc8c-47db-a590-76d0c87c46a7
   source: edge
   relationship: platform-app
   status: not-a-workflow
