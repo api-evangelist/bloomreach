@@ -37,6 +37,7 @@ checked:
 - https://www.crowncommercial.gov.uk/agreements
 - https://www.ncsc.gov.uk/cyberessentials/search
 - adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+- netlify/integrations/netlify-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -348,4 +349,23 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: Adobe Commerce Marketplace extension
+- partner_name: Netlify (own)
+  partner: netlify
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.netlify.com/integrations/bloomreach/
+  mirror_of: netlify/integrations/netlify-integration-edges.yml
+  apps:
+  - Bloomreach
+  - Bloomreach Setup Guide
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Search
+  partner_tier: listing
 templates: []
